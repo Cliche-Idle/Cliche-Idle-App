@@ -1,0 +1,49 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Tooling/ItemIconPreview/UI/ItemDatabase.uss?fileID=7433441132597879392&amp;guid=e6d255e62b2f470479843af575334e48&amp;type=3#ItemDatabase" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: row; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;">
+        <ui:VisualElement name="ItemsTab" style="width: 25%;">
+            <ui:VisualElement name="Header" style="flex-direction: column; border-bottom-color: rgb(0, 0, 0); margin-bottom: 5px; min-width: auto; max-width: none; max-height: 30px; min-height: 30px; background-color: rgb(38, 38, 38); height: 37px; flex-grow: 1; justify-content: center; align-items: flex-start;">
+                <ui:Label text="Layers" display-tooltip-when-elided="true" style="flex-grow: 1; -unity-font-style: bold; font-size: 24px; -unity-text-align: middle-left; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:ListView focusable="true" name="LayerListView" show-add-remove-footer="false" />
+        </ui:VisualElement>
+        <ui:VisualElement style="width: 1px; color: rgb(14, 14, 14); background-color: rgb(202, 202, 202); margin-left: 2px; margin-right: 2px;" />
+        <ui:ScrollView name="ScrollView_Details" style="width: 75%; color: rgb(253, 253, 253); background-color: rgba(106, 106, 106, 0);">
+            <ui:VisualElement name="Header" style="flex-direction: row; background-color: rgb(38, 38, 38); -unity-text-align: upper-left; align-items: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-bottom-color: rgba(255, 183, 0, 0); border-bottom-width: 1px;">
+                <ui:Label text="Icon" display-tooltip-when-elided="true" style="flex-grow: 1; -unity-font-style: bold; font-size: 24px; margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px; background-color: rgba(255, 255, 255, 0);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Content" style="flex-grow: 1;">
+                <ui:VisualElement name="Icon_Custom_Container" style="flex-direction: row; align-items: center; justify-content: center; flex-shrink: 0; min-width: 275px; min-height: 275px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                    <ui:VisualElement name="Icon_Custom_Container" style="border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 260px; height: 260px; align-items: center; justify-content: center; flex-grow: 0; visibility: hidden; display: none;">
+                        <ui:VisualElement name="Icon_Custom_DEPRECATED" style="padding-right: 0; width: 250px; height: 250px; background-image: resource(&apos;icons/placeholder_250x250_cross2&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; padding-left: 0; padding-top: 0; padding-bottom: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); -unity-background-scale-mode: stretch-to-fill; display: none; visibility: hidden;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Row" style="flex-direction: row;" />
+                <ui:VisualElement name="Container" style="flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; -unity-background-image-tint-color: rgb(56, 56, 56); background-color: rgb(65, 65, 65);">
+                    <ui:Label text="General" display-tooltip-when-elided="true" name="Header" class="details-header" />
+                    <uie:ObjectField label="Base sprite" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="IconSprite" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; color: rgb(255, 0, 0); -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=87859e2950d7650408d53c3b9d42b5e6&amp;type=3#NotInter-Regular&apos;); -unity-font-style: normal;" />
+                    <uie:IntegerField label="Height" value="250" name="IconHeight" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                    <uie:IntegerField label="Width" value="250" name="IconWidth" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                    <ui:Toggle label="Keep aspect ratio" name="IconAspectRatioToggle" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Row" style="flex-direction: row;">
+                    <ui:VisualElement name="Container" style="flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; background-color: rgb(65, 65, 65);">
+                        <ui:Label text="Overlay layer" display-tooltip-when-elided="true" name="OverlayControl" class="details-header" style="flex-direction: row; justify-content: flex-end; height: auto; align-items: center; -unity-text-align: middle-left;">
+                            <ui:Button text="Add as new" display-tooltip-when-elided="true" name="Btn_AddOverlay" style="align-items: flex-start; height: 25px; width: 118px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; margin-left: 3px; margin-right: 15px; margin-top: 3px; margin-bottom: 3px;" />
+                            <ui:Button text="Delete" display-tooltip-when-elided="true" name="Btn_DeleteOverlay" style="height: 25px; margin-right: 3px; width: 100px; margin-left: 3px; margin-top: 3px; margin-bottom: 3px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; background-color: rgb(168, 45, 45);" />
+                        </ui:Label>
+                        <ui:TextField picking-mode="Ignore" label="ID" name="OverlayID" binding-path="ID" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                        <uie:ObjectField label="Icon" name="OverlayIcon" binding-path="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                        <ui:TextField picking-mode="Ignore" label="Text" name="OverlayText" binding-path="Text" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                        <uie:EnumField label="Position" name="OverlayPositionFriendly" value="a,a,a" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                        <uie:IntegerField label="Position (index)" value="0" name="OverlayPositionIndex" binding-path="Position" readonly="true" tooltip="Displays the internal index of the selected position" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Container" style="flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; background-color: rgb(65, 65, 65); height: auto;">
+                    <ui:Label text="Sizing preview" display-tooltip-when-elided="true" name="Header" class="details-header" />
+                    <ui:VisualElement name="PreviewContainer" style="flex-direction: column; align-items: flex-start; justify-content: space-between; flex-shrink: 0; margin-left: 15px; margin-right: 25px; margin-top: 10px; margin-bottom: 25px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>
