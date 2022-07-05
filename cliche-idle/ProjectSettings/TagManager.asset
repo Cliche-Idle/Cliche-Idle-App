@@ -38,6 +38,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 637931621
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Body
+    uniqueID: 3320007351
+    locked: 0
+  - name: Facial Features
+    uniqueID: 3963733579
+    locked: 0
+  - name: Hair
+    uniqueID: 3773825689
+    locked: 0
+  - name: Underwear
+    uniqueID: 1345333337
+    locked: 0
+  - name: Equipment
+    uniqueID: 1548168963
+    locked: 0
+  - name: Beard
+    uniqueID: 4285654887
     locked: 0
