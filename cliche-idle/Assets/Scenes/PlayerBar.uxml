@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="PlayerBar" style="width: 100%; height: 200px; background-image: url(&apos;project://database/Assets/Images/playerbar/nameplateBg.png?fileID=2800000&amp;guid=58def222ebc51f3479d50981ffdeca04&amp;type=3#nameplateBg&apos;); flex-direction: row; justify-content: center; align-items: center; margin-bottom: 3%; margin-left: 0; margin-right: 0; margin-top: 3%;">
+        <ui:VisualElement name="BarContainer" style="flex-direction: row; justify-content: space-between; align-items: center; width: 95%; height: 150px;">
+            <ui:VisualElement name="LeftSide" style="width: 50%; height: 150px; align-items: flex-start; justify-content: space-between;">
+                <ui:Label text="Player Name" display-tooltip-when-elided="true" name="PlayerName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px; margin-left: 0; margin-right: 0; margin-top: 2px; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-bottom-width: 2px; border-left-width: 2px;" />
+                <ui:ProgressBar title="HP Value" name="HpBar" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); background-image: none; width: 50%; height: 20%; font-size: 28px;" />
+                <ui:Label text="Race Class" display-tooltip-when-elided="true" name="PlayerInfo" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 2px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="RightSide" style="width: 20%; height: 150px; align-items: center; justify-content: space-around;">
+                <ui:Label text="Level" display-tooltip-when-elided="true" name="PlayerLvl" style="align-items: center; -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px; margin-left: 0; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center;" />
+                <ui:ProgressBar name="ExpBar" style="-unity-font-definition: none; width: 50%;" />
+                <ui:Label display-tooltip-when-elided="true" name="EmptySpace" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

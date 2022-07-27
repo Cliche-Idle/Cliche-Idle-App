@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="RequestContainer" style="background-image: url(&apos;project://database/Assets/Images/adventures/requestBg.png?fileID=2800000&amp;guid=d9a64fbbd5e1e00438889fce3f0af1a9&amp;type=3#requestBg&apos;); width: 100%; height: 300px; margin-bottom: 0; flex-direction: row; min-width: auto; align-items: flex-start; justify-content: space-between; margin-top: 5%;">
+        <ui:VisualElement name="LeftSide" style="width: 70%; margin-left: 30px; margin-top: 40px; height: 200px;">
+            <ui:Label text="Request Name" display-tooltip-when-elided="true" name="RequestName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px;" />
+            <ui:Label text="Request Description" display-tooltip-when-elided="true" name="RequestDesc" style="font-size: 30px; -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); white-space: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightSide" style="width: 30%; margin-right: 30px; margin-top: 40px; height: 200px; align-items: center;">
+            <ui:Label text="99:99:99" display-tooltip-when-elided="true" name="RequestTimer" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px; -unity-text-align: upper-right; margin-bottom: 30px;" />
+            <ui:VisualElement name="RequestReward" style="background-image: url(&apos;project://database/Assets/Images/adventures/placeholder.png?fileID=2800000&amp;guid=ef7331ad6bf0fb544a9080f10bc56d65&amp;type=3#placeholder&apos;); width: 100px; height: 100px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
