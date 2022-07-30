@@ -123,6 +123,180 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &683827965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 683827966}
+  - component: {fileID: 683827974}
+  - component: {fileID: 683827973}
+  - component: {fileID: 683827972}
+  - component: {fileID: 683827971}
+  - component: {fileID: 683827970}
+  - component: {fileID: 683827969}
+  - component: {fileID: 683827968}
+  - component: {fileID: 683827967}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Player
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &683827966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.89845896, y: -0.11405581, z: 0.045814782}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &683827967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a024118ff14d30f45a47ea423c1a2b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapons:
+    _itemList: []
+    <Sockets>k__BackingField: []
+  Armour:
+    _itemList: []
+    <Sockets>k__BackingField: []
+--- !u!114 &683827968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dab1f795db1c44e813fa8ed5d63b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health:
+    <Value>k__BackingField: 0
+  Intelligence:
+    <Value>k__BackingField: 0
+  Dexterity:
+    <Value>k__BackingField: 0
+  Strength:
+    <Value>k__BackingField: 0
+  Vitality:
+    <Value>k__BackingField: 0
+--- !u!114 &683827969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ad780ab3eab8243b3fdeb55aa3cbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gold:
+    <Value>k__BackingField: 0
+  DungeonTickets:
+    <Value>k__BackingField: 0
+--- !u!114 &683827970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d233dc1b19a529a479b48b7889d1a345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Experience:
+    <Value>k__BackingField: 0
+--- !u!114 &683827971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb173a28c8b52f4baae46fb0a58db32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AvailableAdventures: []
+  AdventureQueue: []
+--- !u!114 &683827972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6a672e7396e654f80d850733ca55f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <Race>k__BackingField: 0
+  <ClassSpecName>k__BackingField: 
+  CharacterVisual:
+    race: human
+    gender: female
+    hairStyle: 
+    hairColour: {r: 0, g: 0, b: 0, a: 1}
+    beardStyle: 
+    beardColour: {r: 0, g: 0, b: 0, a: 1}
+    eyebrowStyle: 
+    eyebrowColour: {r: 0, g: 0, b: 0, a: 1}
+    eyeColourPrimary: {r: 0, g: 0, b: 0, a: 1}
+    eyeColourSecondary: {r: 1, g: 1, b: 1, a: 1}
+    skinColour: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &683827973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2345c557f2b9246a9c217e6b67fda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &683827974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8115b6289608e44881c74b5cb0ca82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &893088049
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 0ef04d299513d3d478f1063cbe8efbf6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: eb74f41844ca4954e94f5e276ad8fe24, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: f6ef7972f4d60ce4fabed242460169ed, type: 3}
   m_SortingOrder: 0
 --- !u!4 &893088051
 Transform:
@@ -185,10 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193ea099d398a5a41bd71a5826e237a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  docu: {fileID: 0}
-  item: {fileID: 11400000, guid: e09b50e2d388d3f45a17cd08c8b64ca3, type: 2}
-  iconCount: 1
-  switchSize: 0
+  Player: {fileID: 0}
+  docu: {fileID: 893088050}
+  iconCount: 5
 --- !u!114 &893088053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,12 +375,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Views:
-  - viewID: 
-    containerID: 
-    view: {fileID: 0}
+  - viewID: 1
+    containerID: container
+    UXMLDocument: {fileID: 0}
   - viewID: testView1
     containerID: view-test
-    view: {fileID: 893088050}
+    UXMLDocument: {fileID: 9197481963319205126, guid: eb74f41844ca4954e94f5e276ad8fe24, type: 3}
 --- !u!1 &1092087290
 GameObject:
   m_ObjectHideFlags: 0

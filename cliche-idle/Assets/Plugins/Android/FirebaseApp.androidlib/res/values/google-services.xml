@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">257647959079</string>
+  <string name="google_storage_bucket" translatable="false">cliche-tales.appspot.com</string>
+  <string name="project_id" translatable="false">cliche-tales</string>
+  <string name="google_api_key" translatable="false">AIzaSyBARdbeMmvkkaTQ08SKnCS8j436z4Dtbdg</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBARdbeMmvkkaTQ08SKnCS8j436z4Dtbdg</string>
+  <string name="google_app_id" translatable="false">1:257647959079:android:73f2b2940962e7d5ad0202</string>
+  <string name="default_web_client_id" translatable="false">257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com</string>
+</resources>
