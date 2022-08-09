@@ -7,12 +7,9 @@ using UnityEngine.UIElements;
 using Cliche.Activities;
 using Cliche.System;
 
-public class MockInventoryManager : MonoBehaviour
+public class DirtyDebugTestScript : MonoBehaviour
 {
     public GameObject Player;
-    public UIDocument docu;
-    public VisualElement m_Root;
-    public int iconCount = 0;
 
     // Start is called before the first frame update
     void Start()
