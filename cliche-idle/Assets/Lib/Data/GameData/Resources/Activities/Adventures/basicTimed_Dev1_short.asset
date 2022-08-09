@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7d4a6a3df6dc8498a1cdcd3eee5572, type: 3}
+  m_Script: {fileID: 11500000, guid: fe638afbe8438d947a93e256d372ab6d, type: 3}
   m_Name: basicTimed_Dev1_short
   m_EditorClassIdentifier: 
   Title: Dev adventure
   Description: This is a basic dev adventure used for debugging and system testing.
-  PostCompleteDescription: 
+  PostCompleteDescriptionSuccess: 
+  PostCompleteDescriptionFail: 
   Requirements: {fileID: 0}
   BaseLength: 15
   BaseChance: 100
   Rewards: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
   MinRewardCount: 1
-  MaxRewardCount: 1
+  MaxRewardCount: 2

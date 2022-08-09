@@ -6,7 +6,7 @@ public abstract class ConsumableManifest : ItemManifest
     /// The item's main stat type.
     /// </summary>
     [field: SerializeField]
-    // ! This is an intentional override, as this is normally hidden in the inspector and set from OnValidate()
+    // ! This is an intentional implicit override, as this is normally hidden in the inspector and set from OnValidate()
     // ! but for consumables it makes sense for this to be public.
     new public ItemMainStatTypes MainStatType { get; protected set; }
 

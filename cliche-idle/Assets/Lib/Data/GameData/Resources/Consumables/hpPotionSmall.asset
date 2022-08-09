@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6816f99d26be2439cc24c2a5e5e3f2, type: 3}
   m_Name: hpPotionSmall
   m_EditorClassIdentifier: 
-  <MainStatValue>k__BackingField: 0
+  <MainStatValue>k__BackingField: 15
   <Icon>k__BackingField: {fileID: 0}
   <Name>k__BackingField: 
   <Description>k__BackingField: 
   <Price>k__BackingField: 0
+  <MainStatType>k__BackingField: 2
   <SubType>k__BackingField: 0
-  <MainStatType>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 0

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60242844e937bb4d88db31efb48a622, type: 3}
+  m_Script: {fileID: 11500000, guid: e5fd4b7018918044daf705953c19ccad, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
   Weapons:
   - {fileID: 11400000, guid: 5f0745702f0487b4fad976d25042f685, type: 2}
   Armour: []
-  Consumables: []
+  Consumables:
+  - {fileID: 11400000, guid: 6380c9757a51bea4ea198ddee12a8a52, type: 2}

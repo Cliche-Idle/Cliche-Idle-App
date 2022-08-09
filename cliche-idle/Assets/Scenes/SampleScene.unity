@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 683827971}
   - component: {fileID: 683827970}
   - component: {fileID: 683827969}
+  - component: {fileID: 683827975}
   - component: {fileID: 683827968}
   - component: {fileID: 683827967}
   m_Layer: 0
@@ -209,8 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f37bff8ca1d2d4cb39d2719c9115b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health:
-    <Value>k__BackingField: 100
+  Health: {fileID: 683827975}
   Intelligence:
     <Value>k__BackingField: 0
   Dexterity:
@@ -295,8 +295,22 @@ MonoBehaviour:
   - {fileID: 683827971}
   - {fileID: 683827970}
   - {fileID: 683827969}
+  - {fileID: 683827975}
   - {fileID: 683827968}
   - {fileID: 683827967}
+--- !u!114 &683827975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd02e52574920d42b790f1be147d1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Value>k__BackingField: 100
 --- !u!1 &893088049
 GameObject:
   m_ObjectHideFlags: 0

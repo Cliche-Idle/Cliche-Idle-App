@@ -35,11 +35,11 @@ public class StackedItemBucket<TItem> where TItem : StackableItem
         }
         else
         {
-            if (item.Quantity != 0)
+            if (item.Quantity <= 0)
             {
                 item.Grant(quantity);
-                _itemList.Add(item);
             }
+            _itemList.Add(item);
         }
     }
 

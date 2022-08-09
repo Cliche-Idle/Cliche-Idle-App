@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53685215aa3200d47950aff85a5d1106, type: 3}
   m_Name: Elf
   m_EditorClassIdentifier: Assembly-CSharp::Race
-  _description: 
-  _Dexterity: 0
+  _description: Elves tend to keep to themselves in their forests, studying the bow
+    and the arcane arts.
+  _Dexterity: 2
   _vitality: 0
-  _intelligence: 0
+  _intelligence: 2
   _strength: 0

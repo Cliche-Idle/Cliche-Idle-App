@@ -19,6 +19,7 @@ public abstract class Item
     // Instanced
     [field: SerializeField]
     public bool IsInstanceItem { get; protected set; }
+
     [field: SerializeField]
     public string VariantID { get; protected set; }
 

@@ -20,8 +20,10 @@ namespace Cliche.System
             return manifest;
         }
 
-        /*public static T[] GetAll<T>() where T : ScriptableObject
+        /*
+        public static object GetByObject(Item item)
         {
+            Type manifestType;
             string typeLocationPath = Paths[typeof(T)];
             T manifest = Resources.Load<T>($"{typeLocationPath}/{manifestID}");
             if (manifest == null)
@@ -30,9 +32,10 @@ namespace Cliche.System
             }
             if (manifest == null)
             {
-                Debug.LogError($"Manifest<{typeof(T)}> at RESOURCES://{typeLocationPath}/{manifestID} could not be found.");
+                Debug.LogError($"Manifest<{typeof(T)}> could not be found at neither path:\nRESOURCES://{typeLocationPath}/{manifestID} \nRESOURCES://{typeLocationPath}/{manifestID}/{manifestID}.");
             }
             return manifest;
-        }*/
+        }
+        */
     }
 }

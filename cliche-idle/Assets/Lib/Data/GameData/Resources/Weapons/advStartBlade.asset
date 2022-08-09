@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28c9a9d94f495b242b36b96dbfb705ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 7afaeeb56af6dbd4aaa217c56d948afa, type: 3}
   m_Name: advStartBlade
   m_EditorClassIdentifier: 
-  <SubType>k__BackingField: 0
   <MainStatValue>k__BackingField: 15
   <Icon>k__BackingField: {fileID: 21300000, guid: 8ecc3e08992e60648bc40b04e2c07a24, type: 3}
   <Name>k__BackingField: Adventurer's blade
   <Description>k__BackingField: A simple blade, perfect for a fresh adventurer.
   <Price>k__BackingField: 5
+  <SubType>k__BackingField: 0

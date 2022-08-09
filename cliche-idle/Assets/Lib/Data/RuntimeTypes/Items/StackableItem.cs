@@ -15,9 +15,12 @@ public abstract class StackableItem : Item
     /// </summary>
     public void Use()
     {
-        ConsumableManifest manifest = Manifests.GetByID<ConsumableManifest>(ID);
-        manifest.Use();
-        Take(1);
+        if (Quantity > 0)
+        {
+            ConsumableManifest manifest = Manifests.GetByID<ConsumableManifest>(ID);
+            manifest.Use();
+            Take(1);
+        }
     }
 
     /// <summary>

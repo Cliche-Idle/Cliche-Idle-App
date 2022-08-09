@@ -33,25 +33,17 @@ public class MockInventoryManager : MonoBehaviour
         adventureHandler.StartAdventure("basicTimed_Dev1_short");
 
         /*
-        var currencyBag = Player.GetComponent<CurrencyHandler>();
-        Debug.Log("Gold : " + currencyBag.Gold.Value);
-
-        var statsBag = Player.GetComponent<StatsHandler>();
-        statsBag.Intelligence.Take(3);
-        Debug.Log("Attack before equip: " + statsBag.Attack);
-
         var inventoryBag = Player.GetComponent<InventoryHandler>();
         Weapon testWeapon = new Weapon("advStartBlade", 12);
         inventoryBag.Weapons.Add(testWeapon);
-        testWeapon = new Weapon("advStartBlade", 15);
-        inventoryBag.Weapons.Add(testWeapon);
-        testWeapon = new Weapon("advStartBlade", 20);
-        inventoryBag.Weapons.Add(testWeapon);
 
-        testWeapon = ((List<Weapon>)inventoryBag.Weapons.Items)[0];
+        Debug.Log("Attack before equip: " + statsBag.Attack);
+        testWeapon = (inventoryBag.Weapons.Items)[0];
         Debug.Log("Weapon: " + testWeapon.ID + "_" + testWeapon.VariantID);
         inventoryBag.Weapons.Equip(testWeapon);
         Debug.Log("Attack after equip: " + statsBag.Attack);
+
+        inventoryBag.Weapons.Remove(testWeapon);
         */
 
         docu = GetComponent<UIDocument>();

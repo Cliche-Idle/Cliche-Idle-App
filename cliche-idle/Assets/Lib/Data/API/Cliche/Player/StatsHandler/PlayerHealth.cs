@@ -5,9 +5,20 @@ using Cliche.System;
 [System.Serializable]
 public class PlayerHealth : MonoBehaviour
 {
+    /// <summary>
+    /// Event that fires when the player's health reaches 0.
+    /// </summary>
+    public event EventHandler OnPlayerDeath;
+
+    /// <summary>
+    /// The current amount of health the player has.
+    /// </summary>
     [field: SerializeField]
     public int Value { get; private set; }
 
+    /// <summary>
+    /// Gets the maximum health the player can have.
+    /// </summary>
     public int Max
     {
         get {
@@ -18,6 +29,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Grants the specified amount of health points to the player.
+    /// </summary>
+    /// <param name="amount"></param>
     public void Grant (int amount)
     {
         Value += Mathf.Abs(amount);
@@ -28,6 +43,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes the specified amount of health points to the player. If the health reaches zero, triggers the OnPlayerDeath event.
+    /// </summary>
+    /// <param name="amount"></param>
     public void Take (int amount)
     {
         Value -= Mathf.Abs(amount);
@@ -35,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
         if (Value < 0)
         {
             Value = 0;
+            OnPlayerDeath.Invoke(this, null);
         }
     }
 }
