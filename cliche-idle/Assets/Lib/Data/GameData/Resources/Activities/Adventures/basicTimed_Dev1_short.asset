@@ -21,4 +21,4 @@ MonoBehaviour:
   BaseChance: 100
   Rewards: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
   MinRewardCount: 1
-  MaxRewardCount: 2
+  MaxRewardCount: 1

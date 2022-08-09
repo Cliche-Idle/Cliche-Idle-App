@@ -17,10 +17,6 @@ public class MockInventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Get Player instance
-        Player = GameObject.Find("Player");
-        //
-
         //Authentication.OnLogin += AuthTestDelegate;
         //Authentication.AttemptSessionRestoreAfterRestart();
 
@@ -45,21 +41,5 @@ public class MockInventoryManager : MonoBehaviour
 
         inventoryBag.Weapons.Remove(testWeapon);
         */
-
-        docu = GetComponent<UIDocument>();
-        m_Root = docu.rootVisualElement.Q<VisualElement>("Container");
-        for (int i = 0; i < iconCount; i++)
-        {
-            OverlayIcon testIcon = new OverlayIcon("testItem", Resources.Load<Sprite>("icons/placeholder_250x250_cross"), 100, 100);
-
-            testIcon.AddOverlay("testLayerTransparent-Center", OverlayAlignment.Center, Resources.Load<Sprite>("icons/placeholder_overlay_75_opacity_50x50"));
-            testIcon.AddOverlay("testLayerTransparent-TopLeft", OverlayAlignment.TopLeft, Resources.Load<Sprite>("icons/placeholder_overlay_75_opacity_50x50"));
-            testIcon.AddOverlay("testLayerOpaque-TopRight", OverlayAlignment.TopRight, Resources.Load<Sprite>("icons/placeholder_overlay_50x50"));
-            testIcon.AddOverlay("testLayerOpaque-BottomLeft", OverlayAlignment.BottomLeft, Resources.Load<Sprite>("icons/placeholder_overlay_50x50"));
-            testIcon.AddOverlay("testLayerTransparent-BottomRight", OverlayAlignment.BottomRight, Resources.Load<Sprite>("icons/placeholder_overlay_75_opacity_50x50"));
-
-            m_Root.Add(testIcon);
-        }
-
     }
 }

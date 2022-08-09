@@ -17,3 +17,5 @@ MonoBehaviour:
   Armour: []
   Consumables:
   - {fileID: 11400000, guid: 6380c9757a51bea4ea198ddee12a8a52, type: 2}
+  - {fileID: 11400000, guid: fdb92b15595d04f43af014eebccce697, type: 2}
+  - {fileID: 11400000, guid: 650000d7c0e0a584a9bd8054de8092dc, type: 2}

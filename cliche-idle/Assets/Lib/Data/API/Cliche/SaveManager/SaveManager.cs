@@ -27,8 +27,8 @@ public class SaveManager : MonoBehaviour
 
         foreach (var item in SaveObjects)
         {
-            // Funky double parsing but JSON.NET doesn't seem to like Unity (especially Colours) 
-            save.Add(item.GetInstanceID().ToString(), JToken.Parse(JsonUtility.ToJson(item)));
+            // Funky double parsing but JSON.NET doesn't seem to like Unity (especially Colours)
+            save.Add(GetComponentKey(item), JToken.Parse(JsonUtility.ToJson(item)));
         }
 
         string saveJSON = save.ToString();
@@ -55,7 +55,7 @@ public class SaveManager : MonoBehaviour
 
         foreach (var item in save)
         {
-            var loadObject = SaveObjects.Find(element => element.GetInstanceID().ToString() == item.Key);
+            var loadObject = SaveObjects.Find(element => GetComponentKey(element) == item.Key);
             if (loadObject != null)
             {
                 JsonUtility.FromJsonOverwrite(item.Value.ToString(), loadObject);
@@ -63,6 +63,12 @@ public class SaveManager : MonoBehaviour
         }
 
         Debug.Log($"<color=green>Player data loaded from save-files.</color>\nVersion: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
+    }
+
+    private string GetComponentKey (Component comp)
+    {
+        string key = comp.GetType().ToString(); //comp.GetInstanceID().ToString();
+        return key;
     }
 }
 

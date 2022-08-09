@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193ea099d398a5a41bd71a5826e237a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 683827965}
   docu: {fileID: 893088050}
   iconCount: 5
 --- !u!114 &893088053
@@ -388,13 +388,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f944cf39ccd0db4e8b07ec0d05bff96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Views:
-  - viewID: 1
-    containerID: container
+  Target: {fileID: 893088050}
+  <Views>k__BackingField:
+  - viewID: test1
+    containerID: Container1
     UXMLDocument: {fileID: 0}
-  - viewID: testView1
-    containerID: view-test
-    UXMLDocument: {fileID: 9197481963319205126, guid: eb74f41844ca4954e94f5e276ad8fe24, type: 3}
+  - viewID: test2
+    containerID: Container2
+    UXMLDocument: {fileID: 0}
 --- !u!1 &1092087290
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458133675}
+  - component: {fileID: 1458133676}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -510,3 +512,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1458133676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458133674}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 0ef04d299513d3d478f1063cbe8efbf6, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: f6ef7972f4d60ce4fabed242460169ed, type: 3}
+  m_SortingOrder: 0

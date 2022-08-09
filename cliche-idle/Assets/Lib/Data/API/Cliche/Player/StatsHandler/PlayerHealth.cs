@@ -54,7 +54,10 @@ public class PlayerHealth : MonoBehaviour
         if (Value < 0)
         {
             Value = 0;
-            OnPlayerDeath.Invoke(this, null);
+            if (OnPlayerDeath != null)
+            {
+                OnPlayerDeath.Invoke(this, null);
+            }
         }
     }
 }

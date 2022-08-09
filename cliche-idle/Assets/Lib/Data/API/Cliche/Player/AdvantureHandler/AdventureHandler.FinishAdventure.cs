@@ -6,6 +6,7 @@ using Cliche.Activities;
 
 public partial class AdventureHandler
 {
+    // TODO: refactor this out to a modifier
     private int _DefencePenaltyDivisionScaler = 4;
 
     public PostActivityReport FinishAdventure(string adventureID)
@@ -90,7 +91,9 @@ public partial class AdventureHandler
         // Gets whole level XP bracket
         var xpBracket = nextLevelXpBracket - currentLevelXpBracket;
         // Scales up the max XP by the chance scalar, so lower chance yields more max XP
+        // TODO: refactor this out to a modifier
         var baseMaxRewardXP = (xpBracket / (8 - (4 * chanceScalar)));
+        // TODO: use above modifier but low bound
         // Scales up the min XP by the chance scalar, so lower chance yields more min XP
         var baseMinRewardXP = (baseMaxRewardXP / (4 - (4 * chanceScalar)));
         // * Final XP given:
@@ -108,8 +111,9 @@ public partial class AdventureHandler
         var progressionHandler = gameObject.GetComponent<ProgressionHandler>();
         //
         var chanceScalar = GetAdventureChanceScalar(selectedAdventure);
-        //
-        var maxBaseGold = (25 + progressionHandler.Level);
+        // TODO: refactor this out to a modifier
+        var maxBaseGold = (10 + progressionHandler.Level);
+        // TODO: refactor this out to a modifier
         var chanceScaledGold = (2 * chanceScalar);
         // Get random amount + adventure difficulty multiplier
         var rewardGold = Mathf.CeilToInt(UnityEngine.Random.Range((maxBaseGold / 2), maxBaseGold) * (1 + chanceScaledGold));

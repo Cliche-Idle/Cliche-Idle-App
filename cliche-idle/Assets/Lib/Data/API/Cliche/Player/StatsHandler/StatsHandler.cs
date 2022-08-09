@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,8 @@ using Cliche.System;
 public class StatsHandler : MonoBehaviour
 {
     [HeaderAttribute("General stats")]
-    // FIXME: max health is the upper limit, enforce it
+    //[NonSerialized]
+    // FIXME: Keep an eye out on this, an instance ID is saved into savefiles and if that changes, it might mess things up when it's loaded back.
     public PlayerHealth Health;
 
     //[field: Header("Item stats")]
