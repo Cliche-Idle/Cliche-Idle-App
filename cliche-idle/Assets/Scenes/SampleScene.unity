@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683827966}
   - component: {fileID: 683827974}
-  - component: {fileID: 683827973}
   - component: {fileID: 683827972}
   - component: {fileID: 683827971}
   - component: {fileID: 683827970}
@@ -171,7 +170,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 683827965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a024118ff14d30f45a47ea423c1a2b9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 32605c42368479b4ab27b391643597ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Weapons:
@@ -180,6 +179,8 @@ MonoBehaviour:
   Armour:
     _itemList: []
     <Sockets>k__BackingField: []
+  Consumables:
+    _itemList: []
 --- !u!114 &683827968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,18 +190,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 683827965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33dab1f795db1c44e813fa8ed5d63b79, type: 3}
+  m_Script: {fileID: 11500000, guid: a441aacb979cddd4c92144bd3c220622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health:
-    <Value>k__BackingField: 0
-  Intelligence:
-    <Value>k__BackingField: 0
-  Dexterity:
-    <Value>k__BackingField: 0
-  Strength:
-    <Value>k__BackingField: 0
-  Vitality:
+  Gold:
+    <Value>k__BackingField: 50
+  DungeonTickets:
     <Value>k__BackingField: 0
 --- !u!114 &683827969
 MonoBehaviour:
@@ -211,12 +206,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 683827965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1ad780ab3eab8243b3fdeb55aa3cbae, type: 3}
+  m_Script: {fileID: 11500000, guid: 97f37bff8ca1d2d4cb39d2719c9115b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gold:
+  Health:
+    <Value>k__BackingField: 100
+  Intelligence:
     <Value>k__BackingField: 0
-  DungeonTickets:
+  Dexterity:
+    <Value>k__BackingField: 0
+  Strength:
+    <Value>k__BackingField: 0
+  Vitality:
     <Value>k__BackingField: 0
 --- !u!114 &683827970
 MonoBehaviour:
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 683827965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d233dc1b19a529a479b48b7889d1a345, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d3535d6fde42ba47927c653bc5b4e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Experience:
@@ -241,10 +242,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 683827965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bb173a28c8b52f4baae46fb0a58db32, type: 3}
+  m_Script: {fileID: 11500000, guid: ac3ea55d3d8dd544aa4b449d4aec92a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailableAdventures: []
+  <MaxHandlerAdventures>k__BackingField: 3
+  AvailableAdventures:
+  - basicTimed_Dev1_short
+  <MaxQueuedAdventures>k__BackingField: 1
   AdventureQueue: []
 --- !u!114 &683827972
 MonoBehaviour:
@@ -255,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 683827965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6a672e7396e654f80d850733ca55f6, type: 3}
+  m_Script: {fileID: 11500000, guid: eb76f43270d89fb418f5be3442423e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
@@ -273,18 +277,6 @@ MonoBehaviour:
     eyeColourPrimary: {r: 0, g: 0, b: 0, a: 1}
     eyeColourSecondary: {r: 1, g: 1, b: 1, a: 1}
     skinColour: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &683827973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683827965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2345c557f2b9246a9c217e6b67fda3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &683827974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +289,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8115b6289608e44881c74b5cb0ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SaveSubPath: Saves
+  SaveObjects:
+  - {fileID: 683827972}
+  - {fileID: 683827971}
+  - {fileID: 683827970}
+  - {fileID: 683827969}
+  - {fileID: 683827968}
+  - {fileID: 683827967}
 --- !u!1 &893088049
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,4 +464,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1458133674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1458133675}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1458133675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458133674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

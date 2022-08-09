@@ -14,13 +14,11 @@ public class AdjustableProperty
 
     public void Take (int amount)
     {
-        if (Value >= Mathf.Abs(amount))
+        Value -= Mathf.Abs(amount);
+        // Backfill if negative
+        if (Value < 0)
         {
-            Value -= Mathf.Abs(amount);
-        }
-        else
-        {
-            throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be larger than or equal to the Value.");
+            Value = 0;
         }
     }
 }

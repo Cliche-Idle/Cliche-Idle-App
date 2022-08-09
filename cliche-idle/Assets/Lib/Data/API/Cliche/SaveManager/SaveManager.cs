@@ -1,57 +1,97 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class SaveManager : MonoBehaviour
 {
-    ActivityHandler activities;
-    CharacterHandler character;
-    CurrencyHandler currencies;
-    ProgressionHandler progression;
-    InventoryHandler inventory;
-
-    private void Start() {
-        activities = gameObject.GetComponent<ActivityHandler>();
-        character = gameObject.GetComponent<CharacterHandler>();
-        currencies = gameObject.GetComponent<CurrencyHandler>();
-        progression = gameObject.GetComponent<ProgressionHandler>();
-        inventory = gameObject.GetComponent<InventoryHandler>();
-    }
+    [Header("Settings")]
+    //public bool SeparateSaveFilePerObject = false;
+    public string SaveSubPath = "Saves";
+    public List<Component> SaveObjects;
 
     public void SaveUserState()
     {
-        string activities_json = JsonUtility.ToJson(activities);
-        File.WriteAllText(Application.persistentDataPath + "/activities.json", activities_json);
+        if (Directory.Exists($"{Application.persistentDataPath}/{SaveSubPath}") == false)
+        {
+            Directory.CreateDirectory($"{Application.persistentDataPath}/{SaveSubPath}");
+        }
 
-        string character_json = JsonUtility.ToJson(character);
-        File.WriteAllText(Application.persistentDataPath + "/character.json", character_json);
+        JObject save = new JObject();
+        save.Add("BundleVersion", $"{PlayerSettings.bundleVersion}");
+        save.Add("SaveDate_UNIX", $"{((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds()}");
+        save.Add("SaveDate_WINSTRING", $"{DateTime.UtcNow}");
 
-        string currencies_json = JsonUtility.ToJson(currencies);
-        File.WriteAllText(Application.persistentDataPath + "/currencies.json", currencies_json);
+        foreach (var item in SaveObjects)
+        {
+            // Funky double parsing but JSON.NET doesn't seem to like Unity (especially Colours) 
+            save.Add(item.GetInstanceID().ToString(), JToken.Parse(JsonUtility.ToJson(item)));
+        }
 
-        string progression_json = JsonUtility.ToJson(progression);
-        File.WriteAllText(Application.persistentDataPath + "/progression.json", progression_json);
+        string saveJSON = save.ToString();
 
-        string inventory_json = JsonUtility.ToJson(inventory);
-        File.WriteAllText(Application.persistentDataPath + "/inventory.json", inventory_json);
+        if (Application.isEditor)
+        {
+            // Indent the JSON file for better readability when running in the editor
+            saveJSON = save.ToString(Formatting.Indented);
+        }
+
+        File.WriteAllText($"{Application.persistentDataPath}/{SaveSubPath}/gamesave.json", save.ToString());
+        
+        Debug.Log($"<color=green>Player data saved to save-files.</color>");
     }
 
     public void LoadUserState()
     {
-        string activities_json = File.ReadAllText(Application.persistentDataPath + "/activities.json");
-        JsonUtility.FromJsonOverwrite(activities_json, activities);
+        if (Directory.Exists($"{Application.persistentDataPath}/{SaveSubPath}") == false)
+        {
+            Directory.CreateDirectory($"{Application.persistentDataPath}/{SaveSubPath}");
+        }
 
-        string character_json = File.ReadAllText(Application.persistentDataPath + "/character.json");
-        JsonUtility.FromJsonOverwrite(character_json, character);
+        JObject save = JObject.Parse(File.ReadAllText($"{Application.persistentDataPath}/{SaveSubPath}/gamesave.json"));
 
-        string currencies_json = File.ReadAllText(Application.persistentDataPath + "/currencies.json");
-        JsonUtility.FromJsonOverwrite(currencies_json, currencies);
+        foreach (var item in save)
+        {
+            var loadObject = SaveObjects.Find(element => element.GetInstanceID().ToString() == item.Key);
+            if (loadObject != null)
+            {
+                JsonUtility.FromJsonOverwrite(item.Value.ToString(), loadObject);
+            }
+        }
 
-        string progression_json = File.ReadAllText(Application.persistentDataPath + "/progression.json");
-        JsonUtility.FromJsonOverwrite(progression_json, progression);
+        Debug.Log($"<color=green>Player data loaded from save-files.</color>\nVersion: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
+    }
+}
 
-        string inventory_json = File.ReadAllText(Application.persistentDataPath + "/inventory.json");
-        JsonUtility.FromJsonOverwrite(inventory_json, inventory);
+
+[CustomEditor(typeof(SaveManager))]
+public class SaveManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        var saveManager = target as SaveManager;
+        EditorGUILayout.LabelField("DEBUG", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Save location: ", $"{Application.persistentDataPath}/{saveManager.SaveSubPath}/");
+        //
+        if (GUILayout.Button("Open save location"))
+        {
+            EditorUtility.RevealInFinder($"{ Path.Join(Application.persistentDataPath, saveManager.SaveSubPath) }");
+        }
+        GUILayout.Space(20);
+        if (GUILayout.Button("Trigger manual save"))
+        {
+            saveManager.SaveUserState();
+            Debug.Log("<color=yellow>Manual player data save triggered.</color>");
+        }
+        GUILayout.Space(8);
+        if (GUILayout.Button("Trigger manual load"))
+        {
+            saveManager.LoadUserState();
+            Debug.Log("<color=yellow>Manual player data load triggered.</color>");
+        }
     }
 }

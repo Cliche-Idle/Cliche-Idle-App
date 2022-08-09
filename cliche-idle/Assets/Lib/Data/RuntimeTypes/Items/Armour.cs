@@ -4,9 +4,9 @@ using Cliche.System;
 [Serializable]
 public class Armour : Item
 {
-    public WeaponType ItemSubType {
+    public ArmourType ItemSubType {
         get {
-            return (WeaponType)ItemSubTypeHash;
+            return (ArmourType)ItemSubTypeHash;
         }
     }
     public Armour(string id, int defence)
@@ -23,15 +23,10 @@ public class Armour : Item
 
     protected override void LoadFromManifest()
     {
-        ArmourItem manifest = Manifests.GetByID<ArmourItem>(ID);
+        ArmourManifest manifest = Manifests.GetByID<ArmourManifest>(ID);
         ItemType = manifest.ItemType;
         ItemSubTypeHash = manifest.SubTypeHash;
         MainStatType = manifest.MainStatType;
         IsInstanceItem = manifest.IsInstanceItem;
-        // Item manifest data
-        Icon = manifest.Icon;
-        Name = manifest.Name;
-        Description = manifest.Description;
-        Price = manifest.Price;
     }
 }

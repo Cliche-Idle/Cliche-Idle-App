@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Dev adventure
   Description: This is a basic dev adventure used for debugging and system testing.
+  PostCompleteDescription: 
   Requirements: {fileID: 0}
-  BaseLength: 100
-  Rewards: {fileID: 0}
-  CompositeLoot: 0
-  MinRewardCount: 0
-  MaxRewardCount: 0
+  BaseLength: 15
+  BaseChance: 100
+  Rewards: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
+  MinRewardCount: 1
+  MaxRewardCount: 1

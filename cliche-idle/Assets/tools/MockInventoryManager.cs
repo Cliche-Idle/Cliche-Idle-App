@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-using Cliche.UserManagement;
-using Cliche.GameModes;
+using Cliche.Activities;
 using Cliche.System;
-using Firewrap;
 
 public class MockInventoryManager : MonoBehaviour
 {
@@ -25,10 +23,15 @@ public class MockInventoryManager : MonoBehaviour
 
         //Authentication.OnLogin += AuthTestDelegate;
         //Authentication.AttemptSessionRestoreAfterRestart();
-        
-        // Load player data from local save
-        Player.GetComponent<SaveManager>().LoadUserState();
-        //
+
+        var statsBag = Player.GetComponent<StatsHandler>();
+        Debug.Log($"Free stat points: {statsBag.GetFreeStatPoints()}");
+
+        var adventureHandler = Player.GetComponent<AdventureHandler>();
+        adventureHandler.RefillAvailableList();
+
+        adventureHandler.StartAdventure("basicTimed_Dev1_short");
+
         /*
         var currencyBag = Player.GetComponent<CurrencyHandler>();
         Debug.Log("Gold : " + currencyBag.Gold.Value);
@@ -49,10 +52,8 @@ public class MockInventoryManager : MonoBehaviour
         Debug.Log("Weapon: " + testWeapon.ID + "_" + testWeapon.VariantID);
         inventoryBag.Weapons.Equip(testWeapon);
         Debug.Log("Attack after equip: " + statsBag.Attack);
-
-
-        Player.GetComponent<SaveManager>().SaveUserState();
         */
+
         docu = GetComponent<UIDocument>();
         m_Root = docu.rootVisualElement.Q<VisualElement>("Container");
         for (int i = 0; i < iconCount; i++)
@@ -68,28 +69,5 @@ public class MockInventoryManager : MonoBehaviour
             m_Root.Add(testIcon);
         }
 
-    }
-
-    public async void AuthTestDelegate(object sender, AuthEventArgs e) {
-        if (e.User != null)
-        {
-            User testUser = await Users.GetUserData();
-            Debug.Log(testUser.character.general.name);
-            Debug.Log(testUser.character.general.Level);
-            // * Adventure test
-            Adventure testAdventure = Adventures.GetByID("basicTimed_Dev1_short");
-            Debug.Log($"ID: {testAdventure.ID} : {testAdventure.Title}");
-            List<Adventure> adventures = Adventures.GetNewAdventureList(3, testUser);
-            foreach (var item in adventures)
-            {
-                Debug.Log($"Adventure list item: {item.ID}");
-            }
-            Debug.Log(Manifests.GetByID<IntervalValueModifier>("Vitality").ID);
-            //
-        }
-        else
-        {
-            Debug.LogError(e.UserFriendlyMessage);
-        }
     }
 }

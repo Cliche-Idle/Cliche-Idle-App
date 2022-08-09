@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _internalDescription: 
   _gameDescription: 
-  _upperBound: 0.5
-  _lowerBound: 0.5
+  _upperBound: 0.2
+  _lowerBound: 0.2

@@ -30,7 +30,7 @@ public class ItemBucket<TItem> where TItem : Item
     /// <summary>
     /// Contains the equipment sockets for this bucket, where items are equipped.
     /// </summary>
-    [field: NonReorderable, SerializeField]
+    [field: SerializeField]
     public List<GearSocket<TItem>> Sockets { get; private set; }
 
     /// <summary>
@@ -76,7 +76,6 @@ public class ItemBucket<TItem> where TItem : Item
     {
         if (Guid.TryParse(variantID, out var checkGuid))
         {
-            // TODO: check if item is equipped in any of the sockets
             int itemIndex = _itemList.FindIndex(element => element.ID == itemID && element.VariantID == variantID);
             if (itemIndex != -1)
             {
@@ -150,7 +149,6 @@ public class ItemBucket<TItem> where TItem : Item
         var item = _itemList.Find(element => element.ID == itemID && element.VariantID == variantID);
         if (item != null)
         {
-            // TODO: AND (socket.acceptSubtypeHash == item.SubTypeHash || socket acceptSubtypeHash = -1)
             var sockets = Sockets.FindAll(socket => socket.AcceptSubTypeHash == item.ItemSubTypeHash || socket.AcceptSubTypeHash == -1);
             //
             var socket = sockets.Find(socket => socket.EquippedItem.MainStatValue == (sockets.Min(_socket => _socket.EquippedItem.MainStatValue)));

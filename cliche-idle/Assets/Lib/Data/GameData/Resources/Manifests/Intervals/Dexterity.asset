@@ -15,5 +15,5 @@ MonoBehaviour:
   _internalDescription: 
   _gameDescription: The dexterity stat helps you reduce incoming damage in activities.
   _interval: 1
-  _value: 0.1
-  _isPercentValue: 1
+  _value: 1
+  _isPercentValue: 0

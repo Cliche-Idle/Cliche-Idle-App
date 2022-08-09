@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Cliche.GameModes;
 
 namespace Cliche.System
 {
@@ -12,11 +11,11 @@ namespace Cliche.System
             { typeof(SingleValueModifier), "Manifests/Singles" },
             { typeof(RangeValueModifier), "Manifests/Ranges" },
             { typeof(IntervalValueModifier), "Manifests/Intervals" },
-            { typeof(Adventure), "Activities/Adventures" },
+            { typeof(AdventureManifest), "Activities/Adventures" },
             { typeof(LootTable), "Activities/Rewards" },
-            { typeof(ArmourItem), "Armour" },
-            { typeof(ConsumableItem), "Consumables" },
-            { typeof(WeaponItem), "Weapons" },
+            { typeof(ArmourManifest), "Armour" },
+            { typeof(ConsumableManifest), "Consumables" },
+            { typeof(WeaponManifest), "Weapons" },
             { typeof(Race), "Player/Races" },
         };
     }

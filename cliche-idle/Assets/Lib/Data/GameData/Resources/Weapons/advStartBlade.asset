@@ -16,5 +16,5 @@ MonoBehaviour:
   <MainStatValue>k__BackingField: 15
   <Icon>k__BackingField: {fileID: 21300000, guid: 8ecc3e08992e60648bc40b04e2c07a24, type: 3}
   <Name>k__BackingField: Adventurer's blade
-  <Description>k__BackingField: 
-  <Price>k__BackingField: 0
+  <Description>k__BackingField: A simple blade, perfect for a fresh adventurer.
+  <Price>k__BackingField: 5

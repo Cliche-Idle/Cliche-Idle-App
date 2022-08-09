@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Cliche.System;
 
 [Serializable]
 public abstract class Item
@@ -15,15 +16,6 @@ public abstract class Item
     public ItemMainStatTypes MainStatType { get; protected set; }
     [field: SerializeField]
     public int MainStatValue { get; protected set; }
-    // Manifest
-    [field: SerializeField]
-    public Sprite Icon { get; protected set; }
-    [field: SerializeField]
-    public string Name { get; protected set; }
-    [field: SerializeField]
-    public string Description { get; protected set; }
-    [field: SerializeField]
-    public int Price { get; protected set; }
     // Instanced
     [field: SerializeField]
     public bool IsInstanceItem { get; protected set; }

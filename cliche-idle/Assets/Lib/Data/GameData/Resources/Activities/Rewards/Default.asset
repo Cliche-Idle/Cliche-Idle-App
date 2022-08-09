@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60242844e937bb4d88db31efb48a622, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  Weapons: []
+  Weapons:
+  - {fileID: 11400000, guid: 5f0745702f0487b4fad976d25042f685, type: 2}
   Armour: []
-  Items: []
-  MinRewardCount: 0
-  MaxRewardCount: 0
+  Consumables: []

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Cliche.UserManagement;
 
 [CreateAssetMenu(menuName = "GameData/Requirements")]
 public class Requirements : ScriptableObject
@@ -11,19 +10,34 @@ public class Requirements : ScriptableObject
         }
     }
     
-    public List<string> Race;
+    /// <summary>
+    /// The list of races that fulfill the requirement.
+    /// </summary>
+    public List<Race> Race;
 
+    /// <summary>
+    /// The list of player class names that fulfill the requirement.
+    /// </summary>
     public List<string> ClassSpecName;
 
+    /// <summary>
+    /// The player level that fulfills the requirement.
+    /// </summary>
     public int Level;
 
-    public bool IsFulfilled(User user)
+    /// <summary>
+    /// Checks whether or not the player is fulfilled all described requirements.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsFulfilled()
     {
-        string userRace = user.character.general.race;
-        string userClassSpecName = user.character.general.classSpecName;
-        int userLevel = user.character.general.Level;
+        var PlayerCharacter = GameObject.Find("Player").GetComponent<CharacterHandler>();
+        string userRace = PlayerCharacter.Race.ToString();
+        string userClassSpecName = PlayerCharacter.ClassSpecName;
+        var PlayerProgression = GameObject.Find("Player").GetComponent<ProgressionHandler>();
+        int userLevel = PlayerProgression.Level;
 
-        if(Race.Contains(userRace) || Race.Count == 0)
+        if(Race.Find(race => race.ID == userRace) != null || Race.Count == 0)
         {
             if(ClassSpecName.Contains(userClassSpecName) || ClassSpecName.Count == 0)
             {

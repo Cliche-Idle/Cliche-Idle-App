@@ -23,15 +23,10 @@ public class Weapon : Item
 
     protected override void LoadFromManifest()
     {
-        WeaponItem manifest = Manifests.GetByID<WeaponItem>(ID);
+        WeaponManifest manifest = Manifests.GetByID<WeaponManifest>(ID);
         ItemType = manifest.ItemType;
         ItemSubTypeHash = manifest.SubTypeHash;
         MainStatType = manifest.MainStatType;
         IsInstanceItem = manifest.IsInstanceItem;
-        // Item manifest data
-        Icon = manifest.Icon;
-        Name = manifest.Name;
-        Description = manifest.Description;
-        Price = manifest.Price;
     }
 }
