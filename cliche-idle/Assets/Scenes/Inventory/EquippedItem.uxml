@@ -1,15 +1,56 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="EquippedBg" style="align-items: center; width: 500px; height: 645px; background-image: none; -unity-background-scale-mode: stretch-to-fill; justify-content: space-around; border-left-width: 6px; border-right-width: 6px; border-top-width: 6px; border-bottom-width: 6px; border-left-color: rgb(34, 27, 27); border-right-color: rgb(34, 27, 27); border-top-color: rgb(34, 27, 27); border-bottom-color: rgb(34, 27, 27); background-color: rgb(41, 39, 33);">
-        <ui:VisualElement name="EquippedContainer" style="margin-top: 5%; width: 90%; height: 60%; align-items: center; justify-content: space-between; margin-bottom: 5%;">
-            <ui:VisualElement name="HelmetContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/helmetSocket.png?fileID=2800000&amp;guid=bf7cdc7dfa076594ea65e8d137512317&amp;type=3#helmetSocket&apos;); -unity-background-scale-mode: stretch-to-fill;" />
-            <ui:VisualElement name="MiddleRow" style="flex-direction: row; align-items: center; justify-content: space-between; width: 100%;">
-                <ui:VisualElement name="MainhandContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/weaponSocket.png?fileID=2800000&amp;guid=27482e7893b898d48b4aeec5b84c1374&amp;type=3#weaponSocket&apos;);" />
-                <ui:VisualElement name="ChestContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/chestSocket.png?fileID=2800000&amp;guid=ba132cb3d03d5824a82074eec1a740c0&amp;type=3#chestSocket&apos;);" />
-                <ui:VisualElement name="OffhandContainer" style="width: 90px; height: 90px; background-image: none;" />
+    <ui:VisualElement name="EquippedBg" style="align-items: center; width: 95%; height: auto; background-image: none; -unity-background-scale-mode: stretch-to-fill; justify-content: space-around; border-left-width: 6px; border-right-width: 6px; border-top-width: 6px; border-bottom-width: 6px; border-left-color: rgb(34, 27, 27); border-right-color: rgb(34, 27, 27); border-top-color: rgb(34, 27, 27); border-bottom-color: rgb(34, 27, 27); background-color: rgb(41, 39, 33); border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px;">
+        <ui:VisualElement name="EquippedContainer" style="margin-top: 5%; width: 80%; height: 60%; align-items: flex-start; justify-content: space-between; margin-bottom: 5%;">
+            <ui:VisualElement name="Weapon" style="flex-direction: row; align-items: center; width: 100%; justify-content: space-between;">
+                <ui:VisualElement name="LeftSide" style="flex-direction: row; align-items: center; width: 80%;">
+                    <ui:VisualElement name="MainhandContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/weaponSocket.png?fileID=2800000&amp;guid=27482e7893b898d48b4aeec5b84c1374&amp;type=3#weaponSocket&apos;); flex-direction: column; flex-wrap: wrap; align-items: center;" />
+                    <ui:Label text="Name" display-tooltip-when-elided="true" name="ItemName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgba(255, 255, 255, 255); text-shadow: 2px 2px 0 rgba(0, 0, 0, 255); font-size: 38px; margin-left: 2%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="RightSide" style="width: 20%; align-items: center;">
+                    <ui:VisualElement name="StatContainer" style="flex-direction: row; align-items: center; justify-content: center; width: 100%;">
+                        <ui:Label text="100" display-tooltip-when-elided="true" name="AtkStat" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgba(255, 255, 255, 255); text-shadow: 2px 2px 0 rgba(0, 0, 0, 255); font-size: 32px;" />
+                        <ui:VisualElement name="AtkIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/attack.png?fileID=2800000&amp;guid=59378adf592e974479f7d45acbad888d&amp;type=3#attack&apos;); width: 50px; height: 50px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="FeetContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/feetSocket.png?fileID=2800000&amp;guid=38e489ff026106a43bf213ea8aeea5c4&amp;type=3#feetSocket&apos;);" />
+            <ui:VisualElement name="Helmet" style="flex-direction: row; align-items: center; width: 100%; justify-content: space-between;">
+                <ui:VisualElement name="LeftSide" style="flex-direction: row; align-items: center; width: 80%;">
+                    <ui:VisualElement name="HelmetContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/helmetSocket.png?fileID=2800000&amp;guid=bf7cdc7dfa076594ea65e8d137512317&amp;type=3#helmetSocket&apos;); -unity-background-scale-mode: stretch-to-fill;" />
+                    <ui:Label text="Name" display-tooltip-when-elided="true" name="ItemName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 38px; margin-left: 2%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="RightSide" style="width: 20%; align-items: center;">
+                    <ui:VisualElement name="StatContainer" style="flex-direction: row; align-items: center; justify-content: center; width: 100%;">
+                        <ui:Label text="100" display-tooltip-when-elided="true" name="DefStat" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 32px;" />
+                        <ui:VisualElement name="DefIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/defence.png?fileID=2800000&amp;guid=640a6aac8ea2718469053c1a40ce06e8&amp;type=3#defence&apos;); width: 50px; height: 50px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Chest" style="flex-direction: row; align-items: center; width: 100%; justify-content: space-between;">
+                <ui:VisualElement name="LeftSide" style="flex-direction: row; align-items: center; width: 80%;">
+                    <ui:VisualElement name="ChestContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/chestSocket.png?fileID=2800000&amp;guid=ba132cb3d03d5824a82074eec1a740c0&amp;type=3#chestSocket&apos;);" />
+                    <ui:Label text="Name" display-tooltip-when-elided="true" name="ItemName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 38px; margin-left: 2%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="RightSide" style="width: 20%; align-items: center;">
+                    <ui:VisualElement name="StatContainer" style="flex-direction: row; align-items: center; justify-content: center; width: 100%;">
+                        <ui:Label text="100" display-tooltip-when-elided="true" name="DefStat" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 32px;" />
+                        <ui:VisualElement name="DefIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/defence.png?fileID=2800000&amp;guid=640a6aac8ea2718469053c1a40ce06e8&amp;type=3#defence&apos;); width: 50px; height: 50px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Feet" style="flex-direction: row; align-items: center; width: 100%; justify-content: space-between;">
+                <ui:VisualElement name="LeftSide" style="flex-direction: row; align-items: center; width: 80%;">
+                    <ui:VisualElement name="FeetContainer" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/inventory/feetSocket.png?fileID=2800000&amp;guid=38e489ff026106a43bf213ea8aeea5c4&amp;type=3#feetSocket&apos;);" />
+                    <ui:Label text="Name" display-tooltip-when-elided="true" name="ItemName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 38px; margin-left: 2%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="RightSide" style="width: 20%; align-items: center;">
+                    <ui:VisualElement name="StatContainer" style="flex-direction: row; align-items: center; justify-content: center; width: 100%;">
+                        <ui:Label text="100" display-tooltip-when-elided="true" name="DefStat" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 32px;" />
+                        <ui:VisualElement name="DefIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/defence.png?fileID=2800000&amp;guid=640a6aac8ea2718469053c1a40ce06e8&amp;type=3#defence&apos;); width: 50px; height: 50px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="GearInfo" style="flex-direction: row; width: 80%; justify-content: space-around; margin-bottom: 10px; align-items: stretch;">
+        <ui:VisualElement name="GearInfo" style="flex-direction: row; width: 50%; justify-content: space-around; margin-bottom: 10px; align-items: stretch;">
             <ui:VisualElement name="AtkStats" style="flex-direction: row; align-items: center;">
                 <ui:Label text="100" display-tooltip-when-elided="true" name="AtkNum" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 32px; color: rgb(255, 255, 255); text-shadow: 1px 1px 0 rgb(0, 0, 0);" />
                 <ui:VisualElement name="AtkIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/attack.png?fileID=2800000&amp;guid=59378adf592e974479f7d45acbad888d&amp;type=3#attack&apos;); width: 50px; height: 50px;" />
