@@ -64,7 +64,6 @@ public class StatsHandler : MonoBehaviour
         string raceID = gameObject.GetComponent<CharacterHandler>().Race.ToString();
         Race raceData = Manifests.GetByID<Race>(raceID);
         int stat = (int)raceData.GetType().GetProperty(statName).GetValue(raceData);
-        Debug.Log(stat);
         return stat;
     }
 }
@@ -106,7 +105,7 @@ public abstract class CoreStat
         }
         else
         {
-            Debug.LogError($"Can not TAKE stat point from category {StatName}. It would be either 0 or below the racial default.");
+            Debug.LogError($"Can not TAKE stat point from category {StatName}. It would be either below 0 or the racial minimum.");
         }
     } 
 }

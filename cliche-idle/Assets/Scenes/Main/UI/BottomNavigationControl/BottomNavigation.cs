@@ -28,6 +28,7 @@ public class BottomNavigation : UIScript
     private void InventoryMenuOpen()
     {
         Navigator.SwitchToView("CharacterManagementScreen");
+        Navigator.SwitchToView("CS_SecondarySwitchMenu");
         Navigator.SwitchToView("CS_InventoryEquippedItems");
         Navigator.SwitchToView("CS_InventoryManagement");
     }

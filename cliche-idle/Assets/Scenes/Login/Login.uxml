@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Background" style="background-image: url(&apos;project://database/Assets/Images/background.png?fileID=2800000&amp;guid=6e3aa5eeecf23a54aae6973c50f26245&amp;type=3#background&apos;); height: auto; width: auto; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; flex-shrink: 0; -unity-background-scale-mode: scale-and-crop; transition-property: opacity; transition-duration: 1s; transition-timing-function: ease-in; transition-delay: 0s;">
+        <ui:VisualElement name="MainContainer" style="align-items: center; justify-content: center; width: 70%; height: 80%;">
+            <ui:VisualElement name="Logo" style="background-image: url(&apos;project://database/Assets/Images/login/logo.gif?fileID=2800000&amp;guid=68bba6f875d008d4391206eadf5577d5&amp;type=3#logo&apos;); -unity-background-scale-mode: scale-to-fit; width: 100%; height: 25%; align-items: center; flex-direction: column; flex-wrap: wrap;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
