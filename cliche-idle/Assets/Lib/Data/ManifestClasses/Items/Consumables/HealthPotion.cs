@@ -8,7 +8,7 @@ public class HealthPotion : ConsumableManifest
         var player = GameObject.Find("Player");
         var statsHandler = player.GetComponent<StatsHandler>();
         int maxHealth = statsHandler.Health.Max;
-        int healAmount = maxHealth * (MainStatValue / 100);
+        int healAmount = Mathf.FloorToInt(maxHealth * (MainStatValue / 100f));
         statsHandler.Health.Grant(healAmount);
     }
 

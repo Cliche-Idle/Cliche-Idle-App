@@ -6,17 +6,24 @@ using Cliche.System;
 
 public class StatsHandler : MonoBehaviour
 {
-    [HeaderAttribute("General stats")]
-    //[NonSerialized]
+    private void Awake() {
+        Health = gameObject.GetComponent<PlayerHealth>();
+    }
+
+    [field: HeaderAttribute("General stats")]
     // FIXME: Keep an eye out on this, an instance ID is saved into savefiles and if that changes, it might mess things up when it's loaded back.
-    public PlayerHealth Health;
+    public PlayerHealth Health { get; private set; }
 
     //[field: Header("Item stats")]
     public int Defence {
         get
         {
+            int defence = 0;
             List<GearSocket<Armour>> sockets = gameObject.GetComponent<InventoryHandler>().Armour.Sockets.FindAll(socket => socket.EquippedItem != null);
-            int defence = Mathf.FloorToInt((float)sockets.Average(socket => socket.EquippedItem.MainStatValue));
+            if (sockets.Count != 0)
+            {
+                defence = Mathf.FloorToInt((float)sockets.Average(socket => socket.EquippedItem.MainStatValue));
+            }
             return defence;
         }
     }
@@ -24,8 +31,12 @@ public class StatsHandler : MonoBehaviour
     public int Attack {
         get
         {
+            int attack = 0;
             List<GearSocket<Weapon>> sockets = gameObject.GetComponent<InventoryHandler>().Weapons.Sockets.FindAll(socket => socket.EquippedItem != null);
-            int attack = Mathf.FloorToInt((float)sockets.Average(socket => socket.EquippedItem.MainStatValue));
+            if (sockets.Count != 0)
+            {
+                attack = Mathf.FloorToInt((float)sockets.Average(socket => socket.EquippedItem.MainStatValue));
+            }
             return attack;
         }
     }

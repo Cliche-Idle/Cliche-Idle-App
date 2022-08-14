@@ -28,6 +28,7 @@ public class Consumable : StackableItem
         ItemType = manifest.ItemType;
         ItemSubTypeHash = manifest.SubTypeHash;
         MainStatType = manifest.MainStatType;
+        MainStatValue = manifest.MainStatValue;
         IsInstanceItem = manifest.IsInstanceItem;
     }
 }

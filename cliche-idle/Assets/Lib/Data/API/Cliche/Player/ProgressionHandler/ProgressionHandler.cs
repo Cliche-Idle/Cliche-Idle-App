@@ -31,9 +31,12 @@ public class ProgressionHandler : MonoBehaviour
 
     public int GetLevelXpFloor(int level)
     {
-        float levelXpScalar = Manifests.GetByID<SingleValueModifier>("XpLevelScalar").Value;
-        int currentLevel = level;
-        int levelXP = Mathf.CeilToInt(Mathf.Pow((currentLevel / levelXpScalar), 2));
+        int levelXP = 0;
+        if (level > 1)
+        {
+            float levelXpScalar = Manifests.GetByID<SingleValueModifier>("XpLevelScalar").Value;
+            levelXP = Mathf.CeilToInt(Mathf.Pow((level / levelXpScalar), 2));
+        }
         return levelXP;
     }
 }

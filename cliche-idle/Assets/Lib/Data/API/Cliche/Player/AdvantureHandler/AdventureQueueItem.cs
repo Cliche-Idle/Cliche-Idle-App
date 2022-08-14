@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Cliche.System;
 
 [System.Serializable]
 public class AdventureQueueItem

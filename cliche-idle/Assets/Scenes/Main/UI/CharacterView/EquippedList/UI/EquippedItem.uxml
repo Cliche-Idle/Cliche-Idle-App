@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scenes/Inventory/EquippedItem.uss?fileID=7433441132597879392&amp;guid=138a99d88a60dee41940c74886753d04&amp;type=3#EquippedItem" />
+    <ui:VisualElement name="EquippedItemsView" style="align-items: stretch; height: auto; background-image: none; -unity-background-scale-mode: stretch-to-fill; justify-content: space-around; border-left-width: 6px; border-right-width: 6px; border-top-width: 6px; border-bottom-width: 6px; border-left-color: rgb(34, 27, 27); border-right-color: rgb(34, 27, 27); border-top-color: rgb(34, 27, 27); border-bottom-color: rgb(34, 27, 27); background-color: rgb(41, 39, 33); border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; max-height: 650px; flex-grow: 0; margin-left: 2%; margin-right: 2%; margin-top: 3%; margin-bottom: 3%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <ui:VisualElement name="SocketsContainer" style="margin-top: 30px; align-items: flex-start; justify-content: flex-start; margin-bottom: 30px; margin-left: 60px; margin-right: 60px; flex-grow: 0; flex-direction: column;" />
+        <ui:VisualElement name="GearInfo" style="flex-direction: row; justify-content: center; margin-bottom: 25px; align-items: stretch; margin-top: 25px; margin-left: 25px; margin-right: 25px;">
+            <ui:VisualElement name="AtkStat" class="statsContainer" style="flex-direction: row; align-items: center;">
+                <ui:Label text="100" display-tooltip-when-elided="true" name="AtkNum" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 32px; color: rgb(255, 255, 255); text-shadow: 1px 1px 0 rgb(0, 0, 0);" />
+                <ui:VisualElement name="AtkIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/attack.png?fileID=2800000&amp;guid=59378adf592e974479f7d45acbad888d&amp;type=3#attack&apos;); width: 50px; height: 50px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="DefStat" class="statsContainer" style="flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Label text="100" display-tooltip-when-elided="true" name="DefNum" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 32px; color: rgb(255, 255, 255); text-shadow: 1px 1px 0 rgb(0, 0, 0);" />
+                <ui:VisualElement name="DefIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/defence.png?fileID=2800000&amp;guid=640a6aac8ea2718469053c1a40ce06e8&amp;type=3#defence&apos;); width: 50px; height: 50px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

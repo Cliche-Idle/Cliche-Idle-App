@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterHandler : MonoBehaviour
 {
+    // TODO: build this out properly
+    
     [field: SerializeField]
     public string Name { get; private set;}
 

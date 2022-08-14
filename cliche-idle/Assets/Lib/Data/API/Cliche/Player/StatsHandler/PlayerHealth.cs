@@ -22,10 +22,11 @@ public class PlayerHealth : MonoBehaviour
     public int Max
     {
         get {
+            int baseHealth = 100;
             int level = gameObject.GetComponent<ProgressionHandler>().Level;
             int levelBonus = Manifests.GetByID<IntervalValueModifier>("HealthBonusPerLevel").GetAmountFloored(level);
             int vitalityBonus = Manifests.GetByID<IntervalValueModifier>("Vitality").GetAmountFloored(gameObject.GetComponent<StatsHandler>().Vitality.Value);
-            return (levelBonus + vitalityBonus);
+            return (baseHealth + levelBonus + vitalityBonus);
         }
     }
 

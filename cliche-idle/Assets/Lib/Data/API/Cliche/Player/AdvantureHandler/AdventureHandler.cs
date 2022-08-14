@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,11 @@ using UnityEditor;
 
 public partial class AdventureHandler : MonoBehaviour
 {
+    private void Start() {
+        // Attempt refill on startup
+        RefillAvailableList();
+    }
+    
     /// <summary>
     /// The number of adventures that are available at the same time.
     /// </summary>
@@ -17,6 +23,10 @@ public partial class AdventureHandler : MonoBehaviour
     /// </summary>
     public List<string> AvailableAdventures;
 
+    /// <summary>
+    /// Event that fires when either Adventure lists receive a change.
+    /// </summary>
+    public EventHandler OnAdventuresUpdate;
 
     /// <summary>
     /// The number of adventures that can be active at the same time.
@@ -46,6 +56,7 @@ public partial class AdventureHandler : MonoBehaviour
         {
             Debug.LogWarning($"Adventure ({adventureID}) could not be transferred to queue because it is full.");
         }
+        FireUpdateEvent();
     }
 
     /// <summary>
@@ -67,7 +78,7 @@ public partial class AdventureHandler : MonoBehaviour
         {
             // Stop when refilled the Available list / there are not more adventures left
             // Takes into account that the Queue items are part of the max limit
-            if (((AvailableAdventures.Count - AdventureQueue.Count) == (MaxHandlerAdventures - AdventureQueue.Count)) || (userAvailableAdventures.Count == 0))
+            if (((AvailableAdventures.Count + AdventureQueue.Count) == (MaxHandlerAdventures)) || (userAvailableAdventures.Count == 0))
             {
                 break;
             }
@@ -82,7 +93,16 @@ public partial class AdventureHandler : MonoBehaviour
             // Remove adventure from list (regardless whether or not it was added)
             userAvailableAdventures.RemoveAt(adventureIndex);
         }
+        FireUpdateEvent();
         //  Debug.LogWarning($"Could not refill available adventures list; it is already full or there aren't any available adventures for this character.");
+    }
+
+    private void FireUpdateEvent()
+    {
+        if (OnAdventuresUpdate != null)
+        {
+            OnAdventuresUpdate.Invoke(this, null);
+        }
     }
 
     /// <summary>

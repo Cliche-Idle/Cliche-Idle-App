@@ -44,4 +44,24 @@ public abstract class Item
     }
 
     protected abstract void LoadFromManifest();
+
+    public ItemManifest GetManifest()
+    {
+        return Manifests.GetByObject(this);
+    }
+
+    public static ItemTypes GetInternalItemType(Type item)
+    {
+        ItemTypes internalItemType = ItemTypes.Undefined;
+        if (Enum.IsDefined(typeof(ItemTypes), item.Name))
+        {
+            internalItemType = (ItemTypes)Enum.Parse(typeof(ItemTypes), item.Name);
+        }
+        return internalItemType;
+    }
+
+    public static ItemTypes GetInternalItemType(object item)
+    {
+        return GetInternalItemType(item.GetType());
+    }
 }

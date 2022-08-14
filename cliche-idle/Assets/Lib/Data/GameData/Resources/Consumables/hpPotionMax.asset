@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: hpPotionMax
   m_EditorClassIdentifier: 
   <MainStatValue>k__BackingField: 100
-  <Icon>k__BackingField: {fileID: 0}
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8ecc3e08992e60648bc40b04e2c07a24, type: 3}
+  <Name>k__BackingField: Potion of full restoration
+  <Description>k__BackingField: Restores the user to full health.
   <Price>k__BackingField: 100
   <MainStatType>k__BackingField: 2
   <SubType>k__BackingField: 0

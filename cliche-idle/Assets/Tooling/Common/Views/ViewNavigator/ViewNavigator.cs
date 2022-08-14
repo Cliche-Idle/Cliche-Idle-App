@@ -4,168 +4,178 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ViewNavigator : MonoBehaviour
+namespace UIViews
 {
-    /// <summary>
-    /// The target UIDocument of this Navigator instance. 
-    /// </summary>
-    public UIDocument Target;
-
-    /// <summary>
-    /// Contains the list of registered views.
-    /// </summary>
-    [field: SerializeField]
-    public List<ViewEntry> Views { get; private set; }
-
-    /// <summary>
-    /// Switches the view in the target GameObject's UIDocument, at a specified VisualElement.
-    /// </summary>
-    /// <param name="viewID">The viewID to be switched in</param>
-    /// <exception cref="NullReferenceException">Thrown when the specified containerID is not found on the target document.</exception>
-    /// <exception cref="KeyNotFoundException">Thrown when the specified viewID is not registered.</exception>
-    public void SwitchToView(string viewID)
+    public class ViewNavigator : MonoBehaviour
     {
-        // Get the ViewData assigned to the given ID
-        var viewData = GetView(viewID);
-        // Grab and clear the target container
-        VisualElement targetContainer = GetTargetContainer(viewData.containerID);
-        // Clear the view with the same container ID if it's in focus, and trigger its OnLeaveFocus event
-        var outOfFocusView = Views.Find(view => view.containerID == viewData.containerID && view.InFocus == true);
-        if (outOfFocusView != null)
+        /// <summary>
+        /// The target UIDocument of this Navigator instance. 
+        /// </summary>
+        [field: SerializeField]
+        public UIDocument Target { get; private set; }
+
+        /// <summary>
+        /// Contains the list of registered views.
+        /// </summary>
+        [field: SerializeField]
+        public List<View> Views { get; private set; }
+
+        /// <summary>
+        /// Switches the view in the target GameObject's UIDocument, at a specified VisualElement.
+        /// </summary>
+        /// <param name="viewID">The viewID to be switched in</param>
+        /// <exception cref="NullReferenceException">Thrown when the specified containerID is not found on the target document.</exception>
+        /// <exception cref="KeyNotFoundException">Thrown when the specified viewID is not registered.</exception>
+        public void SwitchToView(string viewID)
         {
-            outOfFocusView.SetState(false);
-            if (outOfFocusView.OnLeaveFocus != null)
+            // Get the ViewData assigned to the given ID
+            var viewData = GetView(viewID);
+            if (viewData.Enabled == false)
             {
-                outOfFocusView.OnLeaveFocus.Invoke(this, null);
+                // Grab and clear the target container
+                VisualElement targetContainer = GetTargetContainer(viewData.ContainerID);
+                if (viewData.UXMLDocument != null && targetContainer != null)
+                {
+                    // Clear the view container
+                    ClearUpViewContainer(viewData.ContainerID);
+                    viewData.UXMLDocument.CloneTree(targetContainer);
+                    //targetContainer.Add(viewData.UXMLDocument.Instantiate());
+                }
+                // Fire update event
+                viewData.SetState(true);
+            }
+            else
+            {
+                // View is already in focus
             }
         }
-        targetContainer.Clear();
-        // TODO: Test this, we don't want any shared references if an instance is updated.
-        // * Instantiate should make a new unique clone, so this is probably a non-issue.
-        targetContainer.Add(viewData.UXMLDocument.Instantiate());
-        // Fire update event
-        viewData.SetState(true);
-        if (viewData.OnEnterFocus != null)
-        {
-            viewData.OnEnterFocus.Invoke(this, null);
-        }
-    }
 
-    public void ClearViewContainer(string viewID)
-    {
-        // Get the ViewData assigned to the given ID
-        var viewData = GetView(viewID);
-        // Grab and clear the target container
-        VisualElement targetContainer = GetTargetContainer(viewData.containerID);
-        targetContainer.Clear();
-        // Fire update event
-        if (viewData.InFocus == true)
+        /// <summary>
+        /// Clears the targeted View's container, and triggers its and every active sub-View's OnLeaveFocus event.
+        /// </summary>
+        /// <param name="viewID"></param>
+        public void ClearUpViewContainer(string containerID)
         {
-            viewData.SetState(false);
-            if (viewData.OnLeaveFocus != null)
+            var baseTargetView = Views.Find(view => view.ContainerID == containerID && view.Enabled == true);
+            // Grab and clear the target container
+            VisualElement baseTargetContainer = GetTargetContainer(containerID);
+            // Fire OnLeaveFocus event for the cleared view
+            if (baseTargetView != null)
             {
-                viewData.OnLeaveFocus.Invoke(this, null);
+                baseTargetView.SetState(false);
+            }
+            // Clear the view with the same container ID if it's in focus, and trigger its OnLeaveFocus event
+            if (baseTargetContainer != null)
+            {
+                // Check and trigger the OnLeaveFocus for every view that may be active inside this one
+                // * Assumes containerIDs are completely unique
+                // * https://docs.unity3d.com/ScriptReference/UIElements.VisualElement-name.html
+                foreach (var view in Views)
+                {
+                    if (view.Enabled)
+                    {
+                        // Check if the view's container is inside the base one and push it out of focus
+                        var subViewContainer = baseTargetContainer.Q(view.ContainerID);
+                        if (subViewContainer != null)
+                        {
+                            view.SetState(false);
+                        }
+                    }
+                }
+                // Clear the base view container
+                baseTargetContainer.Clear();
             }
         }
-    }
 
-    public VisualElement GetTargetContainer(string containerID)
-    {
-        VisualElement targetContainer = Target.rootVisualElement.Q(containerID);
-        if (targetContainer != null)
+        /// <summary>
+        /// Gets the VisualElement with the given name.
+        /// </summary>
+        /// <param name="containerID"></param>
+        /// <returns></returns>
+        public VisualElement GetTargetContainer(string containerID)
         {
+            VisualElement targetContainer = Target.rootVisualElement.Q(containerID);
+            if (targetContainer == null)
+            {
+                Debug.LogWarning($"ViewNavigator could not find targetcontainer `{containerID}` on document {Target}.");   
+            }
             return targetContainer;
         }
-        else
-        {
-            // Handle invalid containerID
-            throw new NullReferenceException($"ViewNavigator could not find targetcontainer `{containerID}` on document {Target}.");
-        }
-    }
 
-    public ViewEntry GetView(string viewID)
-    {
-        var viewData = Views.Find(view => view.viewID == viewID);
-        if (viewData != null)
+        /// <summary>
+        /// Gets the View with the given ID.
+        /// </summary>
+        /// <param name="viewID"></param>
+        /// <returns></returns>
+        public View GetView(string viewID)
         {
+            var viewData = Views.Find(view => view.ID == viewID);
+            if (viewData == null)
+            {
+                Debug.LogWarning($"ViewNavigator could not find a registered view with key `{viewID}`.");
+            }
             return viewData;
         }
-        else
+    }
+
+    [Serializable]
+    public class View
+    {
+        /// <summary>
+        /// Unique ID referencing the view. This is used for calling a view switch.
+        /// </summary>
+        [field: SerializeField]
+        public string ID { get; private set; }
+        /// <summary>
+        /// The ID of the view container in the target document. 
+        /// The VisualElement with this ID will be cleared, and the contents of this view will be copied to its tree.
+        /// </summary>
+        [field: SerializeField]
+        public string ContainerID { get; private set; }
+        /// <summary>
+        /// The UXML Document file containing the view to be switched in.
+        /// </summary>
+        [field: SerializeField]
+        public VisualTreeAsset UXMLDocument { get; private set; }
+
+        /// <summary>
+        /// The current state of the view.
+        /// </summary>
+        [field: SerializeField]
+        public bool Enabled { get; private set; }
+
+        /// <summary>
+        /// Sets the state of the view.
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="parentDocument"></param>
+        public void SetState(bool state)
         {
-            // Handle invalid ViewID
-            throw new KeyNotFoundException($"ViewNavigator could not find a registered view with key `{viewID}`.");
+            if (Enabled == true && state == false)
+            {
+                if (OnLeaveFocus != null)
+                {
+                    OnLeaveFocus.Invoke(this, null);
+                }
+            }
+            else if (Enabled == false && state == true)
+            {
+                if (OnEnterFocus != null)
+                {
+                    OnEnterFocus.Invoke(this, null);
+                }
+            }
+            Enabled = state;
         }
-    }
-}
 
+        /// <summary>
+        /// Event that fires when the view is created.
+        /// </summary>
+        public EventHandler OnEnterFocus;
 
-[Serializable]
-public class ViewEntry
-{
-    /// <summary>
-    /// Unique ID referencing the view. This is used for calling a view switch.
-    /// </summary>
-    public string viewID;
-    /// <summary>
-    /// The ID of the view container in the target document. 
-    /// The VisualElement with this ID will be cleared, and the contents of this view will be copied to its tree.
-    /// </summary>
-    public string containerID;
-    /// <summary>
-    /// The UXML Document file containing the view to be switched in.
-    /// </summary>
-    public VisualTreeAsset UXMLDocument;
-
-    /// <summary>
-    /// The current state of the view.
-    /// </summary>
-    public bool InFocus { get; private set; }
-
-    /// <summary>
-    /// Sets the state of the view.
-    /// </summary>
-    /// <param name="state"></param>
-    public void SetState(bool state)
-    {
-        InFocus = state;
-    }
-
-    /// <summary>
-    /// Event that fires when the view is created.
-    /// </summary>
-    public EventHandler OnEnterFocus;
-
-    /// <summary>
-    /// Event that fires when the view is destroyed.
-    /// </summary>
-    public EventHandler OnLeaveFocus;
-}
-
-
-public class ViewNavigatorEventArgs : EventArgs
-{
-    private string viewID;
-    private string containerID;
-
-    public ViewNavigatorEventArgs(string calledViewID, string updatedContainerID)
-    {
-        viewID = calledViewID;
-        containerID = updatedContainerID;
-    }
-
-    /// <summary>
-    /// The ViewID that was called for update.
-    /// </summary>
-    public string ViewID 
-    {
-        get { return viewID; }
-    }
-
-    /// <summary>
-    /// The ContainerID that got modified.
-    /// </summary>
-    public string ContainerID
-    {
-        get { return containerID; }
+        /// <summary>
+        /// Event that fires when the view is destroyed.
+        /// </summary>
+        public EventHandler OnLeaveFocus;
     }
 }

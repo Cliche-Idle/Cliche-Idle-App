@@ -151,7 +151,7 @@ public class ItemBucket<TItem> where TItem : Item
         {
             var sockets = Sockets.FindAll(socket => socket.AcceptSubTypeHash == item.ItemSubTypeHash || socket.AcceptSubTypeHash == -1);
             //
-            var socket = sockets.Find(socket => socket.EquippedItem.MainStatValue == (sockets.Min(_socket => _socket.EquippedItem.MainStatValue)));
+            var socket = sockets.Find(socket => socket.EquippedItem != null && socket.EquippedItem.MainStatValue == (sockets.Min(_socket => _socket.EquippedItem.MainStatValue)));
             //
             if (sockets.Count == 1)
             {

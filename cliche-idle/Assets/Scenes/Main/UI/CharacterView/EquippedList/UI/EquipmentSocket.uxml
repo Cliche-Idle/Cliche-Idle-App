@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Socket" style="flex-direction: row; align-items: center; justify-content: space-between; margin-left: 15px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; flex-grow: 0; width: 100%;">
+        <ui:VisualElement name="LeftSide" style="flex-direction: row; align-items: center; flex-grow: 1; height: 100%;">
+            <ui:VisualElement name="ItemIcon" style="width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Images/adventures/placeholder.png?fileID=2800000&amp;guid=ef7331ad6bf0fb544a9080f10bc56d65&amp;type=3#placeholder&apos;); flex-direction: column; flex-wrap: wrap; align-items: center;" />
+            <ui:Label text="socket_item_name" display-tooltip-when-elided="true" name="ItemName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 38px; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 25px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightSide" style="align-items: center; flex-grow: 0.15; height: 100%; justify-content: center; flex-direction: row;">
+            <ui:Label text="0" display-tooltip-when-elided="true" name="StatValue" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 32px; margin-right: 20px;" />
+            <ui:VisualElement name="StatIcon" style="background-image: url(&apos;project://database/Assets/Images/Resources/StatIcons/attack.png?fileID=2800000&amp;guid=59378adf592e974479f7d45acbad888d&amp;type=3#attack&apos;); width: 50px; height: 50px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

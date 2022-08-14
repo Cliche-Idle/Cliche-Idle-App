@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe638afbe8438d947a93e256d372ab6d, type: 3}
+  m_Name: basicTimed_Dev1_short 2
+  m_EditorClassIdentifier: 
+  Title: Dev adventure 2
+  Description: This is a basic dev adventure used for debugging and system testing.
+  PostCompleteDescriptionSuccess: 
+  PostCompleteDescriptionFail: 
+  Requirements: {fileID: 0}
+  BaseLength: 15
+  BaseChance: 100
+  Rewards: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
+  MinRewardCount: 1
+  MaxRewardCount: 1

@@ -10,11 +10,20 @@ public class GearSocket<TItem> where TItem : Item
     public string ID { get; private set; }
 
     /// <summary>
-    /// The main Type this socket accepts.
+    /// The main Type this socket accepts. (RuntimeType)
     /// </summary>
     public Type AcceptType { 
         get {
             return typeof(TItem);
+        }
+    }
+
+    /// <summary>
+    /// The main Item Type this socket accepts. (ItemTypes)
+    /// </summary>
+    public ItemTypes AcceptItemType {
+        get {
+            return Item.GetInternalItemType(AcceptType);
         }
     }
 

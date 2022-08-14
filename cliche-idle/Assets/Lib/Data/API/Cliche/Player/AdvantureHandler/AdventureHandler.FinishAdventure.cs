@@ -36,9 +36,14 @@ public partial class AdventureHandler
             gameObject.GetComponent<CurrencyHandler>().Gold.Grant(rewardGold);
             statsHandler.Health.Take(damageTaken);
 
+            // Generate activity end report
             var activityEndReport = new PostActivityReport(damageTaken, 0, rewardXP, rewardGold, lootStream);
             Debug.Log($"Adventure end report ({adventureID}, success: {success}): -{damageTaken} HP, +{rewardXP} XP, +{rewardGold} Gold.");
 
+            // Remove adventure from the list
+            AdventureQueue.Remove(activity);
+            // Refill adventure list (also triggers update event)
+            RefillAvailableList();
             return activityEndReport;
         }
         else
@@ -97,7 +102,7 @@ public partial class AdventureHandler
         // Scales up the min XP by the chance scalar, so lower chance yields more min XP
         var baseMinRewardXP = (baseMaxRewardXP / (4 - (4 * chanceScalar)));
         // * Final XP given:
-        var rewardXP = Mathf.CeilToInt(UnityEngine.Random.Range(baseMinRewardXP, baseMaxRewardXP));
+        var rewardXP = 10 + Mathf.CeilToInt(UnityEngine.Random.Range(baseMinRewardXP, baseMaxRewardXP));
         // Grants minimum XP if failed
         if (!success)
         {
