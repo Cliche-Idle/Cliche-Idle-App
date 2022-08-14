@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Container" style="flex-grow: initial; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; -unity-background-image-tint-color: rgb(56, 56, 56); background-color: rgb(65, 65, 65); min-width: initial; min-height: initial; height: auto; justify-content: flex-start; align-items: stretch; flex-shrink: initial;">
+        <ui:GroupBox style="flex-direction: row; justify-content: space-between; min-width: auto; min-height: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; background-color: rgba(38, 35, 35, 255);">
+            <ui:GroupBox style="flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                <ui:Toggle name="ToggleAccountActive" style="margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+                <ui:Label text="Account name" display-tooltip-when-elided="true" name="AccountName" class="details-header" style="font-size: 15px; background-color: rgba(38, 35, 35, 0); -unity-font-style: bold; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; -unity-background-scale-mode: stretch-to-fill;" />
+            </ui:GroupBox>
+            <ui:Button text="Delete" display-tooltip-when-elided="true" name="DeleteAccount" style="width: 75px; height: 25px; background-color: rgb(156, 55, 55); -unity-font-style: bold;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

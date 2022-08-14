@@ -1,0 +1,35 @@
+.unity-progress-bar {
+}
+
+#HpBar .unity-progress-bar__progress {
+    background-color: rgb(212, 17, 17);
+}
+
+#HpBar .unity-progress-bar__background {
+    background-color: rgba(171, 67, 67, 0.5);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+#HpBar .unity-progress-bar__title {
+    font-size: 20px;
+}
+
+#ExpBar .unity-progress-bar__progress {
+    background-color: rgb(70, 207, 55);
+}
+
+#ExpBar .unity-progress-bar__background {
+    background-color: rgba(65, 173, 64, 0.23);
+    height: 40px;
+    flex-shrink: 0;
+}
+
+#ExpBar .unity-progress-bar__title {
+    font-size: 20px;
+    -unity-font-definition: url('project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&guid=33891e25a29ab1f4dbb2dd2483a11948&type=2#EightBitDragon SDF');
+}

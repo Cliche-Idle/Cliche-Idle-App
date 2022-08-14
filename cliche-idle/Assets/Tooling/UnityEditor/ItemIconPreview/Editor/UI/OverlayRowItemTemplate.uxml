@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="ItemRow" style="width: auto; height: 60px; justify-content: center;">
+        <ui:VisualElement name="Row" style="flex-direction: row; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; align-items: center; margin-left: 7px;">
+            <ui:VisualElement name="Icon" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=4584671053970592468&amp;guid=87859e2950d7650408d53c3b9d42b5e6&amp;type=3#console.warnicon&apos;); width: 50px; height: 50px;" />
+            <ui:VisualElement style="flex-grow: 1; align-items: flex-start; flex-shrink: 0;">
+                <ui:Label text="Unknown" display-tooltip-when-elided="true" name="ID" style="flex-grow: 1; -unity-text-align: middle-left; -unity-font-style: bold; padding-left: 3px; font-size: 14px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px;" />
+                <ui:Label text="Position: ?" display-tooltip-when-elided="true" name="Position" style="flex-grow: 1; padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

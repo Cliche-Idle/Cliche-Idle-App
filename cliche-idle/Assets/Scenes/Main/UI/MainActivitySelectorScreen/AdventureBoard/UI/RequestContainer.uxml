@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="RequestBackground" style="align-items: stretch; background-image: url(&apos;project://database/Assets/Images/adventures/boardBg.png?fileID=2800000&amp;guid=1a8ea423aa0316d4a8b3a83baa25c2e9&amp;type=3#boardBg&apos;); -unity-background-scale-mode: stretch-to-fill; flex-grow: 0; position: relative; padding-left: 30px; padding-top: 30px; margin-left: 2%; margin-right: 2%; margin-top: 3%; margin-bottom: 3%; padding-right: 30px; padding-bottom: 30px; border-left-width: 25px; border-right-width: 25px; border-top-width: 25px; border-bottom-width: 25px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-left-color: rgb(87, 61, 58); border-right-color: rgb(87, 61, 58); border-top-color: rgb(87, 61, 58); border-bottom-color: rgb(87, 61, 58); height: 1150px;">
+        <ui:VisualElement name="RequestQueueContainer" />
+        <ui:VisualElement name="RequestAvailableContainer" style="flex-grow: 1; flex-shrink: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

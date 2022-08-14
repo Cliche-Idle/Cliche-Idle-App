@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "257647959079",
+    "project_id": "cliche-tales",
+    "storage_bucket": "cliche-tales.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257647959079:android:686ebbbdd31b9a45ad0202",
+        "android_client_info": {
+          "package_name": "com.cliche.clichetales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBARdbeMmvkkaTQ08SKnCS8j436z4Dtbdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257647959079:android:73f2b2940962e7d5ad0202",
+        "android_client_info": {
+          "package_name": "com.cliche_tales.idle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBARdbeMmvkkaTQ08SKnCS8j436z4Dtbdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257647959079:android:3861c54b9d2e73fbad0202",
+        "android_client_info": {
+          "package_name": "com.clichetales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBARdbeMmvkkaTQ08SKnCS8j436z4Dtbdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257647959079-10heqi3bd41nbnf6tvubpfgblgmg90fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

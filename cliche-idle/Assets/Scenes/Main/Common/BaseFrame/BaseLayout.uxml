@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="BaseContainer" style="flex-grow: 1; min-width: auto; min-height: auto; width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/Images/background.png?fileID=2800000&amp;guid=6e3aa5eeecf23a54aae6973c50f26245&amp;type=3#background&apos;); -unity-background-scale-mode: scale-and-crop;">
+        <ui:VisualElement name="BaseHeaderContainer" style="flex-grow: 0; flex-shrink: 0; min-width: auto; min-height: auto;" />
+        <ui:VisualElement name="BaseContentContainer" style="flex-grow: 1;" />
+        <ui:VisualElement name="BaseFooterContainer" style="flex-grow: 0; flex-shrink: 0; min-width: auto; min-height: auto;" />
+        <ui:VisualElement name="BasePopUpContainer" style="flex-shrink: 0;" />
+    </ui:VisualElement>
+</ui:UXML>
