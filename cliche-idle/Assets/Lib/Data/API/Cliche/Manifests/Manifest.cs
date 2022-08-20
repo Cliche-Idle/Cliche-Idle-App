@@ -4,7 +4,13 @@ using UnityEngine;
 namespace Cliche.System
 {
     public partial class Manifests
-    {        
+    {      
+        /// <summary>
+        /// Gets a manifest of the specified type by its ID, if it exists.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="manifestID"></param>
+        /// <returns></returns>
         public static T GetByID<T>(string manifestID) where T : ScriptableObject
         {
             string typeLocationPath = Paths[typeof(T)];
@@ -20,6 +26,11 @@ namespace Cliche.System
             return manifest;
         }
 
+        /// <summary>
+        /// Gets the generic ItemManifest of any Item based on their intrinsic ItemType.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public static ItemManifest GetByObject(Item item)
         {
             string typeLocationPath = Paths[ItemManifestTypes[item.ItemType]];
