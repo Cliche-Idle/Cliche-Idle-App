@@ -627,7 +627,7 @@ MonoBehaviour:
     <Enabled>k__BackingField: 0
   - <ID>k__BackingField: CS_SecondarySwitchMenu
     <ContainerID>k__BackingField: CharacterManagementFooterContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: ec5a89b03b363f74ba64c79da0744d05, type: 3}
+    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: daf7f410072743b4f9e6bf183938913f, type: 3}
     <Enabled>k__BackingField: 0
   - <ID>k__BackingField: CS_InventoryEquippedItems
     <ContainerID>k__BackingField: CMCC_UpperContainer
