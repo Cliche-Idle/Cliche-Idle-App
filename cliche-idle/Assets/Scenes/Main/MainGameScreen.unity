@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &48590670
 Transform:
   m_ObjectHideFlags: 0
@@ -168,8 +168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf629d12b660e4e418f8455ff9c99bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: CS_InventoryManagement
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
   InventoryCategoryUXML: {fileID: 9197481963319205126, guid: 639486a98b962834899f7107b927f757, type: 3}
   InventoryMode: 1
 --- !u!114 &48590672
@@ -184,8 +189,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43a9d613819c2c4eaaade3a74b70310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: CS_InventoryEquippedItems
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
   EquipmentSocketUXML: {fileID: 9197481963319205126, guid: 8c91489d67593514abdc52a337111873, type: 3}
 --- !u!1 &54299392
 GameObject:
@@ -204,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &54299393
 Transform:
   m_ObjectHideFlags: 0
@@ -232,8 +242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9588b8d4f698da9459f2d0ca48efd992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: CS_SecondarySwitchMenu
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
 --- !u!114 &54299395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +261,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a52a2377e126b4c9f8181a9d5ac06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: CS_StatsManagement
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
 --- !u!1 &683827965
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,6 +585,7 @@ GameObject:
   - component: {fileID: 1458133675}
   - component: {fileID: 1458133678}
   - component: {fileID: 1458133677}
+  - component: {fileID: 1458133680}
   m_Layer: 5
   m_Name: UI_MainHandler
   m_TagString: Untagged
@@ -600,55 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Target>k__BackingField: {fileID: 1458133678}
-  <Views>k__BackingField:
-  - <ID>k__BackingField: BottomNavigationControl
-    <ContainerID>k__BackingField: BaseFooterContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 6da0f1987206e4f43856c5c39f53e1a1, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: TopPlayerBar
-    <ContainerID>k__BackingField: BaseHeaderContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98130d1d0e24b34488e01cf60619902e, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: PopUpWindowBase
-    <ContainerID>k__BackingField: PopUpBase
-    <UXMLDocument>k__BackingField: {fileID: 0}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: UseItemPopUp
-    <ContainerID>k__BackingField: PopUpContent
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: AdventureBoard
-    <ContainerID>k__BackingField: BaseContentContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 5e66e3f1f47683347a74b1910a7ac4c7, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: CharacterManagementScreen
-    <ContainerID>k__BackingField: BaseContentContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 367b321e518f2154a9415cb17df6943e, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: CS_SecondarySwitchMenu
-    <ContainerID>k__BackingField: CharacterManagementFooterContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: ec5a89b03b363f74ba64c79da0744d05, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: CS_InventoryEquippedItems
-    <ContainerID>k__BackingField: CMCC_UpperContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 53d36caf4aaccad46953bf1499a544a1, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: CS_InventoryManagement
-    <ContainerID>k__BackingField: CMCC_LowerContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a32a80ea803635448b2f38f2f6a1a145, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: CS_StatsManagement
-    <ContainerID>k__BackingField: CMCC_UpperContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98b7026121be7b147bf611ad0cee2791, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: Tavern
-    <ContainerID>k__BackingField: BaseContentContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 5e66e3f1f47683347a74b1910a7ac4c7, type: 3}
-    <Enabled>k__BackingField: 0
-  - <ID>k__BackingField: GameSettingsMenu
-    <ContainerID>k__BackingField: BaseContentContainer
-    <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 5e66e3f1f47683347a74b1910a7ac4c7, type: 3}
-    <Enabled>k__BackingField: 0
+  Views: []
 --- !u!114 &1458133678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,6 +638,25 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 932ebfdb6240df041aa9f923e58235fa, type: 3}
   m_SortingOrder: 0
+--- !u!114 &1458133680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458133674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1554a49b5b3cf4db2ccabd5d93dea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: ActivityMainBoard
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 5e66e3f1f47683347a74b1910a7ac4c7, type: 3}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
 --- !u!1 &1568071902
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +674,7 @@ GameObject:
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1568071903
 Transform:
   m_ObjectHideFlags: 0
@@ -710,8 +702,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40f9fae43870c242bf42dc7dc17f5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: PopUpWindowBase
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
   PopUpBaseUXML: {fileID: 9197481963319205126, guid: 91c03fc88b6dc6a46b9ac981d51897a4, type: 3}
 --- !u!114 &1568071905
 MonoBehaviour:
@@ -725,8 +722,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96b27910d4d5b6448d7a644166e0cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: UseItemPopUp
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
 --- !u!1 &1636096628
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,8 +758,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74e8848aa2a2a4ba773e839e0037f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: AdventureBoard
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: AdventureBoard_Req
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 1458133680}
+  <ContainerID>k__BackingField: RequestBackground
   AdventureItemUXML: {fileID: 9197481963319205126, guid: ec93e83e0f268fa49b74b4761ae6740c, type: 3}
 --- !u!4 &1636096630
 Transform:
@@ -790,7 +797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1773429409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,8 +810,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98e7573ee9f34e418fa71052bf4a93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: TopPlayerBar
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
 --- !u!4 &1773429410
 Transform:
   m_ObjectHideFlags: 0
@@ -836,7 +848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2004442189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,8 +861,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd54de3d903a4f4cbc569039e2748cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ViewID>k__BackingField: BottomNavigationControl
   <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: 
+  <UXMLDocument>k__BackingField: {fileID: 0}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
 --- !u!4 &2004442190
 Transform:
   m_ObjectHideFlags: 0

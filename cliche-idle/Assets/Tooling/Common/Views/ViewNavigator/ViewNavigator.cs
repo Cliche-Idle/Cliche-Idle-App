@@ -18,7 +18,7 @@ namespace UIViews
         /// Contains the list of registered views.
         /// </summary>
         [field: SerializeField]
-        public List<View> Views { get; private set; }
+        private List<UIScript> Views = new List<UIScript>();
 
         /// <summary>
         /// Switches the view in the target GameObject's UIDocument, at a specified VisualElement.
@@ -30,23 +30,41 @@ namespace UIViews
         {
             // Get the ViewData assigned to the given ID
             var viewData = GetView(viewID);
-            if (viewData.Enabled == false)
+            if (viewData.UXMLDocument != null)
             {
-                // Grab and clear the target container
-                VisualElement targetContainer = GetTargetContainer(viewData.ContainerID);
-                if (viewData.UXMLDocument != null && targetContainer != null)
+                if (viewData.IsViewActive == false)
                 {
-                    // Clear the view container
-                    ClearUpViewContainer(viewData.ContainerID);
-                    viewData.UXMLDocument.CloneTree(targetContainer);
-                    //targetContainer.Add(viewData.UXMLDocument.Instantiate());
+                    // If there isn't a dependency specified, spawn the tree into the Nav target root
+                    if (viewData.Dependency != null || viewData.ContainerID.Length != 0)
+                    {
+                        // Grab and clear the target container
+                        VisualElement targetContainer = GetTargetContainer(viewData.ContainerID);
+                        if (targetContainer != null)
+                        {
+                            // Clear the view container
+                            ClearUpViewContainer(viewData.ContainerID);
+                            viewData.UXMLDocument.CloneTree(targetContainer);
+                            //targetContainer.Add(viewData.UXMLDocument.Instantiate());
+                        }
+                    }
+                    else
+                    {
+                        viewData.UXMLDocument.CloneTree(Target.rootVisualElement);
+                    }
                 }
-                // Fire update event
-                viewData.SetState(true);
             }
-            else
+        }
+
+        /// <summary>
+        /// Registers a new view to the navigator. Used internally for UIScripts to register themselves.
+        /// </summary>
+        /// <param name="view"></param>
+        public void RegisterView(UIScript view)
+        {
+            // Todo: check for duplicates. Since this is only used internally, throw a warning and otherwise ignore.
+            if (view != null)
             {
-                // View is already in focus
+                Views.Add(view);
             }
         }
 
@@ -56,32 +74,13 @@ namespace UIViews
         /// <param name="viewID"></param>
         public void ClearUpViewContainer(string containerID)
         {
-            var baseTargetView = Views.Find(view => view.ContainerID == containerID && view.Enabled == true);
             // Grab and clear the target container
             VisualElement baseTargetContainer = GetTargetContainer(containerID);
-            // Fire OnLeaveFocus event for the cleared view
-            if (baseTargetView != null)
-            {
-                baseTargetView.SetState(false);
-            }
+
             // Clear the view with the same container ID if it's in focus, and trigger its OnLeaveFocus event
             if (baseTargetContainer != null)
             {
-                // Check and trigger the OnLeaveFocus for every view that may be active inside this one
-                // * Assumes containerIDs are completely unique
-                // * https://docs.unity3d.com/ScriptReference/UIElements.VisualElement-name.html
-                foreach (var view in Views)
-                {
-                    if (view.Enabled)
-                    {
-                        // Check if the view's container is inside the base one and push it out of focus
-                        var subViewContainer = baseTargetContainer.Q(view.ContainerID);
-                        if (subViewContainer != null)
-                        {
-                            view.SetState(false);
-                        }
-                    }
-                }
+                // TODO: instead of clearing the entire container, ask for the target and sender ID so of a container has multiple active views, only one of them is removed
                 // Clear the base view container
                 baseTargetContainer.Clear();
             }
@@ -97,7 +96,7 @@ namespace UIViews
             VisualElement targetContainer = Target.rootVisualElement.Q(containerID);
             if (targetContainer == null)
             {
-                Debug.LogWarning($"ViewNavigator could not find targetcontainer `{containerID}` on document {Target}.");   
+                Debug.LogWarning($"ViewNavigator could not find container <color=blue>{containerID}</color> on the targeted document.");   
             }
             return targetContainer;
         }
@@ -107,75 +106,38 @@ namespace UIViews
         /// </summary>
         /// <param name="viewID"></param>
         /// <returns></returns>
-        public View GetView(string viewID)
+        public UIScript GetView(string viewID)
         {
             var viewData = Views.Find(view => view.ID == viewID);
             if (viewData == null)
             {
-                Debug.LogWarning($"ViewNavigator could not find a registered view with key `{viewID}`.");
+                Debug.LogWarning($"ViewNavigator could not find a registered view with the key <color=blue>{viewID}</color>.");
             }
             return viewData;
         }
-    }
 
-    [Serializable]
-    public class View
-    {
-        /// <summary>
-        /// Unique ID referencing the view. This is used for calling a view switch.
-        /// </summary>
-        [field: SerializeField]
-        public string ID { get; private set; }
-        /// <summary>
-        /// The ID of the view container in the target document. 
-        /// The VisualElement with this ID will be cleared, and the contents of this view will be copied to its tree.
-        /// </summary>
-        [field: SerializeField]
-        public string ContainerID { get; private set; }
-        /// <summary>
-        /// The UXML Document file containing the view to be switched in.
-        /// </summary>
-        [field: SerializeField]
-        public VisualTreeAsset UXMLDocument { get; private set; }
-
-        /// <summary>
-        /// The current state of the view.
-        /// </summary>
-        [field: SerializeField]
-        public bool Enabled { get; private set; }
-
-        /// <summary>
-        /// Sets the state of the view.
-        /// </summary>
-        /// <param name="state"></param>
-        /// <param name="parentDocument"></param>
-        public void SetState(bool state)
+        private List<UIScript> CompileDependencyList(string viewID)
         {
-            if (Enabled == true && state == false)
+            List<UIScript> dependencies = new List<UIScript>();
+
+            UIScript dependency = GetView(viewID).Dependency;
+            dependencies.Add(dependency);
+
+            while (dependency != null)
             {
-                if (OnLeaveFocus != null)
+                dependency = dependency.Dependency;
+                if (dependency != null)
                 {
-                    OnLeaveFocus.Invoke(this, null);
+                    dependencies.Add(dependency);
                 }
             }
-            else if (Enabled == false && state == true)
-            {
-                if (OnEnterFocus != null)
-                {
-                    OnEnterFocus.Invoke(this, null);
-                }
-            }
-            Enabled = state;
+
+            return dependencies;
         }
 
-        /// <summary>
-        /// Event that fires when the view is created.
-        /// </summary>
-        public EventHandler OnEnterFocus;
+        private void ClimbDependencyStack()
+        {
 
-        /// <summary>
-        /// Event that fires when the view is destroyed.
-        /// </summary>
-        public EventHandler OnLeaveFocus;
+        }
     }
 }

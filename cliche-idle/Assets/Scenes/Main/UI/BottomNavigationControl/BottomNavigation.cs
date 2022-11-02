@@ -22,7 +22,7 @@ public class BottomNavigation : UIScript
 
     private void AdventureMenuOpen()
     {
-        Navigator.SwitchToView("MainActivitySelectorScreen");
+        Navigator.SwitchToView("AdventureBoard");
     }
 
     private void InventoryMenuOpen()
