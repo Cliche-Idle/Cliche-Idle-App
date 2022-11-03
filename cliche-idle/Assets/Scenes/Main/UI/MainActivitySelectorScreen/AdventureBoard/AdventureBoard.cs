@@ -122,13 +122,3 @@ public class AdventureBoard : UIScript
         }
     }
 }
-
-[CustomEditor(typeof(AdventureBoard))]
-public class AdventureBoardEditor : UIScriptEditor
-{
-    public override void OnInspectorGUI()
-    {
-        //DrawDefaultInspector();
-        base.OnInspectorGUI();
-    }
-}

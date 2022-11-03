@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,15 +15,12 @@ namespace UIViews
         /// <summary>
         /// Contains the list of registered views.
         /// </summary>
-        [field: SerializeField]
         private List<UIScript> Views = new List<UIScript>();
 
         /// <summary>
         /// Switches the view in the target GameObject's UIDocument, at a specified VisualElement.
         /// </summary>
         /// <param name="viewID">The viewID to be switched in</param>
-        /// <exception cref="NullReferenceException">Thrown when the specified containerID is not found on the target document.</exception>
-        /// <exception cref="KeyNotFoundException">Thrown when the specified viewID is not registered.</exception>
         public void SwitchToView(string viewID)
         {
             // Get the view assigned to the given ID
@@ -37,7 +32,7 @@ namespace UIViews
         }
 
         /// <summary>
-        /// Registers a new view to the navigator. Used internally for UIScripts to register themselves.
+        /// Registers a view to the navigator. Used internally for UIScripts to register themselves.
         /// </summary>
         /// <param name="view"></param>
         public void RegisterView(UIScript view)
@@ -95,29 +90,6 @@ namespace UIViews
                 Debug.LogWarning($"ViewNavigator could not find a registered view with the key <color=blue>{viewID}</color>.");
             }
             return viewData;
-        }
-
-        /// <summary>
-        /// Compiles the dependency stack of a view into a list. Items are sorted in reverse order, where the lowest non active dependency is first.
-        /// </summary>
-        /// <param name="view"></param>
-        /// <returns></returns>
-        private List<UIScript> CompileDependencyList(UIScript view)
-        {
-            List<UIScript> dependencies = new List<UIScript>();
-
-            UIScript dependency = view.Dependency;
-            while ((dependency != null && dependency.IsViewActive == false))
-            {
-                if (dependency != null)
-                {
-                    dependencies.Add(dependency);
-                }
-                dependency = dependency.Dependency;
-            }
-            // Reverse the list so the lowest inactive dependencies are at the start
-            dependencies.Reverse();
-            return dependencies;
         }
     }
 }

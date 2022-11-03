@@ -5,6 +5,10 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UIViews;
 
+namespace UIViews
+{
+
+}
 
 /// <summary>
 /// A MonoBehaviour that is designed to control ViewNavigator views.
@@ -14,21 +18,20 @@ public class UIScript : MonoBehaviour
     /// <summary>
     /// The ViewNavigator instance this script is hooked up to.
     /// </summary>
-    [field: Header("UI Navigator setup")]
-    [field: Tooltip("The ViewNavigator instance this script is hooked up to.")]
     [field: SerializeField]
+    [field: HideInInspector]
     public ViewNavigator Navigator { get; private set; }
-
-
 
     /// <summary>
     /// The ID of the View this script controls.
     /// </summary>
-    [field: Header("View setup")]
-    [field: Tooltip("")]
     [field: SerializeField]
+    [field: HideInInspector]
     public string ID { get; private set; }
 
+    /// <summary>
+    /// The name of the VisualElement this view will be wrapped into when displayed.
+    /// </summary>
     public string WrapperVisualElementName {
         get {
             return $"UIView__{ID}";
@@ -38,32 +41,29 @@ public class UIScript : MonoBehaviour
     /// <summary>
     /// The UXML Document file containing the view to be switched in.
     /// </summary>
-    [field: Tooltip("")]
     [field: SerializeField]
+    [field: HideInInspector]
     public VisualTreeAsset UXMLDocument { get; private set; }
 
     /// <summary>
     /// Sets whether or not the view is static. If set to <see langword="true"/>, <see cref="UIUpdate()"/> will never run. Default is <see langword="false"/>.
     /// </summary>
-    [field: Tooltip("")]
     [field: SerializeField]
+    [field: HideInInspector]
     public bool IsStatic { get; private set; } = false;
 
     /// <summary>
     /// The current state of the view.
     /// </summary>
-    [field: Tooltip("")]
     [field: SerializeField]
-    public bool IsViewActive { get; private set; }
-
-
+    [field: HideInInspector]
+    public bool IsViewActive { get; private set; } = false;
 
     /// <summary>
     /// The dependency of this view, which must be present before this can be loaded. If none is specified, the view will be spawned in the Navigator target's root.
     /// </summary>
-    [field: Header("Dependency setup")]
-    [field: Tooltip("")]
     [field: SerializeField]
+    [field: HideInInspector]
     public UIScript Dependency { get; private set; }
 
     /// <summary>
@@ -71,7 +71,7 @@ public class UIScript : MonoBehaviour
     /// The VisualElement with this ID will be cleared, and the contents of this view will be copied to its tree.
     /// </summary>
     [field: SerializeField]
-    [field: Tooltip("")]
+    [field: HideInInspector]
     public string ContainerID { get; private set; }
 
     /// <summary>
@@ -85,7 +85,7 @@ public class UIScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Shorthand convenience call to display the attached View.
+    /// Displays the view on the attached Navigator's target.
     /// See <see cref="ViewNavigator.SwitchToView(string)"/> for details.
     /// </summary>
     public void DisplayView()
@@ -102,7 +102,7 @@ public class UIScript : MonoBehaviour
                     if (ContainerID != null && ContainerID.Length != 0)
                     {
                         // Spawn dependencies
-                        WalkDependencyStack();
+                        SetDependenciesActive();
 
                         // Get target container
                         VisualElement viewTargetContainer = Navigator.GetTargetContainer(ContainerID);
@@ -155,8 +155,7 @@ public class UIScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Shorthand convenience call to clear the attached View. 
-    /// See <see cref="ViewNavigator.ClearUpViewContainer(string)"/> for details.
+    /// Hides the view, and removes it from the hierarchy. 
     /// </summary>
     public void HideView()
     {
@@ -164,40 +163,34 @@ public class UIScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Compiles the dependency stack of a view into a list. Items are sorted in reverse order, where the lowest non active dependency is first.
+    /// Compiles the dependency stack of this view into a list.
     /// </summary>
-    /// <param name="view"></param>
     /// <returns></returns>
     public List<UIScript> GetDependencyList()
     {
         List<UIScript> dependencies = new List<UIScript>();
-
         UIScript dependency = Dependency;
-        // TODO: does active checking make sense here? This looks like a generic function that would probably be expected to return the full dependency stack
-        while ((dependency != null && dependency.IsViewActive == false))
+        while (dependency != null)
         {
-            if (dependency != null)
-            {
-                dependencies.Add(dependency);
-            }
+            dependencies.Add(dependency);
             dependency = dependency.Dependency;
         }
-        // TODO: don't reverse the list
-        // Reverse the list so the lowest inactive dependencies are at the start
-        dependencies.Reverse();
-
         return dependencies;
     }
 
-    // TODO: rename this function to make sense
-    private void WalkDependencyStack()
+    /// <summary>
+    /// Runs through the dependency stack and calls every inactive inluded view's <see cref="DisplayView()"/>.
+    /// </summary>
+    private void SetDependenciesActive()
     {
         var deps = GetDependencyList();
+        // Reverse the dependency list so the lowest dependency is first
         deps.Reverse();
         if (deps.Count > 0)
         {
             foreach(UIScript dependency in deps)
             {
+                // Check if the dependency is not active
                 if (dependency.IsViewActive == false)
                 {
                     dependency.DisplayView();
@@ -207,7 +200,14 @@ public class UIScript : MonoBehaviour
     }
 
     private void Awake() {
-        Navigator.RegisterView(this);
+        if (Navigator != null)
+        {
+            Navigator.RegisterView(this);
+        }
+        else
+        {
+            throw new NullReferenceException($"{ID} does not have a UI Navigator instance assigned.");
+        }
     }
 
     private void Update() {
@@ -249,36 +249,124 @@ public class UIScript : MonoBehaviour
     {
         
     }
-}
 
 
-[CustomEditor(typeof(UIScript), true)]
-public class UIScriptEditor : Editor
-{
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(UIScript), true, isFallback = true)]
+    public class UIScriptEditor : Editor
     {
-        DrawDefaultInspector();
-        var uiscript = target as UIScript;
-        string infoMessageText = "";
-        if (uiscript.UXMLDocument == null)
+        public string[] DependencyContainerIDs = new string[0];
+        public int SelectedContainerIDIndex = 0;
+
+        private bool IsFoldoutOpen = true;
+
+        public override void OnInspectorGUI()
         {
-            // TODO: check if this is needed
-            infoMessageText += "Because no UXML document has been added, this view will not trigger attach / detach events. ";
-        }
-        if (uiscript.Dependency == null)
-        {
-            if (uiscript.ContainerID == null)
+            // Get the view data
+            var view = target as UIScript;
+
+            // Set the UI Navigator instance
+            EditorGUILayout.LabelField("Navigator", EditorStyles.boldLabel);
+            view.Navigator = (ViewNavigator)EditorGUILayout.ObjectField("UI Navigator", view.Navigator, typeof(ViewNavigator), true);
+
+            // View setup is in its own foldout so it doesn't take up too much space on derived scripts
+            EditorGUILayout.Space(10);
+            IsFoldoutOpen = EditorGUILayout.BeginFoldoutHeaderGroup(IsFoldoutOpen, "View setup");
+            if (IsFoldoutOpen)
             {
-                infoMessageText += "Because no dependency or container have been specified, this view will be attached directly to the root visual element. ";
+                // Increase ident by 1 so the foldout is more visually separated
+                EditorGUI.indentLevel++;
+
+                view.ID = EditorGUILayout.TextField("ID", view.ID);
+                view.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", view.UXMLDocument, typeof(VisualTreeAsset), true);
+                view.IsStatic = EditorGUILayout.Toggle("Is Static", view.IsStatic);
+                view.IsViewActive = EditorGUILayout.Toggle("Is View Active", view.IsViewActive);
+
+                // Dependency handling
+                EditorGUILayout.Space(10);
+                EditorGUILayout.LabelField("Dependency setup", EditorStyles.boldLabel);
+                view.Dependency = (UIScript)EditorGUILayout.ObjectField("Dependency", view.Dependency, typeof(UIScript), true);
+                
+                if (view.Navigator != null)
+                {
+                    // FIXME: Potential performance and memory impact, as this runs multiple times, not just when the dependency changes
+                    // Get the container IDs from the dependency, if there is one; otherwise get the Navigator target's root
+                    if (view.Dependency != null)
+                    {
+                        UpdateDependencyContainerIDs(view.Dependency.UXMLDocument);
+                    }
+                    else
+                    {
+                        UpdateDependencyContainerIDs(view.Navigator.Target.visualTreeAsset);
+                    }
+
+                    SelectedContainerIDIndex = Array.IndexOf<string>(DependencyContainerIDs, view.ContainerID);
+                    SelectedContainerIDIndex = EditorGUILayout.Popup("Target container ID: ", SelectedContainerIDIndex, DependencyContainerIDs);
+                    if (SelectedContainerIDIndex != -1)
+                    {
+                        view.ContainerID = DependencyContainerIDs[SelectedContainerIDIndex];
+                    }
+                }
+
+                // Display informational warning on the bottom of the foldout
+                ShowInformationWarnings(view);
+
+                // Reset ident to normal
+                EditorGUI.indentLevel--;
             }
-            else
+
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            EditorGUILayout.Space(10);
+
+            // Draw the default inspector last so the script's UI can be separated. This will draw the auto UI as normal for derived scripts
+            DrawDefaultInspector();
+        }
+
+        /// <summary>
+        /// Checks the view setup and displays informational warnings.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <returns></returns>
+        private void ShowInformationWarnings(UIScript view)
+        {
+            if (view.UXMLDocument == null)
             {
-                infoMessageText += "Because no dependency has been specified, this view will be attached as a child to the specified container on the root visual element. ";
+                EditorGUILayout.HelpBox("No UXML document has been added, so this view will not receive attach / detach events.", MessageType.Info);
+            }
+            if (view.Dependency == null)
+            {
+                if (view.ContainerID == null || view.ContainerID.Length == 0)
+                {
+                    EditorGUILayout.HelpBox("No dependency or container have been specified, so this view will be attached directly to the root visual element.", MessageType.Info);
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox("No dependency has been specified, so this view will be attached to the selected container on the root visual element.", MessageType.Info);
+                }
             }
         }
-        if (infoMessageText.Length != 0)
+
+
+        /// <summary>
+        /// Compiles and sets the list of container IDs in the dependency's VisualTreeAsset
+        /// </summary>
+        /// <param name="dependencyUXML"></param>
+        private void UpdateDependencyContainerIDs(VisualTreeAsset dependencyUXML)
         {
-            EditorGUILayout.HelpBox(infoMessageText, MessageType.Info);
+            // Get every VisualElement in the dependency's hierarchy
+            VisualElement layout = dependencyUXML.Instantiate();
+            List<VisualElement> childList = layout.Query<VisualElement>().ToList();
+            // We use instantiate, so remove the TemplateContainer's ID.
+            childList.RemoveAt(0);
+            var selectableContainerIDs = new List<string>();
+            // Get the names of every VisualElement that has one, so they can be targeted
+            foreach (var element in childList)
+            {
+                if (element.name != null)
+                {
+                    selectableContainerIDs.Add(element.name);
+                }
+            }
+            DependencyContainerIDs = selectableContainerIDs.ToArray();
         }
     }
 }
