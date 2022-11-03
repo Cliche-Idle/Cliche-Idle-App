@@ -33,6 +33,7 @@ public class EquippedList : UIScript
         Navigator.ClearUpViewContainer("CMCC_LowerContainer");
         Navigator.SwitchToView("CS_InventoryManagement");
         ListSockets<Weapon>(Inventory.Weapons.Sockets);
+        // FIXME: Don't subscribe to event here, do it in OnEnterFocus, as this will loop subscribe
         SubscribeToSocketEvents<Weapon>(Inventory.Weapons.Sockets);
         ListSockets<Armour>(Inventory.Armour.Sockets);
         SubscribeToSocketEvents<Armour>(Inventory.Armour.Sockets);

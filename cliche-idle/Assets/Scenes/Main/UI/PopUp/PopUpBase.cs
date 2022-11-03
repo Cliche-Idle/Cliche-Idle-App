@@ -23,6 +23,6 @@ public class PopUpBase : UIScript
 
     private void ClosePopUp()
     {
-        ClearView();
+        HideView();
     }
 }

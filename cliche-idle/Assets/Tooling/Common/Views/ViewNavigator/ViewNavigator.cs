@@ -28,30 +28,11 @@ namespace UIViews
         /// <exception cref="KeyNotFoundException">Thrown when the specified viewID is not registered.</exception>
         public void SwitchToView(string viewID)
         {
-            // Get the ViewData assigned to the given ID
-            var viewData = GetView(viewID);
-            if (viewData.UXMLDocument != null)
+            // Get the view assigned to the given ID
+            var view = GetView(viewID);
+            if (view != null)
             {
-                if (viewData.IsViewActive == false)
-                {
-                    // If there isn't a dependency specified, spawn the tree into the Nav target root
-                    if (viewData.Dependency != null || viewData.ContainerID.Length != 0)
-                    {
-                        // Grab and clear the target container
-                        VisualElement targetContainer = GetTargetContainer(viewData.ContainerID);
-                        if (targetContainer != null)
-                        {
-                            // Clear the view container
-                            ClearUpViewContainer(viewData.ContainerID);
-                            viewData.UXMLDocument.CloneTree(targetContainer);
-                            //targetContainer.Add(viewData.UXMLDocument.Instantiate());
-                        }
-                    }
-                    else
-                    {
-                        viewData.UXMLDocument.CloneTree(Target.rootVisualElement);
-                    }
-                }
+                view.DisplayView();
             }
         }
 
@@ -80,7 +61,7 @@ namespace UIViews
             // Clear the view with the same container ID if it's in focus, and trigger its OnLeaveFocus event
             if (baseTargetContainer != null)
             {
-                // TODO: instead of clearing the entire container, ask for the target and sender ID so of a container has multiple active views, only one of them is removed
+                // TODO: instead of clearing the entire container, ask for the target and sender ID so if a container has multiple active views, only one of them is removed
                 // Clear the base view container
                 baseTargetContainer.Clear();
             }
@@ -106,7 +87,7 @@ namespace UIViews
         /// </summary>
         /// <param name="viewID"></param>
         /// <returns></returns>
-        public UIScript GetView(string viewID)
+        private UIScript GetView(string viewID)
         {
             var viewData = Views.Find(view => view.ID == viewID);
             if (viewData == null)
@@ -116,28 +97,27 @@ namespace UIViews
             return viewData;
         }
 
-        private List<UIScript> CompileDependencyList(string viewID)
+        /// <summary>
+        /// Compiles the dependency stack of a view into a list. Items are sorted in reverse order, where the lowest non active dependency is first.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <returns></returns>
+        private List<UIScript> CompileDependencyList(UIScript view)
         {
             List<UIScript> dependencies = new List<UIScript>();
 
-            UIScript dependency = GetView(viewID).Dependency;
-            dependencies.Add(dependency);
-
-            while (dependency != null)
+            UIScript dependency = view.Dependency;
+            while ((dependency != null && dependency.IsViewActive == false))
             {
-                dependency = dependency.Dependency;
                 if (dependency != null)
                 {
                     dependencies.Add(dependency);
                 }
+                dependency = dependency.Dependency;
             }
-
+            // Reverse the list so the lowest inactive dependencies are at the start
+            dependencies.Reverse();
             return dependencies;
-        }
-
-        private void ClimbDependencyStack()
-        {
-
         }
     }
 }

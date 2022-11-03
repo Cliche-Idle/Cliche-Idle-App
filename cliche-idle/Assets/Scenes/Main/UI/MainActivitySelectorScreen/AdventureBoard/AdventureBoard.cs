@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UIElements;
 using Cliche.System;
 
@@ -119,5 +120,15 @@ public class AdventureBoard : UIScript
                 });
             }
         }
+    }
+}
+
+[CustomEditor(typeof(AdventureBoard))]
+public class AdventureBoardEditor : UIScriptEditor
+{
+    public override void OnInspectorGUI()
+    {
+        //DrawDefaultInspector();
+        base.OnInspectorGUI();
     }
 }
