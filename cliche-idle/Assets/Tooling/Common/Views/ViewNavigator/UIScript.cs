@@ -88,67 +88,51 @@ namespace UIViews
         /// </summary>
         public virtual void DisplayView()
         {
-            if (ID != null && ID.Length != 0)
+            if (UXMLDocument != null)
             {
-                //Navigator.SwitchToView(ID);
-                //IsViewActive = true;
-
-                if (UXMLDocument != null)
+                // Only run if the view is not active yet
+                if (IsViewActive == false)
                 {
-                    if (IsViewActive == false)
+                    if (ContainerID != null && ContainerID.Length != 0)
                     {
-                        if (ContainerID != null && ContainerID.Length != 0)
+                        // Spawn dependencies
+                        SetDependenciesActive();
+
+                        // Get target container
+                        VisualElement viewTargetContainer = Navigator.GetTargetContainer(ContainerID);
+                        if (viewTargetContainer != null)
                         {
-                            // Spawn dependencies
-                            SetDependenciesActive();
+                            // Clear the view container
+                            viewTargetContainer.Clear();
 
-                            // Get target container
-                            VisualElement viewTargetContainer = Navigator.GetTargetContainer(ContainerID);
-                            if (viewTargetContainer != null)
-                            {
-                                // Clear the view container
-                                viewTargetContainer.Clear();
+                            VisualElement viewWrapperContainer = new VisualElement();
+                            UXMLDocument.CloneTree(viewWrapperContainer);
+                            viewWrapperContainer.name = WrapperVisualElementName;
 
-                                VisualElement viewWrapperContainer = new VisualElement();
-                                UXMLDocument.CloneTree(viewWrapperContainer);
-                                viewWrapperContainer.name = WrapperVisualElementName;
+                            // The normal event syntax is more useful here than the Unity one, so lambda it 
+                            // TODO: Make the sender the lowest exiting UIScript that is detaching 
 
-                                // The normal event syntax is more useful here than the Unity one, so lambda it 
-                                // TODO: Make the sender the lowest exiting UIScript that is detaching 
+                            // OnEnterFocus
+                            viewWrapperContainer.RegisterCallback<AttachToPanelEvent>(evt => {
+                                OnEnterFocus();
+                                IsViewActive = true;
+                            });
 
-                                // OnEnterFocus
-                                viewWrapperContainer.RegisterCallback<AttachToPanelEvent>(evt => {
-                                    OnEnterFocus();
-                                    IsViewActive = true;
-                                });
+                            // OnLeaveFocus
+                            viewWrapperContainer.RegisterCallback<DetachFromPanelEvent>(evt => {
+                                OnLeaveFocus();
+                                IsViewActive = false;
+                            });
 
-                                // OnLeaveFocus
-                                viewWrapperContainer.RegisterCallback<DetachFromPanelEvent>(evt => {
-                                    OnLeaveFocus();
-                                    IsViewActive = false;
-                                });
-
-                                viewTargetContainer.Add(viewWrapperContainer);
-                            }
-                        }
-                        else
-                        {
-                            UXMLDocument.CloneTree(Navigator.Target.rootVisualElement);
+                            viewTargetContainer.Add(viewWrapperContainer);
                         }
                     }
                     else
                     {
-                        //warning to console
+                        // TODO: check if this is right?
+                        UXMLDocument.CloneTree(Navigator.Target.rootVisualElement);
                     }
                 }
-                else
-                {
-                    //See UIScriptEditor TODO
-                }
-            }
-            else
-            {
-                // throw error
             }
         }
 
@@ -201,11 +185,19 @@ namespace UIViews
         {
             if (Navigator != null)
             {
-                Navigator.RegisterView(this);
+                if (ID != null && ID.Length != 0)
+                {
+                    Navigator.RegisterView(this);
+                }
+                else
+                {
+                    throw new NullReferenceException($"A view must have an valid ID.");
+                }
+                
             }
             else
             {
-                throw new NullReferenceException($"{ID} does not have a UI Navigator instance assigned.");
+                throw new NullReferenceException($"View {ID} on {this.gameObject.name} does not have a UI Navigator instance assigned.");
             }
         }
 
@@ -223,7 +215,7 @@ namespace UIViews
         }
 
         /// <summary>
-        /// Identical to Update(), except it only runs when <see cref="IsStatic"/> is set to <see langword="false"/> and <see cref="IsViewActive"/> is <see langword="true"/>.
+        /// Identical to <see cref="Update"/>, except it only runs when <see cref="IsStatic"/> is set to <see langword="false"/> and <see cref="IsViewActive"/> is <see langword="true"/>.
         /// </summary>
         protected virtual void UIUpdate()
         {
@@ -233,8 +225,6 @@ namespace UIViews
         /// <summary>
         /// Runs when the view enters focus (Created).
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected virtual void OnEnterFocus()
         {
 
@@ -243,8 +233,6 @@ namespace UIViews
         /// <summary>
         /// Runs when the view leaves focus (Destroyed).
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected virtual void OnLeaveFocus()
         {
 
