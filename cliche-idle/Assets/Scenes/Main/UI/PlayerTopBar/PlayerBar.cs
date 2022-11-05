@@ -33,7 +33,7 @@ public class PlayerBar : UIScript
         LevelText.text = $"Level {PlayerProgression.Level.ToString()}";
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         PlayerStats = GameObject.Find("Player").GetComponent<StatsHandler>();
         PlayerProgression = GameObject.Find("Player").GetComponent<ProgressionHandler>();

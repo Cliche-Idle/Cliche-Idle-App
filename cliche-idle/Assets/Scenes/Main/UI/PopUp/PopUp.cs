@@ -35,13 +35,13 @@ namespace UIViews
 
             // OnEnterFocus
             popupBase.RegisterCallback<AttachToPanelEvent>(evt => {
-                OnEnterFocus(null, null);
+                OnEnterFocus();
                 IsViewActive = true;
             });
 
             // OnLeaveFocus
             popupBase.RegisterCallback<DetachFromPanelEvent>(evt => {
-                OnLeaveFocus(null, null);
+                OnLeaveFocus();
                 IsViewActive = false;
             });
 

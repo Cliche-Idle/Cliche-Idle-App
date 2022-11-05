@@ -13,7 +13,7 @@ public class BottomNavigation : UIScript
         DisplayView();
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         GetViewContainer().Q<Button>("AdventureBtn").clicked += AdventureMenuOpen;
         GetViewContainer().Q<Button>("InventoryBtn").clicked += InventoryMenuOpen;

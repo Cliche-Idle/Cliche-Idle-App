@@ -8,13 +8,15 @@ public class UseWindow : PopUp
     private InventoryHandler Inventory;
     public Item WindowItem;
     private VisualElement Window;
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Inventory = GameObject.Find("Player").GetComponent<InventoryHandler>();
         LoadPopUpContents();
     }
 
     // FIXME: Consumable title count is not updating
+    // Apparently this seems to be working? Altough this script doesn't use the UI update loop
+
     // FIXME: Visibly disable button if consumable runs out
 
     private void LoadPopUpContents()

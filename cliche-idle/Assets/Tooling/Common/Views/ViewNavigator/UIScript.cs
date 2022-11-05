@@ -118,13 +118,13 @@ namespace UIViews
 
                                 // OnEnterFocus
                                 viewWrapperContainer.RegisterCallback<AttachToPanelEvent>(evt => {
-                                    OnEnterFocus(null, null);
+                                    OnEnterFocus();
                                     IsViewActive = true;
                                 });
 
                                 // OnLeaveFocus
                                 viewWrapperContainer.RegisterCallback<DetachFromPanelEvent>(evt => {
-                                    OnLeaveFocus(null, null);
+                                    OnLeaveFocus();
                                     IsViewActive = false;
                                 });
 
@@ -235,7 +235,7 @@ namespace UIViews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected virtual void OnEnterFocus(object sender, EventArgs e)
+        protected virtual void OnEnterFocus()
         {
 
         }
@@ -245,7 +245,7 @@ namespace UIViews
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected virtual void OnLeaveFocus(object sender, EventArgs e)
+        protected virtual void OnLeaveFocus()
         {
 
         }

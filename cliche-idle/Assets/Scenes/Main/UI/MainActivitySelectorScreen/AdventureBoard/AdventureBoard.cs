@@ -57,7 +57,7 @@ public class AdventureBoard : UIScript
         }
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Adventures = GameObject.Find("Player").GetComponent<AdventureHandler>();
         // Get queue container
@@ -68,7 +68,7 @@ public class AdventureBoard : UIScript
         RenderAdventureBoard(null, null);
     }
 
-    protected override void OnLeaveFocus(object sender, EventArgs e)
+    protected override void OnLeaveFocus()
     {
         // Unsubscribe from the update event
         Adventures.OnAdventuresUpdate -= RenderAdventureBoard;

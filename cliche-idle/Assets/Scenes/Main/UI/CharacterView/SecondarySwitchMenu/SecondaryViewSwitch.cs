@@ -6,7 +6,7 @@ using UIViews;
 public class SecondaryViewSwitch : UIScript
 {
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         GetViewContainer().Q<Button>("SwitchInv").clicked += InventoryManagementOpen;
         GetViewContainer().Q<Button>("SwitchStat").clicked += StatsManagementOpen;

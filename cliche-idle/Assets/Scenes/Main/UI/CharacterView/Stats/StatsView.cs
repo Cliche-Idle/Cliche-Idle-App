@@ -21,7 +21,7 @@ public class StatsView : UIScript
         GetViewContainer().Q<Label>("PointsNum").text = $"{Stats.GetFreeStatPoints()}";
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
         //

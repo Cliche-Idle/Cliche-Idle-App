@@ -20,7 +20,7 @@ public class InventoryView : UIScript
     private VisualElement InventoryCategoriesContainer;
     public InventoryPopUpMode InventoryMode;
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Inventory = GameObject.Find("Player").GetComponent<InventoryHandler>();
         Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
@@ -28,11 +28,6 @@ public class InventoryView : UIScript
         InventoryCategoriesContainer = GetViewContainer().Q("InventoryCategoriesContainer");
         GetViewContainer().Q<Label>("GoldAmount").text = $"{Currencies.Gold.Value}";
         RenderInventoryContents();
-    }
-
-    protected override void OnLeaveFocus(object sender, EventArgs e)
-    {
-
     }
 
     private void RenderInventoryContents()
