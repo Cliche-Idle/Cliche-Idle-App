@@ -118,7 +118,6 @@ public class InventoryView : UIScript
                     evt.PreventDefault();
                     evt.StopImmediatePropagation();
                     Debug.Log(icon.reference_item_ID);
-                    Navigator.SwitchToView("PopUpWindowBase");
                     if (InventoryMode == InventoryPopUpMode.Use)
                     {
                         GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = item;

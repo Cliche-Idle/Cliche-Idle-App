@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UIElements;
+using UIViews;
 
-public class UseWindow : UIScript
+public class UseWindow : PopUp
 {
     private InventoryHandler Inventory;
     public Item WindowItem;
@@ -17,7 +15,7 @@ public class UseWindow : UIScript
     }
 
     // FIXME: Consumable title count is not updating
-    // FIXME: Close window if consumable runs out
+    // FIXME: Visibly disable button if consumable runs out
 
     private void LoadPopUpContents()
     {

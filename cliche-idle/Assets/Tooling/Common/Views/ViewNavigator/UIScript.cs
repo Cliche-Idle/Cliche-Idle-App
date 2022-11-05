@@ -11,7 +11,7 @@ namespace UIViews
 }
 
 /// <summary>
-/// A MonoBehaviour that is designed to control ViewNavigator views.
+/// Used to create <see cref="ViewNavigator"/> views.
 /// </summary>
 public class UIScript : MonoBehaviour
 {
@@ -20,14 +20,14 @@ public class UIScript : MonoBehaviour
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public ViewNavigator Navigator { get; private set; }
+    public ViewNavigator Navigator { get; protected set; }
 
     /// <summary>
     /// The ID of the View this script controls.
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public string ID { get; private set; }
+    public string ID { get; protected set; }
 
     /// <summary>
     /// The name of the VisualElement this view will be wrapped into when displayed.
@@ -43,28 +43,28 @@ public class UIScript : MonoBehaviour
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public VisualTreeAsset UXMLDocument { get; private set; }
+    public VisualTreeAsset UXMLDocument { get; protected set; }
 
     /// <summary>
     /// Sets whether or not the view is static. If set to <see langword="true"/>, <see cref="UIUpdate()"/> will never run. Default is <see langword="false"/>.
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public bool IsStatic { get; private set; } = false;
+    public bool IsStatic { get; protected set; } = false;
 
     /// <summary>
     /// The current state of the view.
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public bool IsViewActive { get; private set; } = false;
+    public bool IsViewActive { get; protected set; } = false;
 
     /// <summary>
     /// The dependency of this view, which must be present before this can be loaded. If none is specified, the view will be spawned in the Navigator target's root.
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public UIScript Dependency { get; private set; }
+    public UIScript Dependency { get; protected set; }
 
     /// <summary>
     /// The ID of the view container in the target document. 
@@ -72,7 +72,7 @@ public class UIScript : MonoBehaviour
     /// </summary>
     [field: SerializeField]
     [field: HideInInspector]
-    public string ContainerID { get; private set; }
+    public string ContainerID { get; protected set; }
 
     /// <summary>
     /// Gets the view's base VisualElement.
@@ -88,7 +88,7 @@ public class UIScript : MonoBehaviour
     /// Displays the view on the attached Navigator's target.
     /// See <see cref="ViewNavigator.SwitchToView(string)"/> for details.
     /// </summary>
-    public void DisplayView()
+    public virtual void DisplayView()
     {
         if (ID != null && ID.Length != 0)
         {
@@ -157,7 +157,7 @@ public class UIScript : MonoBehaviour
     /// <summary>
     /// Hides the view, and removes it from the hierarchy. 
     /// </summary>
-    public void HideView()
+    public virtual void HideView()
     {
         Navigator.ClearUpViewContainer(ContainerID);
     }
@@ -264,17 +264,16 @@ public class UIScript : MonoBehaviour
             // Get the view data
             var view = target as UIScript;
 
-            // Set the UI Navigator instance
-            EditorGUILayout.LabelField("Navigator", EditorStyles.boldLabel);
-            view.Navigator = (ViewNavigator)EditorGUILayout.ObjectField("UI Navigator", view.Navigator, typeof(ViewNavigator), true);
-
             // View setup is in its own foldout so it doesn't take up too much space on derived scripts
-            EditorGUILayout.Space(10);
             IsFoldoutOpen = EditorGUILayout.BeginFoldoutHeaderGroup(IsFoldoutOpen, "View setup");
             if (IsFoldoutOpen)
             {
                 // Increase ident by 1 so the foldout is more visually separated
                 EditorGUI.indentLevel++;
+                // Set the UI Navigator instance
+                view.Navigator = (ViewNavigator)EditorGUILayout.ObjectField("UI Navigator", view.Navigator, typeof(ViewNavigator), true);
+                
+                EditorGUILayout.Space(10);
 
                 view.ID = EditorGUILayout.TextField("ID", view.ID);
                 view.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", view.UXMLDocument, typeof(VisualTreeAsset), true);
@@ -283,6 +282,7 @@ public class UIScript : MonoBehaviour
 
                 // Dependency handling
                 EditorGUILayout.Space(10);
+
                 EditorGUILayout.LabelField("Dependency setup", EditorStyles.boldLabel);
                 view.Dependency = (UIScript)EditorGUILayout.ObjectField("Dependency", view.Dependency, typeof(UIScript), true);
                 

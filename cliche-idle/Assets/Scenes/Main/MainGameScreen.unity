@@ -660,7 +660,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Target>k__BackingField: {fileID: 1458133678}
-  Views: []
 --- !u!114 &1458133678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +685,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568071903}
-  - component: {fileID: 1568071904}
   - component: {fileID: 1568071905}
   m_Layer: 0
   m_Name: UI_PopUp
@@ -694,7 +692,7 @@ GameObject:
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1568071903
 Transform:
   m_ObjectHideFlags: 0
@@ -710,26 +708,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1568071904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568071902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40f9fae43870c242bf42dc7dc17f5da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: 
-  <UXMLDocument>k__BackingField: {fileID: 0}
-  <IsStatic>k__BackingField: 1
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 0}
-  <ContainerID>k__BackingField: 
-  PopUpBaseUXML: {fileID: 9197481963319205126, guid: 91c03fc88b6dc6a46b9ac981d51897a4, type: 3}
 --- !u!114 &1568071905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,9 +721,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: 
-  <UXMLDocument>k__BackingField: {fileID: 0}
-  <IsStatic>k__BackingField: 1
+  <ID>k__BackingField: UseItemPopUp
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
+  <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: 
