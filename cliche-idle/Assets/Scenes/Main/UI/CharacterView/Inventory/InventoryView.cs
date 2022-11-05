@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UIViews;
 
 public enum InventoryPopUpMode
 {
@@ -117,7 +118,6 @@ public class InventoryView : UIScript
                 {
                     evt.PreventDefault();
                     evt.StopImmediatePropagation();
-                    Debug.Log(icon.reference_item_ID);
                     if (InventoryMode == InventoryPopUpMode.Use)
                     {
                         GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = item;

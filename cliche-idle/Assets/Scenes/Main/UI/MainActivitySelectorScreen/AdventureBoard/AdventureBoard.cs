@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using Cliche.System;
+using UIViews;
 
 public class AdventureBoard : UIScript
 {

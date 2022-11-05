@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using UIViews;
 
 public class BottomNavigation : UIScript
 {

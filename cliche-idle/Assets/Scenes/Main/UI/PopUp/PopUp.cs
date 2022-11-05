@@ -12,10 +12,10 @@ namespace UIViews
         /// <summary>
         /// The background colour of the PopUp's cover element.
         /// </summary>
-        protected Color PopupBackgroundColor { get; set; } = new Color(55, 55, 55, 199);
+        protected Color PopupBackgroundColor = new Color32(55, 55, 55, 199);
 
         /// <summary>
-        /// The base container on the Navigator's target document.
+        /// The PopUp's base container.
         /// </summary>
         private VisualElement BaseContainer;
 
@@ -26,36 +26,32 @@ namespace UIViews
 
         void Start()
         {
-            if (Navigator != null)
-            {
-                ContainerID = "BasePopUpContainer";
-                BaseContainer = Navigator.GetTargetContainer(ContainerID);
-            }
-            DisplayView();
+            ContainerID = WrapperVisualElementName;
         }
 
         public override void DisplayView()
         {
-            if (BaseContainer != null)
-            {
-                VisualElement popupBase = BuildPopUpBaseElement();
+            VisualElement popupBase = BuildPopUpBaseElement();
 
-                // OnEnterFocus
-                popupBase.RegisterCallback<AttachToPanelEvent>(evt => {
-                    OnEnterFocus(null, null);
-                    IsViewActive = true;
-                });
-
-                // OnLeaveFocus
-                popupBase.RegisterCallback<DetachFromPanelEvent>(evt => {
-                    OnLeaveFocus(null, null);
-                    IsViewActive = false;
-                });
-
-                BaseContainer.Clear();
-                BaseContainer.Add(popupBase);
+            // OnEnterFocus
+            popupBase.RegisterCallback<AttachToPanelEvent>(evt => {
                 OnEnterFocus(null, null);
-            }
+                IsViewActive = true;
+            });
+
+            // OnLeaveFocus
+            popupBase.RegisterCallback<DetachFromPanelEvent>(evt => {
+                OnLeaveFocus(null, null);
+                IsViewActive = false;
+            });
+
+            Navigator.Target.rootVisualElement.Add(popupBase);
+            BaseContainer = popupBase;
+        }
+
+        public override void HideView()
+        {
+            Navigator.Target.rootVisualElement.Remove(BaseContainer);
         }
 
         /// <summary>
@@ -75,7 +71,7 @@ namespace UIViews
                     justifyContent = Justify.Center,
                     width = Length.Percent(100),
                     height = Length.Percent(100),
-                    backgroundColor = PopupBackgroundColor
+                    backgroundColor = PopupBackgroundColor,
                 } 
             };
             VisualElement popupContentContainer = new VisualElement()
@@ -90,6 +86,7 @@ namespace UIViews
             Button popupCloseButton = new Button()
             {
                 name = "PopUp_CloseButton",
+                text = "X",
                 style = {
                     position = Position.Absolute,
                     top = 0,
@@ -106,6 +103,9 @@ namespace UIViews
                     marginLeft = 25,
                     marginRight = 25,
                     paddingLeft = 15,
+                    fontSize = 100,
+                    color = new Color(1, 1, 1, 1),
+                    unityFontStyleAndWeight = FontStyle.Bold,
                 },
             };
             popupCloseButton.clicked += ClosePopUpWindow;
@@ -152,6 +152,11 @@ namespace UIViews
                     popup.ID = EditorGUILayout.TextField("ID", popup.ID);
                     popup.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", popup.UXMLDocument, typeof(VisualTreeAsset), true);
                     popup.IsStatic = EditorGUILayout.Toggle("Is Static", popup.IsStatic);
+
+                    EditorGUILayout.Space(10);
+
+                    popup.PopupBackgroundColor = EditorGUILayout.ColorField("PopUp Background Color", popup.PopupBackgroundColor);
+                    
                     // Reset ident to normal
                     EditorGUI.indentLevel--;
                 }
