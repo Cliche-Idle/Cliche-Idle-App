@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,16 +20,16 @@ namespace UIViews
         private List<UIScript> Views = new List<UIScript>();
 
         /// <summary>
-        /// Switches the view in the target GameObject's UIDocument, at a specified VisualElement.
+        /// Displays the specified view on the Navigator's target document.
         /// </summary>
         /// <param name="viewID">The viewID to be switched in</param>
-        public void SwitchToView(string viewID)
+        public void ShowView(string viewID)
         {
             // Get the view assigned to the given ID
             var view = GetView(viewID);
             if (view != null)
             {
-                view.DisplayView();
+                view.ShowView();
             }
         }
 
@@ -37,28 +39,43 @@ namespace UIViews
         /// <param name="view"></param>
         public void RegisterView(UIScript view)
         {
-            // Todo: check for duplicates. Since this is only used internally, throw a warning and otherwise ignore.
             if (view != null)
             {
-                Views.Add(view);
+                bool doesViewAlreadyExist = Views.Any(element => element.ID == view.ID);
+                if (doesViewAlreadyExist == false)
+                {
+                    Views.Add(view);
+                }
+                else
+                {
+                    throw new Exception($"A view with the ID \"{view.ID}\" is already registered. Views must have unique IDs.");
+                }
             }
         }
 
         /// <summary>
-        /// Clears the targeted View's container, and triggers its and every active sub-View's OnLeaveFocus event.
+        /// Hides the specified view, and removes it from the hierarchy.
         /// </summary>
         /// <param name="viewID"></param>
-        public void ClearUpViewContainer(string containerID)
+        public void HideView(string viewID)
         {
-            // Grab and clear the target container
-            VisualElement baseTargetContainer = GetTargetContainer(containerID);
-
-            // Clear the view with the same container ID if it's in focus, and trigger its OnLeaveFocus event
-            if (baseTargetContainer != null)
+            UIScript view = GetView(viewID);
+            if (view != null)
             {
-                // TODO: instead of clearing the entire container, ask for the target and sender ID so if a container has multiple active views, only one of them is removed
-                // Clear the base view container
-                baseTargetContainer.Clear();
+                view.HideView();
+            }
+        }
+
+        /// <summary>
+        /// Clears the specified container on the target document.
+        /// </summary>
+        /// <param name="containerID"></param>
+        public void ClearContainer(string containerID)
+        {
+            VisualElement container = GetTargetContainer(containerID);
+            if (container != null)
+            {
+                container.Clear();
             }
         }
 

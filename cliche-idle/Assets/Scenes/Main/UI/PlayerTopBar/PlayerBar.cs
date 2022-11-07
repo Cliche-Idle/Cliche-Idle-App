@@ -15,7 +15,7 @@ public class PlayerBar : UIScript
     // Start is called before the first frame update
     void Start()
     {
-        DisplayView();
+        ShowView();
     }
 
     protected override void UIUpdate()

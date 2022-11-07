@@ -14,14 +14,14 @@ public class SecondaryViewSwitch : UIScript
 
     private void StatsManagementOpen()
     {
-        Navigator.SwitchToView("CS_StatsManagement");
-        Navigator.ClearUpViewContainer("CMCC_LowerContainer");
+        Navigator.ShowView("CS_StatsManagement");
+        Navigator.ClearContainer("CMCC_LowerContainer");
     }
 
     private void InventoryManagementOpen()
     {
-        Navigator.SwitchToView("CharacterManagementScreen");
-        Navigator.SwitchToView("CS_InventoryEquippedItems");
-        Navigator.SwitchToView("CS_InventoryManagement");
+        Navigator.ShowView("CharacterManagementScreen");
+        Navigator.ShowView("CS_InventoryEquippedItems");
+        Navigator.ShowView("CS_InventoryManagement");
     }
 }

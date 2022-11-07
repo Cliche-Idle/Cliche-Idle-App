@@ -116,7 +116,7 @@ public class InventoryView : UIScript
                     if (InventoryMode == InventoryPopUpMode.Use)
                     {
                         GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = item;
-                        Navigator.SwitchToView("UseItemPopUp");
+                        Navigator.ShowView("UseItemPopUp");
                         
                     }
                     else if (InventoryMode == InventoryPopUpMode.Sell)

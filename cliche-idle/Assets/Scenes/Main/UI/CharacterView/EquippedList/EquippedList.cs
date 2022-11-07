@@ -31,8 +31,8 @@ public class EquippedList : UIScript
     private void DrawSocketEquipmentList(object sender, Item item)
     {
         SocketsContainer.Clear();
-        Navigator.ClearUpViewContainer("CMCC_LowerContainer");
-        Navigator.SwitchToView("CS_InventoryManagement");
+        Navigator.ClearContainer("CMCC_LowerContainer");
+        Navigator.ShowView("CS_InventoryManagement");
         ListSockets<Weapon>(Inventory.Weapons.Sockets);
         // FIXME: Don't subscribe to event here, do it in OnEnterFocus, as this will loop subscribe
         SubscribeToSocketEvents<Weapon>(Inventory.Weapons.Sockets);

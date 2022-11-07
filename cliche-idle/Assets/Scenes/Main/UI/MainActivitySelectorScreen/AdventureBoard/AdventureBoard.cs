@@ -17,7 +17,7 @@ public class AdventureBoard : UIScript
 
     void Start()
     {
-        DisplayView();
+        ShowView();
     }
 
     protected override void UIUpdate()

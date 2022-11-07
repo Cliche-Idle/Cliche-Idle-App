@@ -84,9 +84,9 @@ namespace UIViews
 
         /// <summary>
         /// Displays the view on the attached Navigator's target.
-        /// See <see cref="ViewNavigator.SwitchToView(string)"/> for details.
+        /// See <see cref="ViewNavigator.ShowView(string)"/> for details.
         /// </summary>
-        public virtual void DisplayView()
+        public virtual void ShowView()
         {
             if (UXMLDocument != null)
             {
@@ -110,7 +110,6 @@ namespace UIViews
                             viewWrapperContainer.name = WrapperVisualElementName;
 
                             // The normal event syntax is more useful here than the Unity one, so lambda it 
-                            // TODO: Make the sender the lowest exiting UIScript that is detaching 
 
                             // OnEnterFocus
                             viewWrapperContainer.RegisterCallback<AttachToPanelEvent>(evt => {
@@ -129,19 +128,30 @@ namespace UIViews
                     }
                     else
                     {
-                        // TODO: check if this is right?
-                        UXMLDocument.CloneTree(Navigator.Target.rootVisualElement);
+                        throw new Exception($"View must have a container ID set so it can be shown.");
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Hides the view, and removes it from the hierarchy. 
+        /// Hides the view, and removes it from the hierarchy.
         /// </summary>
         public virtual void HideView()
         {
-            Navigator.ClearUpViewContainer(ContainerID);
+            if (IsViewActive == true)
+            {
+                VisualElement viewContainer = GetViewContainer();
+                if (viewContainer != null)
+                {
+                    // Remove the view container from its parent
+                    VisualElement viewParent = viewContainer.parent;
+                    if (viewParent != null)
+                    {
+                        viewParent.Remove(viewContainer);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -161,7 +171,7 @@ namespace UIViews
         }
 
         /// <summary>
-        /// Runs through the dependency stack and calls every inactive inluded view's <see cref="DisplayView()"/>.
+        /// Runs through the dependency stack and calls every inactive inluded view's <see cref="ShowView()"/>.
         /// </summary>
         private void SetDependenciesActive()
         {
@@ -175,7 +185,7 @@ namespace UIViews
                     // Check if the dependency is not active
                     if (dependency.IsViewActive == false)
                     {
-                        dependency.DisplayView();
+                        dependency.ShowView();
                     }
                 }
             }
@@ -266,7 +276,11 @@ namespace UIViews
                     view.ID = EditorGUILayout.TextField("ID", view.ID);
                     view.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", view.UXMLDocument, typeof(VisualTreeAsset), true);
                     view.IsStatic = EditorGUILayout.Toggle("Is Static", view.IsStatic);
-                    view.IsViewActive = EditorGUILayout.Toggle("Is View Active", view.IsViewActive);
+
+                    // This is purely for visual debug, so the toggle is disabled
+                    EditorGUI.BeginDisabledGroup(true);
+                    EditorGUILayout.Toggle("Is View Active", view.IsViewActive);
+                    EditorGUI.EndDisabledGroup();
 
                     // Dependency handling
                     EditorGUILayout.Space(10);

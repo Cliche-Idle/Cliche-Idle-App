@@ -29,7 +29,7 @@ namespace UIViews
             ContainerID = WrapperVisualElementName;
         }
 
-        public override void DisplayView()
+        public override void ShowView()
         {
             VisualElement popupBase = BuildPopUpBaseElement();
 
@@ -152,6 +152,10 @@ namespace UIViews
                     popup.ID = EditorGUILayout.TextField("ID", popup.ID);
                     popup.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", popup.UXMLDocument, typeof(VisualTreeAsset), true);
                     popup.IsStatic = EditorGUILayout.Toggle("Is Static", popup.IsStatic);
+
+                    EditorGUI.BeginDisabledGroup(true);
+                    EditorGUILayout.Toggle("Is View Active", popup.IsViewActive);
+                    EditorGUI.EndDisabledGroup();
 
                     EditorGUILayout.Space(10);
 
