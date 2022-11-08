@@ -8,19 +8,18 @@ public class SecondaryViewSwitch : UIScript
 
     protected override void OnEnterFocus()
     {
-        GetViewContainer().Q<Button>("SwitchInv").clicked += InventoryManagementOpen;
-        GetViewContainer().Q<Button>("SwitchStat").clicked += StatsManagementOpen;
+        GetViewContainer().Q<Button>("SwitchInv").clicked += SwitchToInventoryMenu;
+        GetViewContainer().Q<Button>("SwitchStat").clicked += SwitchToStatsMenu;
     }
 
-    private void StatsManagementOpen()
+    private void SwitchToStatsMenu()
     {
         Navigator.ShowView("CS_StatsManagement");
-        Navigator.ClearContainer("CMCC_LowerContainer");
+        Navigator.HideView("CS_InventoryManagement");
     }
 
-    private void InventoryManagementOpen()
+    private void SwitchToInventoryMenu()
     {
-        Navigator.ShowView("CharacterManagementScreen");
         Navigator.ShowView("CS_InventoryEquippedItems");
         Navigator.ShowView("CS_InventoryManagement");
     }

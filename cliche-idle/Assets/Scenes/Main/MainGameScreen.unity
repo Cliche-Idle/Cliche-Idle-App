@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1649013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1649014}
+  m_Layer: 5
+  m_Name: UI_Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1649014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 434186701}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &48590669
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,12 +163,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 48590670}
-  - component: {fileID: 48590674}
   - component: {fileID: 48590672}
   - component: {fileID: 48590671}
+  - component: {fileID: 48590674}
   - component: {fileID: 48590673}
   m_Layer: 5
-  m_Name: UI_CS_InventoryManagement
+  m_Name: UI_CS_PlayerManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +185,8 @@ Transform:
   m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 434186701}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -175,7 +207,7 @@ MonoBehaviour:
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a32a80ea803635448b2f38f2f6a1a145, type: 3}
   <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 48590674}
+  <Dependency>k__BackingField: {fileID: 434186700}
   <ContainerID>k__BackingField: CMCC_LowerContainer
   InventoryCategoryUXML: {fileID: 9197481963319205126, guid: 639486a98b962834899f7107b927f757, type: 3}
   InventoryMode: 1
@@ -196,7 +228,7 @@ MonoBehaviour:
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 53d36caf4aaccad46953bf1499a544a1, type: 3}
   <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 48590674}
+  <Dependency>k__BackingField: {fileID: 434186700}
   <ContainerID>k__BackingField: CMCC_UpperContainer
   EquipmentSocketUXML: {fileID: 9197481963319205126, guid: 8c91489d67593514abdc52a337111873, type: 3}
 --- !u!114 &48590673
@@ -208,16 +240,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 48590669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1554a49b5b3cf4db2ccabd5d93dea1, type: 3}
+  m_Script: {fileID: 11500000, guid: 53a52a2377e126b4c9f8181a9d5ac06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: CS_SecondarySwitchMenu
-  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: daf7f410072743b4f9e6bf183938913f, type: 3}
+  <ID>k__BackingField: CS_StatsManagement
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98b7026121be7b147bf611ad0cee2791, type: 3}
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 48590674}
-  <ContainerID>k__BackingField: CharacterManagementFooterContainer
+  <Dependency>k__BackingField: {fileID: 434186700}
+  <ContainerID>k__BackingField: CMCC_UpperContainer
 --- !u!114 &48590674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +257,42 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48590669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9588b8d4f698da9459f2d0ca48efd992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: CS_SecondarySwitchMenu
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: daf7f410072743b4f9e6bf183938913f, type: 3}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 434186700}
+  <ContainerID>k__BackingField: CharacterManagementFooterContainer
+--- !u!1 &434186699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434186701}
+  - component: {fileID: 434186700}
+  m_Layer: 5
+  m_Name: UI_CharacterScreenLayout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &434186700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434186699}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da1554a49b5b3cf4db2ccabd5d93dea1, type: 3}
@@ -237,77 +305,23 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: BaseContentContainer
---- !u!1 &54299392
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 54299393}
-  - component: {fileID: 54299394}
-  - component: {fileID: 54299395}
-  m_Layer: 5
-  m_Name: UI_CS_StatManagement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &54299393
+--- !u!4 &434186701
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54299392}
+  m_GameObject: {fileID: 434186699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Children:
+  - {fileID: 1649014}
+  - {fileID: 1766228448}
+  m_Father: {fileID: 48590670}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &54299394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54299392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9588b8d4f698da9459f2d0ca48efd992, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: 
-  <UXMLDocument>k__BackingField: {fileID: 0}
-  <IsStatic>k__BackingField: 1
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 0}
-  <ContainerID>k__BackingField: 
---- !u!114 &54299395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54299392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53a52a2377e126b4c9f8181a9d5ac06a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: 
-  <UXMLDocument>k__BackingField: {fileID: 0}
-  <IsStatic>k__BackingField: 1
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 0}
-  <ContainerID>k__BackingField: 
 --- !u!1 &683827965
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +793,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1766228447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1766228448}
+  m_Layer: 5
+  m_Name: UI_Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1766228448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766228447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 434186701}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1773429408
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +873,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004442188
 GameObject:
@@ -879,5 +924,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
