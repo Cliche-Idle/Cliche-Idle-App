@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using UIViews;
 
 public class EquippedList : UIScript
 {
@@ -12,7 +13,7 @@ public class EquippedList : UIScript
     public VisualTreeAsset EquipmentSocketUXML;
     private VisualElement SocketsContainer;
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Inventory = GameObject.Find("Player").GetComponent<InventoryHandler>();
         Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
@@ -21,7 +22,7 @@ public class EquippedList : UIScript
 
     }
 
-    protected override void OnLeaveFocus(object sender, EventArgs e)
+    protected override void OnLeaveFocus()
     {
         UnSubscribeFromSocketEvents<Weapon>(Inventory.Weapons.Sockets);
         UnSubscribeFromSocketEvents<Armour>(Inventory.Armour.Sockets);
@@ -30,9 +31,10 @@ public class EquippedList : UIScript
     private void DrawSocketEquipmentList(object sender, Item item)
     {
         SocketsContainer.Clear();
-        Navigator.ClearUpViewContainer("CMCC_LowerContainer");
-        Navigator.SwitchToView("CS_InventoryManagement");
+        Navigator.ClearContainer("CMCC_LowerContainer");
+        Navigator.ShowView("CS_InventoryManagement");
         ListSockets<Weapon>(Inventory.Weapons.Sockets);
+        // FIXME: Don't subscribe to event here, do it in OnEnterFocus, as this will loop subscribe
         SubscribeToSocketEvents<Weapon>(Inventory.Weapons.Sockets);
         ListSockets<Armour>(Inventory.Armour.Sockets);
         SubscribeToSocketEvents<Armour>(Inventory.Armour.Sockets);

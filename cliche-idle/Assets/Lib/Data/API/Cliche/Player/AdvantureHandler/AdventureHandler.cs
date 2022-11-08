@@ -7,16 +7,11 @@ using UnityEditor;
 
 public partial class AdventureHandler : MonoBehaviour
 {
-    private void Start() {
-        // Attempt refill on startup
-        RefillAvailableList();
-    }
-    
     /// <summary>
-    /// The number of adventures that are available at the same time.
+    /// The maximum total number of adventures that can be present at a time in <see cref="AvailableAdventures"/> and <see cref="AdventureQueue"/> combined.
     /// </summary>
     [field: SerializeField]
-    public int MaxHandlerAdventures { get; private set; }
+    public int MaxHandlerAdventures { get; private set; } = 3;
 
     /// <summary>
     /// Contains the list of available activities in the user's feed.
@@ -29,10 +24,10 @@ public partial class AdventureHandler : MonoBehaviour
     public EventHandler OnAdventuresUpdate;
 
     /// <summary>
-    /// The number of adventures that can be active at the same time.
+    /// The maximum number of advantures that can be active at a time. Effectively the maximum count for <see cref="AdventureQueue"/>.
     /// </summary>
     [field: SerializeField]
-    public int MaxQueuedAdventures { get; private set; }
+    public int MaxQueuedAdventures { get; private set; } = 1;
 
     /// <summary>
     /// Contains the list of currenctly active activities.
@@ -40,7 +35,7 @@ public partial class AdventureHandler : MonoBehaviour
     public List<AdventureQueueItem> AdventureQueue;
 
     /// <summary>
-    /// Transfers an adventure from the AvailableAdventures to the AdventureQueue. 
+    /// Transfers an adventure from <see cref="AvailableAdventures"/> to the <see cref="AdventureQueue"/>. 
     /// </summary>
     /// <param name="adventureID"></param>
     /// <param name="adventureEndTime"></param>
@@ -51,16 +46,16 @@ public partial class AdventureHandler : MonoBehaviour
         {
             AvailableAdventures.Remove(adventureID);
             AdventureQueue.Add(new AdventureQueueItem(adventureID, adventureEndTime));
+            FireUpdateEvent();
         }
         else
         {
-            Debug.LogWarning($"Adventure ({adventureID}) could not be transferred to queue because it is full.");
+            throw new Exception($"Adventure ({adventureID}) could not be transferred to queue because it is full.");
         }
-        FireUpdateEvent();
     }
 
     /// <summary>
-    /// Refills the available adventures list (takes the adventure queue into account too when calculating size). If there aren't enough adventures available to the player at the time, it may not completely refill it.
+    /// Refills <see cref="AvailableAdventures"/>. If there aren't enough adventures available to the player at the time, or the number of adventures would exceed <see cref="MaxHandlerAdventures"/>, it may not completely refill the list.
     /// </summary>
     public void RefillAvailableList()
     {
@@ -103,6 +98,12 @@ public partial class AdventureHandler : MonoBehaviour
         {
             OnAdventuresUpdate.Invoke(this, null);
         }
+    }
+
+    private void Start()
+    {
+        // Attempts refill on startup
+        RefillAvailableList();
     }
 
     /// <summary>

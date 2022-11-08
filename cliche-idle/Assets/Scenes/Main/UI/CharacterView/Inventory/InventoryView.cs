@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UIViews;
 
 public enum InventoryPopUpMode
 {
@@ -19,7 +20,7 @@ public class InventoryView : UIScript
     private VisualElement InventoryCategoriesContainer;
     public InventoryPopUpMode InventoryMode;
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Inventory = GameObject.Find("Player").GetComponent<InventoryHandler>();
         Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
@@ -27,11 +28,6 @@ public class InventoryView : UIScript
         InventoryCategoriesContainer = GetViewContainer().Q("InventoryCategoriesContainer");
         GetViewContainer().Q<Label>("GoldAmount").text = $"{Currencies.Gold.Value}";
         RenderInventoryContents();
-    }
-
-    protected override void OnLeaveFocus(object sender, EventArgs e)
-    {
-
     }
 
     private void RenderInventoryContents()
@@ -117,12 +113,10 @@ public class InventoryView : UIScript
                 {
                     evt.PreventDefault();
                     evt.StopImmediatePropagation();
-                    Debug.Log(icon.reference_item_ID);
-                    Navigator.SwitchToView("PopUpWindowBase");
                     if (InventoryMode == InventoryPopUpMode.Use)
                     {
                         GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = item;
-                        Navigator.SwitchToView("UseItemPopUp");
+                        Navigator.ShowView("UseItemPopUp");
                         
                     }
                     else if (InventoryMode == InventoryPopUpMode.Sell)

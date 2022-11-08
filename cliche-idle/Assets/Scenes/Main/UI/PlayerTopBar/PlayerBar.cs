@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using UIViews;
 
 public class PlayerBar : UIScript
 {
@@ -14,7 +15,7 @@ public class PlayerBar : UIScript
     // Start is called before the first frame update
     void Start()
     {
-        DisplayView();
+        ShowView();
     }
 
     protected override void UIUpdate()
@@ -32,7 +33,7 @@ public class PlayerBar : UIScript
         LevelText.text = $"Level {PlayerProgression.Level.ToString()}";
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         PlayerStats = GameObject.Find("Player").GetComponent<StatsHandler>();
         PlayerProgression = GameObject.Find("Player").GetComponent<ProgressionHandler>();

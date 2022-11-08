@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cliche.System;
+using UIViews;
 
 public class StatsView : UIScript
 {
@@ -20,7 +21,7 @@ public class StatsView : UIScript
         GetViewContainer().Q<Label>("PointsNum").text = $"{Stats.GetFreeStatPoints()}";
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
         //

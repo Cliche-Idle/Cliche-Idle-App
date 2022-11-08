@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using UIViews;
 
 public class BottomNavigation : UIScript
 {
@@ -9,10 +10,10 @@ public class BottomNavigation : UIScript
     // Start is called before the first frame update
     void Start()
     {
-        DisplayView();
+        ShowView();
     }
 
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    protected override void OnEnterFocus()
     {
         GetViewContainer().Q<Button>("AdventureBtn").clicked += AdventureMenuOpen;
         GetViewContainer().Q<Button>("InventoryBtn").clicked += InventoryMenuOpen;
@@ -22,24 +23,23 @@ public class BottomNavigation : UIScript
 
     private void AdventureMenuOpen()
     {
-        Navigator.SwitchToView("MainActivitySelectorScreen");
+        Navigator.ShowView("AdventureBoard");
     }
 
     private void InventoryMenuOpen()
     {
-        Navigator.SwitchToView("CharacterManagementScreen");
-        Navigator.SwitchToView("CS_SecondarySwitchMenu");
-        Navigator.SwitchToView("CS_InventoryEquippedItems");
-        Navigator.SwitchToView("CS_InventoryManagement");
+        Navigator.ShowView("CS_SecondarySwitchMenu");
+        Navigator.ShowView("CS_InventoryEquippedItems");
+        Navigator.ShowView("CS_InventoryManagement");
     }
 
     private void TavernMenuOpen()
     {
-        Navigator.SwitchToView("Tavern");
+        Navigator.ShowView("Tavern");
     }
 
     private void SettingsMenuOpen()
     {
-        Navigator.SwitchToView("GameSettingsMenu");
+        Navigator.ShowView("GameSettingsMenu");
     }
 }

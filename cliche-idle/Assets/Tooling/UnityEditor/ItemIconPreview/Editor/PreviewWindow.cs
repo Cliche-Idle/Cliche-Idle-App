@@ -348,7 +348,7 @@ public class IconPreview : EditorWindow
     }
 
 
-    // FIXME: clean this up
+    // TODO: clean this up
     private VisualElement m_ItemsTab;
     private static VisualTreeAsset m_ItemRowTemplate;
     private ScrollView m_DetailSection;

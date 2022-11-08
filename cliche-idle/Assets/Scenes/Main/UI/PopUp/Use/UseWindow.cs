@@ -1,23 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UIElements;
+using UIViews;
 
-public class UseWindow : UIScript
+public class UseWindow : PopUp
 {
-    private InventoryHandler Inventory;
     public Item WindowItem;
-    private VisualElement Window;
-    protected override void OnEnterFocus(object sender, EventArgs e)
+    private InventoryHandler Inventory;
+
+    private void Start()
     {
         Inventory = GameObject.Find("Player").GetComponent<InventoryHandler>();
+    }
+
+    protected override void OnEnterFocus()
+    {
         LoadPopUpContents();
     }
 
     // FIXME: Consumable title count is not updating
-    // FIXME: Close window if consumable runs out
+    // Apparently this seems to be working? Altough this script doesn't use the UI update loop
+
+    // TODO: Visibly disable button if consumable runs out
 
     private void LoadPopUpContents()
     {

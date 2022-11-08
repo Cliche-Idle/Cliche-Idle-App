@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Contains the data of a currently active timed adventure.
+/// </summary>
 [System.Serializable]
 public class AdventureQueueItem
 {
@@ -35,10 +38,10 @@ public class AdventureQueueItem
     /// <returns></returns>
     public bool CheckIfFinished()
     {
-        var baseTime = DateTime.UnixEpoch;
-        baseTime = baseTime.AddSeconds(EndTime);
         if (Finished == false)
         {
+            var baseTime = DateTime.UnixEpoch;
+            baseTime = baseTime.AddSeconds(EndTime);
             if (baseTime < DateTime.UtcNow)
             {
                 Finished = true;
