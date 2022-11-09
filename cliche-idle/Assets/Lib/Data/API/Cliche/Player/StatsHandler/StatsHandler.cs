@@ -11,10 +11,8 @@ public class StatsHandler : MonoBehaviour
     }
 
     [field: HeaderAttribute("General stats")]
-    // FIXME: Keep an eye out on this, an instance ID is saved into savefiles and if that changes, it might mess things up when it's loaded back.
     public PlayerHealth Health { get; private set; }
 
-    //[field: Header("Item stats")]
     public int Defence {
         get
         {

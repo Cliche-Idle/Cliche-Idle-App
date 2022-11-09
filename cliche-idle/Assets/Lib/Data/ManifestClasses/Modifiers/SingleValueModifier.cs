@@ -10,61 +10,43 @@ public class SingleValueModifier : ScriptableObject
         }
     }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _internalDescription;
-    public string InternalDescription {
-        get {
-            return _internalDescription;
-        }
-    }
+    [field: SerializeField]
+    [field: TextArea(3,10)]
+    public string InternalDescription { get; private set; }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _gameDescription;
-    public string GameDescription {
-        get {
-            return _gameDescription;
-        }
-    }
+    [field: SerializeField]
+    [field: TextArea(3,10)]
+    public string GameDescription { get; private set; }
 
-    [SerializeField]
-    private float _value;
-    public float Value {
-        get {
-            return _value;
-        }
-    }
-    
-    [SerializeField]
-    private bool _isPercentValue;
-    public bool IsPercentValue {
-        get {
-            return _isPercentValue;
-        }
-    }
+    [field: SerializeField]
+    public float Value { get; private set; }
 
-    public void Apply(float intervalValue, ref float value)
+    [field: SerializeField]
+    public bool IsPercentValue { get; private set; }
+
+    public float Apply(float intervalValue, float value)
     {
         if (IsPercentValue)
         {
-            value *= _value;
+            value *= Value;
         }
         else
         {
-            value += _value;
+            value += Value;
         }
+        return value;
     }
 
-    public void ApplyFloored(float intervalValue, ref float value)
+    public float ApplyFloored(float intervalValue, float value)
     {
         if (IsPercentValue)
         {
-            value = Mathf.FloorToInt(value * _value);
+            value = Mathf.FloorToInt(value * Value);
         }
         else
         {
-            value = Mathf.FloorToInt(value + _value);
+            value = Mathf.FloorToInt(value + Value);
         }
+        return value;
     }
 }

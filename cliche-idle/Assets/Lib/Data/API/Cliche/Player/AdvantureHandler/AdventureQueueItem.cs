@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+namespace Cliche.Activities.Adventures
+{
+
+}
 /// <summary>
 /// Contains the data of a currently active timed adventure.
 /// </summary>

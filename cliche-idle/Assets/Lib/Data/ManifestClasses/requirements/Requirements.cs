@@ -13,17 +13,20 @@ public class Requirements : ScriptableObject
     /// <summary>
     /// The list of races that fulfill the requirement.
     /// </summary>
-    public List<Race> Race;
+    [field: SerializeField]
+    public List<Race> Race { get; private set; }
 
     /// <summary>
     /// The list of player class names that fulfill the requirement.
     /// </summary>
-    public List<string> ClassSpecName;
+    [field: SerializeField]
+    public List<string> ClassSpecName { get; private set; }
 
     /// <summary>
     /// The player level that fulfills the requirement.
     /// </summary>
-    public int Level;
+    [field: SerializeField]
+    public int Level { get; private set; }
 
     /// <summary>
     /// Checks whether or not the player is fulfilled all described requirements.

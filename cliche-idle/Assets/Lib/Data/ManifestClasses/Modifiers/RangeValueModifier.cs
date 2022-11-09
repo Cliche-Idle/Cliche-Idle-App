@@ -10,37 +10,17 @@ public class RangeValueModifier : ScriptableObject
         }
     }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _internalDescription;
-    public string InternalDescription {
-        get {
-            return _internalDescription;
-        }
-    }
+    [field: SerializeField]
+    [field: TextArea(3,10)]
+    public string InternalDescription { get; private set; }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _gameDescription;
-    public string GameDescription {
-        get {
-            return _gameDescription;
-        }
-    }
+    [field: SerializeField]
+    [field: TextArea(3,10)]
+    public string GameDescription { get; private set; }
 
-    [SerializeField]
-    private float _upperBound;
-    public float UpperBound {
-        get {
-            return _upperBound;
-        }
-    }
+    [field: SerializeField]
+    public float UpperBound { get; private set; }
 
-    [SerializeField]
-    private float _lowerBound;
-    public float LowerBound {
-        get {
-            return _lowerBound;
-        }
-    }
+    [field: SerializeField]
+    public float LowerBound { get; private set; }
 }

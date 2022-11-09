@@ -1,6 +1,6 @@
 using System.Linq;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "GameData/Activities/Loot table")]
 public class LootTable : ScriptableObject
@@ -23,17 +23,20 @@ public class LootTable : ScriptableObject
     /// <summary>
     /// The list of possible Weapon rewards.
     /// </summary>
-    public List<WeaponManifest> Weapons;
+    [field: SerializeField]
+    public List<WeaponManifest> Weapons { get; private set; }
 
     /// <summary>
     /// The list of possible Armour rewards.
     /// </summary>
-    public List<ArmourManifest> Armour;
+    [field: SerializeField]
+    public List<ArmourManifest> Armour { get; private set; }
 
     /// <summary>
     /// The list of possible Consumable rewards.
     /// </summary>
-    public List<ConsumableManifest> Consumables;
+    [field: SerializeField]
+    public List<ConsumableManifest> Consumables { get; private set; }
 
     /// <summary>
     /// Returns a categorised list of item IDs from the table's contents, randomly chosen, between the specified counts. Duplicate items may appear.

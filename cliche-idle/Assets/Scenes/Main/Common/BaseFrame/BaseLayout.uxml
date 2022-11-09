@@ -3,6 +3,5 @@
         <ui:VisualElement name="BaseHeaderContainer" style="flex-grow: 0; flex-shrink: 0; min-width: auto; min-height: auto;" />
         <ui:VisualElement name="BaseContentContainer" style="flex-grow: 1;" />
         <ui:VisualElement name="BaseFooterContainer" style="flex-grow: 0; flex-shrink: 0; min-width: auto; min-height: auto;" />
-        <ui:VisualElement name="BasePopUpContainer" style="flex-shrink: 0;" />
     </ui:VisualElement>
 </ui:UXML>

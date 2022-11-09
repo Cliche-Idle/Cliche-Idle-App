@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameData/Modifiers/Interval value setting")]
+[CreateAssetMenu(menuName = "GameData/Modifiers/Interval value modifier")]
 public class IntervalValueModifier : ScriptableObject
 {
     public string ID {
@@ -10,49 +10,24 @@ public class IntervalValueModifier : ScriptableObject
         }
     }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _internalDescription;
-    public string InternalDescription {
-        get {
-            return _internalDescription;
-        }
-    }
+    [field: SerializeField]
+    [field: TextArea(3,10)]
+    public string InternalDescription { get; private set; }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _gameDescription;
-    public string GameDescription {
-        get {
-            return _gameDescription;
-        }
-    }
+    [field: SerializeField]
+    [field: TextArea(3,10)]
+    public string GameDescription { get; private set; }
 
-    [SerializeField]
-    private float _interval;
-    public float Interval {
-        get {
-            return _interval;
-        }
-    }
+    [field: SerializeField]
+    public float Interval { get; private set; }
 
-    [SerializeField]
-    private float _value;
-    public float Value {
-        get {
-            return _value;
-        }
-    }
-    
-    [SerializeField]
-    private bool _isPercentValue;
-    public bool IsPercentValue {
-        get {
-            return _isPercentValue;
-        }
-    }
+    [field: SerializeField]
+    public float Value { get; private set; }
 
-    public void Apply(float intervalValue, ref float value)
+    [field: SerializeField]
+    public bool IsPercentValue { get; private set; }
+
+    public float Apply(float intervalValue, float value)
     {
         if (IsPercentValue)
         {
@@ -62,9 +37,10 @@ public class IntervalValueModifier : ScriptableObject
         {
             value += GetAmount(value);
         }
+        return value;
     }
 
-    public void ApplyFloored(float intervalValue, ref float value)
+    public float ApplyFloored(float intervalValue, float value)
     {
         if (IsPercentValue)
         {
@@ -74,6 +50,7 @@ public class IntervalValueModifier : ScriptableObject
         {
             value += GetAmountFloored(value);
         }
+        return value;
     }
 
     public float GetAmount(float intervalValue)

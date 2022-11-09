@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0418391f29e1e804db76612e76068b7c, type: 3}
   m_Name: XpLevelScalar
   m_EditorClassIdentifier: 
-  _internalDescription: Controls how much more XP is required for levelling up per
-    level. The lower the value is, the more XP is needed for the next level.
-  _gameDescription: 
-  _value: 0.2
-  _isPercentValue: 1
+  <InternalDescription>k__BackingField: 'Controls how much XP is needed for a given
+    level with the following formula: (LEVEL / Value) ^ 2'
+  <GameDescription>k__BackingField: 
+  <Value>k__BackingField: 0.2
+  <IsPercentValue>k__BackingField: 0

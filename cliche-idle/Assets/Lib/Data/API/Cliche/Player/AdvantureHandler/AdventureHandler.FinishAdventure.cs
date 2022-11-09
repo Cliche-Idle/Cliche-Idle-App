@@ -18,7 +18,7 @@ public partial class AdventureHandler
             AdventureManifest selectedAdventure = Manifests.GetByID<AdventureManifest>(adventureID);
             var statsHandler = gameObject.GetComponent<StatsHandler>();
             var progressionHandler = gameObject.GetComponent<ProgressionHandler>();
-            // * Determine if the adventure ended with a success or not
+            // Determine if the adventure ended with a success or not
             var successChance = UnityEngine.Random.Range(1, 101);
             bool success = (successChance <= selectedAdventure.BaseChance);
 
@@ -31,17 +31,19 @@ public partial class AdventureHandler
             var lootStream = selectedAdventure.Rewards.GetNewLootStream(selectedAdventure.MinRewardCount, selectedAdventure.MaxRewardCount);
             GrantItemRewards(lootStream);
 
-            // * Grant rewards 
+            // Grant rewards 
             progressionHandler.Experience.Grant(rewardXP);
             gameObject.GetComponent<CurrencyHandler>().Gold.Grant(rewardGold);
             statsHandler.Health.Take(damageTaken);
 
             // Generate activity end report
             var activityEndReport = new PostActivityReport(damageTaken, 0, rewardXP, rewardGold, lootStream);
+            
             Debug.Log($"Adventure end report ({adventureID}, success: {success}): -{damageTaken} HP, +{rewardXP} XP, +{rewardGold} Gold.");
 
             // Remove adventure from the list
             AdventureQueue.Remove(activity);
+
             // Refill adventure list (also triggers update event)
             RefillAvailableList();
             return activityEndReport;
@@ -53,6 +55,12 @@ public partial class AdventureHandler
         return null;
     }
 
+
+    /// <summary>
+    /// Inverts the adventure chance percentage to get a rewards scaler.
+    /// </summary>
+    /// <param name="selectedAdventure"></param>
+    /// <returns></returns>
     private float GetAdventureChanceScalar(AdventureManifest selectedAdventure)
     {
         var baseChancePercent = (selectedAdventure.BaseChance / 100);
@@ -170,7 +178,7 @@ public partial class AdventureHandler
                         var variance = UnityEngine.Random.Range(-(gearDefencePerLevel.Value * gearStatVariance.LowerBound), (gearDefencePerLevel.Value * gearStatVariance.UpperBound));
                         // Add variance
                         var weaponAttack = Mathf.FloorToInt(armourManifest.MainStatValue + (gearDefence + variance));
-                        inventoryHandler.Weapons.Add(new Weapon(armourID, weaponAttack));
+                        inventoryHandler.Armour.Add(new Armour(armourID, weaponAttack));
                     }
                     break;
                 case ItemTypes.Consumable:

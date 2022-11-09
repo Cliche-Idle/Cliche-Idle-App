@@ -39,7 +39,7 @@ public partial class AdventureHandler : MonoBehaviour
     /// </summary>
     /// <param name="adventureID"></param>
     /// <param name="adventureEndTime"></param>
-    public void TransferAdventureToActiveQueue(string adventureID, double adventureEndTime)
+    private void TransferAdventureToActiveQueue(string adventureID, double adventureEndTime)
     {
         int adventureQueueCount = AdventureQueue.Count;
         if (adventureQueueCount + 1 <= MaxQueuedAdventures)

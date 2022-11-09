@@ -1,17 +1,55 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
-using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 
 public class SaveManager : MonoBehaviour
 {
     [Header("Settings")]
-    //public bool SeparateSaveFilePerObject = false;
-    public string SaveSubPath = "Saves";
+    
+    public readonly string SaveSubPath = "Saves";
+    public readonly string DEBUGSaveSubPath = "DEBUG_Saves";
     public List<Component> SaveObjects;
+
+    /// <summary>
+    /// Controls wether or not auto save is enabled. This setting is only applied on startup.
+    /// </summary>
+    [field: SerializeField]
+    public bool AutoSaveEnabled { get; private set; } = false;
+
+
+    [field: SerializeField]
+    public double LastSaveTime { get; private set; }
+
+    /// <summary>
+    /// The auto save inerval in seconds.
+    /// </summary>
+    [field: SerializeField]
+    public float SaveInterval { get; private set; } = 120;
+
+    private void Start()
+    {
+        // Start auto save loop
+        if (AutoSaveEnabled)
+        {
+            StartCoroutine(SaveGameLoop());
+        }
+    }
+
+    IEnumerator SaveGameLoop()
+    {
+        while (true)
+        {
+            SaveUserState();
+            yield return new WaitForSecondsRealtime(SaveInterval);
+        }
+    }
+    
 
     public void SaveUserState()
     {
@@ -39,7 +77,7 @@ public class SaveManager : MonoBehaviour
             saveJSON = save.ToString(Formatting.Indented);
         }
 
-        File.WriteAllText($"{Application.persistentDataPath}/{SaveSubPath}/gamesave.json", save.ToString());
+        File.WriteAllText($"{Application.persistentDataPath}/{SaveSubPath}/gamesave.json", saveJSON);
         
         Debug.Log($"<color=green>Player data saved to save-files.</color>");
     }

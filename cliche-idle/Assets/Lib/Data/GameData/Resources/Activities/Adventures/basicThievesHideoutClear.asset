@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe638afbe8438d947a93e256d372ab6d, type: 3}
   m_Name: basicThievesHideoutClear
   m_EditorClassIdentifier: 
-  Title: Thieves' hideout
+  <Title>k__BackingField: Thieves' hideout
+  <Icon>k__BackingField: {fileID: 0}
   Description: Clear the local thieves' hideout and reclaim their stolen treasures.
   PostCompleteDescriptionSuccess: You've successfully drove the thieves away; the
     locals will forever be grateful.

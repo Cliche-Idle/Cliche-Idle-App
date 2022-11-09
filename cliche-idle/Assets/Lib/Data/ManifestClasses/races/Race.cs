@@ -9,50 +9,43 @@ public class Race : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// The in-game display name of the given race.
+    /// </summary>
     public string Name {
         get {
             return name;
         }
     }
 
-    [SerializeField]
-    [TextArea(3,10)]
-    private string _description;
-    public string Description {
-        get {
-            return _description;
-        }
-    }
+    /// <summary>
+    /// The in-game description of the given race.
+    /// </summary>
+    [field: TextArea(3,10)]
+    [field: SerializeField]
+    public string Description { get; private set; }
 
-    [SerializeField]
-    private int _Dexterity;
-    public int Dexterity {
-        get {
-            return _Dexterity;
-        }
-    }
+    /// <summary>
+    /// The starting base racial stat value.
+    /// </summary>
+    [field: SerializeField]
+    public int Dexterity { get; private set; }
 
-    [SerializeField]
-    private int _vitality;
-    public int Vitality {
-        get {
-            return _vitality;
-        }
-    }
+    /// <summary>
+    /// The starting base racial stat value.
+    /// </summary>
+    [field: SerializeField]
+    public int Vitality { get; private set; }
 
-    [SerializeField]
-    private int _intelligence;
-    public int Intelligence {
-        get {
-            return _intelligence;
-        }
-    }
+    /// <summary>
+    /// The starting base racial stat value.
+    /// </summary>
+    [field: SerializeField]
+    public int Intelligence { get; private set; }
 
-    [SerializeField]
-    private int _strength;
-    public int Strength {
-        get {
-            return _strength;
-        }
-    }
+    /// <summary>
+    /// The starting base racial stat value.
+    /// </summary>
+    [field: SerializeField]
+    public int Strength { get; private set; }
 }

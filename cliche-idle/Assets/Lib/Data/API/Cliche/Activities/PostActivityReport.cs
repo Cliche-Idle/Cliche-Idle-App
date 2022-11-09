@@ -32,14 +32,6 @@ namespace Cliche.Activities
         /// </summary>
         public Dictionary<ItemTypes, List<string>> ItemsReceived  { get; private set; }
     
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="damageTaken"></param>
-        /// <param name="damageDealt"></param>
-        /// <param name="xp"></param>
-        /// <param name="gold"></param>
-        /// <param name="rewards"></param>
         public PostActivityReport(int damageTaken, int damageDealt, int xp, int gold, Dictionary<ItemTypes, List<string>> rewards)
         {
             DamageTaken = damageTaken;

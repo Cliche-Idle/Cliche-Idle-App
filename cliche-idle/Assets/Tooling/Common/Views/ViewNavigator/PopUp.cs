@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using System.Collections;
 
 namespace UIViews
 {
@@ -13,6 +14,10 @@ namespace UIViews
         /// The background colour of the PopUp's cover element.
         /// </summary>
         protected Color PopupBackgroundColor = new Color32(55, 55, 55, 199);
+
+        private int _animMinSize = 90;
+        private int _animMaxSize = 100;
+        private float _animSpeed = .005f;
 
         /// <summary>
         /// The PopUp's base container.
@@ -47,11 +52,12 @@ namespace UIViews
 
             Navigator.Target.rootVisualElement.Add(popupBase);
             BaseContainer = popupBase;
+            StartCoroutine(AnimationOpen());
         }
 
         public override void HideView()
         {
-            Navigator.Target.rootVisualElement.Remove(BaseContainer);
+            StartCoroutine(AnimationClose());
         }
 
         /// <summary>
@@ -60,14 +66,15 @@ namespace UIViews
         /// <returns></returns>
         private VisualElement BuildPopUpBaseElement()
         {
-            VisualElement popupBase = new VisualElement() 
-            { 
-                name = WrapperVisualElementName, 
-                style = { 
+            VisualElement popupBase = new VisualElement()
+            {
+                name = WrapperVisualElementName,
+                style = {
                     position = Position.Absolute,
                     top = 0,
                     display = DisplayStyle.Flex,
                     overflow = Overflow.Visible,
+                    alignItems = Align.Center,
                     justifyContent = Justify.Center,
                     width = Length.Percent(100),
                     height = Length.Percent(100),
@@ -78,7 +85,9 @@ namespace UIViews
             {
                 name = "PopUp_ContentContainer",
                 style = {
-                    flexGrow = 1,
+                    //flexGrow = 1,
+                    width = Length.Percent(100),
+                    height = Length.Percent(100),
                     alignItems = Align.Center,
                     justifyContent = Justify.Center
                 }
@@ -115,6 +124,8 @@ namespace UIViews
             popupBase.Add(popupContentContainer);
             popupBase.Add(popupCloseButton);
 
+            ContentContainer = popupContentContainer;
+
             return popupBase;
         }
 
@@ -126,6 +137,30 @@ namespace UIViews
             HideView();
         }
 
+        IEnumerator AnimationOpen()
+        {
+            for (int containerSize = _animMinSize; containerSize <= _animMaxSize; containerSize++)
+            {
+                //BaseContainer.style.opacity = containerSize;
+                ContentContainer.style.width = Length.Percent(containerSize);
+                ContentContainer.style.height = Length.Percent(containerSize);
+                yield return new WaitForSeconds(_animSpeed);
+            }
+            // Set state to open
+        }
+
+        IEnumerator AnimationClose()
+        {
+            for (int containerSize = _animMaxSize; containerSize >= _animMinSize; containerSize--)
+            {
+                ContentContainer.style.width = Length.Percent(containerSize);
+                ContentContainer.style.height = Length.Percent(containerSize);
+                yield return new WaitForSeconds(_animSpeed);
+            }
+            // Set state to closed
+            ContentContainer = null;
+            Navigator.Target.rootVisualElement.Remove(BaseContainer);
+        }
 
         [CustomEditor(typeof(PopUp), true, isFallback = true)]
         public class PopUpEditor : Editor

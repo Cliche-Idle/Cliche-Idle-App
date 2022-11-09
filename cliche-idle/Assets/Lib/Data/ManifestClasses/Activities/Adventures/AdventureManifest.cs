@@ -10,58 +10,74 @@ public class AdventureManifest : ScriptableObject
     }
 
     /// <summary>
-    /// The in-game name of the Adventure.
+    /// The in-game name of the adventure.
     /// </summary>
-    [Header("General")]
-    public string Title;
+    [field: Header("General")]
+    [field:SerializeField]
+    public string Title { get; private set; }
+
+    /// <summary>
+    /// The in-game icon of the adventure.
+    /// </summary>
+    [field: SerializeField]
+    public Sprite Icon { get; private set; }
 
     /// <summary>
     /// The general flavour text that is displayed before the adventure starts.
     /// </summary>
-    [TextArea(3,10)]
-    public string Description;
+    [field: TextArea(3,10)]
+    [field: SerializeField]
+    public string Description { get; private set; }
 
     /// <summary>
-    /// The post-completion flavour text that is displayed if the Adventure is successfully completed.
+    /// The post-completion flavour text that is displayed if the adventure is successfully completed.
     /// </summary>
-    [TextArea(3,10)]
-    public string PostCompleteDescriptionSuccess;
-    
+    [field: TextArea(3,10)]
+    [field: SerializeField]
+    public string PostCompleteDescriptionSuccess { get; private set; }
+
     /// <summary>
-    /// The post-completion flavour text that is displayed if the Adventure is failed.
+    /// The post-completion flavour text that is displayed if the adventure is failed.
     /// </summary>
-    [TextArea(3,10)]
-    public string PostCompleteDescriptionFail;
-    
+    [field: TextArea(3,10)]
+    [field: SerializeField]
+    public string PostCompleteDescriptionFail { get; private set; }
+
     /// <summary>
-    /// The requirements after which this Adventure is available to the player.
+    /// The requirements after which this adventure is available to the player.
     /// </summary>
-    public Requirements Requirements;
+    [field: SerializeField]
+    public Requirements Requirements { get; private set; }
 
     /// <summary>
     /// The base length of this adventure, in seconds.
     /// </summary>
-    [Header("Adventure data")]
-    public float BaseLength;
+    [field: Header("Adventure data")]
+    [field: SerializeField]
+    public float BaseLength { get; private set; } = 0;
 
     /// <summary>
     /// The base chance of this adventure succeeding.
     /// </summary>
-    public float BaseChance;
+    [field: SerializeField]
+    public float BaseChance { get; private set; } = 100;
 
     /// <summary>
     /// The Adventure's loot table.
     /// </summary>
-    [Header("Rewards settings")]
-    public LootTable Rewards;
+    [field: Header("Rewards settings")]
+    [field: SerializeField]
+    public LootTable Rewards { get; private set; }
 
     /// <summary>
     /// The minimum amount of rewards this Adveture grants.
     /// </summary>
-    public int MinRewardCount;
+    [field: SerializeField]
+    public int MinRewardCount { get; private set; } = 0;
 
     /// <summary>
     /// The maximum amount of rewards this Adveture grants.
     /// </summary>
-    public int MaxRewardCount;
+    [field: SerializeField]
+    public int MaxRewardCount { get; private set; } = 0;
 }
