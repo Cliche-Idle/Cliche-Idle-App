@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c66b8e0bb724d442875246f341073b3, type: 3}
   m_Name: GearDefencePerLevel
   m_EditorClassIdentifier: 
-  <InternalDescription>k__BackingField: 
+  <InternalDescription>k__BackingField: " Sets the amount of bonus defence points
+    gear rolls with per\r user level (Lerped)"
   <GameDescription>k__BackingField: 
   <Interval>k__BackingField: 1
   <Value>k__BackingField: 10
