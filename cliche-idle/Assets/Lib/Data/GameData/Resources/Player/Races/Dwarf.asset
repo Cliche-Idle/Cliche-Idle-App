@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53685215aa3200d47950aff85a5d1106, type: 3}
   m_Name: Dwarf
   m_EditorClassIdentifier: Assembly-CSharp::Race
-  _description: Drinking, fighting, mining and more drinking, the dwarves are a hardy
-    bunch dwelling in their caves.
-  _Dexterity: 0
-  _vitality: 3
-  _intelligence: 0
-  _strength: 1
+  <Description>k__BackingField: Drinking, fighting, mining and more drinking, the
+    dwarves are a hardy bunch dwelling in their caves.
+  <Dexterity>k__BackingField: 0
+  <Vitality>k__BackingField: 3
+  <Intelligence>k__BackingField: 0
+  <Strength>k__BackingField: 1

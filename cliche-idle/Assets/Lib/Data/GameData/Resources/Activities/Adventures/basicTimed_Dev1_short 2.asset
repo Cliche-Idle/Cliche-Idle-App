@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe638afbe8438d947a93e256d372ab6d, type: 3}
   m_Name: basicTimed_Dev1_short 2
   m_EditorClassIdentifier: 
-  Title: Dev adventure 2
-  Description: This is a basic dev adventure used for debugging and system testing.
-  PostCompleteDescriptionSuccess: 
-  PostCompleteDescriptionFail: 
-  Requirements: {fileID: 0}
-  BaseLength: 15
-  BaseChance: 100
-  Rewards: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
-  MinRewardCount: 1
-  MaxRewardCount: 1
+  <Title>k__BackingField: Instant finish 50% DEBUG
+  <Icon>k__BackingField: {fileID: 0}
+  <Description>k__BackingField: This is a basic dev adventure used for debugging
+    and system testing.  Instant finish, 50% pass rate.
+  <PostCompleteDescriptionSuccess>k__BackingField: Pass 50.
+  <PostCompleteDescriptionFail>k__BackingField: Fail 50.
+  <Requirements>k__BackingField: {fileID: 0}
+  <BaseLength>k__BackingField: 0
+  <BaseChance>k__BackingField: 50
+  <Rewards>k__BackingField: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
+  <MinRewardCount>k__BackingField: 1
+  <MaxRewardCount>k__BackingField: 1

@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Title>k__BackingField: Thieves' hideout
   <Icon>k__BackingField: {fileID: 0}
-  Description: Clear the local thieves' hideout and reclaim their stolen treasures.
-  PostCompleteDescriptionSuccess: You've successfully drove the thieves away; the
-    locals will forever be grateful.
-  PostCompleteDescriptionFail: Despite your best efforts, the thieves still won.
-    Altough they suffered some losses, no doubt they will be back to plundering right
-    away.
-  Requirements: {fileID: 0}
-  BaseLength: 120
-  BaseChance: 85
-  Rewards: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
-  MinRewardCount: 1
-  MaxRewardCount: 2
+  <Description>k__BackingField: Clear the local thieves' hideout and reclaim their
+    stolen treasures.
+  <PostCompleteDescriptionSuccess>k__BackingField: You've successfully drove the
+    thieves away; the locals will forever be grateful.
+  <PostCompleteDescriptionFail>k__BackingField: Despite your best efforts, the thieves
+    still won. Altough they suffered some losses, no doubt they will be back to plundering
+    right away.
+  <Requirements>k__BackingField: {fileID: 11400000, guid: ddecd5858fb29d64696ebec0bb5757f9, type: 2}
+  <BaseLength>k__BackingField: 120
+  <BaseChance>k__BackingField: 85
+  <Rewards>k__BackingField: {fileID: 11400000, guid: 1e04bcef8ee72c249bd08c09f808be77, type: 2}
+  <MinRewardCount>k__BackingField: 1
+  <MaxRewardCount>k__BackingField: 2

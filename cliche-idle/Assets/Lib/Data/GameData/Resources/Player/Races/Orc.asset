@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53685215aa3200d47950aff85a5d1106, type: 3}
   m_Name: Orc
   m_EditorClassIdentifier: Assembly-CSharp::Race
-  _description: A nomad race, orcs travel across the mountains in search for their
-    next big hunt.
-  _Dexterity: 0
-  _vitality: 1
-  _intelligence: 0
-  _strength: 3
+  <Description>k__BackingField: A nomad race, orcs travel across the mountains in
+    search for their next big hunt.
+  <Dexterity>k__BackingField: 0
+  <Vitality>k__BackingField: 1
+  <Intelligence>k__BackingField: 0
+  <Strength>k__BackingField: 3

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc449921e568e6d4981f7768224b9c53, type: 3}
   m_Name: GearStatVariance
   m_EditorClassIdentifier: 
-  _internalDescription: 
-  _gameDescription: 
-  _upperBound: 0.2
-  _lowerBound: 0.2
+  <InternalDescription>k__BackingField: 
+  <GameDescription>k__BackingField: 
+  <UpperBound>k__BackingField: 0.2
+  <LowerBound>k__BackingField: 0.2
