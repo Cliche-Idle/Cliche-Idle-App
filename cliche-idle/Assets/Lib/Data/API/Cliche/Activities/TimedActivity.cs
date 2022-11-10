@@ -56,7 +56,7 @@ namespace Assets.Lib.Data.API.Cliche.Activities
                 if (selectedAdventure != null)
                 {
                     var statsHandler = player.GetComponent<StatsHandler>();
-                    // FIXME: Possible issue with very high Intelligence stats; negative overall time
+                    // Possible issue with very high Intelligence stats; negative overall time
                     var adventureTimeReductionPercent = Manifests.GetByID<IntervalValueModifier>("Intelligence").GetAmount(statsHandler.Intelligence.Value);
                     var adventureTimeReductionAmount = (selectedAdventure.BaseLength * adventureTimeReductionPercent);
                     var adventureLength = (selectedAdventure.BaseLength - adventureTimeReductionAmount);

@@ -68,7 +68,7 @@ public partial class AdventureHandler : MonoBehaviour
                 userAvailableAdventures.Add(item.ID);
             }
         }
-        // TODO: refactor so the fill amount is explicitly calculated before
+        // TODO: refactor so the full amount is explicitly calculated before
         while (true)
         {
             // Stop when refilled the Available list / there are not more adventures left

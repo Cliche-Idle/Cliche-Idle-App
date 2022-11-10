@@ -31,7 +31,7 @@ namespace UIViews
 
         void Start()
         {
-            ContainerID = WrapperVisualElementName;
+            ContainerID = WrapperVisualElementName;            
         }
 
         public override void ShowView()
@@ -78,7 +78,7 @@ namespace UIViews
                     justifyContent = Justify.Center,
                     width = Length.Percent(100),
                     height = Length.Percent(100),
-                    backgroundColor = PopupBackgroundColor,
+                    backgroundColor = PopupBackgroundColor
                 } 
             };
             VisualElement popupContentContainer = new VisualElement()
@@ -141,7 +141,6 @@ namespace UIViews
         {
             for (int containerSize = _animMinSize; containerSize <= _animMaxSize; containerSize++)
             {
-                //BaseContainer.style.opacity = containerSize;
                 ContentContainer.style.width = Length.Percent(containerSize);
                 ContentContainer.style.height = Length.Percent(containerSize);
                 yield return new WaitForSeconds(_animSpeed);

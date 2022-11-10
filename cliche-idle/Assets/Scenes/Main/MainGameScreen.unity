@@ -466,74 +466,10 @@ MonoBehaviour:
       <MainStatValue>k__BackingField: 33
       <IsInstanceItem>k__BackingField: 1
       <VariantID>k__BackingField: 60027776-a7f3-467a-9114-8a1641f0e41d
-    <Sockets>k__BackingField:
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
+    <Sockets>k__BackingField: []
   Armour:
     _itemList: []
-    <Sockets>k__BackingField:
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
-    - <EquippedItem>k__BackingField:
-        <ID>k__BackingField: 
-        <ItemType>k__BackingField: 0
-        <ItemSubTypeHash>k__BackingField: 0
-        <MainStatType>k__BackingField: 0
-        <MainStatValue>k__BackingField: 0
-        <IsInstanceItem>k__BackingField: 0
-        <VariantID>k__BackingField: 
+    <Sockets>k__BackingField: []
   Consumables:
     _itemList:
     - <ID>k__BackingField: hpPotionSmall
@@ -663,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AutoSaveEnabled>k__BackingField: 0
-  <AutoLoadEnabled>k__BackingField: 1
+  <AutoLoadEnabled>k__BackingField: 0
   <SaveInterval>k__BackingField: 120
   SaveObjects:
   - {fileID: 683827972}
