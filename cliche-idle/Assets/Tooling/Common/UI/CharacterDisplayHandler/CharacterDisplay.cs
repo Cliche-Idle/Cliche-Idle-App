@@ -27,9 +27,6 @@ public class CharacterDisplay : MonoBehaviour
 
         // Auto override for race specific styles
 
-        Debug.Log($"Gender scale max: 0 <-> {GetEnumRange<PlayerBodyTypes>()}");
-        Debug.Log($"Gender string from index 0: {GetEnumStringFromIndex<PlayerBodyTypes>(0)}");
-
         var nameField = Navigator.Target.rootVisualElement.Q<TextField>("Name");
         nameField.RegisterValueChangedCallback(fieldVal => UpdatePlayerName(fieldVal.newValue));
 
@@ -55,7 +52,7 @@ public class CharacterDisplay : MonoBehaviour
         }
 
         var genderSelector = Navigator.Target.rootVisualElement.Q<OptionSelector>("GenderSelector");
-        genderSelector.Options = GetEnumNames<PlayerBodyTypes>();
+        genderSelector.SetOptionsFromEnum<PlayerBodyTypes>();
         genderSelector.SelectionChange += (sender, selection) => { UpdatePlayerGender(selection); };
         
         // This is horrible, change it to auto load races and assign this automatically
@@ -72,32 +69,17 @@ public class CharacterDisplay : MonoBehaviour
 
     private void UpdatePlayerRace(string raceID)
     {
-        PlayerCharacterData.Race = (Races)Enum.Parse(typeof(Races), raceID);
+        PlayerCharacterData.Race = GetEnumValueFromString<Races>(raceID);
     }
 
     private void UpdatePlayerGender(string genderID)
     {
-        PlayerCharacterData.Bodytype = (PlayerBodyTypes)Enum.Parse(typeof(PlayerBodyTypes), genderID);
+        PlayerCharacterData.BodyType = GetEnumValueFromString<PlayerBodyTypes>(genderID);
     }
 
-    private List<string> GetEnumNames<T>() where T : Enum
+    private T GetEnumValueFromString<T>(string enumName) where T : Enum
     {
-        var names = Enum.GetNames(typeof(T));
-        return new List<string>(names);
-    }
-
-    private int GetEnumRange<T>() where T : Enum
-    {
-        // Inherently unsafe but this is based on the assumption that the character style enums are auto indexed
-        // so they are always starting from 0 -> whatever.
-        int enumMax = ((int[])Enum.GetValues(typeof(T))).Max();
-        return enumMax;
-    }
-
-    private string GetEnumStringFromIndex<T>(int index) where T : Enum
-    {
-        string enumString = Enum.GetName(typeof(T), index);
-        return enumString;
+        return (T)Enum.Parse(typeof(T), enumName);
     }
 
     /// <summary>

@@ -10,7 +10,7 @@ public class CharacterVisualData
     /// </summary>
     public Races Race = Races.Human;
 
-    public PlayerBodyTypes Bodytype = PlayerBodyTypes.Feminine;
+    public PlayerBodyTypes BodyType = PlayerBodyTypes.Feminine;
     /// <summary>
     /// The player character's skin color. This is applied over the base sprite as a tint.
     /// </summary>

@@ -5,8 +5,11 @@ using UnityEngine.UIElements;
 
 public class OptionSelector : VisualElement
 {
-    private List<string> _options;
-    public List<string> Options
+    private string[] _options;
+    /// <summary>
+    /// The list of options the selector can choose from.
+    /// </summary>
+    public string[] Options
     {
         get
         {
@@ -17,22 +20,39 @@ public class OptionSelector : VisualElement
             _options = value;
             if (_options != null)
             {
-                if (_options.Count > 0)
+                if (_options.Length > 0)
                 {
                     UpdateSelection(0);
                 }
             }
+            else
+            {
+                _selectedIndex = -1;
+                SelectedOption = null;
+            }
         }
     }
 
+    /*
+    Apparently there is an implicit field conversion between UXML attributes and C# fields:
+    UXML: "example-attribute"   =>   C# "exampleAttribute"
+    If this naming is not followed properly, the UI builder will not make the proper connection and the value
+    will reset everytime.
+     */
     /// <summary>
     /// The UXML attribute that stores the options. Only used if the base values are predefined in the inspector.
     /// </summary>
     private string optionsString { get; set; }
 
+    /// <summary>
+    /// The currently selected string option. Defaults to null if <see cref="Options"/> is null.
+    /// </summary>
     public string SelectedOption { get; private set; }
 
-    private int _selectedIndex = 0;
+    private int _selectedIndex = -1;
+    /// <summary>
+    /// The currently selected option's index. Defaults to -1 if <see cref="Options"/> is null.
+    /// </summary>
     public int SelectedIndex
     {
         get { 
@@ -41,7 +61,7 @@ public class OptionSelector : VisualElement
         set { 
             if (_options != null)
             {
-                if (value < Options.Count)
+                if (value < Options.Length)
                 {
                     UpdateSelection(value);
                 }
@@ -53,8 +73,14 @@ public class OptionSelector : VisualElement
         }
     }
 
+    /// <summary>
+    /// Event that occurs when the selection changes.
+    /// </summary>
     public Action<object, string> SelectionChange;
 
+    /// <summary>
+    /// The label that displays the selected option.
+    /// </summary>
     private Label _optionLabel;
 
     public new class UxmlFactory : UxmlFactory<OptionSelector, UxmlTraits> { }
@@ -73,12 +99,8 @@ public class OptionSelector : VisualElement
             base.Init(ve, bag, cc);
             OptionSelector os = ((OptionSelector)ve);
             os.optionsString = _optionsString.GetValueFromBag(bag, cc);
-            var options = os.optionsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            if (options != null && options.Length > 0)
-            {
-                os._optionLabel.text = options[0].Trim();
-            }
             os.GenerateOptionsList();
+            os._optionLabel.text = os.TryGetFirstOption();
         }
     }
 
@@ -87,24 +109,34 @@ public class OptionSelector : VisualElement
         GenerateStructure();
     }
 
-    public OptionSelector(List<string> options)
+    public OptionSelector(string[] options)
     {
-        Options = options;
+        _options = options;
         GenerateStructure();
+    }
+
+    /// <summary>
+    /// Gets the string names from enum <typeparamref name="T"/>, and sets them as the available options.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public void SetOptionsFromEnum<T>() where T : Enum
+    {
+        // Assign to public Options to trigger update
+        Options = Enum.GetNames(typeof(T));
     }
 
     private void GenerateOptionsList()
     {
         if (optionsString != null)
         {
-            var options = optionsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            if (options.Length > 0)
+            var optionsFromStringAttribute = optionsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            if (optionsFromStringAttribute.Length > 0)
             {
-                Options = new List<string>();
-                foreach (var option in options)
+                for (int i = 0; i < optionsFromStringAttribute.Length; i++)
                 {
-                    Options.Add(option.Trim());
+                    optionsFromStringAttribute[i] = optionsFromStringAttribute[i].Trim();
                 }
+                _options = optionsFromStringAttribute;
             }
         }
     }
@@ -122,12 +154,14 @@ public class OptionSelector : VisualElement
             name = "optionLeftScroll",
             style =
             {
-                width = 150,
+                width = Length.Percent(15),
                 height = Length.Percent(100),
-                fontSize = Length.Percent(100)
+                fontSize = style.fontSize,
+                unityTextAlign = TextAnchor.MiddleCenter,
             }
         };
-        leftScrollButton.clicked += () => { UpdateSelection(GetPreviousOption()); };
+        leftScrollButton.AddToClassList("optionLeftScroll");
+        leftScrollButton.clicked += () => { UpdateSelection(GetPreviousOptionIndex()); };
 
         _optionLabel = new Label()
         {
@@ -135,10 +169,11 @@ public class OptionSelector : VisualElement
             text = TryGetFirstOption(),
             style =
             {
-                fontSize = Length.Percent(85),
+                fontSize = style.fontSize,
                 unityTextAlign = TextAnchor.MiddleCenter,
             }
         };
+        _optionLabel.AddToClassList("optionLabel");
 
         var rightScrollButton = new Button()
         {
@@ -146,12 +181,14 @@ public class OptionSelector : VisualElement
             name = "optionRightScroll",
             style =
             {
-                width = 150,
+                width = Length.Percent(15),
                 height = Length.Percent(100),
-                fontSize = Length.Percent(100)
+                fontSize = style.fontSize,
+                unityTextAlign = TextAnchor.MiddleCenter,
             },
         };
-        rightScrollButton.clicked += () => { UpdateSelection(GetNextOption()); };
+        leftScrollButton.AddToClassList("optionRightScroll");
+        rightScrollButton.clicked += () => { UpdateSelection(GetNextOptionIndex()); };
 
         Add(leftScrollButton);
         Add(_optionLabel);
@@ -160,10 +197,10 @@ public class OptionSelector : VisualElement
 
     private void UpdateSelection(int optionIndex)
     {
-        if (Options != null)
+        if (_options != null)
         {
             _selectedIndex = optionIndex;
-            SelectedOption = Options[optionIndex];
+            SelectedOption = _options[optionIndex];
             _optionLabel.text = SelectedOption;
             if (SelectionChange != null)
             {
@@ -172,12 +209,12 @@ public class OptionSelector : VisualElement
         }
     }
 
-    private int GetNextOption()
+    private int GetNextOptionIndex()
     {
         int index = 0;
-        if (Options != null)
+        if (_options != null)
         {
-            if (SelectedIndex + 1 < Options.Count)
+            if (SelectedIndex + 1 < _options.Length)
             {
                 index = SelectedIndex + 1;
             }
@@ -185,29 +222,29 @@ public class OptionSelector : VisualElement
         return index;
     }
 
-    private int GetPreviousOption()
+    private int GetPreviousOptionIndex()
     {
-        int index = 0;
-        if (Options != null)
+        int index = _options.Length - 1;
+        if (_options != null)
         {
             if (SelectedIndex - 1 >= 0)
             {
                 index = SelectedIndex - 1;
             }
-            else
-            {
-                index = Options.Count - 1;
-            }
         }
         return index;
     }
 
+    /// <summary>
+    /// Tries to get the first option from the array. If it's null or the array is empty, returns the string "No options".
+    /// </summary>
+    /// <returns></returns>
     private string TryGetFirstOption()
     {
         string text = "No options";
-        if (Options != null && Options.Count > 0)
+        if (_options != null && _options.Length > 0)
         {
-            text = Options[0];
+            text = _options[0];
         }
         return text;
     }
