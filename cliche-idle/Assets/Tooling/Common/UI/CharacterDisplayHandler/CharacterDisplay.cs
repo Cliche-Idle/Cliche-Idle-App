@@ -1,75 +1,114 @@
-using System.Collections;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UIViews;
+using Cliche.System;
 
 public class CharacterDisplay : MonoBehaviour
 {
-    // Renderers
-    public SpriteRenderer hair;
-    public SpriteRenderer beard;
-    public SpriteRenderer eyebrow;
-    public SpriteRenderer eyePrimary;
-    public SpriteRenderer eyeSecondary;
-    public SpriteRenderer skin;
-    public SpriteRenderer underwear;
+    public ViewNavigator Navigator;
 
     // Visual data
-    public CharacterVisualData CharData = new CharacterVisualData();
+    public CharacterVisualData PlayerCharacterData = new CharacterVisualData();
+
+    public VisualTreeAsset PlayerCharacterDisplay;
 
     // Start is called before the first frame update
     void Start()
     {
         // TODO: generate UI structure on startup
-        GenerateCharacterDisplayStructure();
+        //GenerateCharacterDisplayStructure();
 
         // TODO: query and load in asset lists
-        CharData.gender = "female";
 
         // TODO: auto pull character data if available?
+
         // Auto override for race specific styles
+
+        Debug.Log($"Gender scale max: 0 <-> {GetEnumRange<PlayerBodyTypes>()}");
+        Debug.Log($"Gender string from index 0: {GetEnumStringFromIndex<PlayerBodyTypes>(0)}");
+
+        var nameField = Navigator.Target.rootVisualElement.Q<TextField>("Name");
+        nameField.RegisterValueChangedCallback(fieldVal => UpdatePlayerName(fieldVal.newValue));
+
+        var raceManifests = Resources.LoadAll<Race>(Manifests.Paths[typeof(Race)]);
+        var racesContainer = Navigator.Target.rootVisualElement.Q<VisualElement>("RaceContainer");
+        foreach (var raceManifest in raceManifests)
+        {
+            var raceSelectButton = new Button()
+            {
+                name = raceManifest.Name,
+                text = "",
+                style = {
+                    height = 150,
+                    width = 150,
+                    backgroundImage = raceManifest.Icon.texture
+                }
+            };
+            raceSelectButton.clicked += () => { 
+                UpdatePlayerRace(raceManifest.Name);
+                Navigator.Target.rootVisualElement.Q<Label>("RaceText").text = raceManifest.Description;
+            };
+            racesContainer.Add(raceSelectButton);
+        }
+
+        var genderSelector = Navigator.Target.rootVisualElement.Q<OptionSelector>("GenderSelector");
+        genderSelector.Options = GetEnumNames<PlayerBodyTypes>();
+        genderSelector.SelectionChange += (sender, selection) => { UpdatePlayerGender(selection); };
+        
+        // This is horrible, change it to auto load races and assign this automatically
+        //Navigator.Target.rootVisualElement.Q<Button>("OrcBtn").clicked += () => { UpdatePlayerRace("Orc"); };
+        //Navigator.Target.rootVisualElement.Q<Button>("HumanBtn").clicked += () => { UpdatePlayerRace("Human"); };
+        //Navigator.Target.rootVisualElement.Q<Button>("ElfBtn").clicked += () => { UpdatePlayerRace("Elf"); };
+        //Navigator.Target.rootVisualElement.Q<Button>("DwarfBtn").clicked += () => { UpdatePlayerRace("Dwarf"); };
     }
 
-    private void GenerateCharacterDisplayStructure()
+    private void UpdatePlayerName(string name)
     {
-        GameObject hair_obj = new GameObject("hair");
-        hair_obj.AddComponent<SpriteRenderer>();
-        hair_obj.transform.parent = gameObject.transform;
-        hair = hair_obj.GetComponent<SpriteRenderer>();
-
-        GameObject beard_obj = new GameObject("beard");
-        beard_obj.AddComponent<SpriteRenderer>();
-        beard_obj.transform.parent = gameObject.transform;
-        beard = beard_obj.GetComponent<SpriteRenderer>();
-
-        GameObject eyebrow_obj = new GameObject("eyebrow");
-        eyebrow_obj.AddComponent<SpriteRenderer>();
-        eyebrow_obj.transform.parent = gameObject.transform;
-        eyebrow = eyebrow_obj.GetComponent<SpriteRenderer>();
-
-        GameObject eyePrimary_obj = new GameObject("eyePrimary");
-        eyePrimary_obj.AddComponent<SpriteRenderer>();
-        eyePrimary_obj.transform.parent = gameObject.transform;
-        eyePrimary = eyePrimary_obj.GetComponent<SpriteRenderer>();
-
-        GameObject eyeSecondary_obj = new GameObject("eyeSecondary");
-        eyeSecondary_obj.AddComponent<SpriteRenderer>();
-        eyeSecondary_obj.transform.parent = gameObject.transform;
-        eyeSecondary = eyeSecondary_obj.GetComponent<SpriteRenderer>();
-
-        GameObject skin_obj = new GameObject("skin");
-        skin_obj.AddComponent<SpriteRenderer>();
-        skin_obj.transform.parent = gameObject.transform;
-        skin = skin_obj.GetComponent<SpriteRenderer>();
-
-        GameObject underwear_obj = new GameObject("underwear");
-        underwear_obj.AddComponent<SpriteRenderer>();
-        underwear_obj.transform.parent = gameObject.transform;
-        underwear = underwear_obj.GetComponent<SpriteRenderer>();
+        PlayerCharacterData.Name = name;
     }
 
-    private Sprite LoadSpriteWithOverride(string styleName, string overrideName="")
+    private void UpdatePlayerRace(string raceID)
     {
-        // ! This assumes the assets used for this can be uniquely identified among all other assets by their name.
+        PlayerCharacterData.Race = (Races)Enum.Parse(typeof(Races), raceID);
+    }
+
+    private void UpdatePlayerGender(string genderID)
+    {
+        PlayerCharacterData.Bodytype = (PlayerBodyTypes)Enum.Parse(typeof(PlayerBodyTypes), genderID);
+    }
+
+    private List<string> GetEnumNames<T>() where T : Enum
+    {
+        var names = Enum.GetNames(typeof(T));
+        return new List<string>(names);
+    }
+
+    private int GetEnumRange<T>() where T : Enum
+    {
+        // Inherently unsafe but this is based on the assumption that the character style enums are auto indexed
+        // so they are always starting from 0 -> whatever.
+        int enumMax = ((int[])Enum.GetValues(typeof(T))).Max();
+        return enumMax;
+    }
+
+    private string GetEnumStringFromIndex<T>(int index) where T : Enum
+    {
+        string enumString = Enum.GetName(typeof(T), index);
+        return enumString;
+    }
+
+    /// <summary>
+    /// Gets the specified default character sprite. To get the alternat version, set <paramref name="styleName"/> to the override identifier. If no override version is found, returns default.
+    /// </summary>
+    /// <param name="styleName">The default, generic identifier of the sprite.</param>
+    /// <param name="overrideName">The optional, override variant identifier of the sprite.</param>
+    /// <returns></returns>
+    private Sprite GetCharacterSprite(string styleName, string overrideName="")
+    {
+        // This assumes the assets used for this can be uniquely identified among all other assets by their name.
         Sprite sprite = null;
         if (overrideName.Length > 0)
         {
@@ -77,77 +116,9 @@ public class CharacterDisplay : MonoBehaviour
         }
         if (sprite == null)
         {
-            // Fall back to default:
+            // If no override was found, load the default one
             sprite = Resources.Load<Sprite>($"{styleName}");
         }
         return sprite;
     }
-
-    public string race {
-        get 
-        {
-            return CharData.race;
-        }
-        set
-        {
-            CharData.race = value;
-            skin.sprite = LoadSpriteWithOverride($"{value}_{CharData.gender}");
-        }
-    }
-
-    public string gender {
-        get 
-        {
-            return CharData.gender;
-        }
-        set
-        {
-            CharData.gender = value;
-            skin.sprite = LoadSpriteWithOverride($"{CharData.race}_{value}");
-        }
-    }
-
-    public string hairStyle {
-        get 
-        {
-            return CharData.hairStyle;
-        }
-        set
-        {
-            CharData.hairStyle = value;
-            hair.sprite = LoadSpriteWithOverride(value, CharData.race);
-        }
-    }
-
-    public Color hairColour {
-        get 
-        {
-            return CharData.hairColour;
-        }
-        set
-        {
-            CharData.hairColour = value;
-            hair.color = value;
-        }
-    }
-
-    public string beardStyle;
-
-    public Color beardColour {
-        get 
-        {
-            return CharData.beardColour;
-        }
-        set
-        {
-            CharData.beardColour = value;
-            beard.color = value;
-        }
-    }
-    
-    public string eyebrowStyle;
-    public Color eyebrowColour;
-    public Color eyeColourPrimary;
-    public Color eyeColourSecondary;
-    public Color skinColour;
 }

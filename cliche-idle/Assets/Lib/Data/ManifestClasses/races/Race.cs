@@ -19,6 +19,12 @@ public class Race : ScriptableObject
     }
 
     /// <summary>
+    /// The in-game icon of the given race.
+    /// </summary>
+    [field: SerializeField]
+    public Sprite Icon { get; private set; }
+
+    /// <summary>
     /// The in-game description of the given race.
     /// </summary>
     [field: TextArea(3,10)]

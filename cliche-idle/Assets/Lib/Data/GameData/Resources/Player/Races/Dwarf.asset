@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53685215aa3200d47950aff85a5d1106, type: 3}
   m_Name: Dwarf
   m_EditorClassIdentifier: Assembly-CSharp::Race
+  <Icon>k__BackingField: {fileID: 21300000, guid: f055c605d4eaf0f4487f08f677a01306, type: 3}
   <Description>k__BackingField: Drinking, fighting, mining and more drinking, the
     dwarves are a hardy bunch dwelling in their caves.
   <Dexterity>k__BackingField: 0

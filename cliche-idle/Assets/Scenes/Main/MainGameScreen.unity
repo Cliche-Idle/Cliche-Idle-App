@@ -563,29 +563,29 @@ MonoBehaviour:
   <Race>k__BackingField: 1
   <ClassSpecName>k__BackingField: Adventurer
   CharacterVisual:
-    race: human
-    gender: female
-    hairStyle: 
-    hairColour:
-      serializedVersion: 2
-      rgba: 16777216
-    beardStyle: 
-    beardColour:
-      serializedVersion: 2
-      rgba: 16777216
-    eyebrowStyle: 
-    eyebrowColour:
-      serializedVersion: 2
-      rgba: 16777216
-    eyeColourPrimary:
-      serializedVersion: 2
-      rgba: 16777216
-    eyeColourSecondary:
-      serializedVersion: 2
-      rgba: 16843009
-    skinColour:
+    Race: 2
+    Bodytype: 0
+    skinColor:
       serializedVersion: 2
       rgba: 0
+    HairStyle: 0
+    HairColor:
+      serializedVersion: 2
+      rgba: 4278190080
+    BeardStyle: 0
+    BeardColor:
+      serializedVersion: 2
+      rgba: 4278190080
+    BrowStyle: 0
+    BrowColor:
+      serializedVersion: 2
+      rgba: 4278190080
+    eyeColorPrimary:
+      serializedVersion: 2
+      rgba: 4278190080
+    eyeColorSecondary:
+      serializedVersion: 2
+      rgba: 4294967295
 --- !u!114 &683827974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 1458133675}
   - component: {fileID: 1458133678}
   - component: {fileID: 1458133677}
+  - component: {fileID: 1458133679}
   m_Layer: 5
   m_Name: UI_ViewNavigator
   m_TagString: Untagged
@@ -768,6 +769,25 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 932ebfdb6240df041aa9f923e58235fa, type: 3}
   m_SortingOrder: 0
+--- !u!114 &1458133679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458133674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1554a49b5b3cf4db2ccabd5d93dea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: TestVal
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: d4f9ac7d7b9cc804ca56443a2b7a7278, type: 3}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseHeaderContainer
 --- !u!1 &1568071902
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +839,7 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: 
+  PopupBackgroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.78039217}
 --- !u!1 &1636096628
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: AdventureBoard
+  <ID>k__BackingField: AdventureBoardMenu
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 5e66e3f1f47683347a74b1910a7ac4c7, type: 3}
   <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0

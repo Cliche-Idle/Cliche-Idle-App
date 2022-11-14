@@ -4,15 +4,42 @@ using UnityEngine;
 [Serializable]
 public class CharacterVisualData
 {
-    public string race = "human";
-    public string gender = "female";
-    public string hairStyle;
-    public Color32 hairColour = Color.black;
-    public string beardStyle;
-    public Color32 beardColour = Color.black;
-    public string eyebrowStyle;
-    public Color32 eyebrowColour = Color.black;
-    public Color32 eyeColourPrimary = Color.black;
-    public Color32 eyeColourSecondary = Color.white;
-    public Color32 skinColour = Color.clear;
+    public string Name = "";
+    /// <summary>
+    /// The player character's race.
+    /// </summary>
+    public Races Race = Races.Human;
+
+    public PlayerBodyTypes Bodytype = PlayerBodyTypes.Feminine;
+    /// <summary>
+    /// The player character's skin color. This is applied over the base sprite as a tint.
+    /// </summary>
+    public Color32 SkinColor = Color.clear;
+
+    public PlayerHairStyles HairStyle;
+    /// <summary>
+    /// The player character's hair color. This is applied over the base sprite as a tint.
+    /// </summary>
+    public Color32 HairColor = Color.black;
+
+    public PlayerBeardStyles BeardStyle;
+    /// <summary>
+    /// The player character's beard color. This is applied over the base sprite as a tint.
+    /// </summary>
+    public Color32 BeardColor = Color.black;
+    
+    public PlayerBrowStyles BrowStyle;
+    /// <summary>
+    /// The player character's brow color. This is applied over the base sprite as a tint.
+    /// </summary>
+    public Color32 BrowColor = Color.black;
+
+    /// <summary>
+    /// The player character's primary (iris) eye color. This is applied over the base sprite as a tint.
+    /// </summary>
+    public Color32 EyeColorPrimary = Color.black;
+    /// <summary>
+    /// The player character's secondary (sclera) eye color. This is applied over the base sprite as a tint.
+    /// </summary>
+    public Color32 EyeColorSecondary = Color.white;
 }

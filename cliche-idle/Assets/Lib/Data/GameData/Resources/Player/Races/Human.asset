@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53685215aa3200d47950aff85a5d1106, type: 3}
   m_Name: Human
   m_EditorClassIdentifier: Assembly-CSharp::Race
+  <Icon>k__BackingField: {fileID: 21300000, guid: bc73619c096b33d4f93f2ae9684e2167, type: 3}
   <Description>k__BackingField: Humans, the jack of all trades, master of none, are
     the most populous race across the world.
   <Dexterity>k__BackingField: 1

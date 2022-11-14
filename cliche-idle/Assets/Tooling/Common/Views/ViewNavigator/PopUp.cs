@@ -13,7 +13,8 @@ namespace UIViews
         /// <summary>
         /// The background colour of the PopUp's cover element.
         /// </summary>
-        protected Color PopupBackgroundColor = new Color32(55, 55, 55, 199);
+        [HideInInspector]
+        public Color PopupBackgroundColor = new Color32(55, 55, 55, 199);
 
         private int _animMinSize = 90;
         private int _animMaxSize = 100;
@@ -160,51 +161,66 @@ namespace UIViews
             ContentContainer = null;
             Navigator.Target.rootVisualElement.Remove(BaseContainer);
         }
+    }
 
-        [CustomEditor(typeof(PopUp), true, isFallback = true)]
-        public class PopUpEditor : Editor
+#if UNITY_EDITOR
+    [CustomEditor(typeof(PopUp), true, isFallback = true)]
+    public class PopUpEditor : Editor
+    {
+        private bool _isFoldoutOpen = true;
+
+        private SerializedProperty _viewNavigator;
+        private SerializedProperty _viewID;
+        private SerializedProperty _viewUIDoc;
+        private SerializedProperty _viewStatic;
+
+        void OnEnable()
         {
-            private bool IsFoldoutOpen = true;
+            _viewNavigator = serializedObject.FindProperty("<Navigator>k__BackingField");
+            _viewID = serializedObject.FindProperty("<ID>k__BackingField");
+            _viewUIDoc = serializedObject.FindProperty("<UXMLDocument>k__BackingField");
+            _viewStatic = serializedObject.FindProperty("<IsStatic>k__BackingField");
+        }
 
-            public override void OnInspectorGUI()
+        public override void OnInspectorGUI()
+        {
+            // Get the view data
+            var popup = target as PopUp;
+
+            // View setup is in its own foldout so it doesn't take up too much space on derived scripts
+            _isFoldoutOpen = EditorGUILayout.BeginFoldoutHeaderGroup(_isFoldoutOpen, "View setup");
+            if (_isFoldoutOpen)
             {
-                // Get the view data
-                var popup = target as PopUp;
+                // Increase ident by 1 so the foldout is more visually separated
+                EditorGUI.indentLevel++;
 
-                // View setup is in its own foldout so it doesn't take up too much space on derived scripts
-                IsFoldoutOpen = EditorGUILayout.BeginFoldoutHeaderGroup(IsFoldoutOpen, "View setup");
-                if (IsFoldoutOpen)
-                {
-                    // Increase ident by 1 so the foldout is more visually separated
-                    EditorGUI.indentLevel++;
+                // Set the UI Navigator instance
+                _viewNavigator.objectReferenceValue = (ViewNavigator)EditorGUILayout.ObjectField("UI Navigator", popup.Navigator, typeof(ViewNavigator), true);
 
-                    // Set the UI Navigator instance
-                    popup.Navigator = (ViewNavigator)EditorGUILayout.ObjectField("UI Navigator", popup.Navigator, typeof(ViewNavigator), true);
-                    
-                    EditorGUILayout.Space(10);
-
-                    popup.ID = EditorGUILayout.TextField("ID", popup.ID);
-                    popup.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", popup.UXMLDocument, typeof(VisualTreeAsset), true);
-                    popup.IsStatic = EditorGUILayout.Toggle("Is Static", popup.IsStatic);
-
-                    EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.Toggle("Is View Active", popup.IsViewActive);
-                    EditorGUI.EndDisabledGroup();
-
-                    EditorGUILayout.Space(10);
-
-                    popup.PopupBackgroundColor = EditorGUILayout.ColorField("PopUp Background Color", popup.PopupBackgroundColor);
-                    
-                    // Reset ident to normal
-                    EditorGUI.indentLevel--;
-                }
-
-                EditorGUILayout.EndFoldoutHeaderGroup();
                 EditorGUILayout.Space(10);
 
-                // Draw the default inspector last so the script's UI can be separated. This will draw the auto UI as normal for derived scripts
-                DrawDefaultInspector();
+                _viewID.stringValue = EditorGUILayout.TextField("ID", popup.ID);
+                _viewNavigator.objectReferenceValue = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", popup.UXMLDocument, typeof(VisualTreeAsset), true);
+                _viewStatic.boolValue = EditorGUILayout.Toggle("Is Static", popup.IsStatic);
+
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.Toggle("Is View Active", popup.IsViewActive);
+                EditorGUI.EndDisabledGroup();
+
+                EditorGUILayout.Space(10);
+
+                popup.PopupBackgroundColor = EditorGUILayout.ColorField("PopUp Background Color", popup.PopupBackgroundColor);
+
+                // Reset ident to normal
+                EditorGUI.indentLevel--;
             }
+
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            EditorGUILayout.Space(10);
+
+            // Draw the default inspector last so the script's UI can be separated. This will draw the auto UI as normal for derived scripts
+            DrawDefaultInspector();
         }
     }
+#endif
 }

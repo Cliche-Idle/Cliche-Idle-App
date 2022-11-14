@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace UIViews
@@ -16,14 +15,14 @@ namespace UIViews
         /// </summary>
         [field: SerializeField]
         [field: HideInInspector]
-        public ViewNavigator Navigator { get; protected set; }
+        public ViewNavigator Navigator { get; private set; }
 
         /// <summary>
         /// The ID of the View this script controls.
         /// </summary>
         [field: SerializeField]
         [field: HideInInspector]
-        public string ID { get; protected set; }
+        public string ID { get; private set; }
 
         /// <summary>
         /// The name of the VisualElement this view will be wrapped into when displayed.
@@ -37,11 +36,11 @@ namespace UIViews
         }
 
         /// <summary>
-        /// The UXML Document file containing the view to be switched in.
+        /// The UXML Document file containing the view to be shown.
         /// </summary>
         [field: SerializeField]
         [field: HideInInspector]
-        public VisualTreeAsset UXMLDocument { get; protected set; }
+        public VisualTreeAsset UXMLDocument { get; private set; }
 
         /// <summary>
         /// Sets whether or not the view is static. If set to <see langword="true"/>, <see cref="UIUpdate()"/> will never run. Default is <see langword="false"/>.
@@ -62,18 +61,18 @@ namespace UIViews
         /// </summary>
         [field: SerializeField]
         [field: HideInInspector]
-        public UIScript Dependency { get; protected set; }
+        public UIScript Dependency { get; private set; }
 
         /// <summary>
         /// The ID of the view container in the target document. 
-        /// The VisualElement with this ID will be cleared, and the contents of this view will be copied to its tree.
+        /// This view will be attached to the VisualElement with this name as a child.
         /// </summary>
         [field: SerializeField]
         [field: HideInInspector]
         public string ContainerID { get; protected set; }
 
         /// <summary>
-        /// Gets the view's base VisualElement.
+        /// Gets the view's base VisualElement (wrapper element).
         /// </summary>
         /// <returns></returns>
         public VisualElement GetViewContainer()
@@ -84,7 +83,6 @@ namespace UIViews
 
         /// <summary>
         /// Displays the view on the attached Navigator's target.
-        /// See <see cref="ViewNavigator.ShowView(string)"/> for details.
         /// </summary>
         public virtual void ShowView()
         {
@@ -246,130 +244,6 @@ namespace UIViews
         protected virtual void OnLeaveFocus()
         {
 
-        }
-
-
-        [CustomEditor(typeof(UIScript), true, isFallback = true)]
-        public class UIScriptEditor : Editor
-        {
-            public string[] DependencyContainerIDs = new string[0];
-            public int SelectedContainerIDIndex = 0;
-
-            private bool IsFoldoutOpen = true;
-
-            public override void OnInspectorGUI()
-            {
-                // Get the view data
-                var view = target as UIScript;
-
-                // View setup is in its own foldout so it doesn't take up too much space on derived scripts
-                IsFoldoutOpen = EditorGUILayout.BeginFoldoutHeaderGroup(IsFoldoutOpen, "View setup");
-                if (IsFoldoutOpen)
-                {
-                    // Increase ident by 1 so the foldout is more visually separated
-                    EditorGUI.indentLevel++;
-                    // Set the UI Navigator instance
-                    view.Navigator = (ViewNavigator)EditorGUILayout.ObjectField("UI Navigator", view.Navigator, typeof(ViewNavigator), true);
-
-                    EditorGUILayout.Space(10);
-
-                    view.ID = EditorGUILayout.TextField("ID", view.ID);
-                    view.UXMLDocument = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", view.UXMLDocument, typeof(VisualTreeAsset), true);
-                    view.IsStatic = EditorGUILayout.Toggle("Is Static", view.IsStatic);
-
-                    // This is purely for visual debug, so the toggle is disabled
-                    EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.Toggle("Is View Active", view.IsViewActive);
-                    EditorGUI.EndDisabledGroup();
-
-                    // Dependency handling
-                    EditorGUILayout.Space(10);
-
-                    EditorGUILayout.LabelField("Dependency setup", EditorStyles.boldLabel);
-                    view.Dependency = (UIScript)EditorGUILayout.ObjectField("Dependency", view.Dependency, typeof(UIScript), true);
-
-                    if (view.Navigator != null)
-                    {
-                        // FIXME: Potential performance and memory impact, as this runs multiple times, not just when the dependency changes
-                        // Get the container IDs from the dependency, if there is one; otherwise get the Navigator target's root
-                        if (view.Dependency != null)
-                        {
-                            UpdateDependencyContainerIDs(view.Dependency.UXMLDocument);
-                        }
-                        else
-                        {
-                            UpdateDependencyContainerIDs(view.Navigator.Target.visualTreeAsset);
-                        }
-
-                        SelectedContainerIDIndex = Array.IndexOf<string>(DependencyContainerIDs, view.ContainerID);
-                        SelectedContainerIDIndex = EditorGUILayout.Popup("Target container ID: ", SelectedContainerIDIndex, DependencyContainerIDs);
-                        if (SelectedContainerIDIndex != -1)
-                        {
-                            view.ContainerID = DependencyContainerIDs[SelectedContainerIDIndex];
-                        }
-                    }
-
-                    // Display informational warning on the bottom of the foldout
-                    ShowInformationWarnings(view);
-
-                    // Reset ident to normal
-                    EditorGUI.indentLevel--;
-                }
-
-                EditorGUILayout.EndFoldoutHeaderGroup();
-                EditorGUILayout.Space(10);
-
-                // Draw the default inspector last so the script's UI can be separated. This will draw the auto UI as normal for derived scripts
-                DrawDefaultInspector();
-            }
-
-            /// <summary>
-            /// Checks the view setup and displays informational warnings.
-            /// </summary>
-            /// <param name="view"></param>
-            /// <returns></returns>
-            private void ShowInformationWarnings(UIScript view)
-            {
-                if (view.UXMLDocument == null)
-                {
-                    EditorGUILayout.HelpBox("No UXML document has been added, so this view will not receive attach / detach events.", MessageType.Info);
-                }
-                if (view.Dependency == null)
-                {
-                    if (view.ContainerID == null || view.ContainerID.Length == 0)
-                    {
-                        EditorGUILayout.HelpBox("No dependency or container have been specified, so this view will be attached directly to the root visual element.", MessageType.Info);
-                    }
-                    else
-                    {
-                        EditorGUILayout.HelpBox("No dependency has been specified, so this view will be attached to the selected container on the root visual element.", MessageType.Info);
-                    }
-                }
-            }
-
-
-            /// <summary>
-            /// Compiles and sets the list of container IDs in the dependency's VisualTreeAsset
-            /// </summary>
-            /// <param name="dependencyUXML"></param>
-            private void UpdateDependencyContainerIDs(VisualTreeAsset dependencyUXML)
-            {
-                // Get every VisualElement in the dependency's hierarchy
-                VisualElement layout = dependencyUXML.Instantiate();
-                List<VisualElement> childList = layout.Query<VisualElement>().ToList();
-                // We use instantiate, so remove the TemplateContainer's ID.
-                childList.RemoveAt(0);
-                var selectableContainerIDs = new List<string>();
-                // Get the names of every VisualElement that has one, so they can be targeted
-                foreach (var element in childList)
-                {
-                    if (element.name != null)
-                    {
-                        selectableContainerIDs.Add(element.name);
-                    }
-                }
-                DependencyContainerIDs = selectableContainerIDs.ToArray();
-            }
         }
     }
 }
