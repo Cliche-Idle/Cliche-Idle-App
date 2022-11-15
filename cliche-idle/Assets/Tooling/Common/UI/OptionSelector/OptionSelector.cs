@@ -3,249 +3,258 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class OptionSelector : VisualElement
+namespace Cliche.UIElements
 {
-    private string[] _options;
     /// <summary>
-    /// The list of options the selector can choose from.
+    /// A selector that can contains and sidescroll through multiple options.
     /// </summary>
-    public string[] Options
+    public class OptionSelector : VisualElement
     {
-        get
+        private string[] _options;
+        /// <summary>
+        /// The list of options the selector can choose from.
+        /// </summary>
+        public string[] Options
         {
-            return _options;
-        }
-        set
-        {
-            _options = value;
-            if (_options != null)
+            get
             {
-                if (_options.Length > 0)
-                {
-                    UpdateSelection(0);
-                }
+                return _options;
             }
-            else
+            set
             {
-                _selectedIndex = -1;
-                SelectedOption = null;
-            }
-        }
-    }
-
-    /*
-    Apparently there is an implicit field conversion between UXML attributes and C# fields:
-    UXML: "example-attribute"   =>   C# "exampleAttribute"
-    If this naming is not followed properly, the UI builder will not make the proper connection and the value
-    will reset everytime.
-     */
-    /// <summary>
-    /// The UXML attribute that stores the options. Only used if the base values are predefined in the inspector.
-    /// </summary>
-    private string optionsString { get; set; }
-
-    /// <summary>
-    /// The currently selected string option. Defaults to null if <see cref="Options"/> is null.
-    /// </summary>
-    public string SelectedOption { get; private set; }
-
-    private int _selectedIndex = -1;
-    /// <summary>
-    /// The currently selected option's index. Defaults to -1 if <see cref="Options"/> is null.
-    /// </summary>
-    public int SelectedIndex
-    {
-        get { 
-            return _selectedIndex; 
-        }
-        set { 
-            if (_options != null)
-            {
-                if (value < Options.Length)
+                _options = value;
+                if (_options != null)
                 {
-                    UpdateSelection(value);
+                    if (_options.Length > 0)
+                    {
+                        UpdateSelection(0);
+                    }
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("SelectedIndex", "Value must be non-negative and less than the size of the Options collection.");
+                    _selectedIndex = -1;
+                    SelectedOption = null;
                 }
             }
         }
-    }
 
-    /// <summary>
-    /// Event that occurs when the selection changes.
-    /// </summary>
-    public Action<object, string> SelectionChange;
+        /*
+        Apparently there is an implicit field conversion between UXML attributes and C# fields:
+        UXML: "example-attribute"   =>   C# "exampleAttribute"
+        If this naming is not followed properly, the UI builder will not make the proper connection and the value
+        will reset everytime.
+         */
+        /// <summary>
+        /// The UXML attribute that stores the options. Only used if the base values are predefined in the inspector.
+        /// </summary>
+        private string optionsString { get; set; }
 
-    /// <summary>
-    /// The label that displays the selected option.
-    /// </summary>
-    private Label _optionLabel;
+        /// <summary>
+        /// The currently selected string option. Defaults to null if <see cref="Options"/> is null.
+        /// </summary>
+        public string SelectedOption { get; private set; }
 
-    public new class UxmlFactory : UxmlFactory<OptionSelector, UxmlTraits> { }
-
-    public new class UxmlTraits : VisualElement.UxmlTraits
-    {
-        UxmlStringAttributeDescription _optionsString = new UxmlStringAttributeDescription { name = "options-string", defaultValue = "No option" };
-
-        public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
+        private int _selectedIndex = -1;
+        /// <summary>
+        /// The currently selected option's index. Defaults to -1 if <see cref="Options"/> is null.
+        /// </summary>
+        public int SelectedIndex
         {
-            get { yield break; }
-        }
-
-        public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-        {
-            base.Init(ve, bag, cc);
-            OptionSelector os = ((OptionSelector)ve);
-            os.optionsString = _optionsString.GetValueFromBag(bag, cc);
-            os.GenerateOptionsList();
-            os._optionLabel.text = os.TryGetFirstOption();
-        }
-    }
-
-    public OptionSelector()
-    {
-        GenerateStructure();
-    }
-
-    public OptionSelector(string[] options)
-    {
-        _options = options;
-        GenerateStructure();
-    }
-
-    /// <summary>
-    /// Gets the string names from enum <typeparamref name="T"/>, and sets them as the available options.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public void SetOptionsFromEnum<T>() where T : Enum
-    {
-        // Assign to public Options to trigger update
-        Options = Enum.GetNames(typeof(T));
-    }
-
-    private void GenerateOptionsList()
-    {
-        if (optionsString != null)
-        {
-            var optionsFromStringAttribute = optionsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            if (optionsFromStringAttribute.Length > 0)
+            get
             {
-                for (int i = 0; i < optionsFromStringAttribute.Length; i++)
+                return _selectedIndex;
+            }
+            set
+            {
+                if (_options != null)
                 {
-                    optionsFromStringAttribute[i] = optionsFromStringAttribute[i].Trim();
+                    if (value < Options.Length)
+                    {
+                        UpdateSelection(value);
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("SelectedIndex", "Value must be non-negative and less than the size of the Options collection.");
+                    }
                 }
-                _options = optionsFromStringAttribute;
             }
         }
-    }
 
-    private void GenerateStructure()
-    {
-        name = "OptionSelector";
-        style.flexDirection = FlexDirection.Row;
-        style.alignItems = Align.Stretch;
-        style.justifyContent = Justify.SpaceBetween;
+        /// <summary>
+        /// Event that occurs when the selection changes.
+        /// </summary>
+        public Action<string> SelectionChange;
 
-        var leftScrollButton = new Button()
+        /// <summary>
+        /// The label that displays the selected option.
+        /// </summary>
+        private Label _optionLabel;
+
+        public new class UxmlFactory : UxmlFactory<OptionSelector, UxmlTraits> { }
+
+        public new class UxmlTraits : VisualElement.UxmlTraits
         {
-            text = "<",
-            name = "optionLeftScroll",
-            style =
+            UxmlStringAttributeDescription _optionsString = new UxmlStringAttributeDescription { name = "options-string", defaultValue = "No option" };
+
+            public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
+            {
+                get { yield break; }
+            }
+
+            public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
+            {
+                base.Init(ve, bag, cc);
+                OptionSelector os = ((OptionSelector)ve);
+                os.optionsString = _optionsString.GetValueFromBag(bag, cc);
+                os.GenerateOptionsList();
+                os._optionLabel.text = os.TryGetFirstOption();
+            }
+        }
+
+        public OptionSelector()
+        {
+            GenerateStructure();
+        }
+
+        public OptionSelector(string[] options)
+        {
+            _options = options;
+            GenerateStructure();
+        }
+
+        /// <summary>
+        /// Gets the string names from enum <typeparamref name="T"/>, and sets them as the available options.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void SetOptionsFromEnum<T>() where T : Enum
+        {
+            // Assign to public Options to trigger update
+            Options = Enum.GetNames(typeof(T));
+        }
+
+        private void GenerateOptionsList()
+        {
+            if (optionsString != null)
+            {
+                var optionsFromStringAttribute = optionsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                if (optionsFromStringAttribute.Length > 0)
+                {
+                    for (int i = 0; i < optionsFromStringAttribute.Length; i++)
+                    {
+                        optionsFromStringAttribute[i] = optionsFromStringAttribute[i].Trim();
+                    }
+                    _options = optionsFromStringAttribute;
+                }
+            }
+        }
+
+        private void GenerateStructure()
+        {
+            name = "OptionSelector";
+            style.flexDirection = FlexDirection.Row;
+            style.alignItems = Align.Stretch;
+            style.justifyContent = Justify.SpaceBetween;
+
+            var leftScrollButton = new Button()
+            {
+                text = "<",
+                name = "optionLeftScroll",
+                style =
             {
                 width = Length.Percent(15),
                 height = Length.Percent(100),
                 fontSize = style.fontSize,
                 unityTextAlign = TextAnchor.MiddleCenter,
             }
-        };
-        leftScrollButton.AddToClassList("optionLeftScroll");
-        leftScrollButton.clicked += () => { UpdateSelection(GetPreviousOptionIndex()); };
+            };
+            leftScrollButton.AddToClassList("optionLeftScroll");
+            leftScrollButton.clicked += () => { UpdateSelection(GetPreviousOptionIndex()); };
 
-        _optionLabel = new Label()
-        {
-            name = "optionLabel",
-            text = TryGetFirstOption(),
-            style =
+            _optionLabel = new Label()
+            {
+                name = "optionLabel",
+                text = TryGetFirstOption(),
+                style =
             {
                 fontSize = style.fontSize,
                 unityTextAlign = TextAnchor.MiddleCenter,
             }
-        };
-        _optionLabel.AddToClassList("optionLabel");
+            };
+            _optionLabel.AddToClassList("optionLabel");
 
-        var rightScrollButton = new Button()
-        {
-            text = ">",
-            name = "optionRightScroll",
-            style =
+            var rightScrollButton = new Button()
+            {
+                text = ">",
+                name = "optionRightScroll",
+                style =
             {
                 width = Length.Percent(15),
                 height = Length.Percent(100),
                 fontSize = style.fontSize,
                 unityTextAlign = TextAnchor.MiddleCenter,
             },
-        };
-        leftScrollButton.AddToClassList("optionRightScroll");
-        rightScrollButton.clicked += () => { UpdateSelection(GetNextOptionIndex()); };
+            };
+            leftScrollButton.AddToClassList("optionRightScroll");
+            rightScrollButton.clicked += () => { UpdateSelection(GetNextOptionIndex()); };
 
-        Add(leftScrollButton);
-        Add(_optionLabel);
-        Add(rightScrollButton);
-    }
+            Add(leftScrollButton);
+            Add(_optionLabel);
+            Add(rightScrollButton);
+        }
 
-    private void UpdateSelection(int optionIndex)
-    {
-        if (_options != null)
+        private void UpdateSelection(int optionIndex)
         {
-            _selectedIndex = optionIndex;
-            SelectedOption = _options[optionIndex];
-            _optionLabel.text = SelectedOption;
-            if (SelectionChange != null)
+            if (_options != null)
             {
-                SelectionChange.Invoke(this, SelectedOption);
+                _selectedIndex = optionIndex;
+                SelectedOption = _options[optionIndex];
+                _optionLabel.text = SelectedOption;
+                if (SelectionChange != null)
+                {
+                    SelectionChange.Invoke(SelectedOption);
+                }
             }
         }
-    }
 
-    private int GetNextOptionIndex()
-    {
-        int index = 0;
-        if (_options != null)
+        private int GetNextOptionIndex()
         {
-            if (SelectedIndex + 1 < _options.Length)
+            int index = 0;
+            if (_options != null)
             {
-                index = SelectedIndex + 1;
+                if (SelectedIndex + 1 < _options.Length)
+                {
+                    index = SelectedIndex + 1;
+                }
             }
+            return index;
         }
-        return index;
-    }
 
-    private int GetPreviousOptionIndex()
-    {
-        int index = _options.Length - 1;
-        if (_options != null)
+        private int GetPreviousOptionIndex()
         {
-            if (SelectedIndex - 1 >= 0)
+            int index = _options.Length - 1;
+            if (_options != null)
             {
-                index = SelectedIndex - 1;
+                if (SelectedIndex - 1 >= 0)
+                {
+                    index = SelectedIndex - 1;
+                }
             }
+            return index;
         }
-        return index;
+
+        /// <summary>
+        /// Tries to get the first option from the array. If it's null or the array is empty, returns the string "No options".
+        /// </summary>
+        /// <returns></returns>
+        private string TryGetFirstOption()
+        {
+            string text = "No options";
+            if (_options != null && _options.Length > 0)
+            {
+                text = _options[0];
+            }
+            return text;
+        }
     }
 
-    /// <summary>
-    /// Tries to get the first option from the array. If it's null or the array is empty, returns the string "No options".
-    /// </summary>
-    /// <returns></returns>
-    private string TryGetFirstOption()
-    {
-        string text = "No options";
-        if (_options != null && _options.Length > 0)
-        {
-            text = _options[0];
-        }
-        return text;
-    }
 }

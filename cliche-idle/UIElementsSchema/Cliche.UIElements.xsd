@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:editor="UnityEditor.UIElements" xmlns:engine="UnityEngine.UIElements" xmlns="UnityEditor.Overlays" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:editor="UnityEditor.UIElements" xmlns:engine="UnityEngine.UIElements" xmlns="UnityEditor.Overlays" elementFormDefault="qualified" targetNamespace="Cliche.UIElements" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
   <xs:complexType name="HSVColorPickerType">
     <xs:complexContent mixed="false">
@@ -18,7 +18,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="HSVColorPicker" substitutionGroup="engine:VisualElement" type="HSVColorPickerType" />
+  <xs:element name="HSVColorPicker" substitutionGroup="engine:VisualElement" xmlns:q1="Cliche.UIElements" type="q1:HSVColorPickerType" />
   <xs:complexType name="OptionSelectorType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -37,7 +37,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="OptionSelector" substitutionGroup="engine:VisualElement" type="OptionSelectorType" />
+  <xs:element name="OptionSelector" substitutionGroup="engine:VisualElement" xmlns:q2="Cliche.UIElements" type="q2:OptionSelectorType" />
   <xs:complexType name="FloatSliderType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -58,5 +58,5 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="FloatSlider" substitutionGroup="engine:VisualElement" type="FloatSliderType" />
+  <xs:element name="FloatSlider" substitutionGroup="engine:VisualElement" xmlns:q3="Cliche.UIElements" type="q3:FloatSliderType" />
 </xs:schema>

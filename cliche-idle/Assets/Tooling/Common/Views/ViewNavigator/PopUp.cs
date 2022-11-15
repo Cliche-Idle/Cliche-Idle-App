@@ -142,6 +142,7 @@ namespace UIViews
         {
             for (int containerSize = _animMinSize; containerSize <= _animMaxSize; containerSize++)
             {
+                BaseContainer.style.opacity = containerSize;
                 ContentContainer.style.width = Length.Percent(containerSize);
                 ContentContainer.style.height = Length.Percent(containerSize);
                 yield return new WaitForSeconds(_animSpeed);
@@ -153,6 +154,7 @@ namespace UIViews
         {
             for (int containerSize = _animMaxSize; containerSize >= _animMinSize; containerSize--)
             {
+                BaseContainer.style.opacity = containerSize;
                 ContentContainer.style.width = Length.Percent(containerSize);
                 ContentContainer.style.height = Length.Percent(containerSize);
                 yield return new WaitForSeconds(_animSpeed);

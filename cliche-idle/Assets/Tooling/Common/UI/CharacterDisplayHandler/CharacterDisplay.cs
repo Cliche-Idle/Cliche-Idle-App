@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UIViews;
 using Cliche.System;
+using Cliche.UIElements;
 
 public class CharacterDisplay : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class CharacterDisplay : MonoBehaviour
                     backgroundImage = raceManifest.Icon.texture
                 }
             };
+            // TODO: make the default race text appear before manual selection
             raceSelectButton.clicked += () => { 
                 UpdatePlayerRace(raceManifest.Name);
                 Navigator.Target.rootVisualElement.Q<Label>("RaceText").text = raceManifest.Description;
@@ -53,13 +55,19 @@ public class CharacterDisplay : MonoBehaviour
 
         var genderSelector = Navigator.Target.rootVisualElement.Q<OptionSelector>("GenderSelector");
         genderSelector.SetOptionsFromEnum<PlayerBodyTypes>();
-        genderSelector.SelectionChange += (sender, selection) => { UpdatePlayerGender(selection); };
+        genderSelector.SelectionChange += UpdatePlayerGender;
         
-        // This is horrible, change it to auto load races and assign this automatically
-        //Navigator.Target.rootVisualElement.Q<Button>("OrcBtn").clicked += () => { UpdatePlayerRace("Orc"); };
-        //Navigator.Target.rootVisualElement.Q<Button>("HumanBtn").clicked += () => { UpdatePlayerRace("Human"); };
-        //Navigator.Target.rootVisualElement.Q<Button>("ElfBtn").clicked += () => { UpdatePlayerRace("Elf"); };
-        //Navigator.Target.rootVisualElement.Q<Button>("DwarfBtn").clicked += () => { UpdatePlayerRace("Dwarf"); };
+        Color[] baseSkinTones = new Color[3]
+        { 
+            new Color32(255, 209, 174, 255), // white
+            new Color32(141, 85, 36, 255), // dark
+            new Color32(224, 172, 105, 255) // middle
+        };
+        var baseSkinTone = baseSkinTones[UnityEngine.Random.Range(0, 3)];
+
+        var skinColorSelect = Navigator.Target.rootVisualElement.Q<HSVColorPicker>("SkinColorSelector");
+        skinColorSelect.ValueChange += UpdatePlayerSkinColor;
+        skinColorSelect.SetColor(baseSkinTone);
     }
 
     private void UpdatePlayerName(string name)
@@ -75,6 +83,11 @@ public class CharacterDisplay : MonoBehaviour
     private void UpdatePlayerGender(string genderID)
     {
         PlayerCharacterData.BodyType = GetEnumValueFromString<PlayerBodyTypes>(genderID);
+    }
+
+    private void UpdatePlayerSkinColor(Color skinColor)
+    {
+        PlayerCharacterData.SkinColor = skinColor;
     }
 
     private T GetEnumValueFromString<T>(string enumName) where T : Enum
