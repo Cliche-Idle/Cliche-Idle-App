@@ -7,16 +7,23 @@
 
 #HpBar .unity-progress-bar__background {
     background-color: rgba(171, 67, 67, 0.5);
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
     height: 40px;
     flex-shrink: 0;
+    background-image: none;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
 }
 
 #HpBar .unity-progress-bar__title {
     font-size: 20px;
+    -unity-font: none;
+    -unity-font-definition: url('project://database/Assets/Editor/font/EightBitDragon%20SDF.asset?fileID=11400000&guid=f9e1b0c4b005f1147ba2d5a71dbed497&type=2#EightBitDragon SDF');
 }
 
 #ExpBar .unity-progress-bar__progress {
@@ -27,6 +34,14 @@
     background-color: rgba(65, 173, 64, 0.23);
     height: 40px;
     flex-shrink: 0;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 #ExpBar .unity-progress-bar__title {
