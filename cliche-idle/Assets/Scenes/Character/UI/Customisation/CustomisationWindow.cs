@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -7,8 +8,10 @@ using UIViews;
 using Cliche.System;
 using Cliche.UIElements;
 
-public class CharacterDisplay : MonoBehaviour
+public class CustomisationWindow : UIScript
 {
+    public CharacterVisualData PlayerCharacterData = new CharacterVisualData();
+
     private enum CharacterCreatorOptionsMode
     {
         body,
@@ -17,56 +20,16 @@ public class CharacterDisplay : MonoBehaviour
         beard
     }
 
-    public ViewNavigator Navigator;
-
-    // Visual data
-    public CharacterVisualData PlayerCharacterData = new CharacterVisualData();
-
-    public VisualTreeAsset PlayerCharacterDisplay;
-
     private OptionSelector optionSelector;
 
     private HSVColorPicker colorPicker;
 
     private CharacterCreatorOptionsMode pickingMode;
 
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnEnterFocus()
     {
-        // TODO: generate UI structure on startup
-        //GenerateCharacterDisplayStructure();
-
-        // TODO: query and load in asset lists
-
-        // TODO: auto pull character data if available?
-
-        // Auto override for race specific styles
-
-        var nameField = Navigator.Target.rootVisualElement.Q<TextField>("Name");
-        nameField.RegisterValueChangedCallback(fieldVal => UpdatePlayerName(fieldVal.newValue));
-
-        var raceManifests = Resources.LoadAll<Race>(Manifests.Paths[typeof(Race)]);
-        var racesContainer = Navigator.Target.rootVisualElement.Q<VisualElement>("RaceContainer");
-        foreach (var raceManifest in raceManifests)
-        {
-            var raceSelectButton = new Button()
-            {
-                name = raceManifest.Name,
-                text = "",
-                style = {
-                    height = 150,
-                    width = 150,
-                    backgroundImage = raceManifest.Icon.texture
-                }
-            };
-            // TODO: make the default race text appear before manual selection
-            raceSelectButton.clicked += () => { 
-                UpdatePlayerRace(raceManifest.Name);
-                Navigator.Target.rootVisualElement.Q<Label>("RaceText").text = raceManifest.Description;
-            };
-            racesContainer.Add(raceSelectButton);
-        }
+        GetViewContainer().style.width = Length.Percent(100);
+        GetViewContainer().style.height = Length.Percent(100);
 
         var bodyButton = Navigator.Target.rootVisualElement.Q<Button>("BodyOption");
         bodyButton.clicked += BodyTabOpen;
@@ -81,8 +44,8 @@ public class CharacterDisplay : MonoBehaviour
         beardButton.clicked += BeardTabOpen;
 
         optionSelector = Navigator.Target.rootVisualElement.Q<OptionSelector>("MainOptionsSelector");
-        optionSelector.SelectionChange += (option) => { 
-            switch(pickingMode)
+        optionSelector.SelectionChange += (option) => {
+            switch (pickingMode)
             {
                 case CharacterCreatorOptionsMode.body:
                     PlayerCharacterData.BodyType = GetEnumValueFromString<PlayerBodyTypes>(option);
@@ -120,6 +83,15 @@ public class CharacterDisplay : MonoBehaviour
         };
         SetRandomStartingTintColors();
         BodyTabOpen();
+
+        var continueButton = Navigator.Target.rootVisualElement.Q<Button>("Create");
+        continueButton.clicked += () => {  };
+
+        var backButton = Navigator.Target.rootVisualElement.Q<Button>("Back");
+        backButton.clicked += () => {
+            Navigator.ShowView("RaceSelect");
+            HideView();
+        };
     }
 
     private void SetRandomStartingTintColors()
@@ -194,41 +166,8 @@ public class CharacterDisplay : MonoBehaviour
         optionSelector.SelectedIndex = (int)PlayerCharacterData.BeardStyle;
     }
 
-
-    private void UpdatePlayerName(string name)
-    {
-        PlayerCharacterData.Name = name;
-    }
-
-    private void UpdatePlayerRace(string raceID)
-    {
-        PlayerCharacterData.Race = GetEnumValueFromString<Races>(raceID);
-    }
-
     private T GetEnumValueFromString<T>(string enumName) where T : Enum
     {
         return (T)Enum.Parse(typeof(T), enumName);
-    }
-
-    /// <summary>
-    /// Gets the specified default character sprite. To get the alternat version, set <paramref name="styleName"/> to the override identifier. If no override version is found, returns default.
-    /// </summary>
-    /// <param name="styleName">The default, generic identifier of the sprite.</param>
-    /// <param name="overrideName">The optional, override variant identifier of the sprite.</param>
-    /// <returns></returns>
-    private Sprite GetCharacterSprite(string styleName, string overrideName="")
-    {
-        // This assumes the assets used for this can be uniquely identified among all other assets by their name.
-        Sprite sprite = null;
-        if (overrideName.Length > 0)
-        {
-            sprite = Resources.Load<Sprite>($"{overrideName}_{styleName}");
-        }
-        if (sprite == null)
-        {
-            // If no override was found, load the default one
-            sprite = Resources.Load<Sprite>($"{styleName}");
-        }
-        return sprite;
     }
 }

@@ -16,10 +16,12 @@ namespace Cliche.UIElements
 
         private bool _isDragging = false;
 
+        private int _capturedPointerId = 0;
+
         private float _value = 0f;
 
         /// <summary>
-        /// Gets or sets the current slider value.
+        /// The current slider value.
         /// </summary>
         public float value
         {
@@ -33,7 +35,7 @@ namespace Cliche.UIElements
         }
 
         /// <summary>
-        /// Sets or gets the slider's minimum value.
+        /// The slider's minimum value.
         /// </summary>
         public float lowValue
         {
@@ -46,7 +48,7 @@ namespace Cliche.UIElements
         }
 
         /// <summary>
-        /// Sets or gets the slider's maximum value.
+        /// The slider's maximum value.
         /// </summary>
         public float highValue
         {
@@ -163,18 +165,22 @@ namespace Cliche.UIElements
                 // Realeases on PointerUpEvent
                 if (!_isDragging)
                 {
-                    PointerCaptureHelper.CapturePointer(this, e.pointerId);
+                    _capturedPointerId = e.pointerId;
+                    PointerCaptureHelper.CapturePointer(this, _capturedPointerId);
                 }
                 _isDragging = true;
             });
             RegisterCallback<PointerUpEvent>(e => {
                 _isDragging = false;
-                PointerCaptureHelper.ReleasePointer(this, e.pointerId);
+                PointerCaptureHelper.ReleasePointer(this, _capturedPointerId);
             });
             RegisterCallback<PointerMoveEvent>(e => {
                 if (_isDragging)
                 {
-                    UpdateState(e.localPosition.x);
+                    if (e.pointerId == _capturedPointerId)
+                    {
+                        UpdateState(e.localPosition.x);
+                    }
                 }
             });
             Add(_dragger);

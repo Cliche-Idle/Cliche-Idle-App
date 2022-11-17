@@ -154,20 +154,22 @@ namespace Cliche.UIElements
             style.flexDirection = FlexDirection.Row;
             style.alignItems = Align.Stretch;
             style.justifyContent = Justify.SpaceBetween;
+            AddToClassList("options-selector");
 
             var leftScrollButton = new Button()
             {
                 text = "<",
                 name = "optionLeftScroll",
                 style =
-            {
-                width = Length.Percent(15),
-                height = Length.Percent(100),
-                fontSize = style.fontSize,
-                unityTextAlign = TextAnchor.MiddleCenter,
-            }
+                {
+                    width = Length.Percent(15),
+                    height = Length.Percent(100),
+                    fontSize = style.fontSize,
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                }
             };
             leftScrollButton.AddToClassList("optionLeftScroll");
+            leftScrollButton.AddToClassList("optionScrollButton");
             leftScrollButton.clicked += () => { UpdateSelection(GetPreviousOptionIndex()); };
 
             _optionLabel = new Label()
@@ -175,10 +177,10 @@ namespace Cliche.UIElements
                 name = "optionLabel",
                 text = TryGetFirstOption(),
                 style =
-            {
-                fontSize = style.fontSize,
-                unityTextAlign = TextAnchor.MiddleCenter,
-            }
+                {
+                    fontSize = style.fontSize,
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                }
             };
             _optionLabel.AddToClassList("optionLabel");
 
@@ -187,14 +189,15 @@ namespace Cliche.UIElements
                 text = ">",
                 name = "optionRightScroll",
                 style =
-            {
-                width = Length.Percent(15),
-                height = Length.Percent(100),
-                fontSize = style.fontSize,
-                unityTextAlign = TextAnchor.MiddleCenter,
-            },
+                {
+                    width = Length.Percent(15),
+                    height = Length.Percent(100),
+                    fontSize = style.fontSize,
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                },
             };
-            leftScrollButton.AddToClassList("optionRightScroll");
+            rightScrollButton.AddToClassList("optionRightScroll");
+            rightScrollButton.AddToClassList("optionScrollButton");
             rightScrollButton.clicked += () => { UpdateSelection(GetNextOptionIndex()); };
 
             Add(leftScrollButton);

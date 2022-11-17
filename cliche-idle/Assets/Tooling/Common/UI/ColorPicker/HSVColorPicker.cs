@@ -10,10 +10,21 @@ namespace Cliche.UIElements
     /// </summary>
     public class HSVColorPicker : VisualElement
     {
+        private Color _color { get; set; }
         /// <summary>
-        /// The currntly selected colour.
+        /// The currently selected colour.
         /// </summary>
-        public Color SelectedColor { get; private set; }
+        public Color color
+        {
+            get
+            {
+                return _color;
+            }
+            set
+            {
+                SetColor(value);
+            }
+        }
         /// <summary>
         /// Event that occurs when the selected colour changes.
         /// </summary>
@@ -44,15 +55,15 @@ namespace Cliche.UIElements
         }
 
         /// <summary>
-        /// Sets the colour sliders and <see cref="SelectedColor"/> to the given colour.
+        /// Sets the colour sliders and <see cref="color"/> to the given colour.
         /// </summary>
-        /// <param name="color"></param>
-        public void SetColor(Color color)
+        /// <param name="colorVal"></param>
+        private void SetColor(Color colorVal)
         {
             float hue = 0;
             float sat = 0;
             float lum = 0;
-            Color.RGBToHSV(color, out hue, out sat, out lum);
+            Color.RGBToHSV(colorVal, out hue, out sat, out lum);
             _hue.value = hue;
             _saturation.value = sat;
             _luminescence.value = lum;
@@ -129,16 +140,16 @@ namespace Cliche.UIElements
             Add(_hue);
             Add(_saturation);
             Add(_luminescence);
-            SelectedColor = Color.HSVToRGB(_hue.value, _saturation.value, _luminescence.value, false);
+            _color = Color.HSVToRGB(_hue.value, _saturation.value, _luminescence.value, false);
         }
 
         private void UpdateSelection()
         {
-            SelectedColor = Color.HSVToRGB(_hue.value, _saturation.value, _luminescence.value, false);
+            _color = Color.HSVToRGB(_hue.value, _saturation.value, _luminescence.value, false);
 
             if (ValueChange != null)
             {
-                ValueChange.Invoke(SelectedColor);
+                ValueChange.Invoke(_color);
             }
         }
     }
