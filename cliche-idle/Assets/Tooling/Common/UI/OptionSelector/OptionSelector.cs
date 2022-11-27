@@ -129,7 +129,8 @@ namespace Cliche.UIElements
         public void SetOptionsFromEnum<T>() where T : Enum
         {
             // Assign to public Options to trigger update
-            Options = Enum.GetNames(typeof(T));
+            _options = Enum.GetNames(typeof(T));
+            UpdateSelection(0, false);
         }
 
         private void GenerateOptionsList()
@@ -205,14 +206,14 @@ namespace Cliche.UIElements
             Add(rightScrollButton);
         }
 
-        private void UpdateSelection(int optionIndex)
+        private void UpdateSelection(int optionIndex, bool triggerEvent = true)
         {
             if (_options != null)
             {
                 _selectedIndex = optionIndex;
                 SelectedOption = _options[optionIndex];
                 _optionLabel.text = SelectedOption;
-                if (SelectionChange != null)
+                if (SelectionChange != null && triggerEvent == true)
                 {
                     SelectionChange.Invoke(SelectedOption);
                 }

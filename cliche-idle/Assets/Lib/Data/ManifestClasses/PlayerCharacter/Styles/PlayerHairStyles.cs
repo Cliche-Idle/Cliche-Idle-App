@@ -1,4 +1,14 @@
 ﻿public enum PlayerHairStyles
 {
-    Default,
+    None,
+    Afro,
+    Bowl,
+    Buns,
+    Cornrows,
+    Elder,
+    Flat,
+    Long,
+    Medium,
+    Scorpion,
+    Tail
 }

@@ -9,8 +9,6 @@ using Cliche.UIElements;
 
 public class RaceSelectScreen : UIScript
 {
-    public CharacterVisualData PlayerCharacterData = new CharacterVisualData();
-
     private Label _raceDescriptionText;
 
     private void Start()
@@ -57,7 +55,7 @@ public class RaceSelectScreen : UIScript
 
     private void UpdatePlayerRace(string raceID)
     {
-        PlayerCharacterData.Race = GetEnumValueFromString<Races>(raceID);
+        GameObject.Find("CharacterCustomisation").GetComponent<CustomisationWindow>().PlayerRace = GetEnumValueFromString<Races>(raceID);
     }
 
     private T GetEnumValueFromString<T>(string enumName) where T : Enum

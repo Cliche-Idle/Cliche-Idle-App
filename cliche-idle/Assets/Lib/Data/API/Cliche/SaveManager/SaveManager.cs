@@ -20,7 +20,7 @@ public class SaveManager : MonoBehaviour
     /// <summary>
     /// The foldername for Debug and Dev builds (when ran from the editor).
     /// </summary>
-    private readonly string _DEBUGSaveSubPath = "DEBUG_Saves";
+    private readonly string _debugSaveSubPath = "DEBUG_Saves";
 
     /// <summary>
     /// The filepath where saves are stored. Changes depending on platform, or if the game is running in a build or in the editor.
@@ -35,16 +35,16 @@ public class SaveManager : MonoBehaviour
     public bool AutoSaveEnabled { get; private set; } = false;
 
     /// <summary>
+    /// The auto save interval in seconds.
+    /// </summary>
+    [field: SerializeField]
+    public float AutoSaveInterval { get; private set; } = 120;
+
+    /// <summary>
     /// Controls wether or not the save file is loaded on startup. Defaults to true.
     /// </summary>
     [field: SerializeField]
     public bool AutoLoadEnabled { get; private set; } = true;
-
-    /// <summary>
-    /// The auto save interval in seconds.
-    /// </summary>
-    [field: SerializeField]
-    public float SaveInterval { get; private set; } = 120;
 
     /// <summary>
     /// The list of components that's state will be saved.
@@ -58,7 +58,7 @@ public class SaveManager : MonoBehaviour
         // Set save path based on editor
         if (Application.isEditor)
         {
-            SavePath = $"{Application.persistentDataPath}/{_DEBUGSaveSubPath}";
+            SavePath = $"{Application.persistentDataPath}/{_debugSaveSubPath}";
         }
         else
         {
@@ -81,7 +81,7 @@ public class SaveManager : MonoBehaviour
         while (true)
         {
             SaveUserState();
-            yield return new WaitForSecondsRealtime(SaveInterval);
+            yield return new WaitForSecondsRealtime(AutoSaveInterval);
         }
     }
     

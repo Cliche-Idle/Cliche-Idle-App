@@ -10,7 +10,7 @@ using Cliche.UIElements;
 
 public class CustomisationWindow : UIScript
 {
-    public CharacterVisualData PlayerCharacterData = new CharacterVisualData();
+    public Races PlayerRace;
 
     private enum CharacterCreatorOptionsMode
     {
@@ -19,6 +19,8 @@ public class CustomisationWindow : UIScript
         hair,
         beard
     }
+
+    private PlayerCharacterDisplay characterDisplay;
 
     private OptionSelector optionSelector;
 
@@ -30,6 +32,9 @@ public class CustomisationWindow : UIScript
     {
         GetViewContainer().style.width = Length.Percent(100);
         GetViewContainer().style.height = Length.Percent(100);
+
+        characterDisplay = Navigator.Target.rootVisualElement.Q<PlayerCharacterDisplay>("CharacterDisplay");
+        characterDisplay.Race = PlayerRace;
 
         var bodyButton = Navigator.Target.rootVisualElement.Q<Button>("BodyOption");
         bodyButton.clicked += BodyTabOpen;
@@ -48,16 +53,13 @@ public class CustomisationWindow : UIScript
             switch (pickingMode)
             {
                 case CharacterCreatorOptionsMode.body:
-                    PlayerCharacterData.BodyType = GetEnumValueFromString<PlayerBodyTypes>(option);
-                    break;
-                case CharacterCreatorOptionsMode.eyes:
-
+                    characterDisplay.BodyType = GetEnumValueFromString<PlayerBodyTypes>(option);
                     break;
                 case CharacterCreatorOptionsMode.hair:
-                    PlayerCharacterData.HairStyle = GetEnumValueFromString<PlayerHairStyles>(option);
+                    characterDisplay.HairStyle = GetEnumValueFromString<PlayerHairStyles>(option);
                     break;
                 case CharacterCreatorOptionsMode.beard:
-                    PlayerCharacterData.BeardStyle = GetEnumValueFromString<PlayerBeardStyles>(option);
+                    characterDisplay.BeardStyle = GetEnumValueFromString<PlayerBeardStyles>(option);
                     break;
             }
         };
@@ -68,16 +70,16 @@ public class CustomisationWindow : UIScript
             switch (pickingMode)
             {
                 case CharacterCreatorOptionsMode.body:
-                    PlayerCharacterData.SkinColor = color;
+                    characterDisplay.SkinColor = color;
                     break;
                 case CharacterCreatorOptionsMode.eyes:
-                    PlayerCharacterData.EyeColorPrimary = color;
+                    characterDisplay.EyeColorPrimary = color;
                     break;
                 case CharacterCreatorOptionsMode.hair:
-                    PlayerCharacterData.HairColor = color;
+                    characterDisplay.HairColor = color;
                     break;
                 case CharacterCreatorOptionsMode.beard:
-                    PlayerCharacterData.BeardColor = color;
+                    characterDisplay.BeardColor = color;
                     break;
             }
         };
@@ -104,7 +106,7 @@ public class CustomisationWindow : UIScript
             new Color32(224, 172, 105, 255) // middle
         };
         var baseSkinTone = baseSkinTones[UnityEngine.Random.Range(0, 3)];
-        PlayerCharacterData.SkinColor = baseSkinTone;
+        characterDisplay.SkinColor = baseSkinTone;
 
         // Set hair colour bases
         Color[] baseHairColors = new Color[3]
@@ -114,8 +116,8 @@ public class CustomisationWindow : UIScript
             new Color32(0, 28, 28, 255) // dark cyan
         };
         var baseHairColor = baseHairColors[UnityEngine.Random.Range(0, 3)];
-        PlayerCharacterData.HairColor = baseHairColor;
-        PlayerCharacterData.BeardColor = baseHairColor;
+        characterDisplay.HairColor = baseHairColor;
+        characterDisplay.BeardColor = baseHairColor;
 
         // Set eye colour bases
         Color[] baseEyeColors = new Color[3]
@@ -125,7 +127,7 @@ public class CustomisationWindow : UIScript
             Color.cyan
         };
         var baseEyeColor = baseEyeColors[UnityEngine.Random.Range(0, 3)];
-        PlayerCharacterData.EyeColorPrimary = baseEyeColor;
+        characterDisplay.EyeColorPrimary = baseEyeColor;
     }
 
     private void BodyTabOpen()
@@ -133,9 +135,9 @@ public class CustomisationWindow : UIScript
         optionSelector.visible = true;
         pickingMode = CharacterCreatorOptionsMode.body;
 
-        colorPicker.color = (PlayerCharacterData.SkinColor);
+        colorPicker.color = (characterDisplay.SkinColor);
         optionSelector.SetOptionsFromEnum<PlayerBodyTypes>();
-        optionSelector.SelectedIndex = (int)PlayerCharacterData.BodyType;
+        optionSelector.SelectedIndex = (int)characterDisplay.BodyType;
     }
 
     private void EyesTabOpen()
@@ -143,7 +145,7 @@ public class CustomisationWindow : UIScript
         optionSelector.visible = false;
         pickingMode = CharacterCreatorOptionsMode.eyes;
 
-        colorPicker.color = (PlayerCharacterData.EyeColorPrimary);
+        colorPicker.color = (characterDisplay.EyeColorPrimary);
     }
 
     private void HairTabOpen()
@@ -151,9 +153,9 @@ public class CustomisationWindow : UIScript
         optionSelector.visible = true;
         pickingMode = CharacterCreatorOptionsMode.hair;
 
-        colorPicker.color = (PlayerCharacterData.HairColor);
+        colorPicker.color = (characterDisplay.HairColor);
         optionSelector.SetOptionsFromEnum<PlayerHairStyles>();
-        optionSelector.SelectedIndex = (int)PlayerCharacterData.HairStyle;
+        optionSelector.SelectedIndex = (int)characterDisplay.HairStyle;
     }
 
     private void BeardTabOpen()
@@ -161,9 +163,9 @@ public class CustomisationWindow : UIScript
         optionSelector.visible = true;
         pickingMode = CharacterCreatorOptionsMode.beard;
 
-        colorPicker.color = (PlayerCharacterData.BeardColor);
+        colorPicker.color = (characterDisplay.BeardColor);
         optionSelector.SetOptionsFromEnum<PlayerBeardStyles>();
-        optionSelector.SelectedIndex = (int)PlayerCharacterData.BeardStyle;
+        optionSelector.SelectedIndex = (int)characterDisplay.BeardStyle;
     }
 
     private T GetEnumValueFromString<T>(string enumName) where T : Enum

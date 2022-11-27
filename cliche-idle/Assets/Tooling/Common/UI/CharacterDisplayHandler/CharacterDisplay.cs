@@ -20,7 +20,7 @@ public class CharacterDisplay : MonoBehaviour
     public ViewNavigator Navigator;
 
     // Visual data
-    public CharacterVisualData PlayerCharacterData = new CharacterVisualData();
+    public PlayerCharacterSheet PlayerCharacterData = new PlayerCharacterSheet();
 
     public VisualTreeAsset PlayerCharacterDisplay;
 
@@ -144,6 +144,7 @@ public class CharacterDisplay : MonoBehaviour
         var baseHairColor = baseHairColors[UnityEngine.Random.Range(0, 3)];
         PlayerCharacterData.HairColor = baseHairColor;
         PlayerCharacterData.BeardColor = baseHairColor;
+        //PlayerCharacterData.BrowColor = baseHairColor;
 
         // Set eye colour bases
         Color[] baseEyeColors = new Color[3]

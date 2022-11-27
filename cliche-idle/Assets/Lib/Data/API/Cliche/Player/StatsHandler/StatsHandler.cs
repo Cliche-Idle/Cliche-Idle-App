@@ -6,13 +6,19 @@ using Cliche.System;
 
 public class StatsHandler : MonoBehaviour
 {
+
+
+
     private void Awake() {
         Health = gameObject.GetComponent<PlayerHealth>();
     }
 
-    [field: HeaderAttribute("General stats")]
+    [field: Header("General stats")]
     public PlayerHealth Health { get; private set; }
 
+    /// <summary>
+    /// The players overall defence.
+    /// </summary>
     public int Defence {
         get
         {

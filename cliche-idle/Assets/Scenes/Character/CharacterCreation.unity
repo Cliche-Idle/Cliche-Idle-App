@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &370880493
 GameObject:
@@ -252,31 +252,6 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: MainContainer
-  PlayerCharacterData:
-    Name: 
-    Race: 2
-    BodyType: 0
-    SkinColor:
-      serializedVersion: 2
-      rgba: 0
-    HairStyle: 0
-    HairColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    BeardStyle: 0
-    BeardColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    BrowStyle: 0
-    BrowColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    EyeColorPrimary:
-      serializedVersion: 2
-      rgba: 4278190080
-    EyeColorSecondary:
-      serializedVersion: 2
-      rgba: 4294967295
 --- !u!4 &653498482
 Transform:
   m_ObjectHideFlags: 0
@@ -290,7 +265,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &666491165
 GameObject:
@@ -406,7 +381,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &891546563
 MonoBehaviour:
@@ -427,99 +402,4 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: MainContainer
-  PlayerCharacterData:
-    Name: 
-    Race: 2
-    BodyType: 0
-    SkinColor:
-      serializedVersion: 2
-      rgba: 0
-    HairStyle: 0
-    HairColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    BeardStyle: 0
-    BeardColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    BrowStyle: 0
-    BrowColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    EyeColorPrimary:
-      serializedVersion: 2
-      rgba: 4278190080
-    EyeColorSecondary:
-      serializedVersion: 2
-      rgba: 4294967295
---- !u!1 &1698843120
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1698843121}
-  - component: {fileID: 1698843122}
-  m_Layer: 0
-  m_Name: UI CharacterDisplay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1698843121
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698843120}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1698843122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698843120}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647c6136a3f684e46b234d0f98f76d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Navigator: {fileID: 370880494}
-  PlayerCharacterData:
-    Name: 
-    Race: 2
-    BodyType: 0
-    SkinColor:
-      serializedVersion: 2
-      rgba: 0
-    HairStyle: 0
-    HairColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    BeardStyle: 0
-    BeardColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    BrowStyle: 0
-    BrowColor:
-      serializedVersion: 2
-      rgba: 4278190080
-    EyeColorPrimary:
-      serializedVersion: 2
-      rgba: 4278190080
-    EyeColorSecondary:
-      serializedVersion: 2
-      rgba: 4294967295
-  PlayerCharacterDisplay: {fileID: 0}
+  PlayerRace: 0
