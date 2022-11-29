@@ -3,7 +3,7 @@ using System.ComponentModel;
 using UnityEngine;
 
 [Serializable]
-public class PlayerCharacterSheet// : INotifyPropertyChanged
+public class CharacterSheet
 {
     public string Name = "";
     /// <summary>

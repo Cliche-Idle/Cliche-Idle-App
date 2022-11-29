@@ -417,7 +417,6 @@ GameObject:
   - component: {fileID: 1458133675}
   - component: {fileID: 1458133678}
   - component: {fileID: 1458133677}
-  - component: {fileID: 1458133679}
   m_Layer: 5
   m_Name: UI_ViewNavigator
   m_TagString: Untagged
@@ -469,25 +468,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 932ebfdb6240df041aa9f923e58235fa, type: 3}
   m_SortingOrder: 0
---- !u!114 &1458133679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1458133674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1554a49b5b3cf4db2ccabd5d93dea1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: TestVal
-  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: d4f9ac7d7b9cc804ca56443a2b7a7278, type: 3}
-  <IsStatic>k__BackingField: 1
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 0}
-  <ContainerID>k__BackingField: BaseHeaderContainer
 --- !u!1 &1568071902
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96b27910d4d5b6448d7a644166e0cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
+  <Navigator>k__BackingField: {fileID: 0}
   <ID>k__BackingField: UseItemPopUp
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
   <IsStatic>k__BackingField: 0
@@ -564,7 +544,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636096628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b74e8848aa2a2a4ba773e839e0037f1, type: 3}
   m_Name: 
@@ -779,6 +759,10 @@ PrefabInstance:
     - target: {fileID: 2590612110745040970, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590612110745041329, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+      propertyPath: <AutoLoadEnabled>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}

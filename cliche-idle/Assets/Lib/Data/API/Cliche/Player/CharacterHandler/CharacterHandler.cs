@@ -20,11 +20,11 @@ public class CharacterHandler : MonoBehaviour
     /// Currently unused, akin to player titles.
     /// </summary>
     [field: SerializeField]
-    public string ClassSpecName { get; private set;}
+    public string ClassSpecName { get; private set; }
 
     // TODO: build this out properly
     /// <summary>
     /// Contains information about the player character's appearance.
     /// </summary>
-    public PlayerCharacterSheet CharacterVisual;
+    public CharacterSheet CharacterVisuals;
 }

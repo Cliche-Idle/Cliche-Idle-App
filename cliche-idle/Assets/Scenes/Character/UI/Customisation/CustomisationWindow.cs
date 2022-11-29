@@ -10,7 +10,10 @@ using Cliche.UIElements;
 
 public class CustomisationWindow : UIScript
 {
-    public Races PlayerRace;
+    public CharacterHandler CharacterHandler;
+
+    // TODO: get rid of this, pass the option to DataHoarder
+    public Races SelectedPlayerRace;
 
     private enum CharacterCreatorOptionsMode
     {
@@ -20,21 +23,21 @@ public class CustomisationWindow : UIScript
         beard
     }
 
-    private PlayerCharacterDisplay characterDisplay;
+    private PlayerCharacterDisplay _characterDisplay;
 
-    private OptionSelector optionSelector;
+    private OptionSelector _optionSelector;
 
-    private HSVColorPicker colorPicker;
+    private HSVColorPicker _colorPicker;
 
-    private CharacterCreatorOptionsMode pickingMode;
+    private CharacterCreatorOptionsMode _pickingMode;
 
     protected override void OnEnterFocus()
     {
         GetViewContainer().style.width = Length.Percent(100);
         GetViewContainer().style.height = Length.Percent(100);
 
-        characterDisplay = Navigator.Target.rootVisualElement.Q<PlayerCharacterDisplay>("CharacterDisplay");
-        characterDisplay.Race = PlayerRace;
+        _characterDisplay = Navigator.Target.rootVisualElement.Q<PlayerCharacterDisplay>("CharacterDisplay");
+        _characterDisplay.Race = SelectedPlayerRace;
 
         var bodyButton = Navigator.Target.rootVisualElement.Q<Button>("BodyOption");
         bodyButton.clicked += BodyTabOpen;
@@ -48,38 +51,38 @@ public class CustomisationWindow : UIScript
         var beardButton = Navigator.Target.rootVisualElement.Q<Button>("BeardOption");
         beardButton.clicked += BeardTabOpen;
 
-        optionSelector = Navigator.Target.rootVisualElement.Q<OptionSelector>("MainOptionsSelector");
-        optionSelector.SelectionChange += (option) => {
-            switch (pickingMode)
+        _optionSelector = Navigator.Target.rootVisualElement.Q<OptionSelector>("MainOptionsSelector");
+        _optionSelector.SelectionChange += (option) => {
+            switch (_pickingMode)
             {
                 case CharacterCreatorOptionsMode.body:
-                    characterDisplay.BodyType = GetEnumValueFromString<PlayerBodyTypes>(option);
+                    _characterDisplay.BodyType = GetEnumValueFromString<PlayerBodyTypes>(option);
                     break;
                 case CharacterCreatorOptionsMode.hair:
-                    characterDisplay.HairStyle = GetEnumValueFromString<PlayerHairStyles>(option);
+                    _characterDisplay.HairStyle = GetEnumValueFromString<PlayerHairStyles>(option);
                     break;
                 case CharacterCreatorOptionsMode.beard:
-                    characterDisplay.BeardStyle = GetEnumValueFromString<PlayerBeardStyles>(option);
+                    _characterDisplay.BeardStyle = GetEnumValueFromString<PlayerBeardStyles>(option);
                     break;
             }
         };
 
 
-        colorPicker = Navigator.Target.rootVisualElement.Q<HSVColorPicker>("MainColorSelector");
-        colorPicker.ValueChange += (color) => {
-            switch (pickingMode)
+        _colorPicker = Navigator.Target.rootVisualElement.Q<HSVColorPicker>("MainColorSelector");
+        _colorPicker.ValueChange += (color) => {
+            switch (_pickingMode)
             {
                 case CharacterCreatorOptionsMode.body:
-                    characterDisplay.SkinColor = color;
+                    _characterDisplay.SkinColor = color;
                     break;
                 case CharacterCreatorOptionsMode.eyes:
-                    characterDisplay.EyeColorPrimary = color;
+                    _characterDisplay.EyeColorPrimary = color;
                     break;
                 case CharacterCreatorOptionsMode.hair:
-                    characterDisplay.HairColor = color;
+                    _characterDisplay.HairColor = color;
                     break;
                 case CharacterCreatorOptionsMode.beard:
-                    characterDisplay.BeardColor = color;
+                    _characterDisplay.BeardColor = color;
                     break;
             }
         };
@@ -87,7 +90,11 @@ public class CustomisationWindow : UIScript
         BodyTabOpen();
 
         var continueButton = Navigator.Target.rootVisualElement.Q<Button>("Create");
-        continueButton.clicked += () => {  };
+        continueButton.clicked += () => {
+            CharacterHandler.CharacterVisuals = _characterDisplay.CharacterSheet;
+            Navigator.ShowView("ConfirmCharacterPopup");
+            HideView();
+        };
 
         var backButton = Navigator.Target.rootVisualElement.Q<Button>("Back");
         backButton.clicked += () => {
@@ -101,12 +108,12 @@ public class CustomisationWindow : UIScript
         // Set skin colour bases
         Color[] baseSkinTones = new Color[3]
         {
-            new Color32(255, 209, 174, 255), // white
+            new Color32(255, 209, 174, 255), // light
             new Color32(141, 85, 36, 255), // dark
             new Color32(224, 172, 105, 255) // middle
         };
         var baseSkinTone = baseSkinTones[UnityEngine.Random.Range(0, 3)];
-        characterDisplay.SkinColor = baseSkinTone;
+        _characterDisplay.SkinColor = baseSkinTone;
 
         // Set hair colour bases
         Color[] baseHairColors = new Color[3]
@@ -116,8 +123,8 @@ public class CustomisationWindow : UIScript
             new Color32(0, 28, 28, 255) // dark cyan
         };
         var baseHairColor = baseHairColors[UnityEngine.Random.Range(0, 3)];
-        characterDisplay.HairColor = baseHairColor;
-        characterDisplay.BeardColor = baseHairColor;
+        _characterDisplay.HairColor = baseHairColor;
+        _characterDisplay.BeardColor = baseHairColor;
 
         // Set eye colour bases
         Color[] baseEyeColors = new Color[3]
@@ -127,45 +134,45 @@ public class CustomisationWindow : UIScript
             Color.cyan
         };
         var baseEyeColor = baseEyeColors[UnityEngine.Random.Range(0, 3)];
-        characterDisplay.EyeColorPrimary = baseEyeColor;
+        _characterDisplay.EyeColorPrimary = baseEyeColor;
     }
 
     private void BodyTabOpen()
     {
-        optionSelector.visible = true;
-        pickingMode = CharacterCreatorOptionsMode.body;
+        _optionSelector.visible = true;
+        _pickingMode = CharacterCreatorOptionsMode.body;
 
-        colorPicker.color = (characterDisplay.SkinColor);
-        optionSelector.SetOptionsFromEnum<PlayerBodyTypes>();
-        optionSelector.SelectedIndex = (int)characterDisplay.BodyType;
+        _colorPicker.color = (_characterDisplay.SkinColor);
+        _optionSelector.SetOptionsFromEnum<PlayerBodyTypes>();
+        _optionSelector.SelectedIndex = (int)_characterDisplay.BodyType;
     }
 
     private void EyesTabOpen()
     {
-        optionSelector.visible = false;
-        pickingMode = CharacterCreatorOptionsMode.eyes;
+        _optionSelector.visible = false;
+        _pickingMode = CharacterCreatorOptionsMode.eyes;
 
-        colorPicker.color = (characterDisplay.EyeColorPrimary);
+        _colorPicker.color = (_characterDisplay.EyeColorPrimary);
     }
 
     private void HairTabOpen()
     {
-        optionSelector.visible = true;
-        pickingMode = CharacterCreatorOptionsMode.hair;
+        _optionSelector.visible = true;
+        _pickingMode = CharacterCreatorOptionsMode.hair;
 
-        colorPicker.color = (characterDisplay.HairColor);
-        optionSelector.SetOptionsFromEnum<PlayerHairStyles>();
-        optionSelector.SelectedIndex = (int)characterDisplay.HairStyle;
+        _colorPicker.color = (_characterDisplay.HairColor);
+        _optionSelector.SetOptionsFromEnum<PlayerHairStyles>();
+        _optionSelector.SelectedIndex = (int)_characterDisplay.HairStyle;
     }
 
     private void BeardTabOpen()
     {
-        optionSelector.visible = true;
-        pickingMode = CharacterCreatorOptionsMode.beard;
+        _optionSelector.visible = true;
+        _pickingMode = CharacterCreatorOptionsMode.beard;
 
-        colorPicker.color = (characterDisplay.BeardColor);
-        optionSelector.SetOptionsFromEnum<PlayerBeardStyles>();
-        optionSelector.SelectedIndex = (int)characterDisplay.BeardStyle;
+        _colorPicker.color = (_characterDisplay.BeardColor);
+        _optionSelector.SetOptionsFromEnum<PlayerBeardStyles>();
+        _optionSelector.SelectedIndex = (int)_characterDisplay.BeardStyle;
     }
 
     private T GetEnumValueFromString<T>(string enumName) where T : Enum

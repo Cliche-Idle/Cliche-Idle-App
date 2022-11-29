@@ -17,7 +17,7 @@ public class BottomNavigation : UIScript
     {
         GetViewContainer().Q<Button>("AdventureBtn").clicked += AdventureMenuOpen;
         GetViewContainer().Q<Button>("InventoryBtn").clicked += InventoryMenuOpen;
-        GetViewContainer().Q<Button>("TavernBtn").clicked += TavernMenuOpen;
+        GetViewContainer().Q<Button>("MarketBtn").clicked += TavernMenuOpen;
         GetViewContainer().Q<Button>("OptionsBtn").clicked += SettingsMenuOpen;
     }
 

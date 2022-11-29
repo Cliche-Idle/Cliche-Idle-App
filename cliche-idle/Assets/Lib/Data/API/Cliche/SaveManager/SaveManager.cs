@@ -171,6 +171,7 @@ public class SaveManager : MonoBehaviour
 
             foreach (var item in save)
             {
+                // Only loads in things that actually exist. However the next save will overwrite the entire file.
                 var loadObject = SaveObjects.Find(element => GetComponentKey(element) == item.Key);
                 if (loadObject != null)
                 {

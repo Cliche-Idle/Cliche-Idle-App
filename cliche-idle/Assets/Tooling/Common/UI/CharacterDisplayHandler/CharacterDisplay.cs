@@ -20,7 +20,7 @@ public class CharacterDisplay : MonoBehaviour
     public ViewNavigator Navigator;
 
     // Visual data
-    public PlayerCharacterSheet PlayerCharacterData = new PlayerCharacterSheet();
+    public CharacterSheet PlayerCharacterData = new CharacterSheet();
 
     public VisualTreeAsset PlayerCharacterDisplay;
 

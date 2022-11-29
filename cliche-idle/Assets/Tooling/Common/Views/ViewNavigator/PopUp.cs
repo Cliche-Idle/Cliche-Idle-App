@@ -188,6 +188,7 @@ namespace UIViews
         {
             // Get the view data
             var popup = target as PopUp;
+            serializedObject.Update();
 
             // View setup is in its own foldout so it doesn't take up too much space on derived scripts
             _isFoldoutOpen = EditorGUILayout.BeginFoldoutHeaderGroup(_isFoldoutOpen, "View setup");
@@ -202,7 +203,7 @@ namespace UIViews
                 EditorGUILayout.Space(10);
 
                 _viewID.stringValue = EditorGUILayout.TextField("ID", popup.ID);
-                _viewNavigator.objectReferenceValue = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", popup.UXMLDocument, typeof(VisualTreeAsset), true);
+                _viewUIDoc.objectReferenceValue = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", popup.UXMLDocument, typeof(VisualTreeAsset), true);
                 _viewStatic.boolValue = EditorGUILayout.Toggle("Is Static", popup.IsStatic);
 
                 EditorGUI.BeginDisabledGroup(true);
@@ -219,7 +220,7 @@ namespace UIViews
 
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorGUILayout.Space(10);
-
+            serializedObject.ApplyModifiedProperties();
             // Draw the default inspector last so the script's UI can be separated. This will draw the auto UI as normal for derived scripts
             DrawDefaultInspector();
         }

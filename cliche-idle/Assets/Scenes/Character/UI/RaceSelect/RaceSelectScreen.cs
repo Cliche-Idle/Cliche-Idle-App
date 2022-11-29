@@ -9,7 +9,15 @@ using Cliche.UIElements;
 
 public class RaceSelectScreen : UIScript
 {
+    public CustomisationWindow CustomisationWindow;
+
+    public float IconSize = 400;
+
     private Label _raceDescriptionText;
+
+    private List<Button> _raceButtons = new List<Button>();
+
+    private Button _continueButton;
 
     private void Start()
     {
@@ -21,11 +29,10 @@ public class RaceSelectScreen : UIScript
         GetViewContainer().style.width = Length.Percent(100);
         GetViewContainer().style.height = Length.Percent(100);
         
-        var iconSize = 400;
-        
         var raceManifests = Resources.LoadAll<Race>(Manifests.Paths[typeof(Race)]);
-        var racesContainer = Navigator.Target.rootVisualElement.Q<VisualElement>("RaceContainer");
-        _raceDescriptionText = Navigator.Target.rootVisualElement.Q<Label>("RaceText");
+        var racesContainer = GetViewContainer().Q<VisualElement>("RaceContainer");
+        _raceDescriptionText = GetViewContainer().Q<Label>("RaceText");
+
         foreach (var raceManifest in raceManifests)
         {
             var raceSelectButton = new Button()
@@ -33,29 +40,41 @@ public class RaceSelectScreen : UIScript
                 name = raceManifest.Name,
                 text = "",
                 style = {
-                    height = iconSize,
-                    width = iconSize,
+                    height = IconSize,
+                    width = IconSize,
                     backgroundImage = raceManifest.Icon.texture
                 }
             };
-            // TODO: selection visual feedback
             raceSelectButton.clicked += () => {
                 UpdatePlayerRace(raceManifest.Name);
                 _raceDescriptionText.text = raceManifest.Description;
+                foreach (var button in _raceButtons)
+                {
+                    if (button.name != raceManifest.Name)
+                    {
+                        button.style.unityBackgroundImageTintColor = Color.grey;
+                    }
+                    else
+                    {
+                        button.style.unityBackgroundImageTintColor = Color.white;
+                    }
+                }
             };
+            _raceButtons.Add(raceSelectButton);
             racesContainer.Add(raceSelectButton);
         }
-        var continueButton = Navigator.Target.rootVisualElement.Q<Button>("ContinueButton");
-        continueButton.clicked += () => { 
+        _continueButton = GetViewContainer().Q<Button>("ContinueButton");
+        _continueButton.clicked += () => { 
             Navigator.ShowView("CustomisationScreen");
             HideView();
         };
-        _raceDescriptionText.text = raceManifests[0].Description;
+        _continueButton.SetEnabled(false);
     }
 
     private void UpdatePlayerRace(string raceID)
     {
-        GameObject.Find("CharacterCustomisation").GetComponent<CustomisationWindow>().PlayerRace = GetEnumValueFromString<Races>(raceID);
+        CustomisationWindow.SelectedPlayerRace = GetEnumValueFromString<Races>(raceID);
+        _continueButton.SetEnabled(true);
     }
 
     private T GetEnumValueFromString<T>(string enumName) where T : Enum

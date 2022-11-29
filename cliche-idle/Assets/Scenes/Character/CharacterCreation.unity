@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 200471701}
+  - component: {fileID: 200471702}
   m_Layer: 0
   m_Name: ConfirmPopUp
   m_TagString: Untagged
@@ -154,6 +155,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200471702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200471700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1910039c21adbfa408474281ff37232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 370880494}
+  <ID>k__BackingField: ConfirmCharacterPopup
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 95be8b566aaa58546bbf5a21967b1d53, type: 3}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: MainContainer
+  CharacterHandler: {fileID: 1660780270}
+  SaveManager: {fileID: 1660780271}
 --- !u!1 &370880493
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +274,8 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: MainContainer
+  CustomisationWindow: {fileID: 891546563}
+  IconSize: 400
 --- !u!4 &653498482
 Transform:
   m_ObjectHideFlags: 0
@@ -402,4 +426,89 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: MainContainer
-  PlayerRace: 0
+  CharacterHandler: {fileID: 1660780270}
+  SelectedPlayerRace: 0
+--- !u!1 &1660780269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660780272}
+  - component: {fileID: 1660780271}
+  - component: {fileID: 1660780270}
+  m_Layer: 0
+  m_Name: DataHoarder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1660780270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660780269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb76f43270d89fb418f5be3442423e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <Race>k__BackingField: 0
+  <ClassSpecName>k__BackingField: 
+  CharacterVisuals:
+    Name: 
+    Race: 2
+    BodyType: 0
+    SkinColor:
+      serializedVersion: 2
+      rgba: 4289647103
+    HairStyle: 8
+    HairColor:
+      serializedVersion: 2
+      rgba: 4278209430
+    BeardStyle: 0
+    BeardColor:
+      serializedVersion: 2
+      rgba: 4278209430
+    BrowStyle: 0
+    EyeColorPrimary:
+      serializedVersion: 2
+      rgba: 4286414080
+--- !u!114 &1660780271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660780269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8115b6289608e44881c74b5cb0ca82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AutoSaveEnabled>k__BackingField: 0
+  <AutoSaveInterval>k__BackingField: 120
+  <AutoLoadEnabled>k__BackingField: 0
+  SaveObjects:
+  - {fileID: 1660780270}
+--- !u!4 &1660780272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660780269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

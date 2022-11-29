@@ -9,10 +9,10 @@ using Cliche.UIElements;
 
 class PlayerCharacterDisplay : VisualElement
 {
-    private PlayerCharacterSheet _playerVisuals = new PlayerCharacterSheet();
+    private CharacterSheet _playerVisuals = new CharacterSheet();
 
     //
-    public PlayerCharacterSheet characterSheet
+    public CharacterSheet CharacterSheet
     {
         get { return _playerVisuals; }
         set { 
