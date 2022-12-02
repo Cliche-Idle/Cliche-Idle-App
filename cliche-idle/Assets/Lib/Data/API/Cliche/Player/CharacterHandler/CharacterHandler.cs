@@ -8,13 +8,13 @@ public class CharacterHandler : MonoBehaviour
     /// The player character's name.
     /// </summary>
     [field: SerializeField]
-    public string Name { get; private set;}
+    public string Name { get; private set; }
 
     /// <summary>
     /// The player character's race.
     /// </summary>
     [field: SerializeField]
-    public Races Race { get; private set;}
+    public Races Race { get; private set; }
 
     /// <summary>
     /// Currently unused, akin to player titles.

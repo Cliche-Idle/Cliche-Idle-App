@@ -10,6 +10,8 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+using Cliche.UIElements;
+
 public class IconPreview : EditorWindow
 {
     private List<OverlayLayer> OverlayLayers = new List<OverlayLayer>();
@@ -73,7 +75,7 @@ public class IconPreview : EditorWindow
     private void IconsInit()
     {
         VisualElement PreviewContainer = rootVisualElement.Q<VisualElement>("PreviewContainer");
-        rootVisualElement.Q<VisualElement>("Icon_Custom_Container").Add(new OverlayIcon("Icon_Custom", DefaultIcon, 250, 250));
+        rootVisualElement.Q<VisualElement>("Icon_Custom_Container").Add(new OverlayIcon(DefaultIcon) { name = "Icon_Custom", style = { width = 250, height = 250 } });
         Preview_Icon_Custom = rootVisualElement.Q<OverlayIcon>("Icon_Custom");
         // Initialise previews:
         foreach (int size in Preview_Sizes)
@@ -95,7 +97,7 @@ public class IconPreview : EditorWindow
                     marginBottom = 10
                 }
             });
-            PreviewContainer.Q<VisualElement>($"Icon_{size}_Container").Add(new OverlayIcon($"Icon_{size}", DefaultIcon, size, size));
+            PreviewContainer.Q<VisualElement>($"Icon_{size}_Container").Add(new OverlayIcon(DefaultIcon) { name = $"Icon_{size}", style = { width = size, height = size } });
             Preview_Icons.Add(PreviewContainer.Q<OverlayIcon>($"Icon_{size}"));
         }
     }
@@ -283,10 +285,18 @@ public class IconPreview : EditorWindow
         {
             // Add text overlay
             OverlayLayer layer = new OverlayLayer(Overlay_ID.value, Overlay_Position_Index.value, Overlay_Text.value, (Font)Overlay_TextFont.value, Overlay_TextSize.value, Overlay_TextColor.value);
-            Preview_Icon_Custom.AddOverlay(layer.ID, (OverlayAlignment)layer.Position, layer.Text, layer.TextFont, layer.TextSize, layer.TextColor);
+            Preview_Icon_Custom.AddOverlay(layer.ID, (OverlayAlignment)layer.Position, layer.Text);
+            var customIcon = Preview_Icon_Custom.GetOverlay(layer.ID);
+            customIcon.style.unityFont = layer.TextFont;
+            customIcon.style.fontSize = layer.TextSize;
+            customIcon.style.color = layer.TextColor;
             foreach (var previewIcon in Preview_Icons)
             {
-                previewIcon.AddOverlay(layer.ID, (OverlayAlignment)layer.Position, layer.Text, layer.TextFont, layer.TextSize, layer.TextColor);
+                previewIcon.AddOverlay(layer.ID, (OverlayAlignment)layer.Position, layer.Text);
+                var icon = previewIcon.GetOverlay(layer.ID);
+                icon.style.unityFont = layer.TextFont;
+                icon.style.fontSize = layer.TextSize;
+                icon.style.color = layer.TextColor;
             }
             OverlayLayers.Add(layer);
         }
@@ -353,7 +363,7 @@ public class IconPreview : EditorWindow
     private static VisualTreeAsset m_ItemRowTemplate;
     private ScrollView m_DetailSection;
 
-    private class OverlayLayer : ScriptableObject
+    private class OverlayLayer
     {
         public string ID = "";
         // Position for the overlay

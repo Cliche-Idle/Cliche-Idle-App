@@ -1,47 +1,60 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
 
-namespace UnityEngine.UIElements
+namespace Cliche.UIElements
 {
     public class OverlayIcon : VisualElement
     {
-        public string reference_item_ID;
+        public string ReferenceID { get; set; }
 
-        public new class UxmlFactory : UxmlFactory<OverlayIcon, VisualElement.UxmlTraits> {}
+        public new class UxmlFactory : UxmlFactory<OverlayIcon, UxmlTraits> { }
+
+        public new class UxmlTraits : VisualElement.UxmlTraits
+        {
+            UxmlStringAttributeDescription _referenceID = new UxmlStringAttributeDescription { name = "referenceID", defaultValue = "" };
+
+            public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
+            {
+                get { yield break; }
+            }
+
+            public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
+            {
+                base.Init(ve, bag, cc);
+                OverlayIcon oi = ((OverlayIcon)ve);
+                oi.ReferenceID = _referenceID.GetValueFromBag(bag, cc);
+            }
+        }
 
         public OverlayIcon()
         {
-            reference_item_ID = "";
+            style.backgroundImage = Resources.Load<Sprite>("icons/placeholder_250x250_cross2").texture;
+            style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+            style.height = 100;
+            style.width = 100;
         }
 
-        public OverlayIcon(string referenceItemID, Sprite iconSprite, float width, float height)
+        public OverlayIcon(Sprite iconSprite) : this()
         {
-            reference_item_ID = referenceItemID;
-            name = $"{reference_item_ID}";
-            style.height = height;
-            style.width = width;
             style.backgroundImage = iconSprite.texture;
         }
-    
-        public OverlayIcon(string referenceItemID, Sprite iconSprite) : this(referenceItemID, iconSprite, (float)iconSprite.rect.width, (float)iconSprite.rect.height) 
-        {
 
-        }
-
-        // * PUBLIC FUNCTIONS * //
 
         public void AddOverlay(string overlayID, OverlayAlignment position, Sprite icon)
         {
             if (icon != null)
             {
-                int overlayPositionIndex = Convert.ToInt32(Enum.Parse(typeof(OverlayAlignment), position.ToString()));
                 if (FindChild(overlayID) == null)
                 {
                     // Add the new image to the overlay stack
-                    AddNewIconOverlayElement(overlayID, overlayPositionIndex, icon);
+                    AddNewIconOverlayElement(overlayID, position, icon);
                 }
                 else
                 {
-                    throw new ArgumentException($"Overlay ID {overlayID} is already in use.", nameof(overlayID));
+                    throw new Exception($"Overlay ID \"{overlayID}\" is already in use.");
                 }
             }
             else
@@ -50,18 +63,27 @@ namespace UnityEngine.UIElements
             }
         }
 
-        public void AddOverlay(string overlayID, OverlayAlignment position, string text, Font font, float textSize, Color color)
+        public void AddOverlay(string overlayID, OverlayAlignment position, string text)
         {
-            int overlayPositionIndex = Convert.ToInt32(Enum.Parse(typeof(OverlayAlignment), position.ToString()));
             if (FindChild(overlayID) == null)
             {
                 // Add the new label to the overlay stack
-                AddNewTextOverlayElement(overlayID, overlayPositionIndex, text, font, textSize, color);
+                AddNewTextOverlayElement(overlayID, position, text);
             }
             else
             {
-                throw new ArgumentException($"Overlay ID {overlayID} is already in use.", nameof(overlayID));
+                throw new Exception($"Overlay ID \"{overlayID}\" is already in use.");
             }
+        }
+
+        /// <summary>
+        /// Returns the specified overlay's <see cref="VisualElement"/> (Either <see cref="VisualElement"/> or <see cref="Label"/>, manual conversion required).
+        /// </summary>
+        /// <param name="overlayID"></param>
+        /// <returns></returns>
+        public VisualElement GetOverlay(string overlayID)
+        {
+            return this.Q<VisualElement>(overlayID);
         }
 
         /// <summary>
@@ -86,28 +108,47 @@ namespace UnityEngine.UIElements
         }
 
         /// <summary>
-        /// Sets the visibility of the overlay with the specific ID.
-        /// If `visible` is not given, it inverts the overlay's current visibility setting; otherwise sets the visibility to the given value.
+        /// Sets the visibility of the specified Overlay.
+        /// If <paramref name="visible"/> is not given, it inverts the overlay's current visibility setting; otherwise sets the visibility to the given value.
         /// </summary>
         /// <param name="overlayID"></param>
-        /// <param name="visible"></param>
-        public void ToggleOverlay(string overlayID, bool? visible = null)
+        public void ToggleOverlay(string overlayID)
         {
-            var overlay = FindChild(overlayID);
+            var overlay = FindChild($"{overlayID}_container");
             if (overlay != null)
             {
-                if (visible == null)
+                if (overlay.style.visibility == Visibility.Visible)
                 {
-                    overlay.style.visibility = (overlay.style.visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible );
+                    overlay.style.visibility = Visibility.Hidden;
                 }
                 else
                 {
-                    overlay.style.visibility = (visible == true ? Visibility.Hidden : Visibility.Visible );
+                    overlay.style.visibility = Visibility.Visible;
                 }
             }
         }
 
-        // INTERNAL ----------------------------------- <summary>
+        /// <summary>
+        /// Sets the visibility of the specified Overlay.
+        /// </summary>
+        /// <param name="overlayID"></param>
+        /// <param name="visible"></param>
+        public void ToggleOverlay(string overlayID, bool visible)
+        {
+            var overlay = FindChild($"{overlayID}_container");
+            if (overlay != null)
+            {
+                if (visible == true)
+                {
+                    overlay.style.visibility = Visibility.Visible;
+                }
+                else
+                {
+                    overlay.style.visibility = Visibility.Hidden;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Finds and returns the VisualElement with the given name in this object's child list.
@@ -116,27 +157,23 @@ namespace UnityEngine.UIElements
         /// <returns></returns>
         private VisualElement FindChild(string name)
         {
-            var childOverlays = Children();
-            foreach (var child in childOverlays)
+            var child = this.Q<VisualElement>(name);
+            if (child == null)
             {
-                if (child.name == name)
-                {
-                    return child;
-                }
+                // Give proper heads up
+                //throw new NullReferenceException($"No Overlay with the name \"{name}\" could be found.");
             }
-            return null;
+            return child;
         }
 
-        private void AddNewIconOverlayElement(string overlayID, int position, Sprite icon)
+        private void AddNewIconOverlayElement(string overlayID, OverlayAlignment position, Sprite icon)
         {
-            // ? Might not be useful anymore; but keep an eye out on the scalar system
-            //var scaledIconSize = ScaleIconSize(layer.Icon.rect.size);
-            OverlayAlignmentStyle alignment = GetOverlayAlignment(position);
+            OverlayAlignmentStyle alignment = GetOverlayAlignmentStyle(position);
             // Calculate icon size in percent
             float IconWidth = (icon.rect.size.x / style.backgroundImage.value.texture.width) * 100;
             float IconHeight = (icon.rect.size.y / style.backgroundImage.value.texture.height) * 100;
-            // Override icon size for FILL option
-            if (((OverlayAlignment)position).ToString() == "Fill")
+
+            if (position == OverlayAlignment.Fill)
             {
                 IconWidth = 100;
                 IconHeight = 100;
@@ -156,7 +193,7 @@ namespace UnityEngine.UIElements
             VisualElement iconOverlay = new VisualElement
             {
                 name = overlayID,
-                style = { 
+                style = {
                     backgroundImage = icon.texture,
                     position = Position.Absolute,
                     width = Length.Percent(IconWidth),
@@ -169,10 +206,10 @@ namespace UnityEngine.UIElements
             //Debug.Log($"Adding new overlay icon {layer.ID}. Size: {scaledIconSize.x}w, {scaledIconSize.y}h.");
         }
 
-        private void AddNewTextOverlayElement(string overlayID, int position, string text, Font font, float textSize, Color color)
+        private void AddNewTextOverlayElement(string overlayID, OverlayAlignment position, string text)
         {
-            OverlayAlignmentStyle alignment = GetOverlayAlignment(position);
-            VisualElement iconOverlayContainer = new VisualElement
+            OverlayAlignmentStyle alignment = GetOverlayAlignmentStyle(position);
+            VisualElement textOverlayContainer = new VisualElement
             {
                 name = $"{overlayID}_container",
                 style = {
@@ -186,68 +223,60 @@ namespace UnityEngine.UIElements
             Label textOverlay = new Label
             {
                 name = overlayID,
-                style = { 
+                style = {
                     position = Position.Absolute,
-                    fontSize = textSize,
-                    unityFont = font,
-                    color = color,
+                    fontSize = 12,
                     unityTextAlign = TextAnchor.MiddleLeft
                 },
                 text = text
             };
-            iconOverlayContainer.Add(textOverlay);
-            Add(iconOverlayContainer);
+            textOverlayContainer.Add(textOverlay);
+            Add(textOverlayContainer);
 
             //Debug.Log($"Adding new overlay text {layer.ID}. Text: '{layer.Text}', fontSize: {layer.TextSize}px.");
         }
 
         /// <summary>
-        /// Calculates the coodinates on the base image, at which the Top-Left corner of the overlay image will be drawn.
-        /// This poit will be used as the origin point for rendering the rest of the image.
+        /// Gets the alignment of the overlay element in Style format.
         /// </summary>
-        /// <param name="positionIndex">The position index of the overlay image.</param>
+        /// <param name="position"></param>
         /// <returns></returns>
-        private OverlayAlignmentStyle GetOverlayAlignment(int positionIndex)
+        private OverlayAlignmentStyle GetOverlayAlignmentStyle(OverlayAlignment position)
         {
             // Default configuration is Top left, which is also used for Fill
             // (Index 1 and 5)
             OverlayAlignmentStyle alignment = new OverlayAlignmentStyle();
-            switch (positionIndex)
+            switch (position)
             {
-                case 0:
+                case OverlayAlignment.Center:
                     // Center
                     alignment.vertical = Justify.Center;
                     alignment.horizontal = Align.Center;
                     break;
-                case 2:
-                    // Top left
+                case OverlayAlignment.Fill:
+                case OverlayAlignment.TopLeft:
+                    // Top left and fill
                     alignment.vertical = Justify.FlexStart;
                     alignment.horizontal = Align.FlexStart;
                     break;
-                case 3:
+                case OverlayAlignment.TopRight:
                     // Top right
                     alignment.vertical = Justify.FlexEnd;
                     alignment.horizontal = Align.FlexStart;
                     break;
-                case 4:
+                case OverlayAlignment.BottomLeft:
                     // Bottom left
                     alignment.vertical = Justify.FlexStart;
                     alignment.horizontal = Align.FlexEnd;
                     break;
-                case 5:
+                case OverlayAlignment.BottomRight:
                     // Bottom right
                     alignment.vertical = Justify.FlexEnd;
                     alignment.horizontal = Align.FlexEnd;
                     break;
-                default:
-                    alignment.vertical = Justify.FlexStart;
-                    alignment.horizontal = Align.FlexStart;
-                    break;
             }
             return alignment;
         }
-
-        // * CLASSES * //
 
         private class OverlayAlignmentStyle
         {
@@ -257,7 +286,7 @@ namespace UnityEngine.UIElements
     }
 
     /// <summary>
-    /// Alignment of overlay layers
+    /// Alignment of overlay layers for <see cref="OverlayIcon"/>.
     /// </summary>
     public enum OverlayAlignment
     {
@@ -285,5 +314,5 @@ namespace UnityEngine.UIElements
         /// Aligns the overlay layer to the bottom left corner of the container.
         /// </summary>
         BottomRight = 5,
-    }   
+    }
 }

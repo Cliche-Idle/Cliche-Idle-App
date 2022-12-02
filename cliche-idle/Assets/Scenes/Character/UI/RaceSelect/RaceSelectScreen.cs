@@ -9,11 +9,12 @@ using Cliche.UIElements;
 
 public class RaceSelectScreen : UIScript
 {
-    public CustomisationWindow CustomisationWindow;
+    public CharacterHandler CharacterHandler;
 
     public float IconSize = 400;
 
     private Label _raceDescriptionText;
+    private Label _raceStatsText;
 
     private List<Button> _raceButtons = new List<Button>();
 
@@ -32,6 +33,7 @@ public class RaceSelectScreen : UIScript
         var raceManifests = Resources.LoadAll<Race>(Manifests.Paths[typeof(Race)]);
         var racesContainer = GetViewContainer().Q<VisualElement>("RaceContainer");
         _raceDescriptionText = GetViewContainer().Q<Label>("RaceText");
+        _raceStatsText = GetViewContainer().Q<Label>("StatsText");
 
         foreach (var raceManifest in raceManifests)
         {
@@ -48,6 +50,7 @@ public class RaceSelectScreen : UIScript
             raceSelectButton.clicked += () => {
                 UpdatePlayerRace(raceManifest.Name);
                 _raceDescriptionText.text = raceManifest.Description;
+                _raceStatsText.text = $"Strenght: {raceManifest.Strength},   Vitality: {raceManifest.Vitality}\nDexterity: {raceManifest.Dexterity},   Intelligence: {raceManifest.Intelligence}";
                 foreach (var button in _raceButtons)
                 {
                     if (button.name != raceManifest.Name)
@@ -73,7 +76,7 @@ public class RaceSelectScreen : UIScript
 
     private void UpdatePlayerRace(string raceID)
     {
-        CustomisationWindow.SelectedPlayerRace = GetEnumValueFromString<Races>(raceID);
+        CharacterHandler.CharacterVisuals.Race = GetEnumValueFromString<Races>(raceID);
         _continueButton.SetEnabled(true);
     }
 

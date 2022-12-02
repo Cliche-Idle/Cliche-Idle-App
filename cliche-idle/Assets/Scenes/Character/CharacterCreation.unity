@@ -274,7 +274,7 @@ MonoBehaviour:
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: MainContainer
-  CustomisationWindow: {fileID: 891546563}
+  CharacterHandler: {fileID: 1660780270}
   IconSize: 400
 --- !u!4 &653498482
 Transform:
@@ -427,7 +427,6 @@ MonoBehaviour:
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: MainContainer
   CharacterHandler: {fileID: 1660780270}
-  SelectedPlayerRace: 0
 --- !u!1 &1660780269
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UIViews;
+using Cliche.UIElements;
 
 public class CreateCharacterPopup : UIScript
 {
@@ -45,7 +46,7 @@ public class CreateCharacterPopup : UIScript
         var raceLabel = GetViewContainer().Q<Label>("PlayerRace");
         raceLabel.text = CharacterHandler.CharacterVisuals.Race.ToString();
 
-        var characterDisplay = GetViewContainer().Q<PlayerCharacterDisplay>();
+        var characterDisplay = GetViewContainer().Q<CharacterDisplay>();
         characterDisplay.CharacterSheet = CharacterHandler.CharacterVisuals;
         //
 
@@ -55,7 +56,7 @@ public class CreateCharacterPopup : UIScript
             CharacterHandler.CharacterVisuals.Name = _playerName;
             SaveManager.SaveUserState();
             // TODO: scene switch from character creator to actual game
-            //SceneManager.LoadScene("");
+            SceneManager.LoadScene("MainGameScreen");
         };
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UIViews;
+using Cliche.UIElements;
 
 public enum InventoryPopUpMode
 {
@@ -80,9 +81,12 @@ public class InventoryView : UIScript
                 itemID += $"__{item.VariantID}";
             }
             ItemManifest manifest = item.GetManifest();
-            OverlayIcon itemIcon = new OverlayIcon(itemID, manifest.Icon, 150, 150)
+            OverlayIcon itemIcon = new OverlayIcon(manifest.Icon)
             { 
+                ReferenceID = item.ID,
                 style = {
+                    width = 150,
+                    height = 150,
                     marginLeft = 10,
                     marginRight = 10,
                     marginTop = 10,
@@ -109,7 +113,7 @@ public class InventoryView : UIScript
             }
             itemIcon.RegisterCallback<ClickEvent>((ClickEvent evt) => {
                 var icon = (OverlayIcon)evt.currentTarget;
-                if (icon.reference_item_ID != null)
+                if (icon.ReferenceID != null)
                 {
                     evt.PreventDefault();
                     evt.StopImmediatePropagation();

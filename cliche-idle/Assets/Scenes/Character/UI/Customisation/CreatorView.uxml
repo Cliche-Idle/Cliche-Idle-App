@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/Scenes/Character/UI/OptionSelector.uss?fileID=7433441132597879392&amp;guid=2bc3f6071f9688e42850696f78438b70&amp;type=3#OptionSelector" />
     <ui:VisualElement name="CreatorContainer" style="align-items: center; margin-top: 10%; justify-content: space-between; height: 100%;">
         <ui:VisualElement name="MiddleContainer" style="width: 90%; height: 50%; min-width: auto; min-height: auto; align-items: center; justify-content: space-around; flex-direction: column;">
-            <PlayerCharacterDisplay name="CharacterDisplay" style="width: 50%; height: 75%; -unity-background-scale-mode: stretch-to-fill;" />
+            <Cliche.UIElements.CharacterDisplay name="CharacterDisplay" style="width: 50%; height: 75%;" />
             <ui:VisualElement name="RaceDesc" style="-unity-text-align: upper-left; justify-content: flex-start;">
                 <ui:Label display-tooltip-when-elided="true" name="RaceText" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px; -unity-text-align: upper-center; -unity-font: url(&apos;project://database/Assets/Font/EightBitDragon.ttf?fileID=12800000&amp;guid=9ffe84a89f0216a41b6332d667571b1f&amp;type=3#EightBitDragon&apos;); flex-wrap: nowrap; overflow: visible; white-space: normal; height: 200px;" />
             </ui:VisualElement>

@@ -11,7 +11,7 @@
                     <ui:Label text="Adventurer" display-tooltip-when-elided="true" name="PlayerTitle" style="font-size: 45px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <PlayerCharacterDisplay style="width: 50%; height: 50%; margin-top: 20%;" />
+            <Cliche.UIElements.CharacterDisplay style="width: 50%; height: 50%;" />
         </ui:VisualElement>
         <ui:Button text="Create your character" display-tooltip-when-elided="true" name="CreateCharacterConfirmButton" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(63, 27, 1); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); color: rgb(255, 255, 255); text-shadow: 2px 2px 0 rgb(0, 0, 0); font-size: 38px; border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; width: 80%; margin-bottom: 4%; height: 75px;" />
     </ui:VisualElement>

@@ -12,9 +12,6 @@ public class CustomisationWindow : UIScript
 {
     public CharacterHandler CharacterHandler;
 
-    // TODO: get rid of this, pass the option to DataHoarder
-    public Races SelectedPlayerRace;
-
     private enum CharacterCreatorOptionsMode
     {
         body,
@@ -23,7 +20,7 @@ public class CustomisationWindow : UIScript
         beard
     }
 
-    private PlayerCharacterDisplay _characterDisplay;
+    private CharacterDisplay _characterDisplay;
 
     private OptionSelector _optionSelector;
 
@@ -36,8 +33,8 @@ public class CustomisationWindow : UIScript
         GetViewContainer().style.width = Length.Percent(100);
         GetViewContainer().style.height = Length.Percent(100);
 
-        _characterDisplay = Navigator.Target.rootVisualElement.Q<PlayerCharacterDisplay>("CharacterDisplay");
-        _characterDisplay.Race = SelectedPlayerRace;
+        _characterDisplay = Navigator.Target.rootVisualElement.Q<CharacterDisplay>("CharacterDisplay");
+        _characterDisplay.Race = CharacterHandler.CharacterVisuals.Race;
 
         var bodyButton = Navigator.Target.rootVisualElement.Q<Button>("BodyOption");
         bodyButton.clicked += BodyTabOpen;
