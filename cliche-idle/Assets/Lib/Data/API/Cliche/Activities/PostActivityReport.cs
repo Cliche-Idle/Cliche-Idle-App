@@ -7,6 +7,12 @@ namespace Cliche.Activities
     /// </summary>
     public class PostActivityReport
     {
+        // TODO: make custom enum here
+        /// <summary>
+        /// The result of the activity.
+        /// </summary>
+        public ActivityStatus Status { get; private set; }
+        
         /// <summary>
         /// The total amount of damage taken during this activity.
         /// </summary>
@@ -32,13 +38,20 @@ namespace Cliche.Activities
         /// </summary>
         public Dictionary<ItemTypes, List<string>> ItemsReceived  { get; private set; }
     
-        public PostActivityReport(int damageTaken, int damageDealt, int xp, int gold, Dictionary<ItemTypes, List<string>> rewards)
+        public PostActivityReport(ActivityStatus status, int damageTaken, int damageDealt, int xp, int gold, Dictionary<ItemTypes, List<string>> rewards)
         {
+            Status = status;
             DamageTaken = damageTaken;
             DamageDealt = damageDealt;
             ExperienceGained = xp;
             GoldGained = gold;
             ItemsReceived = rewards;
         }
-    }   
+    } 
+    
+    public enum ActivityStatus
+    {
+        Fail,
+        Success,
+    }
 }

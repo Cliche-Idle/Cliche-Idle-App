@@ -13,6 +13,7 @@ public class AdventureBoard : UIScript
     public AdventureHandler Adventures;
 
     public AdventureDetailsPopup DetailsPopup;
+    public AdventureFinishPopup FinishPopup;
 
     private List<VisualElement> RequestSlots;
 
@@ -171,14 +172,10 @@ public class AdventureBoard : UIScript
         evt.PreventDefault();
         evt.StopImmediatePropagation();
         var requestSlot = (VisualElement)evt.currentTarget;
-        string adventureID = requestSlot.name;
         if (requestSlot.ClassListContains("CompletedAdventure"))
         {
-            requestSlot.Clear();
-            requestSlot.name = "request";
-            requestSlot.RemoveFromClassList("CompletedAdventure");
-            requestSlot.RemoveFromClassList("ActiveAdventure");
-            Adventures.FinishAdventure(adventureID);
+            FinishPopup.AdventureSlot = requestSlot;
+            FinishPopup.ShowView();
         }
     }
 }

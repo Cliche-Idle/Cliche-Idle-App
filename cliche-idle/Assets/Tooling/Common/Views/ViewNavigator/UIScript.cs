@@ -8,6 +8,7 @@ namespace UIViews
     /// <summary>
     /// Used to create <see cref="ViewNavigator"/> views.
     /// </summary>
+    //[ExecuteInEditMode]
     public class UIScript : MonoBehaviour
     {
         /// <summary>
@@ -196,6 +197,7 @@ namespace UIViews
                 if (ID != null && ID.Length != 0)
                 {
                     Navigator.RegisterView(this);
+                    IsViewActive = false;
                 }
                 else
                 {
@@ -211,13 +213,17 @@ namespace UIViews
 
         private void Update()
         {
-            // Don't run updates if the view is marked as static
-            if (IsStatic == false)
+            // Don't run update loop when running in the editor
+            if (Application.isPlaying)
             {
-                // Don't run updates if the view is not active
-                if (IsViewActive)
+                // Don't run updates if the view is marked as static
+                if (IsStatic == false)
                 {
-                    UIUpdate();
+                    // Don't run updates if the view is not active
+                    if (IsViewActive)
+                    {
+                        UIUpdate();
+                    }
                 }
             }
         }

@@ -51,9 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8115b6289608e44881c74b5cb0ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LowestAcceptedVersion>k__BackingField: 
   <AutoSaveEnabled>k__BackingField: 0
+  <AutoSaveInterval>k__BackingField: 120
   <AutoLoadEnabled>k__BackingField: 0
-  <SaveInterval>k__BackingField: 120
   SaveObjects:
   - {fileID: 2590612110745041331}
   - {fileID: 2590612110745041332}
@@ -74,34 +75,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb76f43270d89fb418f5be3442423e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Micah
-  <Race>k__BackingField: 1
+  <Name>k__BackingField: 
+  <Race>k__BackingField: 0
   <ClassSpecName>k__BackingField: Adventurer
-  CharacterVisual:
+  CharacterSheet:
     Name: 
     Race: 2
     BodyType: 0
     SkinColor:
       serializedVersion: 2
-      rgba: 0
-    HairStyle: 0
+      rgba: 4289647103
+    HairStyle: 8
     HairColor:
       serializedVersion: 2
-      rgba: 4278190080
+      rgba: 4278209430
     BeardStyle: 0
     BeardColor:
       serializedVersion: 2
-      rgba: 4278190080
+      rgba: 4278209430
     BrowStyle: 0
-    BrowColor:
-      serializedVersion: 2
-      rgba: 4278190080
     EyeColorPrimary:
       serializedVersion: 2
-      rgba: 4278190080
-    EyeColorSecondary:
-      serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4286414080
 --- !u!114 &2590612110745041332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHandlerAdventures>k__BackingField: 3
-  AvailableAdventures:
-  - basicTimed_Dev1_short 1
+  AvailableAdventures: []
   <MaxQueuedAdventures>k__BackingField: 1
   AdventureQueue: []
 --- !u!114 &2590612110745041333
@@ -179,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gold:
-    <Value>k__BackingField: 349
+    <Value>k__BackingField: 100
   DungeonTickets:
     <Value>k__BackingField: 0
 --- !u!114 &2590612110745040968
@@ -200,93 +194,9 @@ MonoBehaviour:
       <ItemType>k__BackingField: 0
       <ItemSubTypeHash>k__BackingField: 0
       <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 25
+      <MainStatValue>k__BackingField: 10
       <IsInstanceItem>k__BackingField: 1
       <VariantID>k__BackingField: 9ed19623-5b25-4b5b-8600-3c439e267cfb
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 25
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 86597690-aa1e-466b-a01a-97db4bd4425a
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 28
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: e20ac275-7ed3-4d9d-a534-ec8f5100f33a
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 27
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 6388b5ee-1244-4195-b7a5-badd30fb1f71
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 27
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: d47e3d2d-f441-4dd4-971b-e20ae4877b31
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 27
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 6a558d43-bb25-47a2-8e43-3d3ec4f9b0c3
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 29
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: b4c1cd65-c410-4a3c-bd43-f9f373aa03da
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 28
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 47658d06-2f34-410d-99cf-a6716c608fc7
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 30
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 4e40876f-4013-4b5c-9ff7-9c1490d22e2d
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 30
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 7fd793bd-bdf7-4e1a-832b-3186764be59c
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 30
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 17f7f834-101c-4693-86c4-79e1ace0361c
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 31
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: a933d5bb-ef1e-48df-9e2c-4f54e1f00764
-    - <ID>k__BackingField: advStartBlade
-      <ItemType>k__BackingField: 0
-      <ItemSubTypeHash>k__BackingField: 0
-      <MainStatType>k__BackingField: 0
-      <MainStatValue>k__BackingField: 33
-      <IsInstanceItem>k__BackingField: 1
-      <VariantID>k__BackingField: 60027776-a7f3-467a-9114-8a1641f0e41d
     <Sockets>k__BackingField: []
   Armour:
     _itemList: []
@@ -300,4 +210,4 @@ MonoBehaviour:
       <MainStatValue>k__BackingField: 0
       <IsInstanceItem>k__BackingField: 0
       <VariantID>k__BackingField: 
-      <Quantity>k__BackingField: 11
+      <Quantity>k__BackingField: 5

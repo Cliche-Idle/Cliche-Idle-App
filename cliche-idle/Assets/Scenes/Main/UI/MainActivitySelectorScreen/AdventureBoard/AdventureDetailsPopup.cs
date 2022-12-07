@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using Cliche.System;
+using Cliche.Activities;
 using UIViews;
 
 public class AdventureDetailsPopup : PopUp

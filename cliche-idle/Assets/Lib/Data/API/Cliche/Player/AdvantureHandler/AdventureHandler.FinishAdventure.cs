@@ -21,6 +21,11 @@ public partial class AdventureHandler
             // Determine if the adventure ended with a success or not
             var successChance = UnityEngine.Random.Range(1, 101);
             bool success = (successChance <= selectedAdventure.BaseChance);
+            ActivityStatus status = ActivityStatus.Fail;
+            if (success)
+            {
+                status = ActivityStatus.Success;
+            }
 
             var damageTaken = GetDamageTaken(selectedAdventure);
 
@@ -37,7 +42,7 @@ public partial class AdventureHandler
             statsHandler.Health.Take(damageTaken);
 
             // Generate activity end report
-            var activityEndReport = new PostActivityReport(damageTaken, 0, rewardXP, rewardGold, lootStream);
+            var activityEndReport = new PostActivityReport(status, damageTaken, 0, rewardXP, rewardGold, lootStream);
             
             Debug.Log($"Adventure end report ({adventureID}, success: {success}): -{damageTaken} HP, +{rewardXP} XP, +{rewardGold} Gold.");
 

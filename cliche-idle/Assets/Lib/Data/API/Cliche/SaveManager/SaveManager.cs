@@ -53,6 +53,16 @@ public class SaveManager : MonoBehaviour
     public bool AutoLoadEnabled { get; private set; } = true;
 
     /// <summary>
+    /// 
+    /// </summary>
+    public Action<bool> OnSave;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Action<bool> OnLoad;
+
+    /// <summary>
     /// The list of components that's state will be saved.
     /// </summary>
     [field: SerializeField]
@@ -178,30 +188,27 @@ public class SaveManager : MonoBehaviour
 
             string saveVersion = save["BundleVersion"].ToString();
 
-            // TODO: Save version checking
-            if (saveVersion == null)
+            if (String.IsNullOrEmpty(LowestAcceptedVersion) || saveVersion == LowestAcceptedVersion)
             {
-                
-            }
-            if (saveVersion == LowestAcceptedVersion)
-            {
-
+                foreach (var item in save)
+                {
+                    // Only loads in things that actually exist. However the next save will overwrite the entire file.
+                    var loadObject = SaveObjects.Find(element => GetComponentKey(element) == item.Key);
+                    if (loadObject != null)
+                    {
+                        JsonUtility.FromJsonOverwrite(item.Value.ToString(), loadObject);
+                    }
+                }
+                Debug.Log($"<color=green>Player data loaded from save-files.</color>\nVersion: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
             }
             else
             {
-
+                Debug.LogWarning($"Save file version is not allowed: Version: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
             }
-
-            foreach (var item in save)
-            {
-                // Only loads in things that actually exist. However the next save will overwrite the entire file.
-                var loadObject = SaveObjects.Find(element => GetComponentKey(element) == item.Key);
-                if (loadObject != null)
-                {
-                    JsonUtility.FromJsonOverwrite(item.Value.ToString(), loadObject);
-                }
-            }
-            Debug.Log($"<color=green>Player data loaded from save-files.</color>\nVersion: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
+        }
+        else
+        {
+            throw new FileNotFoundException(saveFilePath);
         }
     }
 
