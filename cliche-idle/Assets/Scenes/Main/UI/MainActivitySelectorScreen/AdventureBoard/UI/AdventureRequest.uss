@@ -1,4 +1,4 @@
-.AdventureComplete {
+.CompletedAdventure {
     border-left-color: rgba(255, 245, 0, 0.73);
     border-right-color: rgba(255, 245, 0, 0.73);
     border-top-color: rgba(255, 245, 0, 0.73);
@@ -11,4 +11,9 @@
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+
+.requestSlot {
+    width: 35%;
+    height: 40%;
 }

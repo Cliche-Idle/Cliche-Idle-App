@@ -1,0 +1,88 @@
+VisualElement {
+    -unity-font-definition: url('project://database/Assets/Editor/font/EightBitDragon%20SDF.asset?fileID=11400000&guid=f9e1b0c4b005f1147ba2d5a71dbed497&type=2#EightBitDragon SDF');
+    font-size: 40px;
+}
+
+.int-selector {
+    color: rgb(255, 255, 255);
+}
+
+.valueDecrease {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url('project://database/Assets/Images/inventory/statSubtract.png?fileID=2800000&guid=716ed79c69ddbc44abff6207d54b7e27&type=3#statSubtract');
+    -unity-background-scale-mode: scale-to-fit;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-text-align: upper-left;
+    font-size: 0;
+}
+
+.valueIncrease {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url('project://database/Assets/Images/inventory/statAdd.png?fileID=2800000&guid=6b53e4fc4ef53f34fb8250cd52133d5c&type=3#statAdd');
+    -unity-background-scale-mode: scale-to-fit;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-text-align: upper-left;
+    font-size: 0;
+}
+
+.valueLabel {
+    width: 30%;
+    height: 100%;
+    background-color: rgb(34, 27, 27);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.options-selector {
+    color: rgb(255, 255, 255);
+}
+
+.optionLeftScroll {
+    font-size: 0;
+    background-image: url('project://database/Assets/Images/creator/left_arrow.png?fileID=2800000&guid=f8def688c6fa17345b77ec862b83db1a&type=3#left_arrow');
+    -unity-background-scale-mode: scale-to-fit;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.optionRightScroll {
+    font-size: 0;
+    background-image: url('project://database/Assets/Images/creator/right_arrow.png?fileID=2800000&guid=a411c32dad6baeb41ac1d055f9642aee&type=3#right_arrow');
+    -unity-background-scale-mode: scale-to-fit;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.optionLabel {
+    background-color: rgb(34, 27, 27);
+    padding-left: 15px;
+    padding-right: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

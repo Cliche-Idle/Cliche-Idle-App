@@ -322,6 +322,17 @@ Transform:
   m_Father: {fileID: 48590670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703061848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590612110745041332, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+  m_PrefabInstance: {fileID: 2590612110329911991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3ea55d3d8dd544aa4b449d4aec92a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1092087290
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96b27910d4d5b6448d7a644166e0cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 0}
+  <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: UseItemPopUp
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
   <IsStatic>k__BackingField: 0
@@ -530,6 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1636096630}
   - component: {fileID: 1636096629}
+  - component: {fileID: 1636096631}
   m_Layer: 5
   m_Name: UI_MainActivitySelector_AdventureBoard
   m_TagString: Untagged
@@ -544,7 +556,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636096628}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b74e8848aa2a2a4ba773e839e0037f1, type: 3}
   m_Name: 
@@ -557,6 +569,8 @@ MonoBehaviour:
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: BaseContentContainer
   AdventureItemUXML: {fileID: 9197481963319205126, guid: ec93e83e0f268fa49b74b4761ae6740c, type: 3}
+  Adventures: {fileID: 703061848}
+  DetailsPopup: {fileID: 1636096631}
 --- !u!4 &1636096630
 Transform:
   m_ObjectHideFlags: 0
@@ -572,6 +586,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1636096631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636096628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16240aa0596caaa42bce98bcb7f64732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: AdventureDetailsPopup
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 38de18bd4b842bf43994fe9642502c8e, type: 3}
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
+  PopupBackgroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.78039217}
+  Adventures: {fileID: 703061848}
 --- !u!1 &1766228447
 GameObject:
   m_ObjectHideFlags: 0

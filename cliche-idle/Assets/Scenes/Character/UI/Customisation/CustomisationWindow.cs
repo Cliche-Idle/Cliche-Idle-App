@@ -34,7 +34,7 @@ public class CustomisationWindow : UIScript
         GetViewContainer().style.height = Length.Percent(100);
 
         _characterDisplay = Navigator.Target.rootVisualElement.Q<CharacterDisplay>("CharacterDisplay");
-        _characterDisplay.Race = CharacterHandler.CharacterVisuals.Race;
+        _characterDisplay.Race = CharacterHandler.CharacterSheet.Race;
 
         var bodyButton = Navigator.Target.rootVisualElement.Q<Button>("BodyOption");
         bodyButton.clicked += BodyTabOpen;
@@ -88,7 +88,7 @@ public class CustomisationWindow : UIScript
 
         var continueButton = Navigator.Target.rootVisualElement.Q<Button>("Create");
         continueButton.clicked += () => {
-            CharacterHandler.CharacterVisuals = _characterDisplay.CharacterSheet;
+            CharacterHandler.CharacterSheet = _characterDisplay.CharacterSheet;
             Navigator.ShowView("ConfirmCharacterPopup");
             HideView();
         };

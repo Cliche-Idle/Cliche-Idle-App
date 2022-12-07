@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 namespace Cliche.UIElements
 {
     /// <summary>
-    /// A selector that can contains and sidescroll through multiple options.
+    /// A selector that can sidescroll through multiple options.
     /// </summary>
     public class OptionSelector : VisualElement
     {
@@ -128,6 +128,7 @@ namespace Cliche.UIElements
         /// <typeparam name="T"></typeparam>
         public void SetOptionsFromEnum<T>() where T : Enum
         {
+            // TODO: make sure this works in a logical way
             // Assign to public Options to trigger update
             _options = Enum.GetNames(typeof(T));
             UpdateSelection(0, false);

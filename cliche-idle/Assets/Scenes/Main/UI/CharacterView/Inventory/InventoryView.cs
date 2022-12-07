@@ -76,13 +76,15 @@ public class InventoryView : UIScript
             var categoryCountLabel = categoryContainer.Q<Label>("CategoryCount");
             categoryCountLabel.text = $"{Convert.ToInt32(categoryCountLabel.text)+1}";
             string itemID = $"{item.ID}";
-            if (item.VariantID.Length != 0)
+            
+            if (item.VariantID != null && item.VariantID.Length > 0)
             {
                 itemID += $"__{item.VariantID}";
             }
             ItemManifest manifest = item.GetManifest();
             OverlayIcon itemIcon = new OverlayIcon(manifest.Icon)
             { 
+                name = itemID,
                 ReferenceID = item.ID,
                 style = {
                     width = 150,

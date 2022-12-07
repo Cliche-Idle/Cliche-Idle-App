@@ -23,7 +23,7 @@ public class BottomNavigation : UIScript
 
     private void AdventureMenuOpen()
     {
-        Navigator.ShowView("AdventureBoard");
+        Navigator.ShowView("AdventureBoardMenu");
     }
 
     private void InventoryMenuOpen()

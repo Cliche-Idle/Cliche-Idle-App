@@ -28,10 +28,16 @@ public class SaveManager : MonoBehaviour
     public string SavePath { get; private set; }
 
     /// <summary>
-    /// Controls wether or not auto save is enabled. This setting is only applied on startup.
+    /// Sets the lowest accepted save version number. Uses Unity's <see cref="PlayerSettings.bundleVersion"/>. If set to null, all saves are accepted.
     /// </summary>
     [field: SerializeField]
     [field: Header("Settings")]
+    public string LowestAcceptedVersion { get; private set; }
+
+    /// <summary>
+    /// Controls wether or not auto save is enabled. This setting is only applied on startup.
+    /// </summary>
+    [field: SerializeField]
     public bool AutoSaveEnabled { get; private set; } = false;
 
     /// <summary>
@@ -90,6 +96,7 @@ public class SaveManager : MonoBehaviour
     /// </summary>
     public void SaveUserState()
     {
+        // TODO: Selectively save only component data that actually changed, don't overwrite the whole file
         if (Directory.Exists(SavePath) == false)
         {
             Directory.CreateDirectory(SavePath);
@@ -109,7 +116,7 @@ public class SaveManager : MonoBehaviour
 
         foreach (var item in SaveObjects)
         {
-            // Funky double parsing but JSON.NET doesn't seem to like Unity (especially Colours)
+            // Funky double parsing because JSON.NET doesn't seem to like Unity by default (especially Colours)
             save.Add(GetComponentKey(item), JToken.Parse(JsonUtility.ToJson(item)));
         }
 
@@ -168,6 +175,22 @@ public class SaveManager : MonoBehaviour
         if (File.Exists(saveFilePath))
         {
             JObject save = JObject.Parse(File.ReadAllText(saveFilePath));
+
+            string saveVersion = save["BundleVersion"].ToString();
+
+            // TODO: Save version checking
+            if (saveVersion == null)
+            {
+                
+            }
+            if (saveVersion == LowestAcceptedVersion)
+            {
+
+            }
+            else
+            {
+
+            }
 
             foreach (var item in save)
             {

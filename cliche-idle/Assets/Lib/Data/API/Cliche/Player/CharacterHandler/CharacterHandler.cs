@@ -26,5 +26,5 @@ public class CharacterHandler : MonoBehaviour
     /// <summary>
     /// Contains information about the player character's appearance.
     /// </summary>
-    public CharacterSheet CharacterVisuals;
+    public CharacterSheet CharacterSheet;
 }

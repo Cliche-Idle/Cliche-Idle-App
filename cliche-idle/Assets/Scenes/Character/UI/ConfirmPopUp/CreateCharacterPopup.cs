@@ -44,18 +44,17 @@ public class CreateCharacterPopup : UIScript
         _nameLabel = GetViewContainer().Q<Label>("Name");
 
         var raceLabel = GetViewContainer().Q<Label>("PlayerRace");
-        raceLabel.text = CharacterHandler.CharacterVisuals.Race.ToString();
+        raceLabel.text = CharacterHandler.CharacterSheet.Race.ToString();
 
         var characterDisplay = GetViewContainer().Q<CharacterDisplay>();
-        characterDisplay.CharacterSheet = CharacterHandler.CharacterVisuals;
+        characterDisplay.CharacterSheet = CharacterHandler.CharacterSheet;
         //
 
         _createCharacterConfirmButton = GetViewContainer().Q<Button>("CreateCharacterConfirmButton");
         _createCharacterConfirmButton.SetEnabled(false);
         _createCharacterConfirmButton.clicked += () => {
-            CharacterHandler.CharacterVisuals.Name = _playerName;
+            CharacterHandler.CharacterSheet.Name = _playerName;
             SaveManager.SaveUserState();
-            // TODO: scene switch from character creator to actual game
             SceneManager.LoadScene("MainGameScreen");
         };
     }

@@ -76,7 +76,7 @@ public class RaceSelectScreen : UIScript
 
     private void UpdatePlayerRace(string raceID)
     {
-        CharacterHandler.CharacterVisuals.Race = GetEnumValueFromString<Races>(raceID);
+        CharacterHandler.CharacterSheet.Race = GetEnumValueFromString<Races>(raceID);
         _continueButton.SetEnabled(true);
     }
 
