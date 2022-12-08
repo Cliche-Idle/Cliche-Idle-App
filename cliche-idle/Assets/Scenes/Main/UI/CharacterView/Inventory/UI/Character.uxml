@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd">
+    <ui:VisualElement name="CharacterBG" style="background-image: url(&apos;project://database/Assets/Images/adventures/requestBg.png?fileID=2800000&amp;guid=2e9be8e1adfa8524ba0cd43343f3d938&amp;type=3#requestBg&apos;); width: 100%; height: 100%; align-items: center; justify-content: center;">
+        <ui:Label text="Name" display-tooltip-when-elided="true" name="CharacterName" style="-unity-font: url(&apos;project://database/Assets/Editor/font/EightBitDragon.ttf?fileID=12800000&amp;guid=48c60b7558e48b24285411a61c9f1be2&amp;type=3#EightBitDragon&apos;); color: rgba(0, 0, 0, 255); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px;" />
+        <Cliche.UIElements.CharacterDisplay style="width: 70%; height: 70%; align-items: auto;" />
+    </ui:VisualElement>
+</ui:UXML>
