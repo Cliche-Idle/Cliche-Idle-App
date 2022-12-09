@@ -4,7 +4,7 @@ using Cliche.System;
 public class ProgressionHandler : MonoBehaviour
 {
     //[field: SerializeField]
-    public IncreaseOnlyProperty Experience;
+    public IncreaseOnlyIntProperty Experience;
 
     public int Level
     {
@@ -38,5 +38,13 @@ public class ProgressionHandler : MonoBehaviour
             levelXP = Mathf.CeilToInt(Mathf.Pow((level / levelXpScalar), 2));
         }
         return levelXP;
+    }
+
+    public (int, int) GetLevelXpBands(int level)
+    {
+        var low = GetLevelXpFloor(level);
+        var high = GetLevelXpFloor(level + 1);
+        var range = new RangeInt(low, high);
+        return (low, high);
     }
 }

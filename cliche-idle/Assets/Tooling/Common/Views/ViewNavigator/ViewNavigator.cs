@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 namespace UIViews
 {
+    //[ExecuteInEditMode]
     public class ViewNavigator : MonoBehaviour
     {
         /// <summary>

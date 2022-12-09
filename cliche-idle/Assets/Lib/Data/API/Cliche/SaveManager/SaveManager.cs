@@ -69,7 +69,7 @@ public class SaveManager : MonoBehaviour
     [field: FormerlySerializedAs("SaveObjects")]
     private List<Component> SaveObjects;
 
-    private void Start()
+    private void Awake()
     {
         // Set save path based on editor
         if (Application.isEditor)
@@ -80,6 +80,10 @@ public class SaveManager : MonoBehaviour
         {
             SavePath = $"{Application.persistentDataPath}/{_saveSubPath}";
         }
+    }
+
+    private void Start()
+    {
         // Load save
         if (AutoLoadEnabled)
         {
@@ -159,6 +163,7 @@ public class SaveManager : MonoBehaviour
         try
         {
             LoadSaveFileContents($"{SavePath}/gamesave.json");
+            InvokeLoadEvent(true);
         }
         catch (Exception ex)
         {
@@ -168,6 +173,7 @@ public class SaveManager : MonoBehaviour
             try
             {
                 LoadSaveFileContents($"{SavePath}/gamesave.bak");
+                InvokeLoadEvent(true);
                 Debug.LogWarning("Backup save has been successfully loaded.");
             }
             catch (Exception ex2)
@@ -175,6 +181,7 @@ public class SaveManager : MonoBehaviour
                 Debug.LogError("Backup save file could not be loaded:");
                 Debug.LogError(ex2.Message);
                 Debug.LogError("User data can not be loaded.");
+                InvokeLoadEvent(false);
                 throw ex2;
             }   
         }
@@ -203,12 +210,20 @@ public class SaveManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Save file version is not allowed: Version: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
+                throw new ArgumentException($"Save file version is not allowed: Version: {save["BundleVersion"]}\nSaved on: {save["SaveDate_WINSTRING"]}");
             }
         }
         else
         {
             throw new FileNotFoundException(saveFilePath);
+        }
+    }
+
+    private void InvokeLoadEvent(bool state)
+    {
+        if (OnLoad != null)
+        {
+            OnLoad.Invoke(state);
         }
     }
 

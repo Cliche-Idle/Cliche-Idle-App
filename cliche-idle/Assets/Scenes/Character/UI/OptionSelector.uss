@@ -18,3 +18,23 @@
     border-top-width: 0;
     border-bottom-width: 0;
 }
+
+.NavButton {
+    background-color: rgb(217, 153, 11);
+    -unity-font-definition: url('project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&guid=33891e25a29ab1f4dbb2dd2483a11948&type=2#EightBitDragon SDF');
+    font-size: 50px;
+    border-left-color: rgb(58, 19, 13);
+    border-right-color: rgb(58, 19, 13);
+    border-top-color: rgb(58, 19, 13);
+    border-bottom-color: rgb(58, 19, 13);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 100%;
+    height: 100px;
+}

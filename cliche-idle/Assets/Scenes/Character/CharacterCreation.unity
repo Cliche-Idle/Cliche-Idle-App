@@ -170,6 +170,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 370880494}
   <ID>k__BackingField: ConfirmCharacterPopup
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 95be8b566aaa58546bbf5a21967b1d53, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
@@ -270,6 +271,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 370880494}
   <ID>k__BackingField: RaceSelect
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 15a6017464203a54d93d4872b90838ea, type: 3}
+  <ShowOnStart>k__BackingField: 1
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
@@ -422,6 +424,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 370880494}
   <ID>k__BackingField: CustomisationScreen
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: fef078b9b0e01c345b793a80793e49ed, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
@@ -436,6 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660780272}
+  - component: {fileID: 1660780273}
   - component: {fileID: 1660780271}
   - component: {fileID: 1660780270}
   m_Layer: 0
@@ -457,10 +461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb76f43270d89fb418f5be3442423e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
-  <Race>k__BackingField: 0
   <ClassSpecName>k__BackingField: 
-  CharacterVisuals:
+  CharacterSheet:
     Name: 
     Race: 2
     BodyType: 0
@@ -491,6 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8115b6289608e44881c74b5cb0ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LowestAcceptedVersion>k__BackingField: 
   <AutoSaveEnabled>k__BackingField: 0
   <AutoSaveInterval>k__BackingField: 120
   <AutoLoadEnabled>k__BackingField: 0
@@ -511,3 +514,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1660780273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660780269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2cae993bac32d41a538efe2c46eff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameSceneName: MainGameScreen
+  SaveManager: {fileID: 1660780271}
+  RunInEditor: 1

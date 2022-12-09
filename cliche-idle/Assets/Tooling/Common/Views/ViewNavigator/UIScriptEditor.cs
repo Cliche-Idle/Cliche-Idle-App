@@ -23,6 +23,7 @@ namespace UIViews
         private SerializedProperty _viewNavigator;
         private SerializedProperty _viewID;
         private SerializedProperty _viewUIDoc;
+        private SerializedProperty _showOnStart;
         private SerializedProperty _viewStatic;
         private SerializedProperty _viewDependency;
         private SerializedProperty _viewContainerID;
@@ -32,6 +33,7 @@ namespace UIViews
             _viewNavigator = serializedObject.FindProperty("<Navigator>k__BackingField");
             _viewID = serializedObject.FindProperty("<ID>k__BackingField");
             _viewUIDoc = serializedObject.FindProperty("<UXMLDocument>k__BackingField");
+            _showOnStart = serializedObject.FindProperty("<ShowOnStart>k__BackingField");
             _viewStatic = serializedObject.FindProperty("<IsStatic>k__BackingField");
             _viewDependency = serializedObject.FindProperty("<Dependency>k__BackingField");
             _viewContainerID = serializedObject.FindProperty("<ContainerID>k__BackingField");
@@ -56,6 +58,7 @@ namespace UIViews
 
                 _viewID.stringValue = EditorGUILayout.TextField("ID", view.ID);
                 _viewUIDoc.objectReferenceValue = (VisualTreeAsset)EditorGUILayout.ObjectField("UI Document", view.UXMLDocument, typeof(VisualTreeAsset), true);
+                _showOnStart.boolValue = EditorGUILayout.Toggle("Show on Start", view.ShowOnStart);
                 _viewStatic.boolValue = EditorGUILayout.Toggle("Is Static", view.IsStatic);
 
                 // This is purely for visual debug, so the toggle is disabled

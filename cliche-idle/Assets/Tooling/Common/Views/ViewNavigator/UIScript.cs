@@ -8,7 +8,7 @@ namespace UIViews
     /// <summary>
     /// Used to create <see cref="ViewNavigator"/> views.
     /// </summary>
-    //[ExecuteInEditMode]
+    [ExecuteInEditMode]
     public class UIScript : MonoBehaviour
     {
         /// <summary>
@@ -42,6 +42,13 @@ namespace UIViews
         [field: SerializeField]
         [field: HideInInspector]
         public VisualTreeAsset UXMLDocument { get; private set; }
+
+        /// <summary>
+        /// Sets whether or not the view is shown on <see cref="Start"/>.
+        /// </summary>
+        [field: SerializeField]
+        [field: HideInInspector]
+        public bool ShowOnStart { get; protected set; } = false;
 
         /// <summary>
         /// Sets whether or not the view is static. If set to <see langword="true"/>, <see cref="UIUpdate()"/> will never run. Default is <see langword="false"/>.
@@ -108,21 +115,28 @@ namespace UIViews
                             UXMLDocument.CloneTree(viewWrapperContainer);
                             viewWrapperContainer.name = WrapperVisualElementName;
 
-                            // The normal event syntax is more useful here than the Unity one, so lambda it 
+                            if (Application.isPlaying)
+                            {
+                                // The normal event syntax is more useful here than the Unity one, so lambda it 
+                                // OnEnterFocus
+                                viewWrapperContainer.RegisterCallback<AttachToPanelEvent>(evt => {
+                                    OnEnterFocus();
+                                    IsViewActive = true;
+                                });
 
-                            // OnEnterFocus
-                            viewWrapperContainer.RegisterCallback<AttachToPanelEvent>(evt => {
+                                // OnLeaveFocus
+                                viewWrapperContainer.RegisterCallback<DetachFromPanelEvent>(evt => {
+                                    OnLeaveFocus();
+                                    IsViewActive = false;
+                                });
+
+                                viewTargetContainer.Add(viewWrapperContainer);
+                            }
+                            else
+                            {
+                                viewTargetContainer.Add(viewWrapperContainer);
                                 OnEnterFocus();
-                                IsViewActive = true;
-                            });
-
-                            // OnLeaveFocus
-                            viewWrapperContainer.RegisterCallback<DetachFromPanelEvent>(evt => {
-                                OnLeaveFocus();
-                                IsViewActive = false;
-                            });
-
-                            viewTargetContainer.Add(viewWrapperContainer);
+                            }
                         }
                     }
                     else
@@ -208,6 +222,15 @@ namespace UIViews
             else
             {
                 throw new NullReferenceException($"View {ID} on {this.gameObject.name} does not have a UI Navigator instance assigned.");
+            }
+        }
+
+        private void Start()
+        {
+            HideView();
+            if (ShowOnStart)
+            {
+                ShowView();
             }
         }
 

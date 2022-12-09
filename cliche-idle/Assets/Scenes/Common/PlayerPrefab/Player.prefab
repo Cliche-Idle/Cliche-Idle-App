@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2590612110745041332}
   - component: {fileID: 2590612110745041333}
   - component: {fileID: 2590612110745041334}
-  - component: {fileID: 2590612110745041328}
   - component: {fileID: 2590612110745041335}
   - component: {fileID: 2590612110745040968}
   m_Layer: 0
@@ -60,7 +59,7 @@ MonoBehaviour:
   - {fileID: 2590612110745041332}
   - {fileID: 2590612110745041333}
   - {fileID: 2590612110745041334}
-  - {fileID: 2590612110745041328}
+  - {fileID: 0}
   - {fileID: 2590612110745041335}
   - {fileID: 2590612110745040968}
 --- !u!114 &2590612110745041331
@@ -139,27 +138,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f37bff8ca1d2d4cb39d2719c9115b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Intelligence:
+  <Health>k__BackingField:
     <Value>k__BackingField: 0
-  Dexterity:
+  <Intelligence>k__BackingField:
     <Value>k__BackingField: 0
-  Strength:
+  <Dexterity>k__BackingField:
     <Value>k__BackingField: 0
-  Vitality:
+  <Strength>k__BackingField:
     <Value>k__BackingField: 0
---- !u!114 &2590612110745041328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2590612110745040970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd02e52574920d42b790f1be147d1e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Value>k__BackingField: 100
+  <Vitality>k__BackingField:
+    <Value>k__BackingField: 0
 --- !u!114 &2590612110745041335
 MonoBehaviour:
   m_ObjectHideFlags: 0

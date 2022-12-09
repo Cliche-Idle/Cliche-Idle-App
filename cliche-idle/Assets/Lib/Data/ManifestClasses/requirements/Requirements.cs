@@ -19,8 +19,8 @@ public class Requirements : ScriptableObject
     /// <summary>
     /// The list of player class names that fulfill the requirement.
     /// </summary>
-    [field: SerializeField]
-    public List<string> ClassSpecName { get; private set; }
+    /*[field: SerializeField]
+    public List<string> ClassSpecName { get; private set; }*/
 
     /// <summary>
     /// The player level that fulfills the requirement.
@@ -35,19 +35,20 @@ public class Requirements : ScriptableObject
     public bool IsFulfilled()
     {
         var PlayerCharacter = GameObject.Find("Player").GetComponent<CharacterHandler>();
-        string userRace = PlayerCharacter.Race.ToString();
-        string userClassSpecName = PlayerCharacter.ClassSpecName;
+        string userRace = PlayerCharacter.CharacterSheet.Race.ToString();
+        //string userClassSpecName = PlayerCharacter.ClassSpecName;
         var PlayerProgression = GameObject.Find("Player").GetComponent<ProgressionHandler>();
         int userLevel = PlayerProgression.Level;
 
         if(Race.Find(race => race.ID == userRace) != null || Race.Count == 0)
         {
-            if(ClassSpecName.Contains(userClassSpecName) || ClassSpecName.Count == 0)
+            /*if(ClassSpecName.Contains(userClassSpecName) || ClassSpecName.Count == 0)
             {
-                if(Level <= userLevel || Level == 0)
-                {
-                    return true;
-                }
+                
+            }*/
+            if (Level <= userLevel || Level == 0)
+            {
+                return true;
             }
         }
         return false;

@@ -6,13 +6,6 @@ using UIViews;
 
 public class BottomNavigation : UIScript
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        ShowView();
-    }
-
     protected override void OnEnterFocus()
     {
         GetViewContainer().Q<Button>("AdventureBtn").clicked += AdventureMenuOpen;

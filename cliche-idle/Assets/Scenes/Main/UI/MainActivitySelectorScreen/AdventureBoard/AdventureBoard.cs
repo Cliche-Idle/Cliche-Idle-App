@@ -17,11 +17,6 @@ public class AdventureBoard : UIScript
 
     private List<VisualElement> RequestSlots;
 
-    void Start()
-    {
-        ShowView();
-    }
-
     protected override void UIUpdate()
     {
         if (Adventures.AdventureQueue.Count != 0)
@@ -83,8 +78,6 @@ public class AdventureBoard : UIScript
                     //
                     requestSlot.Q<Label>("DebugTitle").text = adventure.Title;
                     //
-                    // Start adventure on tile click
-                    // TODO: open adventure details dialogue instead
                     requestSlot.UnregisterCallback<ClickEvent>(OpenAdventureCompletePopup);
                     requestSlot.RegisterCallback<ClickEvent>(OpenAdventureStartPopup);
                     break;
@@ -98,8 +91,6 @@ public class AdventureBoard : UIScript
             {
                 if (requestSlot.name == adventureQueueItem.ID && requestSlot.ClassListContains("ActiveAdventure"))
                 {
-                    // Finish adventure on tile click
-                    // TODO: open adventure details dialogue instead
                     requestSlot.UnregisterCallback<ClickEvent>(OpenAdventureStartPopup);
                     requestSlot.RegisterCallback<ClickEvent>(OpenAdventureCompletePopup);
                     break;
