@@ -3,18 +3,12 @@ using UnityEngine;
 using Cliche.System;
 
 [System.Serializable]
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : AdjustableIntProperty
 {
     /// <summary>
     /// Event that fires when the player's health reaches 0.
     /// </summary>
-    public event EventHandler OnPlayerDeath;
-
-    /// <summary>
-    /// The current amount of health the player has.
-    /// </summary>
-    [field: SerializeField]
-    public int Value { get; private set; }
+    public Action OnPlayerDeath;
 
     /// <summary>
     /// Gets the maximum health the player can have.
@@ -23,9 +17,9 @@ public class PlayerHealth : MonoBehaviour
     {
         get {
             int baseHealth = 100;
-            int level = gameObject.GetComponent<ProgressionHandler>().Level;
+            int level = GameObject.Find("Player").GetComponent<ProgressionHandler>().Level;
             int levelBonus = Manifests.GetByID<IntervalValueModifier>("HealthBonusPerLevel").GetAmountFloored(level);
-            int vitalityBonus = Manifests.GetByID<IntervalValueModifier>("Vitality").GetAmountFloored(gameObject.GetComponent<StatsHandler>().Vitality.Value);
+            int vitalityBonus = Manifests.GetByID<IntervalValueModifier>("Vitality").GetAmountFloored(GameObject.Find("Player").GetComponent<StatsHandler>().Vitality.Value);
             return (baseHealth + levelBonus + vitalityBonus);
         }
     }
@@ -34,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     /// Grants the specified amount of health points to the player.
     /// </summary>
     /// <param name="amount"></param>
-    public void Grant (int amount)
+    public override void Grant (int amount)
     {
         Value += Mathf.Abs(amount);
         int maxHealth = Max;
@@ -42,23 +36,30 @@ public class PlayerHealth : MonoBehaviour
         {
             Value = maxHealth;
         }
+        InvokeValueChangeEvent();
     }
 
     /// <summary>
-    /// Removes the specified amount of health points to the player. If the health reaches zero, triggers the OnPlayerDeath event.
+    /// Removes the specified amount of health points to the player. If the health reaches zero, triggers the <see cref="OnPlayerDeath"/> event.
     /// </summary>
     /// <param name="amount"></param>
-    public void Take (int amount)
+    public override void Take (int amount)
     {
         Value -= Mathf.Abs(amount);
         // Backfill if negative
         if (Value < 0)
         {
             Value = 0;
-            if (OnPlayerDeath != null)
-            {
-                OnPlayerDeath.Invoke(this, null);
-            }
+            InvokePlayerDeathEvent();
+        }
+        InvokeValueChangeEvent();
+    }
+
+    private void InvokePlayerDeathEvent()
+    {
+        if (OnPlayerDeath != null)
+        {
+            OnPlayerDeath.Invoke();
         }
     }
 }

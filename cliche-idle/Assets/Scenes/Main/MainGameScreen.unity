@@ -205,6 +205,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: CS_InventoryManagement
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a32a80ea803635448b2f38f2f6a1a145, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 434186700}
@@ -226,6 +227,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: CS_InventoryEquippedItems
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 53d36caf4aaccad46953bf1499a544a1, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 434186700}
@@ -246,6 +248,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: CS_StatsManagement
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98b7026121be7b147bf611ad0cee2791, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 434186700}
@@ -265,6 +268,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: CS_SecondarySwitchMenu
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: daf7f410072743b4f9e6bf183938913f, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 434186700}
@@ -301,6 +305,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: CharacterManagementScreen
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 367b321e518f2154a9415cb17df6943e, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
@@ -417,17 +422,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1407186027 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2590612110745041328, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
-  m_PrefabInstance: {fileID: 2590612110329911991}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd02e52574920d42b790f1be147d1e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1407186029 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745041333, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
@@ -448,6 +442,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb76f43270d89fb418f5be3442423e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1407186031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590612110745040968, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+  m_PrefabInstance: {fileID: 2590612110329911991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32605c42368479b4ab27b391643597ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1407186032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590612110745041335, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+  m_PrefabInstance: {fileID: 2590612110329911991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a441aacb979cddd4c92144bd3c220622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1407186033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590612110745041334, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+  m_PrefabInstance: {fileID: 2590612110329911991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f37bff8ca1d2d4cb39d2719c9115b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1458133674
@@ -559,6 +586,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: UseItemPopUp
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 0
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
@@ -598,8 +626,9 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: AdventureBoardMenu
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 5e66e3f1f47683347a74b1910a7ac4c7, type: 3}
+  <ShowOnStart>k__BackingField: 1
   <IsStatic>k__BackingField: 0
-  <IsViewActive>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: BaseContentContainer
   AdventureItemUXML: {fileID: 9197481963319205126, guid: ec93e83e0f268fa49b74b4761ae6740c, type: 3}
@@ -636,6 +665,7 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: AdventureDetailsPopup
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 38de18bd4b842bf43994fe9642502c8e, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
@@ -657,10 +687,11 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: AdventureFinishPopup
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 2c230700f68b9d94081c87cd52b7c869, type: 3}
+  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
-  <ContainerID>k__BackingField: 
+  <ContainerID>k__BackingField: UIView__AdventureFinishPopup
   PopupBackgroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.78039217}
   Adventures: {fileID: 703061848}
 --- !u!1 &1766228447
@@ -726,11 +757,12 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: MainPlayerStatusBar
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98130d1d0e24b34488e01cf60619902e, type: 3}
-  <IsStatic>k__BackingField: 0
-  <IsViewActive>k__BackingField: 1
+  <ShowOnStart>k__BackingField: 1
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: BaseHeaderContainer
-  PlayerHealth: {fileID: 1407186027}
+  Stats: {fileID: 1407186033}
   PlayerProgression: {fileID: 1407186029}
   CharacterHandler: {fileID: 1407186030}
 --- !u!4 &1773429410
@@ -780,8 +812,9 @@ MonoBehaviour:
   <Navigator>k__BackingField: {fileID: 1458133677}
   <ID>k__BackingField: BottomNavBar
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 6da0f1987206e4f43856c5c39f53e1a1, type: 3}
+  <ShowOnStart>k__BackingField: 1
   <IsStatic>k__BackingField: 1
-  <IsViewActive>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
   <Dependency>k__BackingField: {fileID: 0}
   <ContainerID>k__BackingField: BaseFooterContainer
 --- !u!4 &2004442190
@@ -939,6 +972,18 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2590612110745041329, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+      propertyPath: SaveObjects.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590612110745041329, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+      propertyPath: SaveObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 1407186032}
+    - target: {fileID: 2590612110745041329, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+      propertyPath: SaveObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 1407186031}
+    - target: {fileID: 2590612110745041329, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
       propertyPath: <AutoLoadEnabled>k__BackingField
       value: 1
       objectReference: {fileID: 0}
@@ -950,5 +995,10 @@ PrefabInstance:
       propertyPath: <Race>k__BackingField
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2590612110745041334, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+      propertyPath: <Health>k__BackingField.<Value>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2590612110745041328, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}

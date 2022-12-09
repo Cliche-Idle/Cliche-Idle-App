@@ -20,11 +20,6 @@ public class RaceSelectScreen : UIScript
 
     private Button _continueButton;
 
-    private void Start()
-    {
-        ShowView();
-    }
-
     protected override void OnEnterFocus()
     {
         GetViewContainer().style.width = Length.Percent(100);

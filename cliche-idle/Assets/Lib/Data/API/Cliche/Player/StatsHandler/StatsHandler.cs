@@ -6,18 +6,25 @@ using Cliche.System;
 
 public class StatsHandler : MonoBehaviour
 {
+    [field: Header("Player health")]
+    [field: SerializeField]
+    public PlayerHealth Health { get; private set; } = new PlayerHealth();
 
+    [field: Header("Core stats")]
+    [field: SerializeField]
+    public CoreStat Intelligence { get; private set; } = new CoreStat("Intelligence");
 
+    [field: SerializeField]
+    public CoreStat Dexterity { get; private set; } = new CoreStat("Dexterity");
 
-    private void Awake() {
-        Health = gameObject.GetComponent<PlayerHealth>();
-    }
+    [field: SerializeField]
+    public CoreStat Strength { get; private set; } = new CoreStat("Strength");
 
-    [field: Header("General stats")]
-    public PlayerHealth Health { get; private set; }
+    [field: SerializeField]
+    public CoreStat Vitality { get; private set; } = new CoreStat("Vitality");
 
     /// <summary>
-    /// The players overall defence.
+    /// The player's overall defence, based on the currently equipped armour sets.
     /// </summary>
     public int Defence {
         get
@@ -32,6 +39,9 @@ public class StatsHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The player's overall defence, based on the currently equipped armour sets.
+    /// </summary>
     public int Attack {
         get
         {
@@ -45,83 +55,29 @@ public class StatsHandler : MonoBehaviour
         }
     }
 
-    [field: HeaderAttribute("Core stats")]
-    public Intelligence Intelligence;
-
-    public Dexterity Dexterity;
-
-    public Strength Strength;
-
-    public Vitality Vitality;
-
+    /// <summary>
+    /// Gets the number of currently unallocated stat points.
+    /// </summary>
+    /// <returns></returns>
     public int GetFreeStatPoints()
     {
         int CurrentLevelPoints = Manifests.GetByID<IntervalValueModifier>("StatPointsPerLevel").GetAmountFloored(gameObject.GetComponent<ProgressionHandler>().Level);
-        string raceID = gameObject.GetComponent<CharacterHandler>().Race.ToString();
+        string raceID = gameObject.GetComponent<CharacterHandler>().CharacterSheet.Race.ToString();
         Race raceData = Manifests.GetByID<Race>(raceID);
         int AllocatedStatPoints = ((Intelligence.Value - raceData.Intelligence) + (Dexterity.Value - raceData.Dexterity) + (Strength.Value - raceData.Strength) + (Vitality.Value - raceData.Vitality));
         return (CurrentLevelPoints - AllocatedStatPoints);
     }
 
+    /// <summary>
+    /// Gets the base amount of base stat points in a given category based on the player's race.
+    /// </summary>
+    /// <param name="statName"></param>
+    /// <returns></returns>
     public int GetRacialBaseStatAmount(string statName)
     {
-        string raceID = gameObject.GetComponent<CharacterHandler>().Race.ToString();
+        string raceID = gameObject.GetComponent<CharacterHandler>().CharacterSheet.Race.ToString();
         Race raceData = Manifests.GetByID<Race>(raceID);
         int stat = (int)raceData.GetType().GetProperty(statName).GetValue(raceData);
         return stat;
     }
 }
-
-public abstract class CoreStat
-{
-    // FIXME: add intrinsic manifest access
-
-    [field: SerializeField]
-    public int Value { get; private set; }
-
-    public int MinimumValue {
-        get
-        {
-            string StatName = GetType().Name;
-            int racialStatPoints = GameObject.Find("Player").GetComponent<StatsHandler>().GetRacialBaseStatAmount(StatName);
-            return racialStatPoints;
-        }
-    }
-
-    public void Grant (int amount)
-    {
-        int freeStatPoints = GameObject.Find("Player").GetComponent<StatsHandler>().GetFreeStatPoints();
-        if (freeStatPoints >= Mathf.Abs(amount))
-        {
-            Value += Mathf.Abs(amount);
-        }
-    }
-
-    public void Take (int amount)
-    {
-        string raceID = GameObject.Find("Player").GetComponent<CharacterHandler>().Race.ToString();
-        Race raceData = Manifests.GetByID<Race>(raceID);
-        string StatName = GetType().Name;
-        int racialStatPoints = GameObject.Find("Player").GetComponent<StatsHandler>().GetRacialBaseStatAmount(StatName);
-        if ((Value - racialStatPoints) >= Mathf.Abs(amount))
-        {
-            Value -= Mathf.Abs(amount);
-        }
-        else
-        {
-            Debug.LogError($"Can not TAKE stat point from category {StatName}. It would be either below 0 or the racial minimum.");
-        }
-    } 
-}
-
-[System.Serializable]
-public class Intelligence : CoreStat { }
-
-[System.Serializable]
-public class Dexterity : CoreStat { }
-
-[System.Serializable]
-public class Strength : CoreStat { }
-
-[System.Serializable]
-public class Vitality : CoreStat { }

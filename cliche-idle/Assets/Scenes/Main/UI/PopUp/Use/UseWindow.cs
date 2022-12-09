@@ -18,9 +18,6 @@ public class UseWindow : PopUp
         LoadPopUpContents();
     }
 
-    // FIXME: Consumable title count is not updating
-    // Apparently this seems to be working? Altough this script doesn't use the UI update loop
-
     // TODO: Visibly disable button if consumable runs out
 
     private void LoadPopUpContents()

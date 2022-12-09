@@ -310,6 +310,7 @@ namespace Cliche.UIElements
 
         private VisualElement GenerateUnderwearStructure()
         {
+            // TODO: add proper outfit layer generation
             VisualElement outfitContainer = new VisualElement()
             {
                 name = "outfitContainer",
