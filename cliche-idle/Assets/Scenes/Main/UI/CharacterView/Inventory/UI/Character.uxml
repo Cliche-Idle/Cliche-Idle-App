@@ -5,6 +5,10 @@
         <ui:VisualElement name="CharacterBG" style="background-image: url(&apos;project://database/Assets/Images/adventures/requestBg.png?fileID=2800000&amp;guid=2e9be8e1adfa8524ba0cd43343f3d938&amp;type=3#requestBg&apos;); width: 50%; height: 100%; align-items: center; justify-content: center;">
             <ui:Label text="Name" display-tooltip-when-elided="true" name="CharacterName" />
             <Cliche.UIElements.CharacterDisplay style="width: 70%; height: 70%; align-items: auto;" />
+            <ui:VisualElement name="GoldContainer" style="flex-direction: row; width: 80%; justify-content: center; align-items: center;">
+                <ui:Label text="99999" display-tooltip-when-elided="true" name="GoldAmount" />
+                <ui:VisualElement name="Icon" style="background-image: url(&apos;project://database/Assets/Images/inventory/coin.png?fileID=2800000&amp;guid=9b622b2df152db64289d5ad7aae8da92&amp;type=3#coin&apos;); width: 40px; height: 44px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:Instance template="StatOverview" name="StatOverview" style="width: 50%;" />
     </ui:VisualElement>

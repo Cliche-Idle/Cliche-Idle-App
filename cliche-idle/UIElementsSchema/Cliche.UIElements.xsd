@@ -19,6 +19,24 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="HSVColorPicker" substitutionGroup="engine:VisualElement" xmlns:q1="Cliche.UIElements" type="q1:HSVColorPickerType" />
+  <xs:complexType name="EquipmentSocketType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EquipmentSocket" substitutionGroup="engine:VisualElement" xmlns:q2="Cliche.UIElements" type="q2:EquipmentSocketType" />
   <xs:complexType name="IntSelectorType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -39,7 +57,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="IntSelector" substitutionGroup="engine:VisualElement" xmlns:q2="Cliche.UIElements" type="q2:IntSelectorType" />
+  <xs:element name="IntSelector" substitutionGroup="engine:VisualElement" xmlns:q3="Cliche.UIElements" type="q3:IntSelectorType" />
   <xs:complexType name="OptionSelectorType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -58,7 +76,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="OptionSelector" substitutionGroup="engine:VisualElement" xmlns:q3="Cliche.UIElements" type="q3:OptionSelectorType" />
+  <xs:element name="OptionSelector" substitutionGroup="engine:VisualElement" xmlns:q4="Cliche.UIElements" type="q4:OptionSelectorType" />
   <xs:complexType name="OverlayIconType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -77,7 +95,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="OverlayIcon" substitutionGroup="engine:VisualElement" xmlns:q4="Cliche.UIElements" type="q4:OverlayIconType" />
+  <xs:element name="OverlayIcon" substitutionGroup="engine:VisualElement" xmlns:q5="Cliche.UIElements" type="q5:OverlayIconType" />
   <xs:complexType name="CharacterDisplayType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -95,7 +113,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="CharacterDisplay" substitutionGroup="engine:VisualElement" xmlns:q5="Cliche.UIElements" type="q5:CharacterDisplayType" />
+  <xs:element name="CharacterDisplay" substitutionGroup="engine:VisualElement" xmlns:q6="Cliche.UIElements" type="q6:CharacterDisplayType" />
   <xs:complexType name="FloatSliderType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -116,5 +134,5 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="FloatSlider" substitutionGroup="engine:VisualElement" xmlns:q6="Cliche.UIElements" type="q6:FloatSliderType" />
+  <xs:element name="FloatSlider" substitutionGroup="engine:VisualElement" xmlns:q7="Cliche.UIElements" type="q7:FloatSliderType" />
 </xs:schema>
