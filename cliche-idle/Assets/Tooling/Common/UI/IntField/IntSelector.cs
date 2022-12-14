@@ -59,7 +59,17 @@ namespace Cliche.UIElements
         /// <summary>
         /// Event that occurs when the field's value changes.
         /// </summary>
-        public Action<int> ValueChange;
+        public Action<int> OnValueChange;
+
+        /// <summary>
+        /// Event that occurs when the field's value increases.
+        /// </summary>
+        public Action OnValueIncrease;
+
+        /// <summary>
+        /// Event that occurs when the field's value decreases.
+        /// </summary>
+        public Action OnValueDecrease;
 
         /// <summary>
         /// The label that displays the selected option.
@@ -131,8 +141,15 @@ namespace Cliche.UIElements
             valueDecreaseButton.AddToClassList("valueDecrease");
             valueDecreaseButton.AddToClassList("valueChangeButton");
             valueDecreaseButton.clicked += () => {
-                _value--;
-                UpdateValue();
+                if (_value - 1 >= lowValue)
+                {
+                    _value--;
+                    UpdateValue();
+                    if (OnValueDecrease != null)
+                    {
+                        OnValueDecrease.Invoke();
+                    }
+                }
             };
 
             _valueLabel = new Label()
@@ -162,8 +179,15 @@ namespace Cliche.UIElements
             valueIncreaseButton.AddToClassList("valueIncrease");
             valueIncreaseButton.AddToClassList("valueChangeButton");
             valueIncreaseButton.clicked += () => {
-                _value++;
-                UpdateValue(); 
+                if (_value + 1 <= highValue)
+                {
+                    _value++;
+                    UpdateValue();
+                    if (OnValueIncrease != null)
+                    {
+                        OnValueIncrease.Invoke();
+                    }
+                }
             };
 
             Add(valueDecreaseButton);
@@ -173,9 +197,10 @@ namespace Cliche.UIElements
 
         private void UpdateValue()
         {
-            if (ValueChange != null)
+            _valueLabel.text = _value.ToString();
+            if (OnValueChange != null)
             {
-                ValueChange.Invoke(value);
+                OnValueChange.Invoke(value);
             }
         }
     }

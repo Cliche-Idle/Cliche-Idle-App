@@ -1,33 +1,34 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scenes/Common/CommonStyling.uss?fileID=7433441132597879392&amp;guid=8c5108de7f42d0649b6d32b2cf7ab5f9&amp;type=3#CommonStyling" />
     <ui:VisualElement name="OverviewBg" style="width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/Images/adventures/requestBg.png?fileID=2800000&amp;guid=2e9be8e1adfa8524ba0cd43343f3d938&amp;type=3#requestBg&apos;); padding-left: 35px; padding-right: 35px; padding-top: 35px; padding-bottom: 35px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: space-between; align-items: center;">
-        <ui:VisualElement name="CombatStat" style="flex-direction: row; align-items: center; justify-content: space-around; width: 100%;">
-            <ui:VisualElement name="Attack" style="flex-direction: row; align-items: center;">
-                <ui:Label text="Num" display-tooltip-when-elided="true" name="AtkValue" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 20px; color: rgba(0, 0, 0, 255);" />
-                <ui:VisualElement name="AttackIcon" style="background-image: resource(&apos;StatIcons/attack&apos;); width: 40px; height: 40px;" />
+        <ui:VisualElement name="CombatStat" style="flex-direction: row; align-items: center; justify-content: space-around; width: 100%; margin-top: 5%;">
+            <ui:VisualElement name="Attack" style="flex-direction: row; align-items: center; justify-content: center; width: 40%;">
+                <ui:Label text="000" display-tooltip-when-elided="true" name="AtkValue" style="width: 40%; -unity-text-align: upper-right;" />
+                <ui:VisualElement name="AttackIcon" class="Icon" style="background-image: resource(&apos;StatIcons/attack&apos;); width: 50px; height: 50px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Defence" style="flex-direction: row; align-items: center;">
-                <ui:Label text="Num" display-tooltip-when-elided="true" name="DefValue" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 20px; color: rgba(0, 0, 0, 255);" />
-                <ui:VisualElement name="DefenceIcon" style="background-image: resource(&apos;StatIcons/defence&apos;); width: 40px; height: 40px;" />
+            <ui:VisualElement name="Defence" style="flex-direction: row; align-items: center; width: 40%; justify-content: center;">
+                <ui:Label text="000" display-tooltip-when-elided="true" name="DefValue" style="width: 40%; -unity-text-align: upper-right;" />
+                <ui:VisualElement name="DefenceIcon" class="Icon" style="background-image: resource(&apos;StatIcons/defence&apos;); width: 50px; height: 50px;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Stats" style="width: 70%; height: 60%; justify-content: space-between; align-items: stretch;">
             <ui:VisualElement name="StrRow" style="flex-direction: row; justify-content: space-between;">
-                <ui:Label text="Str." display-tooltip-when-elided="true" name="Str" style="font-size: 30px; color: rgba(0, 0, 0, 255); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
-                <ui:Label text="#" display-tooltip-when-elided="true" name="StrValue" style="font-size: 30px; color: rgba(0, 0, 0, 255); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
+                <ui:Label text="Str." display-tooltip-when-elided="true" name="Str" />
+                <ui:Label text="00" display-tooltip-when-elided="true" name="StrValue" />
             </ui:VisualElement>
             <ui:VisualElement name="DexRow" style="flex-direction: row; justify-content: space-between;">
-                <ui:Label text="Dex." display-tooltip-when-elided="true" name="Dex" style="font-size: 30px; color: rgb(0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
-                <ui:Label text="#" display-tooltip-when-elided="true" name="DexValue" style="font-size: 30px; color: rgb(0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
+                <ui:Label text="Dex." display-tooltip-when-elided="true" name="Dex" />
+                <ui:Label text="00" display-tooltip-when-elided="true" name="DexValue" />
             </ui:VisualElement>
             <ui:VisualElement name="VitRow" style="flex-direction: row; justify-content: space-between;">
-                <ui:Label text="Vit." display-tooltip-when-elided="true" name="Vit" style="font-size: 30px; color: rgb(0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
-                <ui:Label text="#" display-tooltip-when-elided="true" name="VitValue" style="font-size: 30px; color: rgb(0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
+                <ui:Label text="Vit." display-tooltip-when-elided="true" name="Vit" />
+                <ui:Label text="00" display-tooltip-when-elided="true" name="VitValue" />
             </ui:VisualElement>
             <ui:VisualElement name="IntRow" style="flex-direction: row; justify-content: space-between;">
-                <ui:Label text="Int." display-tooltip-when-elided="true" name="Int" style="font-size: 30px; color: rgb(0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
-                <ui:Label text="#" display-tooltip-when-elided="true" name="IntValue" style="font-size: 30px; color: rgb(0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;);" />
+                <ui:Label text="Int." display-tooltip-when-elided="true" name="Int" />
+                <ui:Label text="00" display-tooltip-when-elided="true" name="IntValue" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button text="Attributes" display-tooltip-when-elided="true" enable-rich-text="false" name="StatsBtn" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 30px; color: rgba(0, 0, 0, 255); background-color: rgba(223, 151, 5, 255); -unity-text-outline-color: rgba(129, 88, 9, 255); border-left-color: rgb(129, 88, 9); border-right-color: rgb(129, 88, 9); border-top-color: rgb(129, 88, 9); border-bottom-color: rgb(129, 88, 9); border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px;" />
+        <ui:Button text="Attributes" display-tooltip-when-elided="true" enable-rich-text="false" name="StatsBtn" class="NavButton" style="margin-bottom: 5%; width: 75%;" />
     </ui:VisualElement>
 </ui:UXML>

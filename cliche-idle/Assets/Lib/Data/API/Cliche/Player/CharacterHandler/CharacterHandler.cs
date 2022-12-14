@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class CharacterHandler : MonoBehaviour
     /// Currently unused, akin to player titles.
     /// </summary>
     [field: SerializeField]
+    [Obsolete]
     public string ClassSpecName { get; private set; }
 
     /// <summary>

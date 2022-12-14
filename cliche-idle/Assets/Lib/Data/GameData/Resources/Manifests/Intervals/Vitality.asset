@@ -15,7 +15,7 @@ MonoBehaviour:
   <InternalDescription>k__BackingField: Sets the amount of bonus max health points
     per vitality point
   <GameDescription>k__BackingField: Your vitality stat grants bonuses to your max
-    health, helping
+    health, helping you stay alive longer.
   <Interval>k__BackingField: 1
   <Value>k__BackingField: 5
   <IsPercentValue>k__BackingField: 0

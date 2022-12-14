@@ -6,7 +6,7 @@ namespace Cliche.System
 {
     public partial class Manifests
     {
-        public static Dictionary<Type, string> Paths = new Dictionary<Type, string>()
+        public static readonly Dictionary<Type, string> Paths = new Dictionary<Type, string>()
         {
             { typeof(SingleValueModifier), "Manifests/Singles" },
             { typeof(RangeValueModifier), "Manifests/Ranges" },

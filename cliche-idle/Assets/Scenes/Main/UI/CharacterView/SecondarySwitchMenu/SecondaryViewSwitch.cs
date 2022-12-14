@@ -15,12 +15,18 @@ public class SecondaryViewSwitch : UIScript
     private void SwitchToStatsMenu()
     {
         Navigator.ShowView("CS_StatsManagement");
-        Navigator.HideView("CS_InventoryManagement");
+        Navigator.HideView("CS_CharacterSheet");
+        Navigator.HideView("CS_InventoryEquippedItems");
+        HideView();
+        ShowView();
     }
 
     private void SwitchToInventoryMenu()
     {
+        Navigator.HideView("CS_StatsManagement");
+        Navigator.ShowView("CS_CharacterSheet");
         Navigator.ShowView("CS_InventoryEquippedItems");
-        Navigator.ShowView("CS_InventoryManagement");
+        HideView();
+        ShowView();
     }
 }

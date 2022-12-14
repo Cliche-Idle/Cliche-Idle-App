@@ -12,16 +12,24 @@ public class StatsHandler : MonoBehaviour
 
     [field: Header("Core stats")]
     [field: SerializeField]
-    public CoreStat Intelligence { get; private set; } = new CoreStat("Intelligence");
+    public CoreStat Intelligence { get; private set; }
 
     [field: SerializeField]
-    public CoreStat Dexterity { get; private set; } = new CoreStat("Dexterity");
+    public CoreStat Dexterity { get; private set; }
 
     [field: SerializeField]
-    public CoreStat Strength { get; private set; } = new CoreStat("Strength");
+    public CoreStat Strength { get; private set; }
 
     [field: SerializeField]
-    public CoreStat Vitality { get; private set; } = new CoreStat("Vitality");
+    public CoreStat Vitality { get; private set; }
+
+    private void Awake()
+    {
+        Intelligence = new CoreStat("Intelligence");
+        Dexterity = new CoreStat("Dexterity");
+        Strength = new CoreStat("Strength");
+        Vitality = new CoreStat("Vitality");
+    }
 
     /// <summary>
     /// The player's overall defence, based on the currently equipped armour sets.

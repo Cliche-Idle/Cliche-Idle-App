@@ -132,8 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649014}
+  - component: {fileID: 1649015}
   m_Layer: 5
-  m_Name: UI_Inventory
+  m_Name: UI_InventoryManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,14 +147,37 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649013}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 434186701}
-  m_RootOrder: 0
+  m_Father: {fileID: 48590670}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1649015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf629d12b660e4e418f8455ff9c99bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: CS_InventoryManagement
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a32a80ea803635448b2f38f2f6a1a145, type: 3}
+  <ShowOnStart>k__BackingField: 0
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
+  InventoryCategoryUXML: {fileID: 9197481963319205126, guid: 639486a98b962834899f7107b927f757, type: 3}
+  InventoryType: 0
+  SubTypeHash: -1
 --- !u!1 &48590669
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,11 +188,10 @@ GameObject:
   m_Component:
   - component: {fileID: 48590670}
   - component: {fileID: 48590672}
-  - component: {fileID: 48590671}
   - component: {fileID: 48590674}
-  - component: {fileID: 48590673}
+  - component: {fileID: 48590675}
   m_Layer: 5
-  m_Name: UI_CS_PlayerManagement
+  m_Name: UI_CharacterManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,32 +209,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1766228448}
+  - {fileID: 1649014}
   - {fileID: 434186701}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &48590671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48590669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf629d12b660e4e418f8455ff9c99bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: CS_InventoryManagement
-  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a32a80ea803635448b2f38f2f6a1a145, type: 3}
-  <ShowOnStart>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 434186700}
-  <ContainerID>k__BackingField: CMCC_LowerContainer
-  InventoryCategoryUXML: {fileID: 9197481963319205126, guid: 639486a98b962834899f7107b927f757, type: 3}
-  InventoryMode: 1
 --- !u!114 &48590672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,31 +231,13 @@ MonoBehaviour:
   <ID>k__BackingField: CS_InventoryEquippedItems
   <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 53d36caf4aaccad46953bf1499a544a1, type: 3}
   <ShowOnStart>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 434186700}
-  <ContainerID>k__BackingField: CMCC_UpperContainer
-  EquipmentSocketUXML: {fileID: 9197481963319205126, guid: 8c91489d67593514abdc52a337111873, type: 3}
---- !u!114 &48590673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48590669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53a52a2377e126b4c9f8181a9d5ac06a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: CS_StatsManagement
-  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98b7026121be7b147bf611ad0cee2791, type: 3}
-  <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 434186700}
-  <ContainerID>k__BackingField: CMCC_UpperContainer
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
+  Inventory: {fileID: 1407186031}
+  Stats: {fileID: 1407186033}
+  InventoryView: {fileID: 1649015}
 --- !u!114 &48590674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +245,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48590669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9588b8d4f698da9459f2d0ca48efd992, type: 3}
   m_Name: 
@@ -271,8 +256,30 @@ MonoBehaviour:
   <ShowOnStart>k__BackingField: 0
   <IsStatic>k__BackingField: 1
   <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 434186700}
-  <ContainerID>k__BackingField: CharacterManagementFooterContainer
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
+--- !u!114 &48590675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48590669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a36f454ba8f314b80463ab7ed58006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: CS_CharacterSheet
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 1d32ee4eeea7b964bbf2210c06f76d93, type: 3}
+  <ShowOnStart>k__BackingField: 0
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
+  Character: {fileID: 1407186030}
+  Stats: {fileID: 1407186033}
 --- !u!1 &72067118
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &72067119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +346,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &263817847
 GameObject:
@@ -367,7 +374,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263817847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -419,7 +426,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &263817851
 RectTransform:
@@ -435,7 +442,7 @@ RectTransform:
   m_Children:
   - {fileID: 708542613}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -458,7 +465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &434186700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,11 +497,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1649014}
-  - {fileID: 1766228448}
+  m_Children: []
   m_Father: {fileID: 48590670}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &703061848 stripped
 MonoBehaviour:
@@ -906,7 +911,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1636096631
 MonoBehaviour:
@@ -961,8 +966,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766228448}
+  - component: {fileID: 1766228449}
   m_Layer: 5
-  m_Name: UI_Stats
+  m_Name: UI_StatsManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,14 +981,35 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766228447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 434186701}
-  m_RootOrder: 1
+  m_Father: {fileID: 48590670}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766228449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766228447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a52a2377e126b4c9f8181a9d5ac06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: CS_StatsManagement
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 98b7026121be7b147bf611ad0cee2791, type: 3}
+  <ShowOnStart>k__BackingField: 0
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
+  Stats: {fileID: 1407186033}
 --- !u!1 &1773429408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1063,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004442188
 GameObject:
@@ -1088,7 +1115,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2590612110329911991
 PrefabInstance:

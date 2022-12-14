@@ -109,7 +109,7 @@ namespace UIViews
                         if (viewTargetContainer != null)
                         {
                             // Clear the view container
-                            viewTargetContainer.Clear();
+                            //viewTargetContainer.Clear();
 
                             VisualElement viewWrapperContainer = new VisualElement();
                             UXMLDocument.CloneTree(viewWrapperContainer);

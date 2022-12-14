@@ -9,16 +9,10 @@ public class Armour : Item
             return (ArmourType)ItemSubTypeHash;
         }
     }
-    public Armour(string id, int defence)
-    {
-        ID = id;
-        MainStatValue = defence;
-        LoadFromManifest();
-    }
 
-    public Armour(string id, string variantID, int defence) : this(id, defence)
+    public Armour(string id, int defence) : base(id)
     {
-        AttachVariantID(variantID);
+        MainStatValue = defence;
     }
 
     protected override void LoadFromManifest()

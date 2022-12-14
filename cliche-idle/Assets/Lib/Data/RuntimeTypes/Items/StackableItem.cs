@@ -6,9 +6,14 @@ using Cliche.System;
 public abstract class StackableItem : Item
 {
     [field: SerializeField]
-    public int Quantity { get; private set; }
+    public int Quantity { get; private set; } = 0;
 
     public int MaxStackSize { get; protected set; }
+
+    public StackableItem (string id) : base(id)
+    {
+
+    }
 
     /// <summary>
     /// 

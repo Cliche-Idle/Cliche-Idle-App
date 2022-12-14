@@ -11,10 +11,9 @@ public class Consumable : StackableItem
         }
     }
 
-    public Consumable(string id)
+    public Consumable(string id) : base(id)
     {
-        ID = id;
-        LoadFromManifest();
+
     }
 
     public Consumable(string id, int quantity) : this(id)

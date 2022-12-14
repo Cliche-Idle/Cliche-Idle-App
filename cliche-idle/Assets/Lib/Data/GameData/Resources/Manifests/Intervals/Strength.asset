@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Strength
   m_EditorClassIdentifier: 
   <InternalDescription>k__BackingField: 
-  <GameDescription>k__BackingField: "The strength stat grants bonuses to your damage
-    output, helping\r with winning though fights."
+  <GameDescription>k__BackingField: The strength stat grants bonuses to your damage
+    output, helping with winning though fights.
   <Interval>k__BackingField: 1
   <Value>k__BackingField: 0.01
   <IsPercentValue>k__BackingField: 1

@@ -10,6 +10,7 @@ public class CoreStat : AdjustableIntProperty
     public CoreStat(string statID)
     {
         StatName = statID;
+        Value = MinimumValue;
     }
 
     public int MinimumValue
@@ -27,6 +28,7 @@ public class CoreStat : AdjustableIntProperty
         if (freeStatPoints >= Mathf.Abs(amount))
         {
             Value += Mathf.Abs(amount);
+            InvokeValueChangeEvent();
         }
     }
 
@@ -38,6 +40,7 @@ public class CoreStat : AdjustableIntProperty
         if ((Value - racialStatPoints) >= Mathf.Abs(amount))
         {
             Value -= Mathf.Abs(amount);
+            InvokeValueChangeEvent();
         }
         else
         {

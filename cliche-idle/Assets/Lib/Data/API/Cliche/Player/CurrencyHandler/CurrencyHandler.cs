@@ -8,7 +8,7 @@ public class CurrencyHandler : MonoBehaviour
     public AdjustableIntProperty Gold;
 
     /// <summary>
-    /// Used to grant immediate access dungeons.
+    /// Used to grant immediate access to dungeons.
     /// </summary>
     public AdjustableIntProperty DungeonTickets;
 }

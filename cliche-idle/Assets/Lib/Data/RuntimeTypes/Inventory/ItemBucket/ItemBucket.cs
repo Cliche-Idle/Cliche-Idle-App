@@ -39,31 +39,7 @@ public class ItemBucket<TItem> where TItem : Item
     /// <param name="item"></param>
     public void Add(TItem item)
     {
-        item.AttachVariantID(GetNewVariantID(item.ID));
         _itemList.Add(item);
-    }
-
-    /// <summary>
-    /// Gets a new VariantID GUID unique amongst other items with the given itemID in the inventory.
-    /// </summary>
-    /// <param name="itemID"></param>
-    /// <returns></returns>
-    protected string GetNewVariantID(string itemID)
-    {
-        string newGUID = Guid.NewGuid().ToString();
-        while (true)
-        {
-            int index = _itemList.FindIndex(element => element.VariantID == newGUID);
-            if (index == -1)
-            {
-                break;
-            }
-            else
-            {
-                newGUID = Guid.NewGuid().ToString();
-            }
-        }
-        return newGUID;
     }
 
     /// <summary>
@@ -76,23 +52,22 @@ public class ItemBucket<TItem> where TItem : Item
     {
         if (Guid.TryParse(variantID, out var checkGuid))
         {
-            int itemIndex = _itemList.FindIndex(element => element.ID == itemID && element.VariantID == variantID);
-            if (itemIndex != -1)
+            var item = _itemList.Find(element => element.ID == itemID && element.VariantID == variantID);
+            if (item != null)
             {
-                var item = _itemList[itemIndex];
                 var socket = Sockets.Find(socket => socket.EquippedItem == item);
                 if (socket == null)
                 {
-                    _itemList.RemoveAt(itemIndex);
+                    _itemList.Remove(item);
                 }
                 else
                 {
-                    Debug.LogError($"Can not remove item {itemID}#{variantID}; item is currently equipped.");
+                    throw new Exception($"Can't remove a currently equipped item from the inventory.");
                 }
             }
             else
             {
-                Debug.LogError($"Can not remove item {itemID}#{variantID}; item is not in inventory.");
+                throw new KeyNotFoundException($"{item} is not present in the bucket.");
             }
         }
         else
@@ -143,25 +118,18 @@ public class ItemBucket<TItem> where TItem : Item
     /// </summary>
     /// <param name="itemID"></param>
     /// <param name="variantID"></param>
-    /// <exception cref="NullReferenceException">Thrown then the specific item does not exist.</exception>
+    /// <exception cref="KeyNotFoundException">Thrown then the specific item does not exist.</exception>
     public void Equip(string itemID, string variantID)
     {
         var item = _itemList.Find(element => element.ID == itemID && element.VariantID == variantID);
         if (item != null)
         {
-            var sockets = Sockets.FindAll(socket => socket.AcceptSubTypeHash == item.ItemSubTypeHash || socket.AcceptSubTypeHash == -1);
-            //
-            var socket = sockets.Find(socket => socket.EquippedItem != null && socket.EquippedItem.MainStatValue == (sockets.Min(_socket => _socket.EquippedItem.MainStatValue)));
-            //
-            if (sockets.Count == 1)
-            {
-                socket = sockets[0];
-            }
+            var socket = FindBestMatchingSocket(item);
             socket.SetSocketItem(item);
         }
         else
         {
-            throw new NullReferenceException("No item with the specified ID and VariantID could be found.");
+            throw new KeyNotFoundException($"{item} is not present in the bucket.");
         }
     }
 
@@ -171,16 +139,40 @@ public class ItemBucket<TItem> where TItem : Item
     /// If multiple matching sockets are found, this item will be equipped into the one that has the item with the lowest <paramref name="MainStatValue" />.
     /// </summary>
     /// <param name="item"></param>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="KeyNotFoundException"></exception>
     public void Equip(TItem item)
     {
-        if (Guid.TryParse(item.VariantID, out var checkGuid))
+        Equip(item.ID, item.VariantID);
+    }
+
+    /// <summary>
+    /// Gets the best matching socket for a given item.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    private GearSocket<TItem> FindBestMatchingSocket(TItem item)
+    {
+        var compatibleSockets = Sockets.FindAll(socket => socket.IsItemCompatible(item));
+        if (compatibleSockets.Count == 0)
         {
-            Equip(item.ID, item.VariantID);
+            throw new Exception($"No matching socket(s) found for item {item}.");
         }
         else
         {
-            throw new ArgumentException("VariantID must be a valid GUID string.", nameof(item.VariantID));
+            // Find empty socket and return it, if there is any
+            var emptySocket = compatibleSockets.Find(socket => socket.EquippedItem == null);
+            if (emptySocket != null)
+            {
+                return emptySocket;
+            }
+            else
+            {
+                // If there isn't an empty socket, grab the one that has the item with the lowest MainStatValue
+                int lowestSocketValue = compatibleSockets.Min(socket => socket.EquippedItem.MainStatValue);
+                var lowestValueCompatibleSocket = compatibleSockets.Find(socket => socket.EquippedItem.MainStatValue == lowestSocketValue);
+                return lowestValueCompatibleSocket;
+            }
         }
     }
 }

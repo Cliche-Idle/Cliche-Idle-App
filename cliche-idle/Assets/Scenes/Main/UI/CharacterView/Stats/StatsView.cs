@@ -3,46 +3,80 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Cliche.System;
 using UIViews;
+using Cliche.UIElements;
 
 public class StatsView : UIScript
 {
-    private StatsHandler Stats;
-    private VisualElement StrengthContainer;
-    private VisualElement DexterityContainer;
-    private VisualElement IntelligenceContainer;
-    private VisualElement VitalityContainer;
+    private IntSelector _strSelector;
+    private IntSelector _dexSelector;
+    private IntSelector _intSelector;
+    private IntSelector _vitSelector;
 
-    protected override void UIUpdate()
-    {
-        StrengthContainer.Q<Label>("NumberStat").text = $"{Stats.Strength.Value}";
-        DexterityContainer.Q<Label>("NumberStat").text = $"{Stats.Dexterity.Value}";
-        IntelligenceContainer.Q<Label>("NumberStat").text = $"{Stats.Intelligence.Value}";
-        VitalityContainer.Q<Label>("NumberStat").text = $"{Stats.Vitality.Value}";
-        GetViewContainer().Q<Label>("PointsNum").text = $"{Stats.GetFreeStatPoints()}";
-    }
+    public StatsHandler Stats;
 
     protected override void OnEnterFocus()
     {
-        Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
+        GetViewContainer().style.height = Length.Percent(90);
         //
-        StrengthContainer = GetViewContainer().Q<VisualElement>("StrRow");
+        _strSelector = GetViewContainer().Q<IntSelector>("StrSelector");
         GetViewContainer().Q<Label>("StrText").text = Manifests.GetByID<IntervalValueModifier>("Strength").GameDescription;
-        StrengthContainer.Q<Button>("AddStat").clicked += () => { Stats.Strength.Grant(1); };
-        StrengthContainer.Q<Button>("MinusStat").clicked += () => { Stats.Strength.Take(1); };
+        Stats.Strength.OnValueChange += OnStatsChange;
+        _strSelector.value = Stats.Strength.Value;
+        _strSelector.lowValue = Stats.Strength.MinimumValue;
+        _strSelector.highValue = Stats.Strength.Value + Stats.GetFreeStatPoints();
+        _strSelector.OnValueIncrease += () => { Stats.Strength.Grant(1); };
+        _strSelector.OnValueDecrease += () => { Stats.Strength.Take(1); };
         //
-        DexterityContainer = GetViewContainer().Q<VisualElement>("DexRow");
+        _dexSelector = GetViewContainer().Q<IntSelector>("DexSelector");
         GetViewContainer().Q<Label>("DexText").text = Manifests.GetByID<IntervalValueModifier>("Dexterity").GameDescription;
-        DexterityContainer.Q<Button>("AddStat").clicked += () => { Stats.Dexterity.Grant(1); };
-        DexterityContainer.Q<Button>("MinusStat").clicked += () => { Stats.Dexterity.Take(1); };
+        Stats.Dexterity.OnValueChange += OnStatsChange;
+        _dexSelector.value = Stats.Dexterity.Value;
+        _dexSelector.lowValue = Stats.Dexterity.MinimumValue;
+        _dexSelector.highValue = Stats.Dexterity.Value + Stats.GetFreeStatPoints();
+        _dexSelector.OnValueIncrease += () => { Stats.Dexterity.Grant(1); };
+        _dexSelector.OnValueDecrease += () => { Stats.Dexterity.Take(1); };
         //
-        IntelligenceContainer = GetViewContainer().Q<VisualElement>("IntRow");
+        _intSelector = GetViewContainer().Q<IntSelector>("IntSelector");
         GetViewContainer().Q<Label>("IntText").text = Manifests.GetByID<IntervalValueModifier>("Intelligence").GameDescription;
-        IntelligenceContainer.Q<Button>("AddStat").clicked += () => { Stats.Intelligence.Grant(1); };
-        IntelligenceContainer.Q<Button>("MinusStat").clicked += () => { Stats.Intelligence.Take(1); };
+        Stats.Intelligence.OnValueChange += OnStatsChange;
+        _intSelector.value = Stats.Intelligence.Value;
+        _intSelector.lowValue = Stats.Intelligence.MinimumValue;
+        _intSelector.highValue = Stats.Intelligence.Value + Stats.GetFreeStatPoints();
+        _intSelector.OnValueIncrease += () => { Stats.Intelligence.Grant(1); };
+        _intSelector.OnValueDecrease += () => { Stats.Intelligence.Take(1); };
         //
-        VitalityContainer = GetViewContainer().Q<VisualElement>("VitRow");
+        _vitSelector = GetViewContainer().Q<IntSelector>("VitSelector");
         GetViewContainer().Q<Label>("VitText").text = Manifests.GetByID<IntervalValueModifier>("Vitality").GameDescription;
-        VitalityContainer.Q<Button>("AddStat").clicked += () => { Stats.Vitality.Grant(1); };
-        VitalityContainer.Q<Button>("MinusStat").clicked += () => { Stats.Vitality.Take(1); };
+        Stats.Vitality.OnValueChange += OnStatsChange;
+        _vitSelector.value = Stats.Vitality.Value;
+        _vitSelector.lowValue = Stats.Vitality.MinimumValue;
+        _vitSelector.highValue = Stats.Vitality.Value + Stats.GetFreeStatPoints();
+        _vitSelector.OnValueIncrease += () => { Stats.Vitality.Grant(1); };
+        _vitSelector.OnValueDecrease += () => { Stats.Vitality.Take(1); };
+    }
+
+    protected override void OnLeaveFocus()
+    {
+        Stats.Strength.OnValueChange -= OnStatsChange;
+        Stats.Dexterity.OnValueChange -= OnStatsChange;
+        Stats.Intelligence.OnValueChange -= OnStatsChange;
+        Stats.Vitality.OnValueChange -= OnStatsChange;
+    }
+
+    private void OnStatsChange(int val)
+    {
+        _strSelector.value = Stats.Strength.Value;
+        _strSelector.highValue = Stats.Strength.Value + Stats.GetFreeStatPoints();
+
+        _dexSelector.value = Stats.Dexterity.Value;
+        _dexSelector.highValue = Stats.Dexterity.Value + Stats.GetFreeStatPoints();
+
+        _intSelector.value = Stats.Intelligence.Value;
+        _intSelector.highValue = Stats.Intelligence.Value + Stats.GetFreeStatPoints();
+
+        _vitSelector.value = Stats.Vitality.Value;
+        _vitSelector.highValue = Stats.Vitality.Value + Stats.GetFreeStatPoints();
+
+        GetViewContainer().Q<Label>("PointsNum").text = Stats.GetFreeStatPoints().ToString();
     }
 }

@@ -35,7 +35,7 @@ public class GearSocket<TItem> where TItem : Item
     /// <summary>
     /// The currently equipped item in this socket.
     /// </summary>
-    [field: SerializeField]
+    [field: SerializeReference]
     public TItem EquippedItem { get; private set; }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class GearSocket<TItem> where TItem : Item
     /// <param name="item"></param>
     public void SetSocketItem(TItem item)
     {
-        if ((AcceptSubTypeHash == -1) || (item.ItemSubTypeHash == AcceptSubTypeHash))
+        if (IsItemCompatible(item))
         {
             EquippedItem = item;
             if (OnEquip != null)
@@ -78,5 +78,16 @@ public class GearSocket<TItem> where TItem : Item
                 OnEquip.Invoke(this, item);
             }
         }
+    }
+
+    /// <summary>
+    /// Checks whether an item is compatible (can be equipped) with the socket or not.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns><see langword="true"/> if the item is compatible, <see langword="false"/> if not.</returns>
+    public bool IsItemCompatible(TItem item)
+    {
+        bool isCompatible = (AcceptSubTypeHash == -1) || (item.ItemSubTypeHash == AcceptSubTypeHash);
+        return isCompatible;
     }
 }

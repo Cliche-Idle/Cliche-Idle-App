@@ -9,16 +9,10 @@ public class Weapon : Item
             return (WeaponType)ItemSubTypeHash;
         }
     }
-    public Weapon(string id, int attack)
-    {
-        ID = id;
-        MainStatValue = attack;
-        LoadFromManifest();
-    }
 
-    public Weapon(string id, string variantID, int attack) : this(id, attack)
+    public Weapon(string id, int attack) : base(id)
     {
-        AttachVariantID(variantID);
+        MainStatValue = attack;
     }
 
     protected override void LoadFromManifest()

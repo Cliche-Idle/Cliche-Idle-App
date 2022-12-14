@@ -16,14 +16,16 @@ public class BottomNavigation : UIScript
 
     private void AdventureMenuOpen()
     {
+        Navigator.ClearContainer("BaseContentContainer");
         Navigator.ShowView("AdventureBoardMenu");
     }
 
     private void InventoryMenuOpen()
     {
-        Navigator.ShowView("CS_SecondarySwitchMenu");
+        Navigator.ClearContainer("BaseContentContainer");
+        Navigator.ShowView("CS_CharacterSheet"); // CS_InventoryManagement
         Navigator.ShowView("CS_InventoryEquippedItems");
-        Navigator.ShowView("CS_InventoryManagement");
+        //Navigator.ShowView("CS_SecondarySwitchMenu");
     }
 
     private void TavernMenuOpen()

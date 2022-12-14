@@ -1,88 +1,46 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using UnityEngine.UIElements;
 using UIViews;
+using Cliche.UIElements;
 
 public class EquippedList : UIScript
 {
-    private InventoryHandler Inventory;
-    private StatsHandler Stats;
-    public VisualTreeAsset EquipmentSocketUXML;
     private VisualElement SocketsContainer;
+
+    public InventoryHandler Inventory;
+    public StatsHandler Stats;
+    public InventoryView InventoryView;
 
     protected override void OnEnterFocus()
     {
-        Inventory = GameObject.Find("Player").GetComponent<InventoryHandler>();
-        Stats = GameObject.Find("Player").GetComponent<StatsHandler>();
-        SocketsContainer = GetViewContainer().Q("SocketsContainer");
-        DrawSocketEquipmentList(null, null);
-
+        SocketsContainer = GetViewContainer().Q("EquippedItemsView");   
+        DrawSocketEquipmentList();
     }
 
-    protected override void OnLeaveFocus()
+    private void DrawSocketEquipmentList()
     {
-        UnSubscribeFromSocketEvents<Weapon>(Inventory.Weapons.Sockets);
-        UnSubscribeFromSocketEvents<Armour>(Inventory.Armour.Sockets);
-    }
-
-    private void DrawSocketEquipmentList(object sender, Item item)
-    {
-        SocketsContainer.Clear();
-        Navigator.ClearContainer("CMCC_LowerContainer");
-        Navigator.ShowView("CS_InventoryManagement");
-        ListSockets<Weapon>(Inventory.Weapons.Sockets);
-        // FIXME: Don't subscribe to event here, do it in OnEnterFocus, as this will loop subscribe
-        SubscribeToSocketEvents<Weapon>(Inventory.Weapons.Sockets);
-        ListSockets<Armour>(Inventory.Armour.Sockets);
-        SubscribeToSocketEvents<Armour>(Inventory.Armour.Sockets);
-        GetViewContainer().Q<Label>("AtkNum").text = $"{Stats.Attack}";
-        GetViewContainer().Q<Label>("DefNum").text = $"{Stats.Defence}";
-    }
-
-    private void SubscribeToSocketEvents<T>(IEnumerable<GearSocket<T>> sockets) where T : Item
-    {
-        foreach (var socket in sockets)
-        {
-            socket.OnEquip += DrawSocketEquipmentList;
-        }
-    }
-
-    private void UnSubscribeFromSocketEvents<T>(IEnumerable<GearSocket<T>> sockets) where T : Item
-    {
-        foreach (var socket in sockets)
-        {
-            socket.OnEquip -= DrawSocketEquipmentList;
-        }
+        ListSockets(Inventory.Weapons.Sockets);
+        ListSockets(Inventory.Armour.Sockets);
     }
 
     private void ListSockets<T>(IEnumerable<GearSocket<T>> sockets) where T : Item
     {
         foreach (var socket in sockets)
         {
-            EquipmentSocketUXML.CloneTree(SocketsContainer);
-            VisualElement container = SocketsContainer.Query("Socket").Build().Last();
-            container.name = $"{socket}Socket";
-            var socketStatIcon = container.Q<VisualElement>("StatIcon");
-            // Set Icons
-            switch(socket.AcceptItemType)
+            var equipmentSocket = new EquipmentSocket()
             {
-                case ItemTypes.Weapon:
-                    socketStatIcon.style.backgroundImage = Resources.Load<Sprite>("StatIcons/attack").texture;
-                    break;
-                case ItemTypes.Armour:
-                    socketStatIcon.style.backgroundImage = Resources.Load<Sprite>("StatIcons/defence").texture;
-                    break;
-            }
-            if (socket.EquippedItem != null && socket.EquippedItem.ID != null)
+                name = socket.ID
+            };
+            equipmentSocket.BindToSocket(socket);
+            equipmentSocket.OnClick += (evt) =>
             {
-                container.Q<Label>("StatValue").text = socket.EquippedItem.MainStatValue.ToString();
-                var manifest = socket.EquippedItem.GetManifest();
-                container.Q<Label>("ItemName").text = manifest.Name;
-                container.Q<VisualElement>("ItemIcon").style.backgroundImage = manifest.Icon.texture;
-            }
+                InventoryView.InventoryType = socket.AcceptItemType;
+                InventoryView.SubTypeHash = socket.AcceptSubTypeHash;
+
+                Navigator.ClearContainer(ContainerID);
+                InventoryView.ShowView();
+            };
+            SocketsContainer.Add(equipmentSocket);
         }
     }
 }
