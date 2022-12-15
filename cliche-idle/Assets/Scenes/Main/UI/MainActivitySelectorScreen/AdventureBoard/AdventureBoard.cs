@@ -17,17 +17,20 @@ public class AdventureBoard : UIScript
 
     private List<VisualElement> RequestSlots;
 
+    private readonly string _completeAdventureClassName = "__complete";
+    private readonly string _completeAdventureUIAnimationClassName = "__completeAnim";
+
     protected override void UIUpdate()
     {
         if (Adventures.AdventureQueue.Count != 0)
         {
             foreach (var item in Adventures.AdventureQueue)
             {
-                var queueItemUIElement = RequestSlots.Find(element => element.ClassListContains("ActiveAdventure") == true);
+                var queueItemUIElement = GetBoundRequestSlot(item.ID)[0];
                 if (queueItemUIElement != null)
                 {
                     // Check if the adventure is marked as completed in the UI
-                    bool isMarkedForFinish = queueItemUIElement.ClassListContains("CompletedAdventure");
+                    bool isMarkedForFinish = queueItemUIElement.ClassListContains(_completeAdventureClassName);
                     if (item.Finished == false)
                     {
                         // Update UI with the remaining time
@@ -39,11 +42,22 @@ public class AdventureBoard : UIScript
                     else if (isMarkedForFinish == false)
                     {
                         // If the adventure is completed but not marked in the UI, update it
-                        queueItemUIElement.Q<Label>("RequestTimer").text = TimeSpan.FromSeconds(0).ToString();
-                        queueItemUIElement.AddToClassList("CompletedAdventure");
+                        queueItemUIElement.Q<Label>("RequestTimer").text = "Complete!";
+                        queueItemUIElement.AddToClassList(_completeAdventureClassName);
+                        StartCoroutine(AdventureCompleteUIAnimation(queueItemUIElement));
                     }
                 }
             }
+        }
+    }
+
+    IEnumerator AdventureCompleteUIAnimation(VisualElement slot)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            slot.ToggleInClassList(_completeAdventureUIAnimationClassName);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -64,62 +78,63 @@ public class AdventureBoard : UIScript
     {
         foreach (var availableAdventureID in Adventures.AvailableAdventures)
         {
-            foreach (var requestSlot in RequestSlots)
+            // Check if request is already rendered
+            var slot = GetBoundRequestSlot(availableAdventureID);
+            if (slot == null)
             {
-                if (requestSlot.name == "request")
+                // If not, get empty slot to fill
+                slot = GetEmptyRequestSlot();
+                if (slot != null)
                 {
-                    // Empty, fill the slot
-                    requestSlot.name = availableAdventureID;
-                    var adventure = Manifests.GetByID<AdventureManifest>(availableAdventureID);
-                    AdventureItemUXML.CloneTree(requestSlot);
-                    //
-                    string durationText = TimeSpan.FromSeconds(Math.Floor(adventure.BaseLength)).ToString();
-                    requestSlot.Q<Label>("RequestTimer").text = durationText;
-                    //
-                    requestSlot.Q<Label>("DebugTitle").text = adventure.Title;
-                    //
-                    requestSlot.UnregisterCallback<ClickEvent>(OpenAdventureCompletePopup);
-                    requestSlot.RegisterCallback<ClickEvent>(OpenAdventureStartPopup);
-                    break;
+                    SpawnRequestVisualElement(slot, availableAdventureID, OpenAdventureStartPopup);
                 }
             }
         }
 
         foreach (var adventureQueueItem in Adventures.AdventureQueue)
         {
-            foreach (var requestSlot in RequestSlots)
+            // Check if request is already rendered
+            var slot = GetBoundRequestSlot(adventureQueueItem.ID);
+            if (slot == null)
             {
-                if (requestSlot.name == adventureQueueItem.ID && requestSlot.ClassListContains("ActiveAdventure"))
+                // If not, get empty slot to fill
+                slot = GetEmptyRequestSlot();
+                if (slot != null)
                 {
-                    requestSlot.UnregisterCallback<ClickEvent>(OpenAdventureStartPopup);
-                    requestSlot.RegisterCallback<ClickEvent>(OpenAdventureCompletePopup);
-                    break;
-                }
-                else if (requestSlot.name == "request")
-                {
-                    // Empty, fill the slot
-                    requestSlot.name = adventureQueueItem.ID;
-                    var adventure = Manifests.GetByID<AdventureManifest>(adventureQueueItem.ID);
-                    AdventureItemUXML.CloneTree(requestSlot);
-                    requestSlot.AddToClassList("ActiveAdventure");
-                    //
-                    string durationText = TimeSpan.FromSeconds(Math.Floor(adventure.BaseLength)).ToString();
-                    requestSlot.Q<Label>("RequestTimer").text = durationText;
-                    //
-                    requestSlot.Q<Label>("DebugTitle").text = adventure.Title;
-                    //
-                    // Start adventure on tile click
-                    // TODO: open adventure details dialogue instead
-                    requestSlot.UnregisterCallback<ClickEvent>(OpenAdventureStartPopup);
-                    requestSlot.RegisterCallback<ClickEvent>(OpenAdventureCompletePopup);
-                    break;
+                    SpawnRequestVisualElement(slot, adventureQueueItem.ID, OpenAdventureCompletePopup);
                 }
             }
         }
-        UpdateRequestsState();
+
+        UpdateSlotStates();
     }
 
-    private void UpdateRequestsState()
+    private VisualElement GetEmptyRequestSlot()
+    {
+        return RequestSlots.Find(slot => slot.childCount == 0);
+    }
+
+    private VisualElement GetBoundRequestSlot(string id)
+    {
+        return RequestSlots.Find(slot => slot.childCount != 0 && slot[0].name == id);
+    }
+
+    private VisualElement SpawnRequestVisualElement(VisualElement slot, string id, EventCallback<ClickEvent> onClickFunc)
+    {
+        var adventure = Manifests.GetByID<AdventureManifest>(id);
+        AdventureItemUXML.CloneTree(slot);        
+        var slotCard = slot[0];
+        slotCard.name = id;
+        string durationText = TimeSpan.FromSeconds(Math.Floor(adventure.BaseLength)).ToString();
+        slotCard.Q<Label>("RequestTimer").text = durationText;
+        // TODO: Adventure titles should be displayed, so promote this poor label from debug to a big boy
+        slotCard.Q<Label>("DebugTitle").text = adventure.Title;
+        slotCard.RegisterCallback<ClickEvent>(onClickFunc);
+        return slotCard;
+    }
+
+    // TODO: fix this
+    private void UpdateSlotStates()
     {
         // Check if there is an active queue item
         bool adventureQueueActive = (Adventures.AdventureQueue.Count > 0);
@@ -127,17 +142,17 @@ public class AdventureBoard : UIScript
         {
             if (adventureQueueActive)
             {
-                if (requestSlot.ClassListContains("ActiveAdventure") == false)
-                {
-                    // Disable available adventures, queue in progress
-                    requestSlot.SetEnabled(false);
-                    requestSlot.style.unityBackgroundImageTintColor = Color.grey;
-                }
-                else
+                if (requestSlot.childCount != 0 && Adventures.AdventureQueue.Find(q => q.ID == requestSlot[0].name) != null)
                 {
                     // Enable queued adventures
                     requestSlot.SetEnabled(true);
                     requestSlot.style.unityBackgroundImageTintColor = Color.white;
+                }
+                else
+                {
+                    // Disable available adventures, queue in progress
+                    requestSlot.SetEnabled(false);
+                    requestSlot.style.unityBackgroundImageTintColor = Color.grey;
                 }
             }
             else
@@ -163,8 +178,10 @@ public class AdventureBoard : UIScript
         evt.PreventDefault();
         evt.StopImmediatePropagation();
         var requestSlot = (VisualElement)evt.currentTarget;
-        if (requestSlot.ClassListContains("CompletedAdventure"))
+        if (requestSlot.ClassListContains(_completeAdventureClassName))
         {
+            // Stop animation
+            StopAllCoroutines();
             FinishPopup.AdventureSlot = requestSlot;
             FinishPopup.ShowView();
         }

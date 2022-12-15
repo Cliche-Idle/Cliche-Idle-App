@@ -14,15 +14,14 @@ public class AdventureFinishPopup : PopUp
 
     public VisualElement AdventureSlot;
 
+    public Action OnAccept;
+
     protected override void OnEnterFocus()
     {
         string adventureID = AdventureSlot.name;
-        AdventureSlot.Clear();
-        AdventureSlot.name = "request";
-        AdventureSlot.RemoveFromClassList("CompletedAdventure");
-        AdventureSlot.RemoveFromClassList("ActiveAdventure");
         var adventure = Manifests.GetByID<AdventureManifest>(adventureID);
-
+        
+        AdventureSlot.parent.Clear();
         PostActivityReport adventureReport = Adventures.FinishAdventure(adventureID);
 
         ContentContainer.Q<Label>("RequestName").text = adventure.Title;

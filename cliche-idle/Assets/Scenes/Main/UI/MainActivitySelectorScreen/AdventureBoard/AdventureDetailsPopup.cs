@@ -14,6 +14,8 @@ public class AdventureDetailsPopup : PopUp
 
     public VisualElement AdventureSlot;
 
+    public Action OnAccept;
+
     protected override void OnEnterFocus()
     {
         var adventure = Manifests.GetByID<AdventureManifest>(AdventureSlot.name);
@@ -35,8 +37,9 @@ public class AdventureDetailsPopup : PopUp
 
         ContentContainer.Q<Button>("StartAdventureButton").clicked += () =>
         {
-            AdventureSlot.AddToClassList("ActiveAdventure");
-            Adventures.StartAdventure(AdventureSlot.name);
+            string adventureID = AdventureSlot.name;
+            AdventureSlot.parent.Clear();
+            Adventures.StartAdventure(adventureID);
             ClosePopUpWindow();
         };
     }

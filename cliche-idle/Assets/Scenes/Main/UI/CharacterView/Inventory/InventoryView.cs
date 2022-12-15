@@ -26,7 +26,7 @@ public class InventoryView : UIScript
         Currencies = GameObject.Find("Player").GetComponent<CurrencyHandler>();
         InventoryCategoriesContainer = GetViewContainer().Q("InventoryCategoriesContainer");
         _equipmentSocket = GetViewContainer().Q<EquipmentSocket>();
-        GetViewContainer().Q<Label>("GoldAmount").text = $"{Currencies.Gold.Value}";
+        //GetViewContainer().Q<Label>("GoldAmount").text = $"{Currencies.Gold.Value}";
         RenderInventoryContents();
     }
 

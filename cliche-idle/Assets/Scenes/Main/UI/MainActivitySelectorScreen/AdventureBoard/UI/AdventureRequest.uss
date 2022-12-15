@@ -1,4 +1,4 @@
-.CompletedAdventure {
+.__completeAnim {
     border-left-color: rgba(255, 245, 0, 0.73);
     border-right-color: rgba(255, 245, 0, 0.73);
     border-top-color: rgba(255, 245, 0, 0.73);
