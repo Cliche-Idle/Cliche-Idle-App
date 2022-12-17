@@ -47,4 +47,10 @@ public class CoreStat : AdjustableIntProperty
             Debug.LogError($"Can not TAKE stat point from category {StatName}. It would be either below 0 or the racial minimum.");
         }
     }
+
+    public override bool CanTakeValue(int amount)
+    {
+        int racialStatPoints = GameObject.Find("Player").GetComponent<StatsHandler>().GetRacialBaseStatAmount(StatName);
+        return ((Value - racialStatPoints) >= Mathf.Abs(amount));
+    }
 }

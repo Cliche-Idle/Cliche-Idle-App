@@ -17,6 +17,7 @@ namespace Cliche.System
             { typeof(ConsumableManifest), "Consumables" },
             { typeof(WeaponManifest), "Weapons" },
             { typeof(Race), "Player/Races" },
+            { typeof(MerchantStore), "Store/Merchant" }
         };
     }
 }

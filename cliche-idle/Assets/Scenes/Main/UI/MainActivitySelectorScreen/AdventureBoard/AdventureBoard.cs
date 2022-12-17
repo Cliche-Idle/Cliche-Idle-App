@@ -76,21 +76,6 @@ public class AdventureBoard : UIScript
 
     private void PopulateAdventureBoard(object sender, EventArgs e)
     {
-        foreach (var availableAdventureID in Adventures.AvailableAdventures)
-        {
-            // Check if request is already rendered
-            var slot = GetBoundRequestSlot(availableAdventureID);
-            if (slot == null)
-            {
-                // If not, get empty slot to fill
-                slot = GetEmptyRequestSlot();
-                if (slot != null)
-                {
-                    SpawnRequestVisualElement(slot, availableAdventureID, OpenAdventureStartPopup);
-                }
-            }
-        }
-
         foreach (var adventureQueueItem in Adventures.AdventureQueue)
         {
             // Check if request is already rendered
@@ -102,6 +87,21 @@ public class AdventureBoard : UIScript
                 if (slot != null)
                 {
                     SpawnRequestVisualElement(slot, adventureQueueItem.ID, OpenAdventureCompletePopup);
+                }
+            }
+        }
+
+        foreach (var availableAdventureID in Adventures.AvailableAdventures)
+        {
+            // Check if request is already rendered
+            var slot = GetBoundRequestSlot(availableAdventureID);
+            if (slot == null)
+            {
+                // If not, get empty slot to fill
+                slot = GetEmptyRequestSlot();
+                if (slot != null)
+                {
+                    SpawnRequestVisualElement(slot, availableAdventureID, OpenAdventureStartPopup);
                 }
             }
         }
