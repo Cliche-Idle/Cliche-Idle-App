@@ -14,8 +14,7 @@ public partial class Merchant : MonoBehaviour
     private void Start()
     {
         var offerings = DailyOfferings.GetDailyOfferings().Select(item => item.ID).ToList();
-        Debug.Log(String.Join(", ", offerings));
-        PurchaseItem(DailyOfferings.GetDailyOfferings()[0]);
+        Debug.Log("Merchant daily offerings: " + String.Join(", ", offerings));
     }
 
     /// <summary>
