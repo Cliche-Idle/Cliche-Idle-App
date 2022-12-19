@@ -6,16 +6,28 @@ public class ProgressionHandler : MonoBehaviour
     //[field: SerializeField]
     public IncreaseOnlyIntProperty Experience;
 
+    public int DisplayLevel
+    {
+        get
+        {
+            return Level+1;
+        }
+    }
+
+    public string DisplayLevelUI
+    {
+        get
+        {
+            return DisplayLevel.ToString();
+        }
+    }
+
     public int Level
     {
         get 
         {
             float levelXpScalar = Manifests.GetByID<SingleValueModifier>("XpLevelScalar").Value;
             int level = Mathf.FloorToInt(levelXpScalar * Mathf.Sqrt(Experience.Value));
-            if (level == 0)
-            {
-                level = 1;
-            }
             return level;
         }
     }
@@ -32,7 +44,7 @@ public class ProgressionHandler : MonoBehaviour
     public int GetLevelXpFloor(int level)
     {
         int levelXP = 0;
-        if (level > 1)
+        if (level >= 1)
         {
             float levelXpScalar = Manifests.GetByID<SingleValueModifier>("XpLevelScalar").Value;
             levelXP = Mathf.CeilToInt(Mathf.Pow((level / levelXpScalar), 2));

@@ -53,6 +53,6 @@ public class PlayerBar : UIScript
         XPBar.value = (xp - levelXpFloor);
         XPBar.title = (xp - levelXpFloor).ToString();
         // Display current level
-        LevelText.text = $"Level {PlayerProgression.Level}";
+        LevelText.text = $"Level {PlayerProgression.DisplayLevel}";
     }
 }

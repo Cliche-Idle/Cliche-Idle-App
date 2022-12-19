@@ -23,7 +23,7 @@ public class StatsHandler : MonoBehaviour
     [field: SerializeField]
     public CoreStat Vitality { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         Intelligence = new CoreStat("Intelligence");
         Dexterity = new CoreStat("Dexterity");

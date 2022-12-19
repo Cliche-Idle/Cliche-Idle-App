@@ -74,7 +74,7 @@ public class InventoryView : UIScript
 
     private void RemoveIcon(string iconReferenceString)
     {
-        var deleteIcon = InventoryCategoriesContainer.Q<OverlayIcon>(iconReferenceString);
+        var deleteIcon = InventoryCategoriesContainer.Q<ItemDisplay>(iconReferenceString);
         if (deleteIcon != null)
         {
             InventoryCategoriesContainer.Remove(deleteIcon);
@@ -109,27 +109,16 @@ public class InventoryView : UIScript
 
     private void UpdateIconIndicators(object sender, Item item)
     {
-        var itemIcons = InventoryCategoriesContainer.Query<OverlayIcon>().Build();
-        foreach (var itemIcon in itemIcons)
+        var displayItems = InventoryCategoriesContainer.Query<ItemDisplay>().Build();
+        foreach (var displayItem in displayItems)
         {
-            var referenceStatValue = 0;
+            var currentlyEquippedItemStatValue = 0;
             if (item != null)
             {
-                referenceStatValue = item.MainStatValue;
+                currentlyEquippedItemStatValue = item.MainStatValue;
             }
-            Item refItem = null;
-            var ids = itemIcon.name.Split("__");
-            switch (InventoryType)
-            {
-                case ItemTypes.Weapon:
-                    refItem = Inventory.Weapons.Items.Find(_item => _item.ID == ids[0] && _item.VariantID == ids[1]);
-                    break;
-                case ItemTypes.Armour:
-                    refItem = Inventory.Armour.Items.Find(_item => _item.ID == ids[0] && _item.VariantID == ids[1]);
-                    break;
-            }
-            var overlay = itemIcon.GetOverlay("StatDiffIndicator");
-            if (referenceStatValue < refItem.MainStatValue)
+            var overlay = displayItem.Icon.GetOverlay("StatDiffIndicator");
+            if (currentlyEquippedItemStatValue < displayItem.DisplayItem.MainStatValue)
             {
                 overlay.style.backgroundImage = Resources.Load<Sprite>("OverlayIcons/GreenUpArrow").texture;
             }
@@ -157,33 +146,31 @@ public class InventoryView : UIScript
                 {
                     itemID += $"__{item.VariantID}";
                 }
-                ItemManifest manifest = item.GetManifest();
-                OverlayIcon itemIcon = new OverlayIcon(manifest.Icon)
+
+                ItemDisplay itemDisplay = new ItemDisplay(item)
                 {
                     name = itemID,
-                    ReferenceID = item.ID,
                     style = {
-                    width = 150,
+                    width = Length.Percent(100f),
+                    backgroundColor = (Color)new Color32(41, 39, 33, 255),
                     height = 150,
-                    marginLeft = 10,
-                    marginRight = 10,
                     marginTop = 10,
                     marginBottom = 10
                 }
                 };
-                itemIcon.AddOverlay("StatDiffIndicator", OverlayAlignment.BottomRight, Resources.Load<Sprite>("OverlayIcons/GreenUpArrow"));
-                itemIcon.RegisterCallback<ClickEvent>((ClickEvent evt) => {
-                    var icon = (OverlayIcon)evt.currentTarget;
-                    if (icon.ReferenceID != null)
-                    {
-                        evt.PreventDefault();
-                        evt.StopImmediatePropagation();
-                        GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = item;
-                        Navigator.ShowView("UseItemPopUp");
-                    }
-                });
-                categoryContainer.Q("Items").Add(itemIcon);
+                itemDisplay.Icon.AddOverlay("StatDiffIndicator", OverlayAlignment.BottomRight, Resources.Load<Sprite>("OverlayIcons/GreenUpArrow"));
+                itemDisplay.RegisterCallback<ClickEvent>(OpenItemDetailsPopup);
+                categoryContainer.Q("Items").Add(itemDisplay);
             }
         }
+    }
+
+    private void OpenItemDetailsPopup(ClickEvent evt)
+    {
+        evt.PreventDefault();
+        evt.StopImmediatePropagation();
+        var itemDisplay = (ItemDisplay)evt.currentTarget;
+        GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = itemDisplay.DisplayItem;
+        Navigator.ShowView("UseItemPopUp");
     }
 }

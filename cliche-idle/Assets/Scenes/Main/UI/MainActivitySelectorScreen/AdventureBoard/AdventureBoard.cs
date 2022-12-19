@@ -133,7 +133,6 @@ public class AdventureBoard : UIScript
         return slotCard;
     }
 
-    // TODO: fix this
     private void UpdateSlotStates()
     {
         // Check if there is an active queue item

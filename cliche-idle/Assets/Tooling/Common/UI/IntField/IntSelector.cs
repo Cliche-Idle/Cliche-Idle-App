@@ -110,11 +110,11 @@ namespace Cliche.UIElements
         {
             if (value < min)
             {
-                value = min;
+                _value = min;
             }
             if (value > max)
             {
-                value = max;
+                _value = max;
             }
         }
 

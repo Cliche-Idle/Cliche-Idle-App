@@ -21,38 +21,32 @@ public class StatsView : UIScript
         _strSelector = GetViewContainer().Q<IntSelector>("StrSelector");
         GetViewContainer().Q<Label>("StrText").text = Manifests.GetByID<IntervalValueModifier>("Strength").GameDescription;
         Stats.Strength.OnValueChange += OnStatsChange;
-        _strSelector.value = Stats.Strength.Value;
         _strSelector.lowValue = Stats.Strength.MinimumValue;
-        _strSelector.highValue = Stats.Strength.Value + Stats.GetFreeStatPoints();
         _strSelector.OnValueIncrease += () => { Stats.Strength.Grant(1); };
         _strSelector.OnValueDecrease += () => { Stats.Strength.Take(1); };
         //
         _dexSelector = GetViewContainer().Q<IntSelector>("DexSelector");
         GetViewContainer().Q<Label>("DexText").text = Manifests.GetByID<IntervalValueModifier>("Dexterity").GameDescription;
         Stats.Dexterity.OnValueChange += OnStatsChange;
-        _dexSelector.value = Stats.Dexterity.Value;
         _dexSelector.lowValue = Stats.Dexterity.MinimumValue;
-        _dexSelector.highValue = Stats.Dexterity.Value + Stats.GetFreeStatPoints();
         _dexSelector.OnValueIncrease += () => { Stats.Dexterity.Grant(1); };
         _dexSelector.OnValueDecrease += () => { Stats.Dexterity.Take(1); };
         //
         _intSelector = GetViewContainer().Q<IntSelector>("IntSelector");
         GetViewContainer().Q<Label>("IntText").text = Manifests.GetByID<IntervalValueModifier>("Intelligence").GameDescription;
         Stats.Intelligence.OnValueChange += OnStatsChange;
-        _intSelector.value = Stats.Intelligence.Value;
         _intSelector.lowValue = Stats.Intelligence.MinimumValue;
-        _intSelector.highValue = Stats.Intelligence.Value + Stats.GetFreeStatPoints();
         _intSelector.OnValueIncrease += () => { Stats.Intelligence.Grant(1); };
         _intSelector.OnValueDecrease += () => { Stats.Intelligence.Take(1); };
         //
         _vitSelector = GetViewContainer().Q<IntSelector>("VitSelector");
         GetViewContainer().Q<Label>("VitText").text = Manifests.GetByID<IntervalValueModifier>("Vitality").GameDescription;
         Stats.Vitality.OnValueChange += OnStatsChange;
-        _vitSelector.value = Stats.Vitality.Value;
         _vitSelector.lowValue = Stats.Vitality.MinimumValue;
-        _vitSelector.highValue = Stats.Vitality.Value + Stats.GetFreeStatPoints();
         _vitSelector.OnValueIncrease += () => { Stats.Vitality.Grant(1); };
         _vitSelector.OnValueDecrease += () => { Stats.Vitality.Take(1); };
+
+        OnStatsChange(0);
     }
 
     protected override void OnLeaveFocus()

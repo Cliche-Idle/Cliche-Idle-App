@@ -128,7 +128,6 @@ namespace Cliche.UIElements
         /// <typeparam name="T"></typeparam>
         public void SetOptionsFromEnum<T>() where T : Enum
         {
-            // TODO: make sure this works in a logical way
             // Assign to public Options to trigger update
             _options = Enum.GetNames(typeof(T));
             UpdateSelection(0, false);
