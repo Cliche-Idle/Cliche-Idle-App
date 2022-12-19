@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1649014}
   - component: {fileID: 1649015}
+  - component: {fileID: 1649016}
   m_Layer: 5
   m_Name: UI_InventoryManagement
   m_TagString: Untagged
@@ -178,6 +179,27 @@ MonoBehaviour:
   InventoryCategoryUXML: {fileID: 9197481963319205126, guid: 639486a98b962834899f7107b927f757, type: 3}
   InventoryType: 0
   SubTypeHash: -1
+--- !u!114 &1649016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96b27910d4d5b6448d7a644166e0cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: UseItemPopUp
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
+  <ShowOnStart>k__BackingField: 0
+  <IsStatic>k__BackingField: 0
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: 
+  PopupBackgroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.78039217}
 --- !u!1 &48590669
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +235,7 @@ Transform:
   - {fileID: 1649014}
   - {fileID: 434186701}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &48590672
 MonoBehaviour:
@@ -347,7 +369,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &263817847
 GameObject:
@@ -443,59 +465,13 @@ RectTransform:
   m_Children:
   - {fileID: 708542613}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &278110094
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 278110096}
-  - component: {fileID: 278110095}
-  m_Layer: 0
-  m_Name: Merchant
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &278110095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278110094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1677ae12bf0eac439380babd92974aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryHandler: {fileID: 1407186031}
-  currencyHandler: {fileID: 1407186032}
---- !u!4 &278110096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278110094}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434186699
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +529,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745041332, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_PrefabInstance: {fileID: 2590612110329911991}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac3ea55d3d8dd544aa4b449d4aec92a7, type: 3}
@@ -648,6 +624,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708542612}
   m_CullTransparentMesh: 1
+--- !u!1 &823366605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 823366607}
+  - component: {fileID: 823366606}
+  - component: {fileID: 823366608}
+  m_Layer: 0
+  m_Name: UI_Market
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &823366606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823366605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a33f48d27a43804eb84aee44bf19d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: MarketView
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: 19a2a22abcb9d8d46b40d911a56cfd8c, type: 3}
+  <ShowOnStart>k__BackingField: 0
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: BaseContentContainer
+  InventoryCategoryUXML: {fileID: 9197481963319205126, guid: 639486a98b962834899f7107b927f757, type: 3}
+  popup: {fileID: 823366608}
+--- !u!4 &823366607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823366605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &823366608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823366605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64f3162ee0124a4d825ff8b23bf6fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Navigator>k__BackingField: {fileID: 1458133677}
+  <ID>k__BackingField: PurchasePopup
+  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: ef69d00b0e47e0948acf3f2c4ea868e2, type: 3}
+  <ShowOnStart>k__BackingField: 0
+  <IsStatic>k__BackingField: 1
+  <IsViewActive>k__BackingField: 0
+  <Dependency>k__BackingField: {fileID: 0}
+  <ContainerID>k__BackingField: UIView__PurchasePopup
+  PopupBackgroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.78039217}
 --- !u!1 &1092087290
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,7 +789,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745041333, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_PrefabInstance: {fileID: 2590612110329911991}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d3535d6fde42ba47927c653bc5b4e7a, type: 3}
@@ -748,7 +800,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745041331, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_PrefabInstance: {fileID: 2590612110329911991}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb76f43270d89fb418f5be3442423e7f, type: 3}
@@ -759,7 +811,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745040968, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_PrefabInstance: {fileID: 2590612110329911991}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32605c42368479b4ab27b391643597ca, type: 3}
@@ -770,7 +822,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745041335, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_PrefabInstance: {fileID: 2590612110329911991}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a441aacb979cddd4c92144bd3c220622, type: 3}
@@ -781,7 +833,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590612110745041334, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_PrefabInstance: {fileID: 2590612110329911991}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97f37bff8ca1d2d4cb39d2719c9115b3, type: 3}
@@ -849,59 +901,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 932ebfdb6240df041aa9f923e58235fa, type: 3}
   m_SortingOrder: 0
---- !u!1 &1568071902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1568071903}
-  - component: {fileID: 1568071905}
-  m_Layer: 0
-  m_Name: UI_PopUp
-  m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1568071903
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568071902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0032563, y: 0.70644146, z: 0.030612033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1568071905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568071902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b96b27910d4d5b6448d7a644166e0cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Navigator>k__BackingField: {fileID: 1458133677}
-  <ID>k__BackingField: UseItemPopUp
-  <UXMLDocument>k__BackingField: {fileID: 9197481963319205126, guid: a95bf7fc9279f054bba07869c88eb4fe, type: 3}
-  <ShowOnStart>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
-  <IsViewActive>k__BackingField: 0
-  <Dependency>k__BackingField: {fileID: 0}
-  <ContainerID>k__BackingField: 
-  PopupBackgroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.78039217}
 --- !u!1 &1636096628
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +957,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1636096631
 MonoBehaviour:
@@ -1110,7 +1109,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004442188
 GameObject:
@@ -1162,7 +1161,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2590612110329911991
 PrefabInstance:
@@ -1255,6 +1254,10 @@ PrefabInstance:
       propertyPath: Weapons._itemList.Array.data[11].<MainStatValue>k__BackingField
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 2590612110745040968, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+      propertyPath: Consumables._itemList.Array.data[0].<MainStatValue>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2590612110745040969, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1334,3 +1337,20 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2590612110745041328, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+--- !u!1 &2590612110329911992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2590612110745040970, guid: a4d59faf3ed35fd4fa6e23b5512c1640, type: 3}
+  m_PrefabInstance: {fileID: 2590612110329911991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2590612110329911993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590612110329911992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc74c3fdefde99e4e8e7b03b11e8e094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

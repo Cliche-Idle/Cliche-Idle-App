@@ -59,7 +59,7 @@ public partial class AdventureHandler : MonoBehaviour
     /// </summary>
     public void RefillAvailableList()
     {
-        AdventureManifest[] allAdventures = Resources.LoadAll<AdventureManifest>(Manifests.Paths[typeof(AdventureManifest)]);
+        AdventureManifest[] allAdventures = Resources.LoadAll<AdventureManifest>(Manifests.ManifestPaths[typeof(AdventureManifest)]);
         List<string> userAvailableAdventures = new List<string>();
         foreach (var item in allAdventures)
         {

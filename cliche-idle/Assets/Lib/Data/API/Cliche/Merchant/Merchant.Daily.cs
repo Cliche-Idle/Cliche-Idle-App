@@ -6,9 +6,9 @@ using UnityEditor;
 using Cliche.System;
 using System.Linq;
 
-public partial class Merchant : MonoBehaviour
+public static partial class Merchant
 {
-    public class DailyOfferings
+    public static class DailyOfferings
     {
         /// <summary>
         /// Gets a seed that changes daily.

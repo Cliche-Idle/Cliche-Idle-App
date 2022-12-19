@@ -16,12 +16,14 @@ public class BottomNavigation : UIScript
 
     private void AdventureMenuOpen()
     {
+        Navigator.ShowView("MainPlayerStatusBar");
         Navigator.ClearContainer("BaseContentContainer");
         Navigator.ShowView("AdventureBoardMenu");
     }
 
     private void InventoryMenuOpen()
     {
+        Navigator.ShowView("MainPlayerStatusBar");
         Navigator.ClearContainer("BaseContentContainer");
         Navigator.ShowView("CS_CharacterSheet"); // CS_InventoryManagement
         Navigator.ShowView("CS_InventoryEquippedItems");
@@ -30,11 +32,14 @@ public class BottomNavigation : UIScript
 
     private void TavernMenuOpen()
     {
-        Navigator.ShowView("Tavern");
+        Navigator.ClearContainer("BaseContentContainer");
+        Navigator.ShowView("MarketView");
+        Navigator.HideView("MainPlayerStatusBar");
     }
 
     private void SettingsMenuOpen()
     {
+        Navigator.ClearContainer("BaseContentContainer");
         Navigator.ShowView("GameSettingsMenu");
     }
 }

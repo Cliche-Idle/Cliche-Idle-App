@@ -5,37 +5,29 @@ using UnityEngine;
 using UnityEditor;
 using Cliche.System;
 using System.Linq;
+using Cliche.Idle;
 
-public partial class Merchant : MonoBehaviour
+public static partial class Merchant
 {
-    public InventoryHandler inventoryHandler;
-    public CurrencyHandler currencyHandler;
-
-    private void Start()
-    {
-        var offerings = DailyOfferings.GetDailyOfferings().Select(item => item.ID).ToList();
-        Debug.Log("Merchant daily offerings: " + String.Join(", ", offerings));
-    }
-
     /// <summary>
     /// Purchases an item from the list of <see cref="DailyOfferings.GetDailyOfferings"/>. The item is then added to the player's inventory, and its total price is taken.
     /// </summary>
     /// <param name="item"></param>
     /// <exception cref="Exception"></exception>
-    public void PurchaseItem(Consumable item)
+    public static void PurchaseItem(Consumable item)
     {
         var offerings = DailyOfferings.GetDailyOfferings();
         if (offerings.Any(offering => offering.ID == item.ID))
         {
             var itemPrice = item.GetManifest().Price;
-            if (currencyHandler.Gold.CanTakeValue(itemPrice))
+            if (Player.CurrencyBag.Gold.CanTakeValue(itemPrice))
             {
-                inventoryHandler.GiveItem(item);
-                currencyHandler.Gold -= itemPrice;
+                Player.Inventory.GiveItem(item);
+                Player.CurrencyBag.Gold -= itemPrice;
             }
             else
             {
-                throw new Exception($"Player does not have enough currency ({currencyHandler.Gold.Value}) to cover this purchase (-{itemPrice}).");
+                throw new Exception($"Player does not have enough currency ({Player.CurrencyBag.Gold.Value}) to cover this purchase (-{itemPrice}).");
             }
         }
         else
@@ -49,18 +41,18 @@ public partial class Merchant : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <param name="consumableQuantity"></param>
-    public void SellItem(Item item, int consumableQuantity = 1)
+    public static void SellItem(Item item, int consumableQuantity = 1)
     {
         var itemPrice = item.GetManifest().Price;
         if (item.ItemType == ItemTypes.Consumable)
         {
-            inventoryHandler.RemoveItem(item, consumableQuantity);
+            Player.Inventory.RemoveItem(item, consumableQuantity);
             itemPrice *= consumableQuantity;
         }
         else
         {
-            inventoryHandler.RemoveItem(item);
+            Player.Inventory.RemoveItem(item);
         }
-        currencyHandler.Gold.Take(itemPrice);
+        Player.CurrencyBag.Gold.Grant(itemPrice);
     }
 }

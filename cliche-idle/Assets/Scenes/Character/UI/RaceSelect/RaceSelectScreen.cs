@@ -25,7 +25,7 @@ public class RaceSelectScreen : UIScript
         GetViewContainer().style.width = Length.Percent(100);
         GetViewContainer().style.height = Length.Percent(100);
         
-        var raceManifests = Resources.LoadAll<Race>(Manifests.Paths[typeof(Race)]);
+        var raceManifests = Resources.LoadAll<Race>(Manifests.ManifestPaths[typeof(Race)]);
         var racesContainer = GetViewContainer().Q<VisualElement>("RaceContainer");
         _raceDescriptionText = GetViewContainer().Q<Label>("RaceText");
         _raceStatsText = GetViewContainer().Q<Label>("StatsText");

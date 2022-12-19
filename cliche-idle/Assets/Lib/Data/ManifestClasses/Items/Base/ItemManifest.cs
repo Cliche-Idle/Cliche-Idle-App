@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Provides the base for all item manifests.
+/// </summary>
 public abstract class ItemManifest : ScriptableObject
 {
     /// <summary>

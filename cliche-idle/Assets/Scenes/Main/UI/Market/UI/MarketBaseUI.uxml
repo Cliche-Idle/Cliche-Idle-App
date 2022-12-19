@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="BuySell" src="project://database/Assets/Scenes/Market/BuySell.uxml?fileID=9197481963319205126&amp;guid=74a769c13baaeea49a87abd25b7f5c25&amp;type=3#BuySell" />
+    <ui:Template name="FullInventory" src="project://database/Assets/Scenes/Market/FullInventory.uxml?fileID=9197481963319205126&amp;guid=6bbf7b566dea18e4e9bacee2850e976e&amp;type=3#FullInventory" />
+    <Style src="project://database/Assets/Scenes/Common/CommonStyling.uss?fileID=7433441132597879392&amp;guid=8c5108de7f42d0649b6d32b2cf7ab5f9&amp;type=3#CommonStyling" />
+    <ui:VisualElement style="width: 100%; height: 100%; color: rgb(255, 255, 255);">
+        <ui:Instance template="BuySell" name="BuySell" style="height: 50%;" />
+        <ui:Instance template="FullInventory" name="FullInventory" style="height: 50%; flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

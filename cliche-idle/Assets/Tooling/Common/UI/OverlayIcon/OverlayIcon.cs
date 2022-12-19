@@ -42,7 +42,7 @@ namespace Cliche.UIElements
             style.backgroundImage = iconSprite.texture;
         }
 
-
+        // TODO: return overlay
         public void AddOverlay(string overlayID, OverlayAlignment position, Sprite icon)
         {
             if (icon != null)
@@ -225,7 +225,6 @@ namespace Cliche.UIElements
                 name = overlayID,
                 style = {
                     position = Position.Absolute,
-                    fontSize = 12,
                     unityTextAlign = TextAnchor.MiddleLeft
                 },
                 text = text
@@ -261,13 +260,13 @@ namespace Cliche.UIElements
                     break;
                 case OverlayAlignment.TopRight:
                     // Top right
-                    alignment.vertical = Justify.FlexEnd;
-                    alignment.horizontal = Align.FlexStart;
+                    alignment.vertical = Justify.FlexStart;
+                    alignment.horizontal = Align.FlexEnd;
                     break;
                 case OverlayAlignment.BottomLeft:
                     // Bottom left
-                    alignment.vertical = Justify.FlexStart;
-                    alignment.horizontal = Align.FlexEnd;
+                    alignment.vertical = Justify.FlexEnd;
+                    alignment.horizontal = Align.FlexStart;
                     break;
                 case OverlayAlignment.BottomRight:
                     // Bottom right

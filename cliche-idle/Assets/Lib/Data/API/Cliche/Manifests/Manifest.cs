@@ -6,14 +6,14 @@ namespace Cliche.System
     public partial class Manifests
     {      
         /// <summary>
-        /// Gets a manifest of the specified type by its ID, if it exists.
+        /// Gets a manifest of type <paramref name="T"/> by its ID, if it exists.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="manifestID"></param>
         /// <returns></returns>
         public static T GetByID<T>(string manifestID) where T : ScriptableObject
         {
-            string typeLocationPath = Paths[typeof(T)];
+            string typeLocationPath = ManifestPaths[typeof(T)];
             T manifest = Resources.Load<T>($"{typeLocationPath}/{manifestID}");
             if (manifest == null)
             {
@@ -27,13 +27,13 @@ namespace Cliche.System
         }
 
         /// <summary>
-        /// Gets the generic ItemManifest of any Item based on their intrinsic ItemType.
+        /// Gets the generic <see cref="ItemManifest"/> of any <see cref="Item"/> based on their intrinsic <see cref="ItemTypes"/>.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         public static ItemManifest GetByObject(Item item)
         {
-            string typeLocationPath = Paths[ItemManifestTypes[item.ItemType]];
+            string typeLocationPath = ManifestPaths[ItemManifestTypes[item.ItemType]];
             Type manifestType = ItemManifestTypes[item.ItemType];
             ItemManifest manifest = (ItemManifest)Resources.Load($"{typeLocationPath}/{item.ID}", manifestType);
             if (manifest == null)

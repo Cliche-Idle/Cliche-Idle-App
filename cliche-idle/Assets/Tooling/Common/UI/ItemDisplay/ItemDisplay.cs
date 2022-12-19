@@ -9,6 +9,9 @@ namespace Cliche.UIElements
     public class ItemDisplay : VisualElement
     {
         private Label _itemNameLabel;
+        // TODO: optionally display quantity and price
+        private Label _itemQuantity;
+        private Label _itemPrice;
         private Label _itemStatLabel;
         private VisualElement _itemStatIcon;
 
@@ -127,6 +130,7 @@ namespace Cliche.UIElements
                     _itemNameLabel.style.display = DisplayStyle.Flex;
                     _itemStatLabel.style.display = DisplayStyle.Flex;
                     _itemStatIcon.style.display = DisplayStyle.Flex;
+                    _itemNameLabel.text = manifest.Name;
                     switch (DisplayItem.ItemType)
                     {
                         case ItemTypes.Weapon:
@@ -138,10 +142,11 @@ namespace Cliche.UIElements
                         case ItemTypes.Consumable:
                             // TODO: add consumable stat icon selector here
                             _itemStatIcon.style.backgroundImage = Resources.Load<Sprite>("StatIcons/heal").texture;
+                            _itemNameLabel.text += $"\n{((Consumable)DisplayItem).Quantity}x";
                             break;
                     }
 
-                    _itemNameLabel.text = manifest.Name;
+                    
                     _itemStatLabel.text = DisplayItem.MainStatValue.ToString();
                 }
 
@@ -174,10 +179,6 @@ namespace Cliche.UIElements
             Icon = new OverlayIcon()
             {
                 name = "itemIcon",
-                style =
-                {
-                    marginRight = 10
-                }
             };
             Icon.AddToClassList("itemIcon");
 
@@ -191,6 +192,7 @@ namespace Cliche.UIElements
                     fontSize = style.fontSize,
                     unityTextAlign = TextAnchor.MiddleLeft,
                     width = Length.Percent(60f),
+                    marginLeft = 10
                 }
             };
             _itemNameLabel.AddToClassList("itemLabel");

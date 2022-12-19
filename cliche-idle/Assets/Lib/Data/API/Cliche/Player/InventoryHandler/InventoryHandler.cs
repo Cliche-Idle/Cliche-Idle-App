@@ -66,4 +66,20 @@ public class InventoryHandler : MonoBehaviour
                 throw new System.Exception($"Item of type {itemType} can not be equipped.");
         }
     }
+
+    public bool IsEquipped(Item item)
+    {
+        var itemType = Item.GetInternalItemType(item);
+        switch (itemType)
+        {
+            case ItemTypes.Weapon:
+                var wskt = Weapons.Sockets.Find(socket => socket.EquippedItem.ID == item.ID && socket.EquippedItem.VariantID == item.VariantID);
+                return (wskt != null);
+            case ItemTypes.Armour:
+                var askt = Weapons.Sockets.Find(socket => socket.EquippedItem.ID == item.ID && socket.EquippedItem.VariantID == item.VariantID);
+                return (askt != null);
+            default:
+                return false;
+        }
+    }
 }

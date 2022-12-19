@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scenes/Common/CommonStyling.uss?fileID=7433441132597879392&amp;guid=8c5108de7f42d0649b6d32b2cf7ab5f9&amp;type=3#CommonStyling" />
+    <ui:VisualElement name="ItemContainer" style="background-image: url(&apos;project://database/Assets/Images/result/resultBg.png?fileID=2800000&amp;guid=9c975560ac31f3a4f8664ec0d58d6e9f&amp;type=3#resultBg&apos;); -unity-background-scale-mode: stretch-to-fill; width: 75%; height: 45%; align-items: center; justify-content: space-around; background-color: rgba(41, 39, 33, 0); color: rgb(0, 0, 0);">
+        <ui:VisualElement name="ItemIcon" style="margin-top: 0; width: 150px; height: 150px; background-image: none; margin-bottom: 0; margin-left: 0; margin-right: 0;" />
+        <ui:Label text="&lt;Item Name&gt;" display-tooltip-when-elided="true" name="ItemName" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 50px; flex-wrap: wrap; width: 90%; overflow: hidden; height: auto; white-space: normal; -unity-text-align: upper-center; margin-bottom: 10px;" />
+        <ui:Label text="&lt;Item Description&gt;" display-tooltip-when-elided="true" name="ItemDesc" style="width: 90%; -unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px; -unity-text-align: upper-center; white-space: normal; margin-bottom: 10px;" />
+        <ui:VisualElement name="ItemInfo" style="flex-direction: row; width: 60%; justify-content: space-around; margin-bottom: 10px;">
+            <ui:VisualElement name="ItemStats" style="flex-direction: row; align-items: center;">
+                <ui:Label text="0" display-tooltip-when-elided="true" name="ItemNum" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px;" />
+                <ui:VisualElement name="StatIcon" style="background-image: url(&apos;project://database/Assets/Images/Resources/StatIcons/attack.png?fileID=2800000&amp;guid=59378adf592e974479f7d45acbad888d&amp;type=3#attack&apos;); width: 50px; height: 50px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ItemPrice" style="flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Label text="0" display-tooltip-when-elided="true" name="ItemCoin" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px;" />
+                <ui:VisualElement name="GoldIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/coin.png?fileID=2800000&amp;guid=9b622b2df152db64289d5ad7aae8da92&amp;type=3#coin&apos;); width: 40px; height: 44px; margin-left: 10px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="PurchaseInfo" style="width: 100%; align-items: center; justify-content: space-around; height: 150px;">
+            <ui:VisualElement name="Cost" style="flex-direction: row; justify-content: space-between; width: 50%;">
+                <ui:Label text="Your gold:" display-tooltip-when-elided="true" />
+                <ui:VisualElement name="ItemPrice" style="flex-direction: row; align-items: center; justify-content: center;">
+                    <ui:Label text="0" display-tooltip-when-elided="true" name="PlayerCoin" style="-unity-font-definition: url(&apos;project://database/Assets/Font/EightBitDragon%20SDF.asset?fileID=11400000&amp;guid=33891e25a29ab1f4dbb2dd2483a11948&amp;type=2#EightBitDragon SDF&apos;); font-size: 40px;" />
+                    <ui:VisualElement name="GoldIcon" style="background-image: url(&apos;project://database/Assets/Images/inventory/coin.png?fileID=2800000&amp;guid=9b622b2df152db64289d5ad7aae8da92&amp;type=3#coin&apos;); width: 40px; height: 44px; margin-left: 10px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="width: 50%; flex-direction: row; justify-content: space-between;">
+                <ui:Label text="You own:" display-tooltip-when-elided="true" />
+                <ui:Label text="0" display-tooltip-when-elided="true" name="ItemCount" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Button text="Purchase" display-tooltip-when-elided="true" name="UseBtn" class="ConfirmButton" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(63, 27, 1); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; width: 600px; margin-bottom: 4%; height: 100px;" />
+    </ui:VisualElement>
+</ui:UXML>

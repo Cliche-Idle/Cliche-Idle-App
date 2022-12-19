@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UIViews;
 using Cliche.UIElements;
+using Cliche.Idle;
 
 public class InventoryView : UIScript
 {
@@ -66,6 +67,7 @@ public class InventoryView : UIScript
                 UpdateIconIndicators(null, armSocket.EquippedItem);
                 break;
             case ItemTypes.Consumable:
+                // TODO: hide socket container when displaying consumables
                 RenderDisplayCategories<ConsumableType>();
                 RenderCategoryContents<ConsumableType>(Inventory.Consumables.Items);
                 break;
@@ -135,32 +137,35 @@ public class InventoryView : UIScript
         {
             if (item.ItemSubTypeHash == SubTypeHash || SubTypeHash == -1)
             {
-                var itemSubTypeName = Enum.GetName(typeof(T), item.ItemSubTypeHash);
-                string categoryContainerID = $"{itemSubTypeName}CategoryContainer";
-                var categoryContainer = InventoryCategoriesContainer.Q(categoryContainerID);
-                var categoryCountLabel = categoryContainer.Q<Label>("CategoryCount");
-                categoryCountLabel.text = $"{Convert.ToInt32(categoryCountLabel.text) + 1}";
-                string itemID = $"{item.ID}";
-
-                if (item.IsInstanceItem)
+                if (Player.Inventory.IsEquipped(item) != true)
                 {
-                    itemID += $"__{item.VariantID}";
-                }
+                    var itemSubTypeName = Enum.GetName(typeof(T), item.ItemSubTypeHash);
+                    string categoryContainerID = $"{itemSubTypeName}CategoryContainer";
+                    var categoryContainer = InventoryCategoriesContainer.Q(categoryContainerID);
+                    var categoryCountLabel = categoryContainer.Q<Label>("CategoryCount");
+                    categoryCountLabel.text = $"{Convert.ToInt32(categoryCountLabel.text) + 1}";
+                    string itemID = $"{item.ID}";
 
-                ItemDisplay itemDisplay = new ItemDisplay(item)
-                {
-                    name = itemID,
-                    style = {
-                    width = Length.Percent(100f),
-                    backgroundColor = (Color)new Color32(41, 39, 33, 255),
-                    height = 150,
-                    marginTop = 10,
-                    marginBottom = 10
+                    if (item.IsInstanceItem)
+                    {
+                        itemID += $"__{item.VariantID}";
+                    }
+
+                    ItemDisplay itemDisplay = new ItemDisplay(item)
+                    {
+                        name = itemID,
+                        style = {
+                            width = Length.Percent(100f),
+                            backgroundColor = (Color)new Color32(41, 39, 33, 255),
+                            height = 150,
+                            marginTop = 10,
+                            marginBottom = 10
+                        }
+                    };
+                    itemDisplay.Icon.AddOverlay("StatDiffIndicator", OverlayAlignment.BottomRight, Resources.Load<Sprite>("OverlayIcons/GreenUpArrow"));
+                    itemDisplay.RegisterCallback<ClickEvent>(OpenItemDetailsPopup);
+                    categoryContainer.Q("Items").Add(itemDisplay);
                 }
-                };
-                itemDisplay.Icon.AddOverlay("StatDiffIndicator", OverlayAlignment.BottomRight, Resources.Load<Sprite>("OverlayIcons/GreenUpArrow"));
-                itemDisplay.RegisterCallback<ClickEvent>(OpenItemDetailsPopup);
-                categoryContainer.Q("Items").Add(itemDisplay);
             }
         }
     }
@@ -170,7 +175,7 @@ public class InventoryView : UIScript
         evt.PreventDefault();
         evt.StopImmediatePropagation();
         var itemDisplay = (ItemDisplay)evt.currentTarget;
-        GameObject.Find("UI_PopUp").GetComponent<UseWindow>().WindowItem = itemDisplay.DisplayItem;
+        gameObject.GetComponent<UseWindow>().WindowItem = itemDisplay.DisplayItem;
         Navigator.ShowView("UseItemPopUp");
     }
 }
